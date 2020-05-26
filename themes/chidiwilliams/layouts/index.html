@@ -1,0 +1,16 @@
+{{ define "main" }}
+  {{ $mainSections := .Site.Params.mainSections | default (slice "post") }}
+  {{ $section := where .Site.RegularPages "Section" "in" $mainSections }}
+  {{ $section_count := len $section }}
+
+  {{ $section_name := index (.Site.Params.mainSections) 0 }}
+  {{ $n_posts := $.Param "recent_posts_number" | default 3 }}
+
+  <section class="articles">
+    {{ range $section }}
+      <div>
+        {{ partial "summary.html" . }}
+      </div>
+    {{ end }}
+  </section>
+{{ end }}
