@@ -2,7 +2,3 @@ baseURL = "http://chidiwilliams.com/"
 languageCode = "en-us"
 title = "Chidi's Blog"
 theme = "chidiwilliams"
-# theme = "ananke"
-# [permalinks]
-#   post = "/:year/:month/:slug/"
-#   page = "/:slug/"

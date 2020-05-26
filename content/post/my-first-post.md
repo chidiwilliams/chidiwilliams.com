@@ -1,7 +1,7 @@
 ---
 title: 'My First Post'
 date: 2020-05-20T11:57:05+01:00
-draft: true
+draft: false
 summary: Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta dolores pariatur fuga, minus reiciendis temporibus quas adipisci tempora, quis sint autem fugiat. Quo quae cumque exercitationem adipisci beatae libero temporibus!
 ---
 

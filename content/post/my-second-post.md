@@ -1,7 +1,7 @@
 ---
 title: 'My Second Post'
 date: 2020-05-26T14:40:03+01:00
-draft: true
+draft: false
 summary: Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ex quia eos impedit dolorem repudiandae repellat autem tempore corrupti alias nulla? Ea similique odit maxime deleniti cumque quisquam incidunt veritatis architecto.
 ---
 

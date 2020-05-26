@@ -14,4 +14,4 @@
   - [ ] Orbit simulation
   - [ ] Drum Machine
   - [ ] Data communication simulator
-- [ ] Add GH workflow
+- [ ] Add GH workflow to deploy to Netlify
