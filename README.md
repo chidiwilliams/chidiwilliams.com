@@ -4,13 +4,14 @@ Built with [Hugo](https://gohugo.io/).
 
 ## Todos
 
-- [ ] Add colors
+- [x] Add colors
 - [ ] Move old articles
   - [x] Clean Go
   - [ ] Internships
   - [ ] Story of CU Prints
 - [x] Add bio
 - [x] Add social links
+  - [ ] Change to inline SVGs
 - [ ] Add Disqus
 - [ ] Add projects
   - [ ] Orbit simulation
