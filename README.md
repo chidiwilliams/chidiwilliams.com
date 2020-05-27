@@ -19,4 +19,5 @@ Built with [Hugo](https://gohugo.io/).
 - [x] Add workflow to deploy to Netlify
 - [ ] Add social cards
   - [ ] Make site card image
-- Dark mode :)
+- [ ] Dark mode :)
+- [ ] Google Analytics
