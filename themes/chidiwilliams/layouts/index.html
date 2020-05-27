@@ -1,18 +1,28 @@
 {{ define "main" }}
+<div class="home">
   <section class="site-description">
-    <p>I'm Chidi, a software developer from Lagos, Nigeria.</p>
-    <p>I enjoy building software and simulations, reading, and playing the guitar.</p>
+    <p>Hi, I'm Chidi, a software developer from Lagos, Nigeria.</p>
+    <p>
+      I enjoy building software and simulations, reading, and playing the
+      guitar.
+    </p>
+    <p>
+      And I write about some of my interests on this blog. Enjoy!
+    </p>
   </section>
 
   {{ $mainSections := .Site.Params.mainSections | default (slice "post") }}
+  <div></div>
   {{ $section := where .Site.RegularPages "Section" "in" $mainSections }}
+  <div></div>
   {{ $section_count := len $section }}
 
   <section class="articles">
     {{ range $section }}
-      <div>
-        {{ partial "summary.html" . }}
-      </div>
+    <div>
+      {{ partial "summary.html" . }}
+    </div>
     {{ end }}
   </section>
+</div>
 {{ end }}

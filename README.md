@@ -17,7 +17,7 @@ Built with [Hugo](https://gohugo.io/).
   - [ ] Drum Machine
   - [ ] Data communication simulator
 - [x] Add workflow to deploy to Netlify
-- [ ] Add social cards
+- [x] Add social cards
   - [ ] Make site card image
 - [ ] Dark mode :)
-- [ ] Google Analytics
+- [x] Google Analytics

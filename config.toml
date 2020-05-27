@@ -1,8 +1,10 @@
 baseURL = "https://chidiwilliams.com/"
 languageCode = "en-us"
 title = "Chidi's Blog"
+description = "Posts from Chidi Williams"
 theme = "chidiwilliams"
 googleAnalytics = "UA-167812981-1"
+images = []
 
 [markup.highlight]
 style = "dracula"
