@@ -2,3 +2,6 @@ baseURL = "http://chidiwilliams.com/"
 languageCode = "en-us"
 title = "Chidi's Blog"
 theme = "chidiwilliams"
+
+[markup.highlight]
+style = "dracula"

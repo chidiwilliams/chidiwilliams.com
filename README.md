@@ -4,7 +4,7 @@
 
 - [ ] Add colors
 - [ ] Move old articles
-  - [ ] Clean Go
+  - [x] Clean Go
   - [ ] Internships
   - [ ] Story of CU Prints
 - [ ] Add bio
@@ -14,4 +14,4 @@
   - [ ] Orbit simulation
   - [ ] Drum Machine
   - [ ] Data communication simulator
-- [ ] Add GH workflow to deploy to Netlify
+- [x] Add workflow to deploy to Netlify

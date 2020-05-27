@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Mono&display=swap');
+
 html,
 body {
   margin: 0;
@@ -10,6 +12,7 @@ h4,
 h5,
 h6 {
   font-weight: 400;
+  font-family: 'PT Mono', monospace;
 }
 
 body {
@@ -66,4 +69,24 @@ article p {
 article.post h1 {
   font-size: 45px;
   line-height: 130%;
+}
+
+article.post img {
+  width: 100%;
+}
+
+article.post pre {
+  overflow-x: scroll;
+  padding: 20px;
+  font-size: 14px;
+}
+
+article.post figure {
+  display: flex;
+  flex-direction: column;
+}
+
+article.post figure figcaption {
+  text-align: center;
+  font-size: 16px;
 }
