@@ -1,4 +1,4 @@
-baseURL = "http://chidiwilliams.com/"
+baseURL = "https://chidiwilliams.com/"
 languageCode = "en-us"
 title = "Chidi's Blog"
 theme = "chidiwilliams"

@@ -1,4 +1,9 @@
 {{ define "main" }}
+  <section class="site-description">
+    <p>I'm Chidi, a software developer from Lagos, Nigeria.</p>
+    <p>I enjoy building software and simulations, reading, and playing the guitar.</p>
+  </section>
+
   {{ $mainSections := .Site.Params.mainSections | default (slice "post") }}
   {{ $section := where .Site.RegularPages "Section" "in" $mainSections }}
   {{ $section_count := len $section }}
