@@ -209,8 +209,8 @@ section.site-description p {
 }
 
 span.new-tab svg {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
 }
 
 .articles article h3 a.github-link {
@@ -219,8 +219,8 @@ span.new-tab svg {
 }
 
 .articles article h3 a.github-link svg {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
 }
 
 article h3 a span,
