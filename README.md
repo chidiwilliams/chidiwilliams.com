@@ -13,13 +13,16 @@ Built with [Hugo](https://gohugo.io/).
 - [x] Add social links
   - [x] Change to inline SVGs
 - [ ] Add Disqus
-- [ ] Add projects
-  - [ ] Orbit simulation
-  - [ ] Drum Machine
-  - [ ] Data communication simulator
+- [x] Add projects
+  - [ ] (Write descriptions)
+  - [ ] (Host on subdomains)
+  - [x] Orbit simulation
+  - [x] Drum Machine
+  - [x] Data communication simulator
 - [x] Add workflow to deploy to Netlify
 - [x] Add social cards
   - [x] Make site card image
 - [ ] Dark mode :)
 - [x] Google Analytics
 - [x] Add favicon
+- [ ] Use thicker expand icon

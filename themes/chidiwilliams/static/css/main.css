@@ -124,6 +124,9 @@ header nav a:hover {
 header nav .social-icons svg {
   width: 16px;
   height: 16px;
+}
+
+a svg {
   fill: var(--primary-color);
   -webkit-transition: all 0.3s ease-in;
   -moz-transition: all 0.3s ease-in;
@@ -132,21 +135,24 @@ header nav .social-icons svg {
   transition: all 0.3s ease-in;
 }
 
-header nav a:focus svg,
-header nav a:hover svg {
+a:focus svg,
+a:hover svg {
   fill: var(--link-highlight-color);
 }
 
-.articles article h2 {
+.articles article h3 {
   font-size: 25px;
   margin: 5px 0;
   line-height: 1.3;
-  font-weight: 600;
   color: var(--primary-color);
 }
 
 .articles article .time {
   margin-bottom: 5px;
+}
+
+.articles article {
+  margin-bottom: 20px;
 }
 
 article .time {
@@ -195,4 +201,14 @@ section.site-description {
 
 section.site-description p {
   margin: 0;
+}
+
+svg.new-tab {
+  margin-left: 7.5px;
+  width: 18px;
+  height: 18px;
+}
+
+.articles article h3 a.github-link {
+  border-bottom: none;
 }

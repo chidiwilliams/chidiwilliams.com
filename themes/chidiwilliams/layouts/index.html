@@ -8,21 +8,23 @@
       </b>
     </p>
     <p>
-      I enjoy building software and simulations, reading, and playing the
-      guitar.
+      I enjoy building software and <a href="/simulations">simulations</a>,
+      reading, and playing the guitar.
     </p>
     <p>
       And I write about some of my interests on this blog. Enjoy!
     </p>
   </section>
 
+  <!--  -->
   {{ $mainSections := .Site.Params.mainSections | default (slice "post") }}
-  <!-- placeholder -->
+  <!--  -->
   {{ $section := where .Site.RegularPages "Section" "in" $mainSections }}
-  <!-- placeholder -->
+  <!--  -->
   {{ $section_count := len $section }}
 
   <section class="articles">
+    <h2>Posts</h2>
     {{ range $section }}
     <div>
       {{ partial "summary.html" . }}

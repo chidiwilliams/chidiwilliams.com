@@ -1,0 +1,23 @@
+[
+  {
+    "title": "3D Orbit Simulation",
+    "description": "",
+    "url": "https://chidiwilliams.github.io/3d-orbit-simulation/",
+    "date": "2020-03-01",
+    "githubURL": "https://github.com/chidiwilliams/3d-orbit-simulation/"
+  },
+  {
+    "title": "3D Drum Machine",
+    "description": "",
+    "url": "https://chidiwilliams.github.io/3d-drum-machine/",
+    "date": "2020-02-01",
+    "githubURL": "https://github.com/chidiwilliams/3d-drum-machine"
+  },
+  {
+    "title": "DataComm Laboratory",
+    "description": "",
+    "url": "https://datacommlab.herokuapp.com/",
+    "date": "2018-07-01",
+    "githubURL": "https://github.com/chidiwilliams/datacomm-client"
+  }
+]
