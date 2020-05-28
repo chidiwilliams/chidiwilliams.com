@@ -10,7 +10,7 @@ Writing clean, high-quality code makes programs easier to understand, maintain, 
 
 In this post, I will share some tips for writing clean, effective Go web servers. These tips are focused on issues related to architecture and error handling in Go.
 
-A complete project containing all the examples is available on [Github](https://github.com/chidiwilliams/go-web-server-tips).
+A complete project containing all the examples is available on [GitHub](https://github.com/chidiwilliams/go-web-server-tips).
 
 ## Separate concerns with clean architecture
 
