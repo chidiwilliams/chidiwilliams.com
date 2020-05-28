@@ -11,15 +11,7 @@
       {{ .Site.Title }}{{ with .Params.Title }}: {{ . }}{{ end }}
     </title>
     <link href="/css/main.css" rel="stylesheet" />
-    <link
-      rel="preload"
-      href="/fonts/PTMono-Regular.ttf"
-      as="font"
-      crossorigin
-    />
     {{ template "_internal/google_analytics.html" . }}
-    <!--  -->
-    {{ block "head" . }}{{ partial "head.html" .}}{{ end }}
   </head>
   <body>
     <div class="container">
