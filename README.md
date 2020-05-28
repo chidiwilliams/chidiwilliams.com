@@ -11,7 +11,7 @@ Built with [Hugo](https://gohugo.io/).
   - [ ] Story of CU Prints
 - [x] Add bio
 - [x] Add social links
-  - [ ] Change to inline SVGs
+  - [x] Change to inline SVGs
 - [ ] Add Disqus
 - [ ] Add projects
   - [ ] Orbit simulation

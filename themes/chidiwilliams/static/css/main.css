@@ -47,6 +47,13 @@ a:hover {
   color: var(--link-highlight-color);
 }
 
+.sr-only {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  left: -9999px;
+  top: -9999px;
+}
+
 .container {
   position: relative;
   max-width: 700px;
@@ -89,7 +96,6 @@ nav ul.social-icons {
 nav ul.social-icons li {
   margin-left: 25px;
   line-height: 1;
-  margin-top: -6px;
 }
 
 nav ul.social-icons li a {
@@ -104,6 +110,22 @@ header nav a:focus,
 header nav a:hover {
   text-decoration: none;
   border-bottom: none;
+}
+
+header nav .social-icons svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--primary-color);
+  -webkit-transition: all 0.3s ease-in;
+  -moz-transition: all 0.3s ease-in;
+  -ms-transition: all 0.3s ease-in;
+  -o-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+}
+
+header nav a:focus svg,
+header nav a:hover svg {
+  fill: var(--link-highlight-color);
 }
 
 .articles article h2 {

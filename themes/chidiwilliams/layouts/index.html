@@ -17,9 +17,9 @@
   </section>
 
   {{ $mainSections := .Site.Params.mainSections | default (slice "post") }}
-  <div></div>
+  <!-- placeholder -->
   {{ $section := where .Site.RegularPages "Section" "in" $mainSections }}
-  <div></div>
+  <!-- placeholder -->
   {{ $section_count := len $section }}
 
   <section class="articles">
