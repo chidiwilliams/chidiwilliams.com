@@ -22,3 +22,4 @@ Built with [Hugo](https://gohugo.io/).
   - [ ] Make site card image
 - [ ] Dark mode :)
 - [x] Google Analytics
+- [ ] Add favicon
