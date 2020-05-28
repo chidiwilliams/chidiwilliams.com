@@ -4,7 +4,9 @@ title = "Chidi's Blog"
 description = "Posts from Chidi Williams"
 theme = "chidiwilliams"
 googleAnalytics = "UA-167812981-1"
-images = []
+
+[params]
+images = ["/img/Twitter Post - 1.png"]
 
 [markup.highlight]
 style = "dracula"
