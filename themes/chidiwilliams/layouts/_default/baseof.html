@@ -10,12 +10,16 @@
     <title>
       {{ .Site.Title }}{{ with .Params.Title }}: {{ . }}{{ end }}
     </title>
-    <link rel="stylesheet" href="/css/main.css" />
+    <link href="/css/main.css" rel="stylesheet" />
     <link
-      href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      href="/fonts/PTMono-Regular.ttf"
+      as="font"
+      crossorigin
     />
     {{ template "_internal/google_analytics.html" . }}
+    <!--  -->
+    {{ block "head" . }}{{ partial "head.html" .}}{{ end }}
   </head>
   <body>
     <div class="container">
