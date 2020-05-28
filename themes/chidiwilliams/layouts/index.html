@@ -24,7 +24,6 @@
   {{ $section_count := len $section }}
 
   <section class="articles">
-    <h2>Posts</h2>
     {{ range $section }}
     <div>
       {{ partial "summary.html" . }}

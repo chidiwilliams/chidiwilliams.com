@@ -140,7 +140,8 @@ a:hover svg {
   fill: var(--link-highlight-color);
 }
 
-.articles article h3 {
+.articles article h3,
+.home .articles article h2 {
   font-size: 25px;
   margin: 5px 0;
   line-height: 1.3;
@@ -203,12 +204,27 @@ section.site-description p {
   margin: 0;
 }
 
-svg.new-tab {
-  margin-left: 7.5px;
-  width: 18px;
-  height: 18px;
+.new-tab {
+  margin-left: -7px;
+}
+
+span.new-tab svg {
+  width: 20px;
+  height: 20px;
 }
 
 .articles article h3 a.github-link {
   border-bottom: none;
+  margin-left: 4px;
+}
+
+.articles article h3 a.github-link svg {
+  width: 20px;
+  height: 20px;
+}
+
+article h3 a span,
+.articles article h3 a.github-link {
+  display: inline-block;
+  vertical-align: middle;
 }

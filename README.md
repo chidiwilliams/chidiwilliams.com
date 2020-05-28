@@ -16,6 +16,7 @@ Built with [Hugo](https://gohugo.io/).
 - [x] Add projects
   - [ ] (Write descriptions)
   - [ ] (Host on subdomains)
+  - [ ] (Add GIFs?)
   - [x] Orbit simulation
   - [x] Drum Machine
   - [x] Data communication simulator
