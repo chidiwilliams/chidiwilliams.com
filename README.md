@@ -19,7 +19,7 @@ Built with [Hugo](https://gohugo.io/).
   - [ ] Data communication simulator
 - [x] Add workflow to deploy to Netlify
 - [x] Add social cards
-  - [ ] Make site card image
+  - [x] Make site card image
 - [ ] Dark mode :)
 - [x] Google Analytics
-- [ ] Add favicon
+- [x] Add favicon
