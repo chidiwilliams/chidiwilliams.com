@@ -12,6 +12,11 @@
               d="M38 38H10V10h14V6H10c-2.21 0-4 1.79-4 4v28c0 2.21 1.79 4 4 4h28c2.21 0 4-1.79 4-4V24h-4v14zM28 6v4h7.17L15.51 29.66l2.83 2.83L38 12.83V20h4V6H28z"
             /></svg></span
       ></a>
+    </h3>
+    <div class="time">
+      <span>
+        {{ dateFormat "January 2006" .date }}
+      </span>
       <a
         href="{{.githubURL}}"
         target="_blank"
@@ -32,9 +37,7 @@
           ></path>
         </svg>
       </a>
-    </h3>
-
-    <div class="time">{{ dateFormat "January 2006" .date }}</div>
+    </div>
     <div>{{.description}}</div>
   </article>
   {{end}}

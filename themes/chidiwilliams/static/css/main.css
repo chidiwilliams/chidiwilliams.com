@@ -27,6 +27,8 @@ h6 {
 :root {
   --primary-color: #3a74d2;
   --link-highlight-color: #144dab;
+  --secondary-color: #555555;
+  --body-color: #24292e;
 }
 
 body {
@@ -34,7 +36,7 @@ body {
     sans-serif, Apple Color Emoji, Segoe UI Emoji;
   font-size: 20px;
   line-height: 1.8;
-  color: #24292e;
+  color: var(--body-color);
   background-color: #fff;
 }
 
@@ -159,7 +161,7 @@ a:hover svg {
 article .time {
   font-weight: 600;
   margin-bottom: 20px;
-  color: #555555;
+  color: var(--secondary-color);
   font-size: 16px;
 }
 
@@ -196,8 +198,8 @@ section.site-description {
   font-size: 16px;
   margin-bottom: 30px;
   padding: 15px;
-  border: 1px solid #555555;
-  color: #555555;
+  border: 1px solid var(--secondary-color);
+  color: var(--secondary-color);
 }
 
 section.site-description p {
@@ -213,14 +215,20 @@ span.new-tab svg {
   height: 16px;
 }
 
-.articles article h3 a.github-link {
+.articles article a.github-link {
   border-bottom: none;
   margin-left: 4px;
 }
 
-.articles article h3 a.github-link svg {
+.articles article a.github-link svg {
   width: 16px;
   height: 16px;
+  fill: var(--secondary-color);
+}
+
+.articles article a.github-link:focus svg,
+.articles article a.github-link:hover svg {
+  fill: var(--body-color);
 }
 
 article h3 a span,
