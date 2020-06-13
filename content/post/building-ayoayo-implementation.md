@@ -28,6 +28,12 @@ Ayòayò [*ah-yo-ah-yo*], or just Ayò, is a variant of mancala played by the Yo
 
 The history of mancala dates back to ancient times in Egypt [as far back as 1000 BC](https://books.google.com.ng/books?id=IyFHvy-SCIYC&lpg=PA22&dq=mancala%20middle%20east&pg=PA22#v=onepage&q=mancala%20middle%20east&f=false). Since then, the game and its variants have spread all around the world.
 
+{{< external-image
+  title="Dotun55 / CC BY-SA (https://creativecommons.org/licenses/by-sa/4.0)"
+  href="https://commons.wikimedia.org/wiki/File:Children_gather_over_a_game_of_Ayo.jpg"
+  alt="Children gather over a game of Ayo"
+  src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Children_gather_over_a_game_of_Ayo.jpg/512px-Children_gather_over_a_game_of_Ayo.jpg" >}}
+
 ## Rules of the Game
 
 In this section, we'll discuss how to play the game of Ayòayò. Depending on who, or where, you ask, the game rules may be slightly different. But these are the rules I learned to play with growing up in Lagos, Nigeria.
