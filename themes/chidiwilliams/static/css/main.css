@@ -55,7 +55,13 @@ body {
   background-color: #fff;
 }
 
-a {
+p a,
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
   color: var(--primary-color);
   text-decoration: none;
   border-bottom: 1px solid transparent;
@@ -66,8 +72,20 @@ a {
   transition: all 0.3s ease-in;
 }
 
-a:focus,
-a:hover {
+p a:focus,
+p a:hover,
+h1 a:focus,
+h1 a:hover,
+h2 a:focus,
+h2 a:hover,
+h3 a:focus,
+h3 a:hover,
+h4 a:focus,
+h4 a:hover,
+h5 a:focus,
+h5 a:hover,
+h6 a:focus,
+h6 a:hover {
   text-decoration: none;
   border-bottom: 1px solid var(--link-highlight-color);
   color: var(--link-highlight-color);
