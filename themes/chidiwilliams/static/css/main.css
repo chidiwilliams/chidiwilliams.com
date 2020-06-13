@@ -43,7 +43,8 @@ blockquote {
   --primary-color: #3a74d2;
   --link-highlight-color: #144dab;
   --secondary-color: #555555;
-  --body-color: #24292e;
+  --body-color: #333333;
+  --border-color: #cccccc;
 }
 
 body {
@@ -108,8 +109,7 @@ h6 a:hover {
 }
 
 header {
-  margin-bottom: 20px;
-  padding: 10px 0;
+  padding: 15px 0;
   height: 30px;
   color: var(--primary-color);
 }
@@ -129,17 +129,8 @@ nav h1.main {
   margin: 0;
 }
 
-nav ul.social-icons {
-  list-style: none;
-  margin: 0;
-  align-items: center;
-  display: flex;
-  padding: 0;
-}
-
 nav ul.social-icons li {
   margin-left: 25px;
-  line-height: 1;
 }
 
 nav ul.social-icons li a {
@@ -162,7 +153,6 @@ header nav .social-icons svg {
 }
 
 a svg {
-  fill: var(--primary-color);
   -webkit-transition: all 0.3s ease-in;
   -moz-transition: all 0.3s ease-in;
   -ms-transition: all 0.3s ease-in;
@@ -170,9 +160,22 @@ a svg {
   transition: all 0.3s ease-in;
 }
 
-a:focus svg,
-a:hover svg {
+a.primary svg {
+  fill: var(--primary-color);
+}
+
+a.primary:focus svg,
+a.primary:hover svg {
   fill: var(--link-highlight-color);
+}
+
+a.secondary svg {
+  fill: var(--secondary-color);
+}
+
+a.secondary:focus svg,
+a.secondary:hover svg {
+  fill: var(--body-color);
 }
 
 .articles article h3,
@@ -202,6 +205,10 @@ article p {
   margin-top: 0;
 }
 
+article.post {
+  margin-bottom: 30px;
+}
+
 article.post h1 {
   font-size: 36px;
 }
@@ -214,7 +221,7 @@ article.post pre {
   overflow-x: scroll;
   padding: 20px;
   font-size: 13px;
-  border: 1px solid #cccccc;
+  border: 1px solid var(--border-color);
   border-radius: 3px;
 }
 
@@ -257,16 +264,41 @@ span.new-tab svg {
 .articles article a.github-link svg {
   width: 16px;
   height: 16px;
-  fill: var(--secondary-color);
-}
-
-.articles article a.github-link:focus svg,
-.articles article a.github-link:hover svg {
-  fill: var(--body-color);
 }
 
 article h3 a span,
 .articles article h3 a.github-link {
   display: inline-block;
   vertical-align: middle;
+}
+
+.share-links {
+  border-top: 1px solid var(--border-color);
+  padding: 30px 0;
+}
+
+.share-links .header {
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: var(--secondary-color);
+  font-size: 14px;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.social-icons {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  line-height: 1;
+}
+
+.share-links ul.social-icons li {
+  margin-right: 10px;
+}
+
+.share-links ul.social-icons svg {
+  width: 20px;
+  height: 20px;
 }

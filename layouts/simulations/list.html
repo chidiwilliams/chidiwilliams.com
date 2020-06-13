@@ -4,7 +4,7 @@
   {{range .Site.Data.simulations}}
   <article>
     <h3>
-      <a href="{{.url}}" target="_blank" rel="noopener">
+      <a href="{{.url}}" target="_blank" rel="noopener" class="primary">
         <span>{{.title}}</span>
         <span class="new-tab">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="5 4 38 37">
@@ -21,7 +21,7 @@
         href="{{.githubURL}}"
         target="_blank"
         rel="noopener"
-        class="github-link"
+        class="github-link secondary"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
