@@ -1,7 +1,8 @@
 ---
 title: 'The source code of the Ayoayo implementation'
 date: 2020-06-13T14:52:30+01:00
-draft: true
+draft: false
+tags: [algorithms, ayo, ayoayo, ayò, ayòayò, game-development, javascript, js]
 ---
 
 This is the complete source code of the [Ayoayo implementation](/post/building-ayoayo-implementation).
