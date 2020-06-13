@@ -237,7 +237,7 @@ if (this.captured.some((count) => count > Ayoayo.TOTAL_NUM_SEEDS / 2)) {
 }
 ```
 
-Believe it or not, the basic gameplay is now complete. The complete source code for this implementation is available [here](/code/building-ayoayo-implementation/).
+The basic gameplay is now all done. The complete source code for this implementation is available [here](/code/building-ayoayo-implementation/).
 
 In the next post in this series, we'll build a simple Node console application for Ayòayò.
 
