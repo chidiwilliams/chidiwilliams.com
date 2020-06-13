@@ -1,7 +1,7 @@
 baseURL = "https://chidiwilliams.com/"
 languageCode = "en-us"
-title = "Chidi's Blog"
-description = "Posts from Chidi Williams"
+title = "Chidi Williams"
+description = "Posts from Chidi Williams, a software engineer from Lagos, Nigeria."
 theme = "chidiwilliams"
 googleAnalytics = "UA-167812981-1"
 
