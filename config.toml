@@ -6,7 +6,9 @@ theme = "chidiwilliams"
 googleAnalytics = "UA-167812981-1"
 
 [params]
-images = ["/img/Twitter Post - 1.png"]
+images = [
+  "https://res.cloudinary.com/cwilliams/image/upload/v1592055617/Site_Image_-_Wide.png"
+]
 
 [markup.highlight]
 style = "dracula"
