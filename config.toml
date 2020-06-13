@@ -11,4 +11,4 @@ images = [
 ]
 
 [markup.highlight]
-style = "dracula"
+style = "xcode"
