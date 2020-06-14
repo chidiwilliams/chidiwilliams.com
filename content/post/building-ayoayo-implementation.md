@@ -2,13 +2,14 @@
 title: 'Building Ayòayò: Implementation'
 date: 2020-06-14T15:21:03+01:00
 draft: false
-summary: This is the first post in the "Building Ayòayò" series. I explore the history and rules of the game and implement the game logic with JavaScript.
+summary: This is the first post in the Building Ayòayò series. I explore the history and rules of the game and implement the game logic with JavaScript.
 images:
   [
     https://res.cloudinary.com/cwilliams/image/upload/v1592065048/Building_Ayoayo__Implementation.png,
   ]
 tags: [algorithms, ayo, ayoayo, ayò, ayòayò, game-development, javascript, js]
 series: [Building Ayoayo]
+description: This is the first post in the Building Ayòayò series. I explore the history and rules of the game and implement the game logic with JavaScript.
 ---
 
 This is the first post in the [Building Ayòayò](/series/building-ayoayo) series. The series will cover different aspects of building a simple web-based game with JavaScript.
