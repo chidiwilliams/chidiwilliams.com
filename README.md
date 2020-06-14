@@ -13,3 +13,4 @@ Built with [Hugo](https://gohugo.io/).
   - [x] Drum Machine
   - [x] Data communication simulator
 - [ ] Dark mode :)
+- [ ] Write a script to generate site header from title
