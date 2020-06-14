@@ -1,11 +1,11 @@
 baseURL = "https://chidiwilliams.com/"
 languageCode = "en-us"
 title = "Chidi Williams"
-description = "Posts from Chidi Williams, a software engineer from Lagos, Nigeria."
 theme = "chidiwilliams"
 googleAnalytics = "UA-167812981-1"
 
 [params]
+description = "Posts from Chidi Williams, a software engineer from Lagos, Nigeria."
 images = [
   "https://res.cloudinary.com/cwilliams/image/upload/v1592055617/Site_Image_-_Wide.png"
 ]
