@@ -1,6 +1,6 @@
 ---
 title: 'The source code of the Ayòayò implementation'
-date: 2020-06-13T14:52:30+01:00
+date: 2020-06-14T15:21:03+01:00
 draft: false
 tags: [algorithms, ayo, ayoayo, ayò, ayòayò, game-development, javascript, js]
 ---

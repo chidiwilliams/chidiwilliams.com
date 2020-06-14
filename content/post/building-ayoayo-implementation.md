@@ -1,6 +1,6 @@
 ---
 title: 'Building Ayòayò: Implementation'
-date: 2020-06-13T11:36:21+01:00
+date: 2020-06-14T15:21:03+01:00
 draft: false
 summary: This is the first post in the "Building Ayòayò" series. I explore the history and rules of the game and implement the game logic with JavaScript.
 images:
