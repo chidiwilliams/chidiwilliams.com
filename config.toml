@@ -12,3 +12,8 @@ images = [
 
 [markup.highlight]
 style = "xcode"
+
+[taxonomies]
+category = "categories"
+series = "series"
+tags = "tags"
