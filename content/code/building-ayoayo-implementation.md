@@ -67,18 +67,6 @@ Ayoayo.prototype.play = function play(cell) {
   }
 };
 
-// Returns a copy of the game state.
-// Event listeners are not copied.
-Ayoayo.prototype.clone = function clone() {
-  const clone = new Ayoayo();
-  clone.winner = this.winner;
-  clone.captured = this.captured.slice();
-  clone.board = this.board.map((row) => row.slice());
-  clone.permissibleMoves = this.permissibleMoves.slice();
-  clone.nextPlayer = this.nextPlayer;
-  return clone;
-};
-
 // Relay-sows the seeds starting from cell and returns
 // the updated board and number of captured seeds.
 Ayoayo.relaySow = function relaySow(board, player, cell) {
