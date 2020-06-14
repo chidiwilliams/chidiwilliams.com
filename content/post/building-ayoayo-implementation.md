@@ -32,7 +32,7 @@ The history of mancala dates back to ancient times in Egypt [as far back as 1000
   title="Dotun55 / CC BY-SA (https://creativecommons.org/licenses/by-sa/4.0)"
   href="https://commons.wikimedia.org/wiki/File:Children_gather_over_a_game_of_Ayo.jpg"
   alt="Children gather over a game of Ayo"
-  src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Children_gather_over_a_game_of_Ayo.jpg/512px-Children_gather_over_a_game_of_Ayo.jpg" >}}
+  src="https://res.cloudinary.com/cwilliams/image/upload/v1592147195/Children_gather_over_a_game_of_Ayo.jpg" >}}
 
 ## Rules of the Game
 
