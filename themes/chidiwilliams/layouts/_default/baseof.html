@@ -25,7 +25,13 @@
       {{ .Site.Title }}{{ with .Params.Title }}: {{ . }}{{ end }}
     </title>
 
-    <link href="/css/main.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap"
+      rel="stylesheet"
+    />
+
+    {{ $css := resources.Get "css/main.css" | resources.Minify }}
+    <link href="{{ $css.Permalink }}" rel="stylesheet" />
 
     <link rel="preconnect" href="https://www.google-analytics.com/" />
     {{ template "_internal/google_analytics.html" . }}
