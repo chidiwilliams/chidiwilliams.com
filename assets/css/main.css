@@ -104,7 +104,7 @@ h6 a:hover {
 }
 
 header {
-  padding: 15px 0;
+  padding: 20px 0;
   height: 30px;
   color: var(--primary-color);
 }
@@ -209,7 +209,7 @@ article.post img {
 }
 
 article.post pre {
-  overflow-x: scroll;
+  overflow-x: auto;
   padding: 20px;
   font-size: 13px;
   border: 1px solid var(--border-color);
@@ -254,10 +254,10 @@ span.new-tab svg {
 
 .share-links .header {
   font-weight: 600;
-  margin-bottom: 5px;
+  margin: 0 0 20px;
   color: var(--secondary-color);
   font-size: 14px;
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Inconsolata', monospace;
 }
 
 .social-icons {
