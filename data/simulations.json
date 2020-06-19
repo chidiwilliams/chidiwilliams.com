@@ -8,21 +8,21 @@
   },
   {
     "title": "3D Orbit Simulation",
-    "description": "Made with Three.js.",
+    "description": "A 3D simulation of the Earth orbiting the Sun. Made with Three.js.",
     "url": "https://chidiwilliams.github.io/3d-orbit-simulation/",
     "date": "2020-03-01",
     "githubURL": "https://github.com/chidiwilliams/3d-orbit-simulation/"
   },
   {
     "title": "3D Drum Machine",
-    "description": "Made with Three.js.",
+    "description": "A 3D simulation of a drum machine. Made with Three.js.",
     "url": "https://chidiwilliams.github.io/3d-drum-machine/",
     "date": "2020-02-01",
     "githubURL": "https://github.com/chidiwilliams/3d-drum-machine"
   },
   {
     "title": "DataComm Laboratory",
-    "description": "Made with React.",
+    "description": "A data communication laboratory on the Web featuring a communication simulator and a spectrometer. Made with React.",
     "url": "https://datacommlab.herokuapp.com/",
     "date": "2018-07-01",
     "githubURL": "https://github.com/chidiwilliams/datacomm-client"
