@@ -1,0 +1,26 @@
+{{ $regularPages := .Site.RegularPages.ByDate }}
+<!--  -->
+{{ $series := where $regularPages ".Params.series" "intersect" .Params.series }}
+<!--  -->
+{{ if gt (len $series) 0 }}
+<div class="series-list">
+  <div class="title">
+    <span class="title-name">{{ index .Params.series 0 }}</span>
+    <span>({{ len $series }} posts)</span>
+  </div>
+  <ol>
+    {{ $thisPage := . }}
+    <!--  -->
+    {{ range $index, $element := $series }}
+    <li>
+      {{ add $index 1 }}. {{ if eq .RelPermalink $thisPage.RelPermalink }}
+      {{.Title}} {{ else }}
+      <a href="{{.RelPermalink}}" class="text-link">
+        {{.Title}}
+      </a>
+      {{ end }}
+    </li>
+    {{ end }}
+  </ol>
+</div>
+{{ end }}
