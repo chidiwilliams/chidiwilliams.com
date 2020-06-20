@@ -4,7 +4,7 @@
   <div class="time">
     {{ .PublishDate.Format "January 2, 2006" }}
   </div>
-  {{ .Content }}
+  {{ partial "serieslist.html" . }} {{ .Content }}
 </article>
 
 <div class="share-links">
