@@ -20,14 +20,14 @@ h1 {
 }
 
 h2 {
-  margin: 20px 0 5px;
+  margin: 20px 0 10px;
 }
 
 h3,
 h4,
 h5,
 h6 {
-  margin-top: 10px;
+  margin: 10px 0;
 }
 
 blockquote {
@@ -57,7 +57,8 @@ h2 a,
 h3 a,
 h4 a,
 h5 a,
-h6 a {
+h6 a,
+a.text-link {
   color: var(--primary-color);
   text-decoration: none;
   border-bottom: 1px solid transparent;
@@ -80,6 +81,8 @@ h4 a:focus,
 h4 a:hover,
 h5 a:focus,
 h5 a:hover,
+a.text-link:focus,
+a.text-link:hover,
 h6 a:focus,
 h6 a:hover {
   text-decoration: none;
@@ -173,8 +176,7 @@ a.secondary:hover svg {
   fill: var(--body-color);
 }
 
-.articles article h3,
-.home .articles article h2 {
+.articles article h2 {
   font-size: 20px;
   margin: 5px 0;
   color: var(--primary-color);
@@ -287,7 +289,24 @@ span.new-tab svg {
   height: 16px;
 }
 
-article h3 a span,
-.articles article h3 a.github-link {
-  vertical-align: middle;
+.series-list {
+  border: 1px solid var(--border-color);
+  margin: 0 auto 20px;
+  border-radius: 3px;
+  padding: 20px;
+  max-width: 400px;
+}
+
+.title-name {
+  font-weight: bold;
+}
+
+.series-list ol {
+  margin: 0;
+  list-style: none;
+  padding: 0;
+}
+
+video {
+  width: 100%;
 }
