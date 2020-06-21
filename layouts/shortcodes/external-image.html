@@ -1,9 +1,13 @@
-<a
-  title="{{ .Get "title" }}"
-  href="{{ .Get "href" }}"
-  target="_blank"
-  rel="noopener"
-><img
-    alt="{{ .Get "alt" }}"
-    src="{{ .Get "src" }}"
-/></a>
+{{ $title := .Get "title" }} {{ $src := .Get "src" }} {{ $href := .Get "href" }}
+{{ $alt := .Get "alt" }}
+
+<p>
+  <a
+    title="{{ $title }}"
+    href="{{ $href }}"
+    target="_blank"
+    rel="noopener"
+    class="image-link"
+    ><img alt="{{ $alt }}" src="{{ $src }}"
+  /></a>
+</p>
