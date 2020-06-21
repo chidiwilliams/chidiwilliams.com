@@ -262,7 +262,7 @@ span.new-tab svg {
   font-family: 'Inconsolata', monospace;
 }
 
-.social-icons {
+ul.social-icons {
   display: flex;
   list-style: none;
   margin: 0;
@@ -271,11 +271,11 @@ span.new-tab svg {
   line-height: 1;
 }
 
-.share-links ul.social-icons li {
-  margin-right: 10px;
+ul.social-icons li {
+  margin-right: 0.75em;
 }
 
-.share-links ul.social-icons svg {
+ul.social-icons svg {
   width: 20px;
   height: 20px;
 }
