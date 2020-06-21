@@ -1,4 +1,15 @@
-<video autoplay="autoplay" loop="loop" preload="auto" title="{{ .Get "title" }}" playsinline muted controls>
-  <source src="{{ .Get "src" }}" type="video/mp4"> Your browser does not support
-  the video tag.
-</video>
+<p>
+  {{ $title := .Get "title" }} {{ $src := .Get "src" }}
+  <video
+    autoplay="autoplay"
+    loop="loop"
+    preload="auto"
+    title="{{ $title }}"
+    playsinline
+    muted
+    controls
+  >
+    <source src="{{ $src }}" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+</p>

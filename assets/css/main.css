@@ -310,3 +310,10 @@ span.new-tab svg {
 video {
   width: 100%;
 }
+
+p a.image-link,
+p a.image-link:hover,
+p a.image-link:focus {
+  text-decoration: none;
+  border: none;
+}
