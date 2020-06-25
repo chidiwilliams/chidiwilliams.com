@@ -16,8 +16,8 @@ tags:
     cli,
     node,
   ]
-summary: In this post, I implement a CLI for Ayoayo with Node's Readline module.
-description: In this post, I implement a CLI for Ayoayo with Node's Readline module.
+summary: In this post, I implement a CLI for Ayòayò with Node's Readline module.
+description: In this post, I implement a CLI for Ayòayò with Node's Readline module.
 images:
   [
     https://res.cloudinary.com/cwilliams/image/upload/v1592677234/Building_Ayoayo__CLI_Application.png,
