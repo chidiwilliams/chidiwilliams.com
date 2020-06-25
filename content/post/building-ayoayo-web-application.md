@@ -109,7 +109,9 @@ function onClickNewGame() {
 }
 
 function onClickPit(evt) {
-  // e.g. "3" is in index 4 in "pit-3".
+  // Pits have class names numbered like "pit-1", "pit-2", "pit-3".
+  // So, className[4] will return the pit's column index.
+  // E.g. "pit2"[4] => "2"
   const startIndexOfCellIndex = 4;
   const cellIndex = evt.currentTarget.classList
     .toString()
@@ -228,12 +230,19 @@ function handlePickupSeedsEvent(event, fractionDone) {
   }
 }
 
-// Returns the [x, y] coordinates (in pixels)
-// of the pit at the given row and column
-function getPitPosition(row, column) {}
+// Returns the [x, y] coordinates (in pixels, relative
+// to the board) of the pit at the given row and column
+function getPitPosition(row, column) {
+  const pit = getPitAtPosition(row, column);
+  const pitRect = pit.getBoundingClientRect();
+  const boardRect = board.getBoundingClientRect();
+  return [pitRect.x - boardRect.x, pitRect.y - boardRect.y];
+}
 
 // Returns the pit element at the given row and column
-function getPitAtPosition(row, column) {}
+function getPitAtPosition(row, column) {
+  return document.querySelector(`.side-${row + 1} .pit-${column + 1}`);
+}
 ```
 
 ### handleMoveToEvent
