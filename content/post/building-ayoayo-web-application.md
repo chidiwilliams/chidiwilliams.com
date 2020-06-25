@@ -1,6 +1,6 @@
 ---
 title: 'Building Ayòayò: Web Application'
-date: 2020-06-24T19:13:31+01:00
+date: 2020-06-27T16:00:00+01:00
 draft: false
 series: [Building Ayoayo]
 tags: [javascript]
@@ -111,7 +111,7 @@ function onClickNewGame() {
 function onClickPit(evt) {
   // Pits have class names numbered like "pit-1", "pit-2", "pit-3".
   // So, className[4] will return the pit's column index.
-  // E.g. "pit2"[4] => "2"
+  // E.g. "pit-2"[4] => "2"
   const startIndexOfCellIndex = 4;
   const cellIndex = evt.currentTarget.classList
     .toString()
