@@ -5,7 +5,7 @@ draft: false
 series: [Building Ayoayo]
 tags: [javascript]
 summary: In the previous posts in this series, we wrote the game logic for Ayòayò and built a CLI application. In this post, we’ll build an interactive web application for the game with JavaScript.
-description: In this post, I implement a CLI for Ayòayò with Node's Readline module.
+description: In the previous posts in this series, we wrote the game logic for Ayòayò and built a CLI application. In this post, we’ll build an interactive web application for the game with JavaScript.
 images:
   [
     https://res.cloudinary.com/cwilliams/image/upload/v1593099586/Ayoayo_Web_App_Post_1.png,
