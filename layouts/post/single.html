@@ -7,8 +7,6 @@
   {{ partial "serieslist.html" . }} {{ .Content }}
 </article>
 
-{{ template "_internal/disqus.html" . }}
-
 <div class="share-links">
   <ul class="social-icons">
     <li>
@@ -37,4 +35,4 @@
   </ul>
 </div>
 
-{{ end }}
+{{ template "_internal/disqus.html" . }} {{ end }}
