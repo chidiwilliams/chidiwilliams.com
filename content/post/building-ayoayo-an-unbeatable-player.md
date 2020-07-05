@@ -130,7 +130,7 @@ game.captured[0] - game.captured[1];
 
 Given this utility function, the goal of Player 1 would be to maximize this value while Player 2 aims to minimize this value.
 
-(We could also set the score to `game.captured[1] - game.captured[0]`). In that case, Player 1 becomes the maximizer, and Player 2, the minimizer.)
+(We could also set the score to `game.captured[1] - game.captured[0]`). In that case, Player 1 becomes the minimizer, and Player 2, the maximizer.)
 
 ### Minimizing (or maximizing) the utility function
 
