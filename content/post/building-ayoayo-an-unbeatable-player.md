@@ -4,8 +4,8 @@ date: 2020-07-05T13:15:50+01:00
 draft: false
 series: [Building Ayoayo]
 tags: [javascript]
-summary: Minimax is a simple and effective decision rule used in game theory and artificial intelligence. In this post we'll implement an unbeatable AI player for Ayòayò using minimax.
-description: Minimax is a simple and effective decision rule used in game theory and artificial intelligence. In this post we'll implement an unbeatable AI player for Ayòayò using minimax.
+summary: Minimax is a simple and effective decision rule used in game theory and artificial intelligence. In this post, we'll implement an unbeatable AI player for Ayòayò using minimax.
+description: Minimax is a simple and effective decision rule used in game theory and artificial intelligence. In this post, we'll implement an unbeatable AI player for Ayòayò using minimax.
 images:
   [
     https://res.cloudinary.com/cwilliams/image/upload/v1593959805/Ayoayo_Minimax.png,
@@ -207,7 +207,7 @@ function minimax(game, depth, moves, maximizing) {
 
 ## Playing against Minimax
 
-Next, we'll add the minimax algorithm to the `Ayoayo` game. We'll write a function that creates a special instance of the `Ayoayo` constructor. This special instance plays the minimax move after each turn. In other words, it sets minimax as Player 2.
+Next, we'll add the minimax algorithm to the `Ayoayo` game. We'll write a function that creates a special instance of `Ayoayo` that plays the minimax move after each turn. In other words, it sets minimax as Player 2.
 
 ```js
 // Returns a new instance of Ayoayo that plays
@@ -264,5 +264,7 @@ These results prove that increasing the depth of the constructed tree improves t
 We also learn from the minimax games and the Random vs Random game that the player with the first turn in a game of Ayòayò has a slightly lower chance of winning than the player who goes second.
 
 Test your skills against the AI [in the web game](https://chidiwilliams.github.io/ayoayo) and check out the complete project for the series [on GitHub](https://github.com/chidiwilliams/ayoayo/).
+
+A random fact about Ayòayò before you go: Yorùbá people have several different ways for greeting people on different occasions. During a game of Ayòayò in some Yorùbá communities, a spectator might say {{<yoruba text="Mo kí ọ̀tá, mo kí ọ̀pẹ́">}} meaning "I greet the champion and the loser". And another would respond {{<yoruba text="Ọ̀tá ni jẹ́, ọ̀pẹ́ ò lè fohùn">}} meaning "The champion responds, the loser can't talk".
 
 Thanks for reading this post and the entire Ayòayò series!
