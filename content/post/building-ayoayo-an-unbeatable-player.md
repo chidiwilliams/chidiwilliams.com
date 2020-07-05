@@ -54,7 +54,7 @@ We'll assume the game started with a board value of `[[2,6,6,1,1,7], [0,2,7,2,7,
 
 The following diagram shows the possible game moves for the next three turns and the final game scores. The diagram omits some moves for the sake of brevity (shown with "..."). We'll represent the game scores as `[player1Score, player2Score]`.
 
-![Ayòayò game tree](https://res.cloudinary.com/cwilliams/image/upload/v1593958488/Ayoayo_Minimax_Tree.png)
+![Ayòayò game tree](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_900,f_auto/v1593958488/Ayoayo_Minimax_Tree.png)
 
 The next diagram shows how we select the optimal minimax move. Moving upwards from the bottom of the tree, we select nodes according to whether the layer is maximizing or minimizing.
 
@@ -62,7 +62,7 @@ In the maximizing layers, we choose the child node whose value favours Player 1 
 
 The value at the top of the tree would be the minimax value: the optimal move to make assuming the opponent is also playing optimally.
 
-![Selecting minimax move for Ayòayò](https://res.cloudinary.com/cwilliams/image/upload/v1593958934/Ayoayo_Minimax_Select_Move.png)
+![Selecting minimax move for Ayòayò](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_900,f_auto/v1593958934/Ayoayo_Minimax_Select_Move.png)
 
 (Because minimax expects optimal opposition, it is usually possible for irrational real-life players to obtain higher-than-expected results by playing some sub-optimal moves.)
 
@@ -257,7 +257,7 @@ We'll also use different depths for the minimax algorithm. An `n`-depth minimax 
 | Random          | 3-depth Minimax | 500             | 0        | 495      | 5     |
 | Random          | Random          | 15,000          | 4,581    | 6,095    | 4,324 |
 
-![Minimax Performance vs Random](https://res.cloudinary.com/cwilliams/image/upload/v1593958191/Minimax_Performance_vs_Random.png)
+![Minimax Performance vs Random](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_900,f_auto/v1593958191/Minimax_Performance_vs_Random.png)
 
 These results prove that increasing the depth of the constructed tree improves the success rate of the minimax algorithm (although it also increases the runtime exponentially as we've already seen).
 
