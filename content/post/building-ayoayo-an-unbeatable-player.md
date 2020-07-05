@@ -261,4 +261,4 @@ We also learn from the minimax games and the Random vs. Random game that the pla
 
 Test your skills against the AI [in the web game](https://chidiwilliams.github.io/ayoayo) and check out the complete project for the series [on GitHub](https://github.com/chidiwilliams/ayoayo/).
 
-Thanks for reading!
+Thanks for reading this post and the entire Ayòayò series!
