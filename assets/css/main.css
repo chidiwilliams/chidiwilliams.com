@@ -319,7 +319,7 @@ p a.image-link:focus {
 }
 
 table {
-  border: solid 1px #ddeeee;
+  border: solid 1px #c6dcff;
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
@@ -328,15 +328,15 @@ table {
 }
 
 table thead th {
-  background-color: #ddefef;
-  border: solid 1px #ddeeee;
-  color: #336b6b;
+  background-color: #e6ecf7;
+  border: solid 1px #c6dcff;
+  color: #3f5780;
   padding: 10px;
   text-align: left;
 }
 
 table tbody td {
-  border: solid 1px #ddeeee;
+  border: solid 1px #c6dcff;
   color: #333;
   padding: 10px;
 }
