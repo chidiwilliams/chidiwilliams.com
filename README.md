@@ -8,3 +8,4 @@ Built with [Hugo](https://gohugo.io/).
 - [ ] Write a script to generate site header from title
 - [ ] GitHub embed
 - [ ] Next and previous post to read
+- [ ] Use InteractionObserver for Disqus

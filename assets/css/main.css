@@ -42,9 +42,12 @@ blockquote {
   --border-color: #cccccc;
 }
 
-body {
+* {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
     sans-serif, Apple Color Emoji, Segoe UI Emoji;
+}
+
+body {
   font-size: 16px;
   line-height: 1.8;
   color: var(--body-color);
@@ -339,4 +342,24 @@ table tbody td {
   border: solid 1px #c6dcff;
   color: #333;
   padding: 10px;
+}
+
+.data-table {
+  overflow: auto;
+  margin-bottom: 1rem;
+}
+
+.data-table table {
+  margin-bottom: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+button#load_comments {
+  width: 100%;
+  height: 60px;
+  border: 0;
+  border-radius: 3px;
 }

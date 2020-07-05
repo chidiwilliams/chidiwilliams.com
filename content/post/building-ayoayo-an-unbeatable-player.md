@@ -247,15 +247,17 @@ Let's test how this algorithm performs. We'll play [several games](https://githu
 
 We'll also use different depths for the minimax algorithm. An `n`-depth minimax player analyses `n` future moves starting from their next move: a 1-depth minimax player analyses only their next move; a 2-depth minimax player analyses their next move and the next move of their opponent; and so on.
 
-| Player 1        | Player 2        | Number of games | Player 1 | Player 2 | Draw  |
+{{< responsive-table >}}
+| Player 1 | Player 2 | Number of games | Player 1 | Player 2 | Draw |
 | --------------- | --------------- | --------------- | -------- | -------- | ----- |
-| 1-depth Minimax | Random          | 25,000          | 21,556   | 1,111    | 2,333 |
-| 2-depth Minimax | Random          | 4,000           | 2,660    | 82       | 258   |
-| 3-depth Minimax | Random          | 500             | 487      | 0        | 13    |
-| Random          | 1-depth Minimax | 25,000          | 250      | 22,934   | 1,816 |
-| Random          | 2-depth Minimax | 4,000           | 8        | 3,907    | 89    |
-| Random          | 3-depth Minimax | 500             | 0        | 495      | 5     |
-| Random          | Random          | 15,000          | 4,581    | 6,095    | 4,324 |
+| 1-depth Minimax | Random | 25,000 | 21,556 | 1,111 | 2,333 |
+| 2-depth Minimax | Random | 4,000 | 2,660 | 82 | 258 |
+| 3-depth Minimax | Random | 500 | 487 | 0 | 13 |
+| Random | 1-depth Minimax | 25,000 | 250 | 22,934 | 1,816 |
+| Random | 2-depth Minimax | 4,000 | 8 | 3,907 | 89 |
+| Random | 3-depth Minimax | 500 | 0 | 495 | 5 |
+| Random | Random | 15,000 | 4,581 | 6,095 | 4,324 |
+{{</ responsive-table >}}
 
 ![Minimax Performance vs Random](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_900,f_auto/v1593958191/Minimax_Performance_vs_Random.png)
 
