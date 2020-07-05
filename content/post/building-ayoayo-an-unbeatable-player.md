@@ -265,6 +265,6 @@ We also learn from the minimax games and the Random vs Random game that the play
 
 Test your skills against the AI [in the web game](https://chidiwilliams.github.io/ayoayo) and check out the complete project for the series [on GitHub](https://github.com/chidiwilliams/ayoayo/).
 
-A random fact about Ayòayò before you go: Yorùbá people have several different ways for greeting people on different occasions. During a game of Ayòayò in some Yorùbá communities, a spectator might say {{<yoruba text="Mo kí ọ̀tá, mo kí ọ̀pẹ́">}} meaning "I greet the champion and the loser". And another would respond {{<yoruba text="Ọ̀tá ni jẹ́, ọ̀pẹ́ ò lè fohùn">}} meaning "The champion responds, the loser can't talk".
+A random fact about Ayòayò before you go: Yorùbá people have several different ways for greeting people on different occasions. During a game of Ayòayò in some Yorùbá communities, a spectator might say {{<yoruba text="Mo kí ọ̀tá, mo kí ọ̀pẹ́">}} meaning "I greet the champion and the loser". And another would respond {{<yoruba text="Ọ̀tá ni jẹ́, ọ̀pẹ́ ò lè f'ohùn">}} meaning "The champion responds, the loser can't talk".
 
 Thanks for reading this post and the entire Ayòayò series!
