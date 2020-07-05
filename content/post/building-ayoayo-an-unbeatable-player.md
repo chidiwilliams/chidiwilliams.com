@@ -8,7 +8,7 @@ summary: Minimax is a simple and effective decision rule used in game theory and
 description: Minimax is a simple and effective decision rule used in game theory and artificial intelligence. In this post, we'll implement an unbeatable AI player for Ayòayò using minimax.
 images:
   [
-    https://res.cloudinary.com/cwilliams/image/upload/v1593959805/Ayoayo_Minimax.png,
+    https://res.cloudinary.com/cwilliams/image/upload/v1593960311/Ayoayo_Minimax.png,
   ]
 ---
 
