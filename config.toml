@@ -3,6 +3,7 @@ languageCode = "en-us"
 title = "Chidi Williams"
 theme = "chidiwilliams"
 googleAnalytics = "UA-167812981-1"
+disqusShortname = "chidiwilliams"
 
 [params]
 description = "Posts from Chidi Williams, a software engineer from Lagos, Nigeria."
