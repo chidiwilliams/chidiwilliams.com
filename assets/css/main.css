@@ -340,3 +340,12 @@ table tbody td {
   color: #333;
   padding: 10px;
 }
+
+.data-table {
+  overflow: auto;
+  margin-bottom: 1rem;
+}
+
+.data-table table {
+  margin-bottom: 0;
+}
