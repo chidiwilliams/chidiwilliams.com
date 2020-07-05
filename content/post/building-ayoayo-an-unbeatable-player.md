@@ -18,25 +18,29 @@ In the previous posts in this series, we built a CLI and web game for Ayòayò (
 
 We'll start with a little game theory.
 
-Games have several different features or ways with which we classify them. We'll discuss two of these classifications: zero-sum vs. non-zero-sum games and perfect information vs. non-perfect information games.
+Games have several different features or ways with which we classify them. We'll discuss two of these classifications: zero-sum vs non-zero-sum games and perfect information vs non-perfect information games.
 
-A **zero-sum** game, like chess, is one in which players compete for a limited resource. A win for one player is a loss for the other(s). We say such a game is _non-cooperative_. In a **non-zero-sum** (or positive-sum) game, however, actions are mutually beneficial (or mutually detrimental) to all players. Games like Minecraft and The Sims are cooperative non-zero-sum games.
+A **zero-sum** game, like chess, is one in which players compete for a limited resource. A win for one player is a loss for the other(s). We say such a game is _non-cooperative_.
 
-Secondly, a game has **perfect information** if all players are completely informed of all the previous moves. Chess is also a perfect information game, because, at every point in the game, both players are aware of all the moves that led up to that point. But in a **non-perfect information** game, like poker or rock-paper-scissors, players hold secret information that influence the outcomes of their opponent's moves.
+In a **non-zero-sum** (or positive-sum) game, however, actions are mutually beneficial (or mutually detrimental) to all players. Games like Minecraft and The Sims are cooperative non-zero-sum games.
 
-In the case of rock-paper-scissors, because the moves are played simultaneously, it is impossible to know in advance what the outcome of your turn would be. You may be left thoroughly surprised as your opponent's "paper" covers your "rock".
+Secondly, a game has **perfect information** if all players have complete knowledge of all the previous moves. Chess is also a perfect information game. At every point in a chess game, both players are aware of all the moves that led up to that point.
+
+But in a **non-perfect information** game, like poker or rock-paper-scissors, players hold secret information that influences the outcomes of their opponent's moves.
+
+In the case of rock-paper-scissors, because the moves happen simultaneously, it is impossible to know in advance what the outcome of your turn would be. You may be left thoroughly surprised as your opponent's _paper_ covers your _rock_.
 
 ## The Minimax Strategy
 
 In perfect information games, players act sequentially and can observe the state of the game before deciding what move to make. Each player acts to maximize the _utility_ of their move.
 
-We can represent such games with a **decision tree** that represents all possible moves that can be made in the game.
+We can represent such games with a **decision tree** that represents all possible game moves.
 
-To choose the optimal strategy, we'll use a method known as **backwards induction**. Starting from the leaf nodes of the tree (which represent all the possible ways in which the game can end), we'll work our way up the tree, selecting the best node for each turn. The "best" node is the node that maximizes the utility of its player's move.
+To choose the optimal strategy, we'll use a method known as **backwards induction**. Starting from the leaf nodes of the tree (which represent all the possible ways in which the game can end), we'll work our way up the tree, selecting the best node for each turn. The _best_ node is the node that maximizes the utility of its player's move.
 
 By the root node (the top of the tree), we would have chosen the best possible move the first player can make, while simultaneously assuming that their opponent is also making optimal moves.
 
-If the game is also a zero-sum game, we can define the utility function as a single number which one player is trying to **maximize** and the other is trying to **minimize**. For example, we may define the utility function by asking: "By how much is Player 2 winning?" Player 1 will aim to minimize the value of the function while Player 2 aims to maximize its value.
+If the game is also a zero-sum game, we can define the utility function as a single number which one player is trying to **maximize** and the other is trying to **minimize**. For example, we may define the utility function by asking: by how much is Player 2 winning? Player 1 will aim to minimize the value of the function while Player 2 aims to maximize its value.
 
 This strategy of minimizing the potential loss (or maximizing the potential gain) is called **minimax**. The goal of minimax is to choose the optimal move while assuming the opponent is also playing optimally.
 
@@ -48,7 +52,7 @@ Let's consider an example to see how minimax works in Ayòayò.
 
 We'll assume the game started with a board value of `[[2,6,6,1,1,7], [0,2,7,2,7,7]]` and that it is Player 1's turn to play next. What is the optimal move Player 1 can make to get the maximum benefit in the next three turns?
 
-The following diagram shows the possible game moves for the next three turns and the final game scores. Some moves were omitted for sake of brevity (shown with "..."). The scores are shown as `[player1Score, player2Score]`.
+The following diagram shows the possible game moves for the next three turns and the final game scores. The diagram omits some moves for the sake of brevity (shown with "..."). We'll represent the game scores as `[player1Score, player2Score]`.
 
 ![Ayòayò game tree](https://res.cloudinary.com/cwilliams/image/upload/v1593958488/Ayoayo_Minimax_Tree.png)
 
@@ -88,7 +92,7 @@ function minimax(game, moves) {
 
 The `minimax()` function recursively plays all possible game moves and prints out the moves.
 
-However, the state space of the game is huge: there are 12 playable pits and 48 available stones. It would be impractical to traverse the entire game tree. We'll add a `depth` parameter to the function and stop the traversal after that many moves have been played.
+However, the state space of the game is huge: there are 12 playable pits and 48 available stones. It would be impractical to traverse the entire game tree. We'll add a `depth` parameter to the function and stop the traversal after that number of turns.
 
 Consequently, the algorithm would only consider the next `depth` moves and optimize for the final state at those moves.
 
@@ -112,7 +116,7 @@ function minimax(game, depth, moves) {
 
 The runtime complexity for this traversal is `O(b^d)`, where `b` is the average branching factor of the tree and `d` is the depth we specify.
 
-In each turn, we can play a maximum of 6 possible moves, so, the _upper bound_ of the branching factor in Ayòayò is 6. However, as the game progresses, fewer pits are left to play, so the average branching factor would be a little less than 6.
+In each turn, we can play a maximum of 6 possible moves, so, the _upper bound_ of the branching factor in Ayòayò is 6. However, as the game progresses, fewer pits are left to play. So the average branching factor would be a little less than 6.
 
 We also see that the runtime increases exponentially with the specified depth.
 
@@ -141,7 +145,7 @@ function minimax(game, depth, moves, maximizing) {}
 // minimax(new Ayoayo(), 3, '', true) // Maximizing. So, for Player 1.
 ```
 
-For nodes in a maximizing level, we'll return the maximum score returned by its minimizing children. For nodes in a minimizing level, we'll return the minimum score returned by its maximizing children.
+For nodes in a maximizing level, we'll return the maximum score of its minimizing children. For nodes in a minimizing level, we'll return the minimum score of its maximizing children.
 
 The full code for the minimax implementation becomes:
 
@@ -257,7 +261,7 @@ We'll also use different depths for the minimax algorithm. An `n`-depth minimax 
 
 These results prove that increasing the depth of the constructed tree improves the success rate of the minimax algorithm (although it also increases the runtime exponentially as we've already seen).
 
-We also learn from the minimax games and the Random vs. Random game that the player with the first turn in a game of Ayòayò has a slightly lower chance of winning than the player who goes second.
+We also learn from the minimax games and the Random vs Random game that the player with the first turn in a game of Ayòayò has a slightly lower chance of winning than the player who goes second.
 
 Test your skills against the AI [in the web game](https://chidiwilliams.github.io/ayoayo) and check out the complete project for the series [on GitHub](https://github.com/chidiwilliams/ayoayo/).
 
