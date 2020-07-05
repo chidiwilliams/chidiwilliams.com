@@ -4,8 +4,8 @@ date: 2020-07-05T13:15:50+01:00
 draft: false
 series: [Building Ayoayo]
 tags: [javascript]
-summary: Minimax is a simple and effective decision rule used in game theory and artificial intelligence. In this post we'll implement an unbeatable AI player for Ayòayò using the minimax algorithm.
-description: Minimax is a simple and effective decision rule used in game theory and artificial intelligence. In this post we'll implement an unbeatable AI player for Ayòayò using the minimax algorithm.
+summary: Minimax is a simple and effective decision rule used in game theory and artificial intelligence. In this post we'll implement an unbeatable AI player for Ayòayò using minimax.
+description: Minimax is a simple and effective decision rule used in game theory and artificial intelligence. In this post we'll implement an unbeatable AI player for Ayòayò using minimax.
 images:
   [
     https://res.cloudinary.com/cwilliams/image/upload/v1593958934/Ayoayo_Minimax_Select_Move.png,
@@ -258,11 +258,6 @@ We'll also use different depths for the minimax algorithm. An `n`-depth minimax 
 These results prove that increasing the depth of the constructed tree improves the success rate of the minimax algorithm (although it also increases the runtime exponentially as we've already seen).
 
 We also learn from the minimax games and the Random vs. Random game that the player with the first turn in a game of Ayòayò has a slightly lower chance of winning than the player who goes second.
-
-<!-- A little trivia: mo k’ota, mo k’ope
-Ota n’je, ope o le f’ohun
-I greet the champion and loser
-the champion responds, the loser can’t talk. -->
 
 Test your skills against the AI [in the web game](https://chidiwilliams.github.io/ayoayo) and check out the complete project for the series [on GitHub](https://github.com/chidiwilliams/ayoayo/).
 
