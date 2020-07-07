@@ -39,7 +39,9 @@ blockquote {
   --link-highlight-color: #144dab;
   --secondary-color: #555555;
   --body-color: #333333;
-  --border-color: #cccccc;
+  --border-color: #eeeeee;
+  --serif-font: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+    sans-serif, Apple Color Emoji, Segoe UI Emoji;
 }
 
 body {
@@ -47,13 +49,11 @@ body {
   line-height: 1.8;
   color: var(--body-color);
   background-color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
-    sans-serif, Apple Color Emoji, Segoe UI Emoji;
+  font-family: var(--serif-font);
 }
 
 button {
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
-    sans-serif, Apple Color Emoji, Segoe UI Emoji;
+  font-family: var(--serif-font);
 }
 
 p a,
@@ -208,10 +208,6 @@ article p {
   margin-top: 0;
 }
 
-article.post {
-  margin-bottom: 30px;
-}
-
 article.post img {
   width: 100%;
 }
@@ -220,7 +216,7 @@ article.post pre {
   overflow-x: auto;
   padding: 20px;
   font-size: 13px;
-  border: 1px solid var(--border-color);
+  border: 2px solid var(--border-color);
   border-radius: 3px;
 }
 
@@ -238,7 +234,7 @@ section.site-description {
   font-size: 16px;
   margin-bottom: 30px;
   padding: 15px;
-  border: 1px solid var(--secondary-color);
+  border: 2px solid var(--secondary-color);
   color: var(--secondary-color);
   border-radius: 3px;
 }
@@ -256,9 +252,15 @@ span.new-tab svg {
   height: 16px;
 }
 
+footer {
+  border: solid var(--border-color);
+  border-width: 2px 0;
+  padding: 35px 0;
+  margin: 2.5em 0 2em;
+}
+
 .share-links {
-  border-top: 1px solid var(--border-color);
-  padding: 30px 0;
+  margin-bottom: 1.25em;
 }
 
 .share-links .header {
@@ -297,7 +299,7 @@ ul.social-icons svg {
 }
 
 .series-list {
-  border: 1px solid var(--border-color);
+  border: 2px solid var(--border-color);
   margin: 0 auto 20px;
   border-radius: 3px;
   padding: 20px;
@@ -326,7 +328,7 @@ p a.image-link:focus {
 }
 
 table {
-  border: solid 1px #c6dcff;
+  border: solid 2px #c6dcff;
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
@@ -336,14 +338,14 @@ table {
 
 table thead th {
   background-color: #e6ecf7;
-  border: solid 1px #c6dcff;
+  border: solid 2px #c6dcff;
   color: #3f5780;
   padding: 10px;
   text-align: left;
 }
 
 table tbody td {
-  border: solid 1px #c6dcff;
+  border: solid 2px #c6dcff;
   color: #333;
   padding: 10px;
 }
@@ -366,4 +368,21 @@ button#load_comments {
   height: 60px;
   border: 0;
   border-radius: 3px;
+}
+
+.post-next-previous {
+  display: flex;
+}
+
+.post-next-previous > div {
+  flex: 1;
+}
+
+.post-next-previous .post-previous {
+  text-align: right;
+}
+
+.post-next-previous .post-next-previous-arrow {
+  font-family: var(--serif-font);
+  color: var(--secondary-color);
 }

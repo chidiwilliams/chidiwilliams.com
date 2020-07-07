@@ -5,8 +5,7 @@
 {{ if gt (len $series) 0 }}
 <div class="series-list">
   <div class="title">
-    <span class="title-name">{{ index .Params.series 0 }}</span>
-    <span>({{ len $series }} posts)</span>
+    <span class="title-name">All posts in this series</span>
   </div>
   <ol>
     {{ $thisPage := . }}
