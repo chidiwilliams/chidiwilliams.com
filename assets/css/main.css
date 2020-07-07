@@ -240,6 +240,7 @@ section.site-description {
   padding: 15px;
   border: 1px solid var(--secondary-color);
   color: var(--secondary-color);
+  border-radius: 3px;
 }
 
 section.site-description p {
