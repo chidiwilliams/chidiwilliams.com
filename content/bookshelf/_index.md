@@ -6,6 +6,7 @@ images:
   [
     https://res.cloudinary.com/cwilliams/image/upload/v1596904766/photo-1472173148041-00294f0814a2.jpg,
   ]
+description: A collection of some of my favourite books.
 ---
 
 > "The reading of all good books is like conversation with the finest minds of past centuries." — René Descartes
