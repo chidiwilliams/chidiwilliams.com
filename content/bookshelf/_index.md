@@ -4,7 +4,7 @@ date: 2020-08-08T17:29:00+01:00
 draft: false
 images:
   [
-    https://res.cloudinary.com/cwilliams/image/upload/v1596904766/photo-1472173148041-00294f0814a2.jpg,
+    https://res.cloudinary.com/cwilliams/image/upload/v1596905146/photo-1593814013328-6041acc27094.jpg,
   ]
 description: A collection of some of my favourite books.
 ---
