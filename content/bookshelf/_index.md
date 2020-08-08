@@ -2,6 +2,10 @@
 title: 'Bookshelf'
 date: 2020-08-08T17:29:00+01:00
 draft: false
+images:
+  [
+    https://res.cloudinary.com/cwilliams/image/upload/v1596904766/photo-1472173148041-00294f0814a2.jpg,
+  ]
 ---
 
 > "The reading of all good books is like conversation with the finest minds of past centuries." — René Descartes
