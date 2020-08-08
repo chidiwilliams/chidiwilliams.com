@@ -1,0 +1,15 @@
+---
+title: 'Bookshelf'
+date: 2020-08-08T17:29:00+01:00
+draft: false
+---
+
+> "The reading of all good books is like conversation with the finest minds of past centuries." — René Descartes
+
+<!-- Books take me on journeys to the past and the future to hear interesting ideas from brilliant people across the globe and time. -->
+
+Here's a selected list from my current bookshelf (physical and digital). The books in **bold** are my top recommendations. (I haven't yet read the books with the ⌛ emoji.)
+
+I'll keep updating this list as I find other great reads.
+
+If you want to have a chat about any of these books or share some of yours, feel free to [say hello](mailto:chidi@chidiwilliams.com). I also curate shelves and write reviews on [Goodreads](https://www.goodreads.com/user/show/64479598-chidi-williams).
