@@ -203,11 +203,7 @@ article .time {
   font-family: 'Inconsolata', monospace;
 }
 
-article p {
-  margin-top: 0;
-}
-
-article.post img {
+article img {
   width: 100%;
 }
 

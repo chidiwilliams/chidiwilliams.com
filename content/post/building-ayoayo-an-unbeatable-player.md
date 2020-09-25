@@ -3,7 +3,7 @@ title: 'Building Ayòayò: An Unbeatable Player'
 date: 2020-07-05T13:15:50+01:00
 draft: false
 series: [Building Ayoayo]
-tags: [javascript]
+tags: [algorithms, javascript]
 summary: Minimax is a simple and effective decision rule used in game theory and artificial intelligence. In this post, we'll implement an unbeatable AI player for Ayòayò using minimax.
 description: Minimax is a simple and effective decision rule used in game theory and artificial intelligence. In this post, we'll implement an unbeatable AI player for Ayòayò using minimax.
 images:

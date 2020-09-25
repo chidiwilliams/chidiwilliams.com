@@ -3,19 +3,7 @@ title: 'Building Ayòayò: CLI Application'
 date: 2020-06-20T19:13:31+01:00
 draft: false
 series: [Building Ayoayo]
-tags:
-  [
-    algorithms,
-    ayo,
-    ayoayo,
-    ayò,
-    ayòayò,
-    game-development,
-    javascript,
-    js,
-    cli,
-    node,
-  ]
+tags: [algorithms, javascript]
 summary: In this post, I implement a CLI for Ayòayò with Node's Readline module.
 description: In this post, I implement a CLI for Ayòayò with Node's Readline module.
 images:
