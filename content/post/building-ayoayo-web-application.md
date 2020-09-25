@@ -3,7 +3,7 @@ title: 'Building Ayòayò: Web Application'
 date: 2020-06-27T16:00:00+01:00
 draft: false
 series: [Building Ayoayo]
-tags: [javascript]
+tags: [algorithms, javascript]
 summary: In the previous posts in this series, we wrote the game logic for Ayòayò and built a CLI application. In this post, we’ll build an interactive web application for the game with JavaScript.
 description: In the previous posts in this series, we wrote the game logic for Ayòayò and built a CLI application. In this post, we’ll build an interactive web application for the game with JavaScript.
 images:

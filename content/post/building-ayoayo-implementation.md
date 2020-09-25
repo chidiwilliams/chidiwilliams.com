@@ -7,7 +7,7 @@ images:
   [
     https://res.cloudinary.com/cwilliams/image/upload/v1592065048/Building_Ayoayo__Implementation.png,
   ]
-tags: [algorithms, ayo, ayoayo, ayò, ayòayò, game-development, javascript, js]
+tags: [algorithms, javascript]
 series: [Building Ayoayo]
 description: This is the first post in the Building Ayòayò series. I explore the history and rules of the game and implement the game logic with JavaScript.
 ---
