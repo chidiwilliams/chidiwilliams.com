@@ -11,8 +11,6 @@ description: A collection of some of my favourite books.
 
 > "The reading of all good books is like conversation with the finest minds of past centuries." — René Descartes
 
-<!-- Books take me on journeys to the past and the future to hear interesting ideas from brilliant people across the globe and time. -->
-
 Here's a selected list from my current bookshelf (physical and digital). The books in **bold** are my top recommendations. (I haven't yet read the books with the ⌛ emoji.)
 
 I'll keep updating this list as I find other great reads.
