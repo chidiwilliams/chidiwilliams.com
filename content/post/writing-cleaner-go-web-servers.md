@@ -14,9 +14,9 @@ A complete project containing all the examples is available on [GitHub](https://
 
 ## Separate concerns with clean architecture
 
-Clean architecture is a design pattern for separating concerns. Robert “Uncle Bob” Martin, in his book ["Clean Architecture: A Craftsman’s Guide to Software Structure and Design"](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164), presents this architecture as a way of breaking up an application into loosely-coupled components.
+Clean architecture is a design pattern for separating concerns. Robert "Uncle Bob" Martin, in his book, [Clean Architecture: A Craftsman’s Guide to Software Structure and Design](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164), presents this architecture as a way of breaking up an application into loosely-coupled components.
 
-{{< figure src="https://blog.cleancoder.com/uncle-bob/images/2012-08-13-the-clean-architecture/CleanArchitecture.jpg" caption="[The Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)" alt="Clean Architecture diagram">}}
+{{< figure src="https://res.cloudinary.com/cwilliams/image/upload/v1605275488/Blog/CleanArchitecture.jpg" alt="Clean Architecture diagram" attr="The Clean Architecture - Clean Coder" attrlink="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">}}
 
 The architecture divides the application into four main components.
 
