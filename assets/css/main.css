@@ -1,3 +1,13 @@
+:root {
+  --primary-color: #3a74d2;
+  --link-highlight-color: #144dab;
+  --secondary-color: #555555;
+  --body-color: #333333;
+  --border-color: #e9e9e9;
+  --serif-font: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+    sans-serif, Apple Color Emoji, Segoe UI Emoji;
+}
+
 html,
 body {
   margin: 0;
@@ -10,7 +20,7 @@ h4,
 h5,
 h6 {
   font-display: swap;
-  font-family: 'Inconsolata', monospace;
+  font-weight: 500;
 }
 
 h1 {
@@ -31,16 +41,6 @@ h6 {
 
 blockquote {
   font-style: italic;
-}
-
-:root {
-  --primary-color: #3a74d2;
-  --link-highlight-color: #144dab;
-  --secondary-color: #555555;
-  --body-color: #333333;
-  --border-color: #e9e9e9;
-  --serif-font: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
-    sans-serif, Apple Color Emoji, Segoe UI Emoji;
 }
 
 body {
@@ -126,7 +126,7 @@ nav div.separator {
 }
 
 nav h1.main {
-  font-weight: bold;
+  font-weight: 600;
   font-size: 16px;
   margin: 0;
 }
@@ -192,7 +192,7 @@ a.secondary:hover svg {
 }
 
 .articles article {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 article .time {
@@ -200,7 +200,6 @@ article .time {
   margin-bottom: 20px;
   color: var(--secondary-color);
   font-size: 14px;
-  font-family: 'Inconsolata', monospace;
 }
 
 article img {
@@ -218,11 +217,16 @@ article.post pre {
 article.post figure {
   display: flex;
   flex-direction: column;
+  margin: 0;
 }
 
 article.post figure figcaption {
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
+}
+
+article.post figure figcaption p {
+  margin: 0;
 }
 
 section.site-description {
@@ -263,7 +267,6 @@ footer {
   margin: 0 0 20px;
   color: var(--secondary-color);
   font-size: 14px;
-  font-family: 'Inconsolata', monospace;
 }
 
 ul.social-icons {
@@ -302,7 +305,7 @@ ul.social-icons svg {
 }
 
 .title-name {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .series-list ol {
@@ -383,7 +386,7 @@ button#load_comments {
 }
 
 section.shelf a.perfect-book-link {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 nav.menu ul {
