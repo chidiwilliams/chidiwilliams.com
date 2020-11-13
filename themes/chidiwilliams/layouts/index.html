@@ -1,12 +1,7 @@
 {{ define "main" }}
 <div class="home">
   <section class="site-description">
-    <p>
-      👋
-      <b>
-        Hi, I'm Chidi, a software developer from Lagos, Nigeria.
-      </b>
-    </p>
+    <p><b>👋 Hi, I'm Chidi, a software developer from Lagos, Nigeria.</b></p>
     <p>
       I enjoy building software and <a href="/simulations">simulations</a>,
       <a href="/bookshelf">reading</a>, and playing
@@ -17,9 +12,7 @@
         >music</a
       >.
     </p>
-    <p>
-      And I write about some of my interests on this blog. Enjoy!
-    </p>
+    <p>And I write about some of my interests on this blog.</p>
   </section>
 
   <!--  -->
@@ -30,11 +23,7 @@
   {{ $section_count := len $section }}
 
   <section class="articles">
-    {{ range $section }}
-    <div>
-      {{ partial "summary.html" . }}
-    </div>
-    {{ end }}
+    {{ range $section }}{{ partial "summary.html" . }}{{ end }}
   </section>
 </div>
 {{ end }}
