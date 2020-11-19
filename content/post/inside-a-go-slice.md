@@ -56,7 +56,13 @@ function shiftNums(nums) {
 // 1
 ```
 
-`shiftNums` concatenates an array of the first zero elements of `nums` and an array of the last `n - 1` elements in `nums` and assigns the result to `nums`. `slice()` and `concat()` both return new arrays, so the value of `nums` remains unchanged and the program prints `1` on each iteration.
+On each iteration, `shiftNums`:
+
+- extracts the first element of `nums`,
+- concatenates the first zero elements and the last two elements of `nums`, and then
+- returns the initial first element
+
+`slice()` and `concat()` both return new arrays, so the value of `nums` in `loopNums` remains unchanged after each iteration. And the program continues to print out the first element in the original array: `1`.
 
 The Go program, however, has a different output. Because though Go slices are similar to arrays in other languages, they have a few unusual properties. We'll explore these properties.
 
@@ -68,9 +74,9 @@ The Go program, however, has a different output. Because though Go slices are si
 // 3
 ```
 
-## Arrays
-
 A Go slice describes a section of an underlying array. To understand how slices work, we first need to know how arrays in Go work.
+
+## Arrays
 
 An array is a collection of elements of the same type with continuous memory.
 
@@ -140,11 +146,16 @@ Slice expressions have two variants: **simple slice expressions** that specify a
 
 ### Simple slice expressions
 
-The expression `a[low:high]` constructs a slice containing the elements between the low and high indices. The length of the slice will be `high - low`.
+The expression `a[low:high]` constructs a slice containing the elements between the low (inclusive) and high indices. The length of the slice will be `high - low`.
 
 ```go
 a := [5]int{1, 2, 3, 4, 5}
-s := a[1:4] // s == [2 3 4]
+// Slice array a to form slice s
+s := a[1:4] // [2 3 4]
+
+b := []string{"a", "b", "c", "d"}
+// Re-slice slice b to form slice t
+t := b[2:4] // ["c" "d"]
 ```
 
 A missing low index defaults to zero, and a missing high index defaults to the length of the original array or slice.
@@ -201,7 +212,7 @@ Therefore, modifying the elements of a re-slice modifies the elements of the ori
 ```go
 a := []int{10, 20, 30, 40, 50} // [10 20 30 40 50]
 b := a[:2]                     // [10 20]
-a[1] = 23                      // a == [10 23], b == [10 23 30 40 50]
+a[1] = 23                      // b == [10 23], a == [10 23 30 40 50]
 ```
 
 We can grow a slice to its capacity by slicing it again. However, a slice cannot grow beyond its capacity. And we cannot re-slice a slice below zero to access earlier elements in the array.
@@ -264,7 +275,7 @@ var c []int           // c == [], cap(a) == 0
 c = append(c, 10, 20) // c == [10 20], cap(c) == 2
 ```
 
-## Modifying re-slices
+## Modifying slices
 
 Remember that a slice points to an underlying array.
 
@@ -274,19 +285,19 @@ If we modify the elements of a slice, it also modifies the elements in the under
 a := []int{10, 20, 30, 40, 50} // [10 20 30 40 50]
 b := a[:3]                     // b == [10 20 30], cap(b) == 5
 
-// Appending one element to `b` will not allocate a new array
-// because `b` has enough capacity.
-// `append` adds the element to the end of the slice (index 3
-// in the underlying array) and the change is visible to `a`.
+// Appending one element to b will not allocate a new array
+// because b has enough capacity.
+// append adds the element to the end of the slice (index 3
+// in the underlying array) and the change is visible to a.
 b = append(b, 34)
 
 // b == [10 20 30 34], cap(b) == 5
 // a == [10 20 30 34 50]
 
-// Appending two more elements to `b` will allocate a new array
-// because `b` does not have enough capacity.
-// `append` will copy the existing and new elements into the new
-// array, so these changes will not be visible to `a`.
+// Appending two more elements to b will allocate a new array
+// because b does not have enough capacity.
+// append will copy the existing and new elements into the new
+// array, so these changes will not be visible to a.
 b = append(b, 10, 49)
 
 // b == [10 20 30 34 10 49]
@@ -304,9 +315,9 @@ func main() {
 
 func modifySlice(s []int) {
 	b := s[:3]
-	// Appending to `b` adds the element to the end of the
+	// Appending to b adds the element to the end of the
 	// slice (index 3 in the underlying array) and the change
-	// is visible to `a`.
+	// is visible to a.
 	b = append(b, 45) // b == [0 0 0 45]
 }
 ```
@@ -341,7 +352,7 @@ func shiftNums(nums []int) int {
 // 3
 ```
 
-`shiftNums` appends `nums[:0]` and `nums[1:]...`, assigns the result to `nums`, and then returns the first element in the initial `nums` slice.
+`shiftNums` appends `nums[1:]...` to `nums[:0]`, assigns the result to `nums`, and then returns the first element in the initial `nums` slice.
 
 Let's take a closer look at the `append` expression.
 
@@ -349,13 +360,13 @@ The first argument to `append` is `nums[:0]`. `nums[:0]` returns a slice that po
 
 The second argument to `append` is `nums[1:]...`, which spreads all the elements in `nums` except the first.
 
-In the first iteration, the value of nums is `[1 2 3]`. Appending `nums[:0]` and `nums[1:]...` will store the second and third elements of `nums` (`2` and `3`) in indexes `0` and `1` of the underlying array. (We assign the resulting slice to `nums`, but this assignment has no further effect.)
+In the first iteration, the value of `nums` is `[1 2 3]`. Appending `nums[:0]` and `nums[1:]...` will store the second and third elements of `nums` (`2` and `3`) in indexes `0` and `1` of the underlying array. (We assign the resulting slice to `nums`, but this assignment has no further effect.)
 
-`loopNums` then prints the return value, `1`, to the console.
+`loopNums` then prints the return value (`1`) to the console.
 
 The modification to the underlying array is visible to `nums` in `loopNums`, and the value of `nums` in the second iteration is `[2 3 3]`.
 
-After calling `append` again, the next value of `nums` in `loopNums` is `[3 3 3]`, and the program prints `2` to the console.
+In the third iteration, calling `append` stores the second and third elements of `nums` (`3` and `3`) in indexes `0` and `1` of the array. The next value of `nums` in `loopNums` is `[3 3 3]`. And the program prints `2` to the console.
 
 For each iteration after this point, the value of `nums` in `loopNums` will remain `[3 3 3]`, and the program will continue to print `3`.
 
