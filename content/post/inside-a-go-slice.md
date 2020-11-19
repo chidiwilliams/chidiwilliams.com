@@ -5,7 +5,7 @@ draft: false
 tags: [go]
 ---
 
-Last week, a friend of mine, who is learning to write Go, asked me to explain the output of this snippet.
+Two weeks ago, a friend of mine, who is learning to write Go, asked me to explain the output of this snippet.
 
 ```go
 func main() {
