@@ -203,7 +203,7 @@ article .time {
 }
 
 article img {
-  width: 100%;
+  max-width: 100%;
 }
 
 article.post pre {
