@@ -1,29 +1,23 @@
 {{ define "main" }}
 <div class="home">
-  <section class="site-description">
-    <p><b>👋 Hi, I'm Chidi, a software developer from Lagos, Nigeria.</b></p>
-    <p>
-      I enjoy building software and <a href="/simulations">simulations</a>,
-      <a href="/bookshelf">reading</a>, and playing
-      <a
-        href="https://youtube.com/channel/UCusE4ZHQoVPJ-zzhZZSyL9w/featured"
-        target="_blank"
-        rel="noopener"
-        >music</a
-      >.
-    </p>
-    <p>And I write about some of my interests on this blog.</p>
-  </section>
-
   <!--  -->
   {{ $mainSections := .Site.Params.mainSections | default (slice "post") }}
   <!--  -->
   {{ $section := where .Site.RegularPages "Section" "in" $mainSections }}
-  <!--  -->
-  {{ $section_count := len $section }}
 
+  <h2>Posts</h2>
   <section class="articles">
     {{ range $section }}{{ partial "summary.html" . }}{{ end }}
   </section>
+
+  <h2>Links</h2>
+  <div class="articles">
+    {{ range .Site.Taxonomies.categories.featured }}
+    <article>
+      <h3><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a></h3>
+      <p>{{ .Page.Description }}</p>
+    </article>
+    {{ end }}
+  </div>
 </div>
 {{ end }}
