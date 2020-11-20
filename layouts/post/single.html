@@ -1,9 +1,8 @@
 {{ define "main" }}
 <article class="post">
   <h1>{{ .Title }}</h1>
-  <div class="time">
-    {{ .PublishDate.Format "January 2, 2006" }}
-  </div>
+  {{ partial "post-meta.html" (dict "Page" . "Tags" true) }}
+  <!--  -->
   {{ partial "serieslist.html" . }} {{ .Content }}
 </article>
 
@@ -42,18 +41,14 @@
     {{ with .NextInSection }}
     <div class="post-next">
       <h3>
-        <div class="post-next-previous-arrow">
-          ←
-        </div>
+        <div class="post-next-previous-arrow">←</div>
         <a href="{{ .Permalink }}">{{ .Title }}</a>
       </h3>
     </div>
     {{ end }} {{ with .PrevInSection }}
     <div class="post-previous">
       <h3>
-        <div class="post-next-previous-arrow">
-          →
-        </div>
+        <div class="post-next-previous-arrow">→</div>
         <a href="{{ .Permalink }}">{{ .Title }}</a>
       </h3>
     </div>

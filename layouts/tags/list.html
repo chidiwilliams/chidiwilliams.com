@@ -1,0 +1,10 @@
+{{ define "main" }}
+<section class="articles">
+  {{ $tag := .Params.title }}
+  <h1>Posts tagged: "{{ $tag }}"</h1>
+
+  {{ range index .Site.Taxonomies.tags $tag }} {{ partial "summary.html" . }}
+  <!--  -->
+  {{ end }}
+</section>
+{{ end }}

@@ -2,9 +2,6 @@
 <section class="articles shelf">
   <article>
     <h1>{{.Title}}</h1>
-    <div class="time">
-      {{ .PublishDate.Format "January 2, 2006" }}
-    </div>
     {{.Content}}
     <ul>
       {{range sort .Site.Data.shelf "title"}}

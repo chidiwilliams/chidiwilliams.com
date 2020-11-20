@@ -4,7 +4,5 @@
       {{ .Title }}
     </a>
   </h3>
-  <div class="time">
-    {{ .PublishDate.Format "January 2, 2006" }}
-  </div>
+  {{ partial "post-meta.html" (dict "Page" .) }}
 </article>

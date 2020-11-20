@@ -2,7 +2,7 @@
 title: 'Writing cleaner Go web servers'
 date: 2020-05-01T00:00:00.000Z
 draft: false
-tags: [go, cleancode, bestpractices]
+tags: [go]
 description: Writing clean, high-quality code makes programs easier to understand, maintain, improve, and test. In this post, I share some tips for writing clean, effective Go web servers.
 ---
 
