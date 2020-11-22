@@ -212,7 +212,7 @@ Therefore, modifying the elements of a re-slice modifies the elements of the ori
 ```go
 a := []int{10, 20, 30, 40, 50} // [10 20 30 40 50]
 b := a[:2]                     // [10 20]
-a[1] = 23                      // b == [10 23], a == [10 23 30 40 50]
+b[1] = 23                      // b == [10 23], a == [10 23 30 40 50]
 ```
 
 We can grow a slice to its capacity by slicing it again. However, a slice cannot grow beyond its capacity. And we cannot re-slice a slice below zero to access earlier elements in the array.
@@ -364,9 +364,9 @@ In the first iteration, the value of `nums` is `[1 2 3]`. Appending `nums[:0]` a
 
 `loopNums` then prints the return value (`1`) to the console.
 
-The modification to the underlying array is visible to `nums` in `loopNums`, and the value of `nums` in the second iteration is `[2 3 3]`.
+The modification to the underlying array is visible to `nums` in `loopNums`, and the value of `nums` before the second iteration is `[2 3 3]`.
 
-In the third iteration, calling `append` stores the second and third elements of `nums` (`3` and `3`) in indexes `0` and `1` of the array. The next value of `nums` in `loopNums` is `[3 3 3]`. And the program prints `2` to the console.
+In the second iteration, calling `append` stores the second and third elements of `nums` (`3` and `3`) in indexes `0` and `1` of the array. The next value of `nums` in `loopNums` is `[3 3 3]`. And the program prints `2` to the console.
 
 For each iteration after this point, the value of `nums` in `loopNums` will remain `[3 3 3]`, and the program will continue to print `3`.
 
