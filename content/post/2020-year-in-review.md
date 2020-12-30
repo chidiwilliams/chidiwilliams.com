@@ -70,7 +70,7 @@ I enjoy building open-source side projects because it lets me use new tools, tec
 
 I and some friends from the Nigerian tech community frequently have conversations on Twitter about designing software systems. We would discuss questions like: "How would you build X?" or "Why would you choose X tool/library over Y?".
 
-And at some point, I felt like those discussions would be more effective in a more structured and accessible environment. Sometime in August, I spoke with two friends of mine (one of them runs [@SystemTuesday](https://twitter.com/SystemTuesday)), and we set up a Discord server.'''
+And at some point, I felt like those discussions would be more effective in a more structured and accessible environment. Sometime in August, I spoke with two friends of mine (one of them runs [@SystemTuesday](https://twitter.com/SystemTuesday)), and we set up a Discord server.
 
 Since then, we've run about 3 group call sessions on the server to discuss different questions and share resources related to systems design. About 30-40 people join the calls on average.
 
