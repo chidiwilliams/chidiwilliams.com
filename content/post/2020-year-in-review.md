@@ -87,13 +87,13 @@ There were also many episodes of violence. For days in April, there were robbery
 
 In October, there were peaceful [#ENDSARS protests](https://en.wikipedia.org/wiki/End_SARS) in Lagos and other cities around Nigeria. Nigerian youths protested against police brutality from the Special Anti-Robbery Squad (SARS), a rogue police unit. And on the 20th of October, the Nigerian military opened fire on the protesters. The violence escalated, and over the next few days, there were many more incidents of break-ins, looting, arson, and murders across Lagos and other cities in Nigeria.
 
-These times were scary and devastating. It was incredibly tragic to lose people to these incidents.
+These times were scary and tragic. It was devastating to lose people to those incidents.
 
 ## Others
 
 **Music:** Besides being entertaining, music helps me recover and refocus on stressful days. I'm grateful to have gotten some time to practice the guitar and keyboard this year. I learned a few more techniques and songs, and I'll be practicing more in the new year.
 
-**Religion**: I've spent a good part of the last couple of years thinking through some of the biggest issues I've had with religion. Consequently, even more so this year, I've grown more skeptical about religion.r
+**Religion**: I've spent a good part of the last couple of years thinking through some of the biggest issues I've had with religion. Consequently, even more so this year, I've grown more skeptical about religion.
 
 **Lisp:** Within the year, I also got curious about functional programming, and then Lisp. I had heard about the language in the past, but I knew nothing about writing it. Through a handful of YouTube tutorials (like [MIT 6.001 Structure and Interpretation](https://www.youtube.com/playlist?list=PLE18841CABEA24090)), [Paul Graham essays](http://www.paulgraham.com/lisp.html), and some practice, I got into writing Common Lisp. I didn't end up building any serious projects with the language. But I learned about some new concepts, like meta-programming and "bottom-up programming."
 
@@ -111,7 +111,7 @@ It is in this sense that I look forward to the new year, to the new lap, to lear
 
 ## Notes
 
-[1] I must make a special note for Lex Fridman and his podcast. He was one of my biggest inspirations this year. And I learned about many interesting people and ideas from his podcast.
+[1] Lex Fridman was one of my biggest inspirations this year. I learned about many new, interesting people and ideas from his podcast.
 
 [2] If you want to follow my reading lists and reviews, check out [my Goodreads profile](https://www.goodreads.com/user/show/64479598-chidi-williams). I typically read books about popular science, philosophy, and technology.
 
