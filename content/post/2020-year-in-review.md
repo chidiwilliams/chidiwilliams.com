@@ -3,6 +3,7 @@ title: '2020: Year in Review'
 date: 2020-12-30T11:25:33Z
 draft: false
 tags: [personal]
+url: 2020
 ---
 
 I've spent the past few days reflecting on the past year. 2020 has been an eventful year in many different ways, and I thought it was important to review some of its highlights and what I learned along the way. I also decided to write a year-in-review post to document my journey for myself and to share with anyone else who may find it useful.
@@ -39,7 +40,7 @@ I enjoy the extended nature of the podcasts. Besides the subject of the discussi
 
 I also got to read a few books on different topics this year. Some of my favorites were: "[Heroes](https://www.penguin.co.uk/books/308231/heroes/9780241380369.html)," a collection of stories of the heroes from ancient Greek mythology; "[Reality Is Not What It Seems](https://www.penguin.co.uk/books/294669/reality-is-not-what-it-seems/9780241257975.html)," an account of how our understanding of the world has changed over the centuries, from Aristotle to Faraday to the Higgs boson; and "[Notes from the End of Everything](https://pursuitofwonder.com/product/notes-from-the-end-of-everything)," a fictional story of an author diagnosed with terminal cancer, writing about regret, friendship, existence, and death.
 
-Though I had used them both before this year, Goodreads and Kindle continued to help me maintain my reading habits. I use Goodreads to discover new books and organize lists of books [2]. And I take notes and highlights when I read on the Kindle application. I also bought a Kindle reader this year. And it's been a much better experience than reading from my mobile phone or laptop.
+Though I had used them both before this year, Goodreads and Kindle helped me maintain my reading habits. I use Goodreads to discover new books and organize lists of books [2]. And I take notes and highlights when I read on the Kindle application. I also bought a Kindle reader this year. And it's been a much better experience than reading from my mobile phone or laptop.
 
 Roam Research has also helped me learn better. I tried it out for the first time in August, and it quickly became part of my daily routine. I use Roam for a lot of different things, like journaling and drafting blog posts. And I also use it to keep notes and highlights from books and podcasts. I use Readwise to auto-sync the notes and highlights of books I read on my Kindle device to Roam. And I manually enter notes from the content I read or listen to elsewhere.
 
