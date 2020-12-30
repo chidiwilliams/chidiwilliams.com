@@ -93,6 +93,10 @@ h6 a:hover {
   color: var(--link-highlight-color);
 }
 
+hr {
+  border: 1px solid var(--border-color);
+}
+
 .sr-only {
   position: absolute;
   clip: rect(1px, 1px, 1px, 1px);
@@ -250,10 +254,10 @@ span.new-tab svg {
 }
 
 footer {
-  border: solid var(--border-color);
-  border-width: 2px 0;
+  border: 0 solid var(--border-color);
+  border-top-width: 2px;
   padding: 35px 0;
-  margin: 2.5em 0 2em;
+  margin-top: 2.5em;
 }
 
 .share-links {
