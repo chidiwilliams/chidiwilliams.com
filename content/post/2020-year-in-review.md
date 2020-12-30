@@ -106,7 +106,7 @@ These times were scary and tragic. It was devastating to lose people to those in
 
 In the cosmological sense, new years appear to have little significance. We’ve chosen an arbitrary point along our journey around our home star to say, “We’ve come full circle.” And we try to reflect on the previous lap and look forward to the next one. We give the time _meaning_.
 
-It is in this sense that I look forward to the new year, to the new lap, to learning more about myself and the world, to building and growing relationships with family and friends, to doing the things I value the most.
+And it is in this sense that I look forward to the new year, to the new lap, to learning more about myself and the world, to building and growing relationships with family and friends, to doing the things I value the most.
 
 ---
 
