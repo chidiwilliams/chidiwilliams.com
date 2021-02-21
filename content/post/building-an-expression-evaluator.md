@@ -3,6 +3,7 @@ title: 'Building an Expression Evaluator'
 date: 2021-02-21T04:30:55Z
 draft: false
 tags: [algorithms, javascript]
+url: evaluator
 ---
 
 Today, we're going to build an expression evaluator.
@@ -485,7 +486,7 @@ function evaluate(input) {
 
 The program we've built can evaluate expressions containing simple arithmetic: addition, multiplication, division, subtraction, exponentiation. But the fun has just begun. In the next article, we'll extend the evaluator to support conditionals, custom functions, and environments.
 
-You can try out the evaluator online or check out [the code on GitHub](https://github.com/chidiwilliams/expression-evaluator/blob/main/simple.js).
+You can try out [the evaluator online](https://chidiwilliams.github.io/expression-evaluator/) or check out [the code on GitHub](https://github.com/chidiwilliams/expression-evaluator/blob/main/simple.js).
 
 ---
 
