@@ -513,7 +513,7 @@ function evaluate(input) {
 }
 ```
 
-The program we've built can evaluate expressions containing simple arithmetic: addition, multiplication, division, subtraction, exponentiation. But the fun has just begun. In the next article, we'll extend the evaluator to support conditionals, custom functions, and environments.
+The program we've built can evaluate expressions containing simple arithmetic: addition, multiplication, division, subtraction, exponentiation. But the fun has just begun. In the next article, we'll extend the evaluator to support conditionals, functions, and environments.
 
 In the meantime, try out [the evaluator online](https://chidiwilliams.github.io/expression-evaluator/) or check out [the code on GitHub](https://github.com/chidiwilliams/expression-evaluator/blob/main/simple.js).
 
