@@ -1,20 +1,22 @@
 ---
 title: 'Building an Expression Evaluator'
-date: 2021-02-21T04:30:55Z
+date: 2021-02-22T04:30:55Z
 draft: false
 tags: [algorithms, javascript]
 url: evaluator
 ---
 
-Today, we're going to build an expression evaluator.
+In a spreadsheet application, like Microsoft Excel or Google Sheets, you can enter an expression like `=3 + 5 * 3 - 8` into a cell and calculate the result by pressing `ENTER`.
 
-An expression evaluator is a program that receives an arithmetic expression, like `"3 + 5 * 3 - 8"`, and returns the value of the expression, `8`.
+We call programs like that—programs that receive an arithmetic expression and return its value—expression evaluators. And today, we're going to build one.
 
-By the end of this post, we'll have written a JavaScript function, `evaluate`, which can perform simple arithmetic: addition, subtraction, multiplication, division, exponentiation. The function will expect an arithmetic expression as a string and return the numeric value of the expression.
+By the end of this post, we'll have written a JavaScript function, `evaluate`, which can perform simple arithmetic: addition, subtraction, multiplication, division, exponentiation.
 
-## Why not eval()?
+{{< video src="https://res.cloudinary.com/cwilliams/video/upload/c_crop,w_473,x_3,y_3/v1613991599/Blog/evaluator_demo.mp4" title="Demo of the online evaluator" >}}
 
-[`eval`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval) is a function on the JavaScript global object that evaluates JavaScript code. Arithmetic expressions like `"3 + 5 * 3 - 8"` are valid JavaScript code. And so, we can simply tell our program to call `eval(expression)` and call it a day.
+## Just `eval()`?
+
+[`eval`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval) is a function on the JavaScript global object that evaluates JavaScript code. Arithmetic expressions like `3 + 5 * 3 - 8` are valid JavaScript code. And so, we can simply tell our program to call `eval(expression)` and call it a day.
 
 However, what we want to do is implement `eval` ourselves, albeit a much simpler version. Later on, we'll even extend our evaluator to support expressions that aren't valid JavaScript code, essentially building a simple language of our own.
 
@@ -24,7 +26,7 @@ If that sounds exciting, let's kick things off!
 
 We'll break down our evaluation process into three stages.
 
-In the first stage, we'll extract the numbers and arithmetic operators from the expression and return an array of the _tokens_. In the second stage, we'll convert the tokens from infix notation to Reverse Polish notation (RPN). And in the final stage, we'll evaluate the RPN expression and return the resulting value.
+In the first stage, we'll extract the numbers and arithmetic operators from the expression and return an array of the _tokens_. In the second stage, we'll convert the tokens from infix notation to Reverse Polish notation (RPN). (We'll find out what those notations mean in a minute.) And in the final stage, we'll evaluate the RPN expression and return the resulting value.
 
 ![Stages of the expression evaluator](https://res.cloudinary.com/cwilliams/image/upload/v1613925510/Blog/expression-evaluator-diagram.png)
 
@@ -40,7 +42,10 @@ For example, the expression `1 + 45 * (3 + 2)` contains the following tokens:
 
 You may notice that we ignored whitespace characters in the list of tokens. We do this because white space has no impact on the value of the expression besides separating the other tokens in the expression string.
 
-We'll start the tokenization step by initializing a) a scanner, to keep track of our current position in the expression string, and b) an array, to store the tokens we find.
+We'll start the tokenization step by initializing:
+
+1. a scanner to keep track of our current position in the expression string, and
+2. an array to store the tokens we find.
 
 ```jsx
 function tokenize(input) {
@@ -61,6 +66,8 @@ If the current character is a digit, we'll look for subsequent characters that a
 if (/[0-9]/.test(char)) {
   let digits = '';
 
+  // Starting from the current position, check if there are more
+  // digits that make up a single number and parse them all as one
   while (scanner < input.length && /[0-9\.]/.test(input[scanner])) {
     digits += input[scanner++];
   }
@@ -124,11 +131,11 @@ To evaluate the infix expression: `3 + 2 * (4 - 1)`, we:
 2. Multiply 3 (from step 1) by 2 to get 6
 3. Add 6 (from step 2) to 3 to get 9
 
-Notice that we followed the precedence rules of brackets first, then multiplication, then addition.
+Notice that we followed the precedence rules of brackets first (hence, subtraction), then multiplication, then addition.
 
-The RPN equivalent of the expression is `3 2 4 1 - * +`. Ignoring the weird way the operators are placed, if you look closely at the expression, you may notice that the operators appear in the correct order of evaluation from left to right: subtraction first, then multiplication, then addition.
+The RPN equivalent of the expression is `3 2 4 1 - * +`. If you read this RPN expression from left to right, you may notice that the operators appear in the correct order of evaluation: subtraction first, then multiplication, then addition.
 
-To evaluate an RPN expression we **read the expression from left to right** and **operate when the first two operands of each operator are available**.
+To evaluate an RPN expression, we **read it from left to right** and **operate when the first two operands of each operator are available**.
 
 In the expression, `3 2 4 1 - * +`, the first operator we find with both its operands available is the subtraction operator. So we subtract 1 from 4.
 
@@ -296,7 +303,7 @@ function operate(operator, stack) {
 
 We now know what Reverse Polish notation is and how to evaluate RPN expressions. Well done on making it this far. Next, we'll see how to convert expressions written in infix notation to RPN using a process known as the **shunting-yard algorithm** [3].
 
-Remember that RPN places the operators in an expression in the correct order of evaluation. So the goal of the shunting-yard algorithm is to read through an infix expression and place the operators in the correct position according to precedence rules.
+Remember that RPN places the operators in an expression in the correct order of evaluation. So the goal of the shunting-yard algorithm is to read through an infix expression and then place the operators in their correct position according to precedence rules.
 
 ### A simple infix expression
 
@@ -331,7 +338,9 @@ If the operators already in `operators` have an equal or higher precedence than 
 
 If the operators already in `operators` have lower precedence than the next token, then the next operator should be positioned in the final expression before them. So we'll simply push the next operator to `operators` as before.
 
-In this case, the operator in `operators`, `*`, has higher precedence than the next token, `+`. So, we'll move `*` to `out` and then, push the current operator, `+`, to `operators`.
+**Exponentiation has higher precedence than multiplication and division, which, in turn, have higher precedence than addition and subtraction.**
+
+In this case, the operator in `operators`, `*`, has higher precedence than the next token, `+`. So, we'll move `*` to `out` and then push the current operator, `+`, to `operators`.
 
 ```jsx
 operators = ['+'];
@@ -345,7 +354,7 @@ operators = ['+'];
 out = [3, 4, '*', 1]; // 3 * 4 + >1<
 ```
 
-We have no more tokens left in the infix expression, and we know that the operators left in `operators`, if any, are in a specific evaluation order: operators with higher precedence were most recently pushed (or, in other words, at the top of the stack). So we can unwind all the contents of `operators` on to `out` to get the final RPN expression.
+We have no more tokens left in the infix expression. And we know that the operators left in `operators`, if any, are in a specific evaluation order: operators with higher precedence were most recently pushed (or, in other words, at the top of the stack). So we can unwind all the contents of `operators` on to `out` to get the final RPN expression.
 
 ```jsx
 out = [3, 4, '*', 1, '+'];
@@ -385,14 +394,14 @@ operators = ['*', '(', '-'];
 out = [3, 4]; // 3 * ( 4 >-< 2 ) + 1 * 5
 ```
 
-Next we'll push 2 to `out`. The next token is the right parenthesis symbol. When we meet a right parenthesis, we'll unwind all the operators in the `operators` stack till we meet a left parenthesis, and then we'll discard both the right and left parentheses.
+Next, we'll push 2 to `out`. The next token is the right parenthesis symbol. When we meet a right parenthesis, we'll unwind all the operators in the `operators` stack till we meet a left parenthesis, and then we'll discard both the right and left parentheses.
 
 ```jsx
 operators = ['*'];
 out = [3, 4, 2, '-']; // 3 * ( 4 - 2 >)< + 1 * 5
 ```
 
-Take some time to think about what we've just done. By adding the left parenthesis as a placeholder, we paused the unwinding of the stack till we reached the right parenthesis. The parentheses said to the previous contents of the stack: _hold on, let us go first_.
+Take some time to think about what we've just done. By adding the left parenthesis as a placeholder, we paused unwinding the stack till we reached the right parenthesis. The parentheses said to the previous contents of the stack: _hold on, let us go first_.
 
 For the next token, `+`, we first check to see if the operator at the top of the `operators` stack has an equal or higher precedence. It does, so we'll unwind it on to `out` and then push `+` to the `operators` stack.
 
@@ -476,7 +485,7 @@ function shouldUnwindOperatorStack(operators, nextToken) {
 
 We now have all the pieces of the puzzle to build our complete evaluator: a function to tokenize an infix expression string, another to convert the tokens into RPN, and another to evaluate the RPN expression. We've come a long way, you and I.
 
-All that's left to do is put all three functions together.
+All that's left to do now is put all three functions together.
 
 ```jsx
 function evaluate(input) {
@@ -486,7 +495,7 @@ function evaluate(input) {
 
 The program we've built can evaluate expressions containing simple arithmetic: addition, multiplication, division, subtraction, exponentiation. But the fun has just begun. In the next article, we'll extend the evaluator to support conditionals, custom functions, and environments.
 
-You can try out [the evaluator online](https://chidiwilliams.github.io/expression-evaluator/) or check out [the code on GitHub](https://github.com/chidiwilliams/expression-evaluator/blob/main/simple.js).
+In the meantime, try out [the evaluator online](https://chidiwilliams.github.io/expression-evaluator/) or check out [the code on GitHub](https://github.com/chidiwilliams/expression-evaluator/blob/main/simple.js).
 
 ---
 
