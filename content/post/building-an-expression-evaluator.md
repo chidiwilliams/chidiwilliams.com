@@ -391,8 +391,9 @@ The RPN of the expression is `3 4 2 - * 1 5 * +`. (Again, take a moment to try e
 To convert from the infix notation to the RPN, we'll set up `operators` and `out` as before. Then, we'll push the first token, 3, to `out`, and the next one, `*`, to the `operators` stack.
 
 ```jsx
+// 3 >*< ( 4 - 2 ) + 1 * 5
 operators = ['*'];
-out = [3]; // 3 >*< ( 4 - 2 ) + 1 * 5
+out = [3];
 ```
 
 The next token is the left parenthesis symbol. The symbol isn't a mathematical operator, but we'll use it as a placeholder to decide when to unwind the stack. Let's push this to the `operators` stack for now.
