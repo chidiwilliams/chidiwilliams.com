@@ -26,13 +26,13 @@ If that sounds exciting, let's kick things off!
 
 We'll break down our evaluation process into three stages.
 
-In the first stage, we'll extract the numbers and arithmetic operators from the expression and return an array of the _tokens_. In the second stage, we'll convert the tokens from infix notation to Reverse Polish notation (RPN). (We'll find out what those notations mean in a minute.) And in the final stage, we'll evaluate the RPN expression and return the resulting value.
+In the first stage, we'll extract the numbers and arithmetic operators from the expression and return an array of the _tokens_. In the second stage, we'll convert the tokens from infix notation to Reverse Polish notation (RPN). (We'll find out what that notation means in a minute.) And in the final stage, we'll evaluate the RPN expression and return the resulting value.
 
 ![Stages of the expression evaluator](https://res.cloudinary.com/cwilliams/image/upload/v1613925510/Blog/expression-evaluator-diagram.png)
 
 ## Tokenization
 
-In the first stage of evaluation, we'll convert the expression string into an array of tokens. A token is the smallest, useful unit of an expression, like a number or a mathematical operator.
+In the first stage of evaluation, we'll convert the expression string into an array of tokens. A token is the smallest, meaningful unit of an expression, like a number or a mathematical operator.
 
 For example, the expression `1 + 45 * (3 + 2)` contains the following tokens:
 
@@ -135,7 +135,7 @@ To evaluate the infix expression: `3 + 2 * (4 - 1)`, we:
 
 Notice that we followed precedence rules—brackets first (hence, subtraction), then multiplication, then addition—instead of simply calculating from left to right.
 
-The RPN equivalent of the expression is `3 2 4 1 - * +`. (We haven't yet learned to convert an infix expression to RPN, but take my word on this for now.)
+The RPN equivalent of the expression is `3 2 4 1 - * +`. (We haven't yet learned to convert an infix expression to RPN. But take my word on this for now.)
 
 You may notice that, unlike in the infix expression, the operators in the RPN expression appear in the correct order of evaluation from left to right. Subtraction shows up first, then multiplication, then addition.
 
@@ -169,7 +169,7 @@ To evaluate this infix expression, we would:
 2. Add 3 to 8 (from step 1) to get 11
 3. Subtract 1 from 11 (from step 2) to get 10
 
-Again, here we we followed precedence rules—multiplication first, then addition, then subtraction—instead of calculating from left to right.
+Again, here we followed precedence rules—multiplication first, then addition, then subtraction—instead of calculating from left to right.
 
 The RPN equivalent of this expression is `3 2 4 * + 1 -`. And again, you may notice that the operators are in the correct evaluation order from left to right: multiplication shows up first, then addition, then subtraction.
 
