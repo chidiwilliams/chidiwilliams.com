@@ -7,7 +7,7 @@ images:
     https://res.cloudinary.com/cwilliams/image/upload/v1596905146/photo-1593814013328-6041acc27094.jpg,
   ]
 categories: [featured]
-description: A selected list of books from my current bookshelf.
+description: Some of my favourite books
 ---
 
 Here's a selected list from my current bookshelf (physical and digital). The books in **bold** are my top recommendations. (I haven't yet read the books with the ⌛ emoji.)

@@ -1,5 +1,5 @@
 ---
-title: 'Inside a Go Slice'
+title: 'Inside a Go slice'
 date: 2020-11-19T03:59:54+01:00
 draft: false
 tags: [go]

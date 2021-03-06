@@ -1,5 +1,5 @@
 ---
-title: 'Building Ayòayò: An Unbeatable Player'
+title: 'Building Ayòayò: An unbeatable player'
 date: 2020-07-05T13:15:50+01:00
 draft: false
 series: [Building Ayoayo]
@@ -13,7 +13,7 @@ images:
 
 In the previous posts in this series, we built a CLI and web game for Ayòayò (Ayò) with JavaScript. In this post, we'll implement an unbeatable AI player for the game using a decision rule called minimax.
 
-## Types of Games
+## Types of games
 
 We'll start with a little game theory.
 
@@ -29,7 +29,7 @@ But in a **non-perfect information** game, like poker or rock-paper-scissors, pl
 
 In the case of rock-paper-scissors, because the moves happen simultaneously, it is impossible to know in advance what the outcome of your turn would be. You may be left thoroughly surprised as your opponent's _paper_ covers your _rock_.
 
-## The Minimax Strategy
+## The minimax strategy
 
 In perfect information games, players act sequentially and can observe the state of the game before deciding what move to make. Each player acts to maximize the _utility_ of their move.
 
@@ -204,7 +204,7 @@ function minimax(game, depth, moves, maximizing) {
 
 (We can improve the performance of this algorithm with a technique known as alpha-beta pruning, but it's beyond the scope of this post.)
 
-## Playing against Minimax
+## Playing against minimax
 
 Next, we'll add the minimax algorithm to the `Ayoayo` game. We'll write a function that creates a special instance of `Ayoayo` that plays the minimax move after each turn. In other words, it sets minimax as Player 2.
 

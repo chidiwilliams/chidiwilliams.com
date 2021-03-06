@@ -17,7 +17,7 @@ In this post, we'll explore the history and rules of the game. We'll also implem
 
 I hope you enjoy reading this series and learning about the beautiful game of Ayòayò!
 
-## A Brief History
+## A brief history
 
 Ayòayò [*ah-yo-ah-yo*], or just Ayò, is a variant of mancala played by the Yoruba people in Nigeria.
 
@@ -35,7 +35,7 @@ The history of mancala dates back to ancient times in Egypt [as far back as 1000
   alt="Children gather over a game of Ayo"
   src="https://res.cloudinary.com/cwilliams/image/upload/v1592147195/Children_gather_over_a_game_of_Ayo.jpg" >}}
 
-## Rules of the Game
+## Rules of the game
 
 In this section, we'll discuss how to play the game of Ayòayò. Depending on who, or where, you ask, the game rules may be slightly different. But these are the rules I learned to play with growing up in Lagos, Nigeria.
 
@@ -48,7 +48,7 @@ In this section, we'll discuss how to play the game of Ayòayò. Depending on wh
 
 ![Ayoayo: Direction of Play](https://res.cloudinary.com/cwilliams/image/upload/v1592055237/Ayoayo_-_Direction_of_Play.png)
 
-## The Implementation
+## The implementation
 
 ### Rule #1
 

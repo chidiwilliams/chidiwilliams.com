@@ -15,7 +15,7 @@
     {{ range .Site.Taxonomies.categories.featured }}
     <article>
       <h3><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a></h3>
-      <p>{{ .Page.Description }}</p>
+      <div class="post-meta">{{ .Page.Description }}</div>
     </article>
     {{ end }}
   </div>
