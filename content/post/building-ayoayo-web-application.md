@@ -1,5 +1,5 @@
 ---
-title: 'Building Ayòayò: Web Application'
+title: 'Building Ayòayò: Web application'
 date: 2020-06-27T16:00:00+01:00
 draft: false
 series: [Building Ayoayo]
@@ -17,7 +17,7 @@ We'll focus on the gameplay and animations here. For the styling and more, see t
 
 {{< video src="https://res.cloudinary.com/cwilliams/video/upload/v1593098658/Video_MP4_796x400.mp4" title="Demo of Ayòayò web app" >}}
 
-## Setting the Stage
+## Setting the stage
 
 We'll begin by creating the HTML elements for the game's entities.
 
@@ -44,7 +44,7 @@ Lastly, we'll add a button for starting a new game.
 <button class="new-game">New Game</button>
 ```
 
-## Game Interactions
+## Game interactions
 
 In the CLI application we built in the previous post, the console printed out the updated state of the game after each turn.
 
@@ -120,7 +120,7 @@ function onClickPit(evt) {
 }
 ```
 
-### Handling the Events
+### Handling the events
 
 When we receive events from the `Ayoayo` instance, we'll push them onto a queue. This way, we can execute the events in the same order we received them.
 
