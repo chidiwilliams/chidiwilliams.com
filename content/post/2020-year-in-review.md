@@ -32,7 +32,7 @@ Besides changing jobs and moving out, I also got to learn different things this 
 
 Before this year, I wouldn't have considered myself a "podcast person." I had listened to a few episodes from a few different podcasts, but I didn't follow any of them earnestly. But this year, I learned to enjoy podcasts—in particular, long-form podcasts.
 
-Some of my favorite episodes of the year were: [Elon Musk](https://www.youtube.com/watch?v=ycPr5-27vSI) and [Naval](https://www.youtube.com/watch?v=3qHkcs3kG44) on The Joe Rogan Experience; [Patrick Collison](https://tim.blog/2018/12/20/patrick-collison/), [Naval](https://tim.blog/2020/10/14/naval/), and [Yuval Noah Harari](https://tim.blog/2020/10/27/yuval-noah-harari/) on The Tim Ferriss Show; and [George Hotz](https://www.youtube.com/watch?v=iwcYp-XT7UI), [Richard Dawkins](https://www.youtube.com/watch?v=5f-JlzBuUUU), [Alexander Fridman](https://www.youtube.com/watch?v=6JipQNWuYnA), and [Eric Weinstein](https://www.youtube.com/watch?v=o2nG7-eXxko) on The Lex Fridman Podcast [1].
+Some of my favorite episodes of the year were: [Elon Musk](https://www.youtube.com/watch?v=ycPr5-27vSI) and [Naval](https://www.youtube.com/watch?v=3qHkcs3kG44) on The Joe Rogan Experience; [Patrick Collison](https://tim.blog/2018/12/20/patrick-collison/), [Naval](https://tim.blog/2020/10/14/naval/), and [Yuval Noah Harari](https://tim.blog/2020/10/27/yuval-noah-harari/) on The Tim Ferriss Show; and [George Hotz](https://www.youtube.com/watch?v=iwcYp-XT7UI), [Richard Dawkins](https://www.youtube.com/watch?v=5f-JlzBuUUU), [Alexander Fridman](https://www.youtube.com/watch?v=6JipQNWuYnA), and [Eric Weinstein](https://www.youtube.com/watch?v=o2nG7-eXxko) on The Lex Fridman Podcast [^ghk].
 
 I enjoy the extended nature of the podcasts. Besides the subject of the discussion itself, I find that I also get to learn about the speaker's personality and worldview.
 
@@ -40,11 +40,11 @@ I enjoy the extended nature of the podcasts. Besides the subject of the discussi
 
 I also got to read a few books on different topics this year. Some of my favorites were: "[Heroes](https://www.penguin.co.uk/books/308231/heroes/9780241380369.html)," a collection of stories of the heroes from ancient Greek mythology; "[Reality Is Not What It Seems](https://www.penguin.co.uk/books/294669/reality-is-not-what-it-seems/9780241257975.html)," an account of how our understanding of the world has changed over the centuries, from Aristotle to Faraday to the Higgs boson; and "[Notes from the End of Everything](https://pursuitofwonder.com/product/notes-from-the-end-of-everything)," a fictional story of an author diagnosed with terminal cancer, writing about regret, friendship, existence, and death.
 
-Though I had used them both before this year, Goodreads and Kindle helped me maintain my reading habits. I use Goodreads to discover new books and organize lists of books [2]. And I take notes and highlights when I read on the Kindle application. I also bought a Kindle reader this year. And it's been a much better experience than reading from my mobile phone or laptop.
+Though I had used them both before this year, Goodreads and Kindle helped me maintain my reading habits. I use Goodreads to discover new books and organize lists of books [^jhf]. And I take notes and highlights when I read on the Kindle application. I also bought a Kindle reader this year. And it's been a much better experience than reading from my mobile phone or laptop.
 
 Roam Research has also helped me learn better. I tried it out for the first time in August, and it quickly became part of my daily routine. I use Roam for a lot of different things, like journaling and drafting blog posts. And I also use it to keep notes and highlights from books and podcasts. I use Readwise to auto-sync the notes and highlights of books I read on my Kindle device to Roam. And I manually enter notes from the content I read or listen to elsewhere.
 
-The unique thing about Roam is how easy it is to link different texts together. I find this especially helpful when reviewing notes. After indexing a phrase or an author's name, I can jump around to view different notes related to the same author or idea [3].
+The unique thing about Roam is how easy it is to link different texts together. I find this especially helpful when reviewing notes. After indexing a phrase or an author's name, I can jump around to view different notes related to the same author or idea [^zth].
 
 Taking better notes, in general, has helped me learn things better. And I'm looking to take better notes while improving the quality of content I learn from and how well I apply them to my daily life.
 
@@ -108,12 +108,10 @@ In the cosmological sense, new years appear to have little significance. We’ve
 
 And it is in this sense that I look forward to the new year, to the new lap, to learning more about myself and the world, to building and growing relationships with family and friends, to doing the things I value the most.
 
----
-
 ## Notes
 
-[1] Lex Fridman was one of my biggest inspirations this year. I learned about many new, interesting people and ideas from his podcast.
+[^ghk]: Lex Fridman was one of my biggest inspirations this year. I learned about many new, interesting people and ideas from his podcast.
 
-[2] If you want to follow my reading lists and reviews, check out [my Goodreads profile](https://www.goodreads.com/user/show/64479598-chidi-williams). I typically read books about popular science, philosophy, and technology.
+[^jhf]: If you want to follow my reading lists and reviews, check out [my Goodreads profile](https://www.goodreads.com/user/show/64479598-chidi-williams). I typically read books about popular science, philosophy, and technology.
 
-[3] Admittedly, at $165/year, Roam Research is much more expensive than other note-taking apps, and it may not be worth that amount for everyone.
+[^zth]: Admittedly, at $165/year, Roam Research is much more expensive than other note-taking apps, and it may not be worth that amount for everyone.
