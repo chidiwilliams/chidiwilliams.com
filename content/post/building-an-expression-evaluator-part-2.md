@@ -1,14 +1,14 @@
 ---
 title: 'Building an expression evaluator (continued)'
 date: 2021-03-15T15:49:42Z
-draft: true
+draft: false
 tags: [algorithms, javascript]
 url: evaluator-2
 ---
 
 In my [previous post](/evaluator/), we explored how expression evaluation works and built a program, `evaluate`, that returns the result of an arithmetic expression.
 
-Here, we'll extend the evaluator with a few more features. First, we'll add support for predefined functions, like  `MAX` and `SQRT`. Then, we'll add relational operations: three new operators (`<`, `>`,  `=`) and an `IF` function. And finally, we'll create an environment: a place to store and retrieve the results of an expression.
+Here, we'll extend the evaluator with a few more features. First, we'll add support for predefined functions, like `MAX` and `SQRT`. Then, we'll add relational operations: three new operators (`<`, `>`, `=`) and an `IF` function. And finally, we'll create an environment: a place to store and retrieve the results of an expression.
 
 Let's start with a recap of the evaluation process. In the first stage of evaluation, the program extracts the tokens in the arithmetic expression string. (Tokens are the smallest, meaningful units of an expression. Numbers and symbols are tokens, but whitespace characters aren't.)
 
@@ -68,7 +68,7 @@ if (/[+\-/*(),^]/.test(char)) {
 
 ### Evaluating RPNs with function names
 
-Let's take the expression,  `MAX(4, 19) * 3`, as an example. How would you evaluate this expression? Hopefully:
+Let's take the expression, `MAX(4, 19) * 3`, as an example. How would you evaluate this expression? Hopefully:
 
 1. Get the maximum value of 4 and 19, which is 19
 2. Multiply 19 by 3 to get 57
@@ -134,13 +134,12 @@ function apply(func, stack) {
 Finally, we'll see how to convert infix expressions containing function names to RPN.
 
 ```js
-toRPN(['MAX', '(', 4, ',', 19, ')', '*', 4]) // [4, 19, 'MAX', 4, '*']
+toRPN(['MAX', '(', 4, ',', 19, ')', '*', 4]); // [4, 19, 'MAX', 4, '*']
 ```
 
 Let's start by reviewing how we convert infix expressions to RPN.
 
 ```js
-
 function toRPN(tokens) {
   // First, we set up a stack to hold operators which should
   // not yet be in the final RPN expression
@@ -308,7 +307,7 @@ const environment = {
 To access a variable from the environment, we'll use a dollar sign followed by the name of the variable. For example, to calculate the area of a circle with a radius of 5:
 
 ```js
-evaluate('$PI * 5 * 5') // 78.5398...
+evaluate('$PI * 5 * 5'); // 78.5398...
 ```
 
 #### Tokenizing variable names
@@ -316,7 +315,7 @@ evaluate('$PI * 5 * 5') // 78.5398...
 In `tokenize`, we'll extend the regex that matches function names to also match variable names. `/[A-Z]/` becomes `/[A-Z$]/`.
 
 ```js
-tokenize('$PI + 34') // ['$PI', '+', 34]
+tokenize('$PI + 34'); // ['$PI', '+', 34]
 ```
 
 #### Converting infix expressions with variable names to RPN
@@ -363,7 +362,7 @@ evaluate('$PI * 78 + $E'); // 247.7625088084629
 
 Next, we'll look at a way to set and change the values of variables. We'll add a function, `SET(#X, Y)`, which sets the value of variable `X` to `Y`.
 
-*Why do we use a different syntax, `#X`, to reference variable `X` when we already have `$X`?*
+_Why do we use a different syntax, `#X`, to reference variable `X` when we already have `$X`?_
 
 The distinction between `$X` and `#X` is that `$X` represents **the value of the variable**. For example, if we evaluate the expression, `SET($X, 50)`, the evaluator will first try to get the value of `X` from the environment and then try to set the value of that value to 50. If `$X` was previously 20, `SET($X, 50)` becomes `SET(20, 50)`. That's not what we want.
 
