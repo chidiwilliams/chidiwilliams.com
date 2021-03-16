@@ -403,8 +403,8 @@ if (func === 'SET') {
 
 ## Conclusion
 
-We added a handful of features to the evaluator in this post. Our program can now evaluate predefined functions, relational operations, and variables.
+We added a handful of features to the evaluator in this post. Our nifty, little program can now evaluate predefined functions, relational operations, and variables.
 
-There are many more places to go in the world of expression evaluators: more primitives and predefined functions, logical operators, lambdas(?). But, I'll leave that to you to explore.
+There are many more places to go in the world of expression evaluators: more primitives and predefined functions, logical operators, lambdas(?), and more. But, I'll have to leave them up to you to explore. Thanks for reading.
 
 Try out [the evaluator online](https://chidiwilliams.github.io/expression-evaluator/) or check out [the complete code on Github](https://github.com/chidiwilliams/expression-evaluator/blob/main/evaluator.js).
