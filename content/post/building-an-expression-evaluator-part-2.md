@@ -8,15 +8,17 @@ url: evaluator-2
 
 In my [previous post](/evaluator/), we explored how expression evaluation works and built a program, `evaluate`, that returns the result of an arithmetic expression.
 
-Here, we'll extend the evaluator with a few more features. First, we'll add support for predefined functions, like `MAX` and `SQRT`. Then, we'll add relational operations: three new operators (`<`, `>`, `=`) and an `IF` function. And finally, we'll create an environment: a place to store and retrieve the results of an expression.
+Here, we'll extend the evaluator with a few more features. We'll add support for predefined functions, like `MAX` and `SQRT`. Then, we'll add relational operations: three new operators (`<`, `>`, `=`) and an `IF` function. And finally, we'll create an environment: a place to store and retrieve the results of an expression.
 
-Let's start with a recap of the evaluation process. In the first stage of evaluation, the program extracts the tokens in the arithmetic expression string. (Tokens are the smallest, meaningful units of an expression. Numbers and symbols are tokens, but whitespace characters aren't.)
+Let's start with a recap of the evaluation process. In the first stage of evaluation, we extract the tokens in the arithmetic expression string. Tokens are the meaningful units of an expression. Numbers and symbols are tokens, but whitespace characters aren't.
 
 ```js
 tokenize('2 + 3 * (5 + 4)'); // [2, '+', 3, '*', '(', 5, '+', 4, ')']
 ```
 
-In the second stage, the program converts the tokens to Reverse Polish notation (RPN). RPN doesn't need parentheses to indicate the order of evaluation of the expression. And so, it's easier to evaluate than infix notation.
+In the second stage, we convert the tokens from **infix notation** to **Reverse Polish notation (RPN)**. In infix notation, which you are probably more familiar with, we place operators _between_ their operands. For example, `1 + 2`. In RPN, also called postfix notation, we place operators _after_ their operands. For example, `1 2 +`.
+
+Unlike infix notation, RPN doesn't need parentheses to indicate the order of evaluation of an expression. And so, it's easier to evaluate than infix notation.
 
 ```js
 toRPN([2, '+', 3, '*', '(', 5, '+', 4, ')']); // [2, 3, 5, 4, '+', '*', '+']
@@ -30,7 +32,7 @@ evalRPN([2, 3, 5, 4, '+', '*', '+']); // 29
 
 ## Functions
 
-We'll predefine two functions in the evaluator: `MAX` and `SQRT`. `MAX(a, b)` will return the larger number of `a` and `b`, while `SQRT` will return the square root of `a`.
+We'll predefine two functions in the evaluator: `MAX` and `SQRT`. `MAX(a, b)` will return the larger of `a` and `b`, while `SQRT` will return the square root of `a`.
 
 ```js
 evaluate('45 + SQRT(9)'); // 48
@@ -39,9 +41,9 @@ evaluate('3 * MAX(4, 19)'); // 57
 
 ### Tokenizing function names
 
-In the tokenization stage, we need to parse two new types of tokens: function names (like `SQRT`), and the comma symbol that separates function arguments.
+In the tokenization stage, we need to parse two new types of tokens: function names (like `SQRT`) and the comma symbol that separates function arguments.
 
-A valid function name may contain one or more uppercase letters. So, in `tokenize`, if the current token is an uppercase letter, we'll check for the other characters that form the name and push them as a single string to the list of tokens.
+A valid function name may contain one or more uppercase letters. In `tokenize`, if we find an uppercase letter in the expression, we'll check for the other characters that form the name and push them as a single string to the list of tokens.
 
 ```js
 if (/[A-Z]/.test(char)) {
@@ -68,16 +70,18 @@ if (/[+\-/*(),^]/.test(char)) {
 
 ### Evaluating RPNs with function names
 
-Let's take the expression, `MAX(4, 19) * 3`, as an example. How would you evaluate this expression? Hopefully:
+After tokenization, we need to convert the tokens to RPN and then evaluate the RPN expression. But we don’t yet know how RPN expressions that contain function names look. Let's try to figure that out first.
+
+We'll take `MAX(4, 19) * 3` as an example. To evaluate this expression, we would:
 
 1. Get the maximum value of 4 and 19, which is 19
 2. Multiply 19 by 3 to get 57
 
-Looking closely at these two steps, you'll notice that we use `MAX` and `*` in a very similar way. We "max 4 and 19" just like we "multiply 19 and 3". Functions work very much like operators. They act on arguments (or operands) and return the result.
+Looking closely at these two steps, you'll notice that we use `MAX` and `*` similarly. We "max 4 and 19" like we "multiply 19 and 3". Functions work just like operators: they return the result of operating on arguments (or operands).
 
-So, we can represent the expression, `MAX(4, 19) * 3`, in RPN as `4 19 MAX 3 *`.
+So, we can represent `MAX(4, 19) * 3` in RPN as `4 19 MAX 3 *`.
 
-Remember that, to evaluate an RPN expression, we perform operations from left to right till we're left with a final value. If the current token in the expression is a number, we push it to a stack. If it is an operator, we pop the topmost two numbers in the stack, operate on them, and then push the resulting value back onto the stack. At the end of the expression, we return the last element left in the stack.
+Remember that, to evaluate an RPN expression, we perform operations from left to right till we get a final value. When we find a number in the expression, we push it to a stack. When we find an operator, we pop the topmost two numbers in the stack, operate on them, and then push the result back onto the stack. At the end of the expression, we return the last result left in the stack.
 
 ```js
 function evalRPN(rpn) {
@@ -141,7 +145,7 @@ Let's start by reviewing how we convert infix expressions to RPN.
 
 ```js
 function toRPN(tokens) {
-  // First, we set up a stack to hold operators which should
+  // First, we set up a stack to hold operators that should
   // not yet be in the final RPN expression
   const operators = [];
 
@@ -212,7 +216,7 @@ if (/[A-Z]/.test(token)) {
 
 Remember that in `shouldUnwindOperatorStack(operators, token)`, we check whether the topmost operator in the `operators` stack has higher precedence than `token`. If it does, we pop it out of the `operators` stack and push it onto `out`.
 
-We need to decide what the precedence of a function is. Looking at an expression like `5 * MAX(4, 2)`, we see that functions **always** have higher precedence than mathematical operators. We'll unwind the `operators` stack if the topmost operator is a function, regardless of whatever `nextToken` is.
+We need to decide what the precedence of a function is. In an expression like `5 * MAX(4, 2)`, we evaluate the function before the multiplication. Functions have higher precedence than their neighboring mathematical operators. We'll unwind the `operators` stack if the topmost operator is a function, regardless of whatever `nextToken` is.
 
 ```js
 const precedence = { '^': 3, '*': 2, '/': 2, '+': 1, '-': 1 };
@@ -224,7 +228,7 @@ function shouldUnwindOperatorStack(operators, nextToken) {
 
   const lastOperator = operators[operators.length - 1];
   return (
-    /[A-Z]/.test(lastOperator) || // return true, if lastOperator is a function
+    /[A-Z]/.test(lastOperator) || // unwind, if lastOperator is a function
     precedence[lastOperator] >= precedence[nextToken]
   );
 }
@@ -232,12 +236,12 @@ function shouldUnwindOperatorStack(operators, nextToken) {
 
 Next, we'll take a look at commas. To evaluate the infix expression, `3 * MAX(1 + 4, 2 - 8)`, we would:
 
-1. Add 1 and 4 together, to get 5
-2. Subtract 8 from 2, to get -6
+1. Add 1 and 4 together to get 5
+2. Subtract 8 from 2 to get -6
 3. Get the maximum value of 5 (from step 1) and -6 (from step 2), which is 5
-4. Multiply 3 by 5, to get 8
+4. Multiply 3 by 5 to get 8
 
-We can represent this evaluation with the RPN: `3 1 4 + 2 8 - MAX *`. Looking closely, we see that the comma in the infix expression behaves like a closing parenthesis. The sub-expression between the comma and the opening parenthesis, `1 + 4`, has higher precedence than the operations before it. (To put it differently: we evaluate subexpressions that are function arguments before evaluating the function itself.)
+We can represent this evaluation with the RPN: `3 1 4 + 2 8 - MAX *`. Looking closely, we see that the comma in the infix expression behaves like a closing parenthesis. The sub-expression between the comma and the opening parenthesis, `1 + 4`, has higher precedence than the operations before it. (In other words: we evaluate sub-expressions that are function arguments before evaluating the function itself.)
 
 Just like the closing parenthesis, when the current token in `toRPN` is a comma, we would unwind the operators in the stack until we get to the most recent opening parenthesis. However, we won't pop out the opening parenthesis from the stack. We'll leave that for the closing parenthesis to do.
 
@@ -364,7 +368,7 @@ Next, we'll look at a way to set and change the values of variables. We'll add a
 
 _Why do we use a different syntax, `#X`, to reference variable `X` when we already have `$X`?_
 
-The distinction between `$X` and `#X` is that `$X` represents **the value of the variable**. For example, if we evaluate the expression, `SET($X, 50)`, the evaluator will first try to get the value of `X` from the environment and then try to set the value of that value to 50. If `$X` was previously 20, `SET($X, 50)` becomes `SET(20, 50)`. That's not what we want.
+The distinction between `$X` and `#X` is that `$X` represents **the value of the variable**. If we evaluate the expression, `SET($X, 50)`, the evaluator will attempt to get the value of `X` from the environment and then try to set the value of that value to 50. If `$X` was previously 20, `SET($X, 50)` becomes `SET(20, 50)`. That's not what we want.
 
 What we want is a way to point to **the place of the variable**. `SET(#X, Y)` means: set the value of the place called `X` to `Y`. We'll refer to `#X` as a variable pointer to `X`.
 
@@ -372,7 +376,7 @@ What we want is a way to point to **the place of the variable**. `SET(#X, Y)` me
 
 #### Tokenizing variable pointer names and SET
 
-We'll parse the variable pointer name like we parse function names and variable names. We'll add the hash character, `#`, to the regex that matches names in the `tokenize` and `toRPN` functions.
+We'll parse the variable pointer name like we parse function names and variable names. We'll add the hash character, `#`, to the regex that matches names in `tokenize()` and `toRPN()`.
 
 ```js
 tokenize('SET(#X, 50)'); // ['SET', '(', '#X', ',', 50, ')']
@@ -381,7 +385,7 @@ toRPN(['SET', '(', '#X', ',', 50, ')']); // ['#X', 50, 'SET']
 
 #### Evaluating RPN expressions with variable pointer names and SET
 
-Remember that in `evalRPN`, when the current token is a number, we push the number to the stack for the operators and functions to pick up. We'll do the same for the variable pointer names so that `SET` picks up the variable name `#X` and not its value in the environment.
+Remember that in `evalRPN`, when the current token is a number, we push the number to the stack for the operators and functions to pick up. We'll do the same for the variable pointer names so that `SET` picks them up.
 
 ```js
 if (typeof token === 'number' || /^\#/.test(token)) {
@@ -405,6 +409,6 @@ if (func === 'SET') {
 
 We added a handful of features to the evaluator in this post. Our nifty, little program can now evaluate predefined functions, relational operations, and variables.
 
-There are many more places to go in the world of expression evaluators: more primitives and predefined functions, logical operators, lambdas(?), and more. But, I'll have to leave them up to you to explore. Thanks for reading.
+There are many more places to go in the world of expression evaluators: [string primitives](https://www.vertex42.com/blog/excel-formulas/text-formulas-in-excel.html#len), [other predefined functions](https://support.microsoft.com/en-us/office/excel-functions-alphabetical-b3944572-255d-4efb-bb96-c6d90033e188), [relational operators](https://www.excelfunctions.net/excel-operators.html#ComparisonOperators), [lambdas](https://www.microsoft.com/en-us/research/blog/lambda-the-ultimatae-excel-worksheet-function/), and more. But I'll have to leave them up to you to explore. Thanks for reading.
 
 Try out [the evaluator online](https://chidiwilliams.github.io/expression-evaluator/) or check out [the complete code on Github](https://github.com/chidiwilliams/expression-evaluator/blob/main/evaluator.js).
