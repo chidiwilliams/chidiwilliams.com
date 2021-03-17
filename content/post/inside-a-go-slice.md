@@ -259,7 +259,7 @@ func AppendInts(slice []int, newElements ...int) []int {
 }
 ```
 
-We grow the size of the slice by a large amount (2x) so that we don't have to grow it each time we append a new element [^cgh].
+We grow the size of the slice by a large amount (2x) so that we don't have to grow it each time we append a new element[^cgh].
 
 Go provides this functionality for growing arrays with its built-in `append` function.
 

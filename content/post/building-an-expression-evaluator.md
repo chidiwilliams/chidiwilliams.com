@@ -113,11 +113,11 @@ The second and third stages of evaluation involve converting the tokens from inf
 
 When using infix notation, it is sometimes necessary to use parentheses to indicate the order of performing operations. For example, to add 3 and 4 together and multiply the result by 5, we write `(3 + 4) * 5`.
 
-Without the parentheses, precedence rules determine the order of evaluating the expression [^nds]. Using these precedence rules, we would evaluate the expression `3 + 4 * 5` differently: first, multiplying 4 by 5 and then adding the result to 3.
+Without the parentheses, precedence rules determine the order of evaluating the expression[^nds]. Using these precedence rules, we would evaluate the expression `3 + 4 * 5` differently: first, multiplying 4 by 5 and then adding the result to 3.
 
 As a result, a program that evaluates an infix expression needs to do extra work to decide the order of the operations. Instead of simply evaluating the expression from left to right, it may need to check the full expression to see if there are parts of the expression enclosed in parentheses that should be evaluated first.
 
-To avoid this need for parentheses, computer scientists developed two other types of arithmetic notations [^mee]. In **prefix notation**, also known as **Polish notation**, operators **precede** their operands. And in **postfix notation**, or **Reverse Polish notation**, operators **follow** their operands. For example, the infix expression, `1 + 5`, may be represented as `+ 1 5` in prefix notation and `1 5 +` in postfix notation.
+To avoid this need for parentheses, computer scientists developed two other types of arithmetic notations[^mee]. In **prefix notation**, also known as **Polish notation**, operators **precede** their operands. And in **postfix notation**, or **Reverse Polish notation**, operators **follow** their operands. For example, the infix expression, `1 + 5`, may be represented as `+ 1 5` in prefix notation and `1 5 +` in postfix notation.
 
 Polish and Reverse Polish notations have the advantage of not requiring parentheses to represent the order of evaluating expressions. Both notations innately express the order of operations and can simply be evaluated from right to left (for Polish notation) or left to right (for Reverse Polish notation). We'll see how in the next section.
 
@@ -309,7 +309,7 @@ function operate(operator, stack) {
 
 We now know what Reverse Polish notation is and how to evaluate RPN expressions. Well done on making it this far.
 
-Next, we'll see how to convert expressions written in infix notation to RPN using a process known as the **shunting-yard algorithm** [^njo].
+Next, we'll see how to convert expressions written in infix notation to RPN using a process known as the **shunting-yard algorithm**[^njo].
 
 Remember that RPN places the operators in an expression in the correct order of evaluation. So the goal of the shunting-yard algorithm is to read through an infix expression and then place the operators in their correct position according to precedence rules.
 
