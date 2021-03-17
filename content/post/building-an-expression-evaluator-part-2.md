@@ -409,6 +409,6 @@ if (func === 'SET') {
 
 We added a handful of features to the evaluator in this post. Our nifty, little program can now evaluate predefined functions, relational operations, and variables.
 
-There are many more places to go in the world of expression evaluators: [string primitives](https://www.vertex42.com/blog/excel-formulas/text-formulas-in-excel.html#len), [other predefined functions](https://support.microsoft.com/en-us/office/excel-functions-alphabetical-b3944572-255d-4efb-bb96-c6d90033e188), [relational operators](https://www.excelfunctions.net/excel-operators.html#ComparisonOperators), [lambdas](https://www.microsoft.com/en-us/research/blog/lambda-the-ultimatae-excel-worksheet-function/), and more. But I'll have to leave them up to you to explore. Thanks for reading.
+There are many more places to go in the world of expression evaluators: [string primitives](https://www.vertex42.com/blog/excel-formulas/text-formulas-in-excel.html#len), [other predefined functions](https://support.microsoft.com/en-us/office/excel-functions-alphabetical-b3944572-255d-4efb-bb96-c6d90033e188), [lambdas](https://www.microsoft.com/en-us/research/blog/lambda-the-ultimatae-excel-worksheet-function/), and more. But I'll have to leave them up to you to explore. Thanks for reading.
 
 Try out [the evaluator online](https://chidiwilliams.github.io/expression-evaluator/) or check out [the complete code on Github](https://github.com/chidiwilliams/expression-evaluator/blob/main/evaluator.js).
