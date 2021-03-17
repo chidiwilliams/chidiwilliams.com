@@ -1,6 +1,6 @@
 ---
 title: 'Building an expression evaluator (continued)'
-date: 2021-03-15T15:49:42Z
+date: 2021-03-17T08:00:00Z
 draft: false
 tags: [algorithms, javascript]
 url: evaluator-2
