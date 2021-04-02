@@ -10,10 +10,9 @@
           href="{{.href}}"
           target="_blank"
           rel="noopener"
-          class="text-link {{ if gt .rating 0 }}{{ if gt .rating 4 }}perfect-book-link{{ else }}read-book-link{{ end }}{{ else }}pending-book-link{{ end }}"
+          class="text-link {{ if gt .rating 4 }}perfect-book-link{{ end }}"
           >{{.title}}</a
         >
-        {{ if lt .rating 1 }}<span>⌛</span>{{ end }}
       </li>
       {{end}}
     </ul>

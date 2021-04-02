@@ -10,8 +10,6 @@ categories: [featured]
 description: Some of my favourite books
 ---
 
-Here's a selected list from my current bookshelf (physical and digital). The books in **bold** are my top recommendations. (I haven't yet read the books with the ⌛ emoji.)
+Here's a selected list from my current bookshelf. The books in **bold** are my top recommendations. I'll keep updating this list as I find other great reads.
 
-I'll keep updating this list as I find other great reads.
-
-If you want to have a chat about any of these books or share some of yours, feel free to [say hello](mailto:chidi@chidiwilliams.com). I also curate shelves and write reviews on [Goodreads](https://www.goodreads.com/user/show/64479598-chidi-williams).
+[Say hello](https://twitter.com/chidiwilliams__) if you want to talk about any of these books or share some of your own recommendations. I also curate shelves and write reviews on [Goodreads](https://www.goodreads.com/user/show/64479598-chidi-williams).
