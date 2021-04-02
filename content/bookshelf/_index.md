@@ -2,10 +2,6 @@
 title: 'Bookshelf'
 date: 2020-08-08T17:29:00+01:00
 draft: false
-images:
-  [
-    https://res.cloudinary.com/cwilliams/image/upload/v1596905146/photo-1593814013328-6041acc27094.jpg,
-  ]
 categories: [featured]
 description: A selected list from my current bookshelf
 ---
