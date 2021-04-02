@@ -8,7 +8,7 @@ disqusShortname = "chidiwilliams"
 [params]
 description = "Posts from Chidi Williams, a software engineer from Lagos, Nigeria."
 images = [
-  "https://res.cloudinary.com/cwilliams/image/upload/v1615927150/Blog/Icon%20Gradient.png"
+  "https://res.cloudinary.com/cwilliams/image/upload/v1592140043/chidiwilliams_-_twitter_icon_small.png"
 ]
 
 [markup.highlight]
