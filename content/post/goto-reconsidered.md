@@ -1,39 +1,25 @@
 ---
 title: 'GOTO Reconsidered'
-date: 2021-03-24T08:00:00+00:00
+date: 2021-04-14T08:00:00+00:00
 draft: true
 tags: [basic, c, assembly]
 ---
 
-I wrote my very first program in BASIC. My father had bought a DVD from Computer Village[^dwe] that had a compilation of compilers and tutorials for different programming languages. There were compilers for BASIC, Fortran, COBOL, and Pascal.
+Before I learned to program, I had used computers to explore Microsoft Encarta and play games like Solitaire and Road Rash. I took a few computer classes in school, learning what parts computers had, who the pioneers of computing were, and how to navigate around Windows. But I hardly knew how computer applications really worked, and I hadn't ever built one myself.
 
-[^dwe]: Computer Village is a place in Lagos, Nigeria where eletronics, computers, phones, etc are sold.
-
-My very first program looked like this:
+One day, my father brought home a CD collection of compilers, interpreters, and manuals for a handful of programming languages: BASIC (QBasic and TBasic), Fortran, COBOL, and Pascal. And, like many other programmers, my first program printed out a message to the world:
 
 ```basic
 PRINT "Hello World"
 ```
 
-Gradually I learned about more concepts: comments, variables, how to receive user input, [math expressions](/evaluator), conditional statements, and more. Somewhere between then and the rest of my journey learning BASIC, I learned about a construct known as the `GOTO` statement.
-
-In BASIC, you could assign a number to a line of code, and `GOTO` let you jump to that line. For example, this program prompts the user till they enter an even number.
-
-```basic
-10 INPUT "Enter an even number: ", n
-20 IF n MOD 2 = 0 THEN
-30 PRINT "Thank you!"
-35 PRINT "qw!"
-40 ELSE
-50 GOTO 10
-60 END IF
-```
+As I progressed through the QBasic manual, I learned about programming concepts like comments, variables, user input, math expressions, and conditional statements. One section of the manual covered the GOTO statement, a construct which is much less popular in modern programming today, but worth taking another look at.
 
 ## What is GOTO?
 
-The GOTO statement jumps from the current line in a program to another line. It performs a one-way transfer of control (which is to say, it does not return back control to the current line, like a function call).
+The GOTO statement jumps from the current line in a program to another line. It performs a one-way transfer of control (which is to say, it does not return control back to the current line, like a function call does).
 
-`GOTO label` jumps to the line labelled with `label`. In BASIC, we can label line with line numbers. For example, this BASIC program prints out successive integers counting from 1.
+`GOTO label` jumps to the line with the given label. And, in BASIC, we can label lines with line numbers. For example, this program prints out successive positive integers:
 
 ```basic
 10 LET X = 1
@@ -42,45 +28,16 @@ The GOTO statement jumps from the current line in a program to another line. It 
 40 GOTO 20
 ```
 
-You can also combine the `GOTO` statement with a conditional statement to perform a conditional transfer of control: `IF condition THEN GOTO label`. For example, this program prints out the first 20 numbers in the Fibonacci series.
+We can also combine the `GOTO` statement with a conditional statement to perform a conditional transfer of control: `IF condition THEN GOTO label`. In this example, we only print out the first 20 positive integers:
 
 ```basic
-10 LET A = 0
-20 LET B = 1
-30 LET SUM = 0
-40 LET N = 20
-50 PRINT A
-60 LET SUM = A + B
-70 LET A = B
-80 LET B = SUM
-90 LET N = N - 1
-100 IF N > 0 THEN GOTO 50
+10 LET X = 1
+20 LET X = X + 1
+30 PRINT X
+40 IF X < 21 THEN GOTO 20
 ```
 
-Apart from line numbers, you can also use GOTOs to jump to a labelled section of code. For example, this C program also prints out the first 20 Fibonacci numbers.
-
-```c
-#include <stdio.h>
-
-void main()
-{
-    int a = 0, b = 1, sum = 0, n = 20;
-
-nextFib:
-    if (n > 0) {
-        printf("%d\n", a);
-        sum = a + b;
-        a = b;
-        b = sum;
-        n--;
-        goto nextFib;
-    }
-}
-```
-
-## GOTOs in assembly code
-
-GOTOs are compiled into jump assembly instructions. This C program that prints successive positive integers...
+In languages like C, we label lines with alphanumeric labels instead of line numbers. For example, this C program also prints out the first 20 counting numbers:
 
 ```c
 void main()
@@ -90,25 +47,39 @@ void main()
 next:
     x++;
     printf("%d", x);
-    goto next;
+    if (x < 21) goto next;
+}
+```
+
+## Assembly code
+
+GOTOs compile into jump assembly instructions. This C program that prints successive positive integers...
+
+```c
+void main()
+{
+  int x = 1;
+next:
+  x++;
+  printf("%d", x);
+  goto next;
 }
 ```
 
 ...compiles into this assembly code[^jek]:
 
-[^jek]: Compiled with x86-64 gcc 10.2
+[^jek]: Compiled with x86-64 gcc 10.2 [https://godbolt.org/](https://godbolt.org/)
 
 ```asm
 ; "local label" which stores the string constant we'll use to print later
 .LC0:
         .string "%d"
-
 ; label for the start of the main function
 main:
         ; prepare the stack and registers for use
-        push    rbp
-        mov     rbp, rsp
-        sub     rsp, 16
+        push rbp mov
+        rbp, rsp sub
+        rsp, 16
 
         ; move 1 into 4 bytes starting at the address rbp-4
         ; rbp-4 represents the variable x
@@ -130,17 +101,16 @@ main:
         jmp     .L2
 ```
 
-We call the statement in the last line, `jmp`, an unconditional jump statement. It tells the machine to return to the section of code marked `.L2`.
+We call the statement in the last line an unconditional jump statement. It tells the machine to jump to the section of code marked `.L2`.
 
-### Looping with GOTOs
+### Loops
 
-From this example, and the ones in the previous section, you may have noticed something peculiar about how we use GOTOs. We use GOTOs to repeat a process, just like we do with loop statements like `for` and `while`. Indeed, we can rewrite the previous example using a while loop.
+You may have noticed something peculiar about the examples we've seen so far. We use GOTOs to repeat a process, like a pseudo `for` or `while` loop. Indeed, we can rewrite the previous example using a while loop.
 
 ```c
 void main()
 {
     int x = 1;
-
     while (1) {
         x++;
         printf("%d", x);
@@ -148,7 +118,7 @@ void main()
 }
 ```
 
-This code doesn't just print the same output as the version with GOTO. They have the exact same assembly code! The compiler converts this code into a combination of labels and a `jmp` statement, just like it did with the GOTO version.
+This program doesn't just print the same output as the GOTO version, it has the exact same assembly code.
 
 ```asm
 .LC0:
@@ -168,7 +138,9 @@ main:
         jmp     .L2
 ```
 
-In the previous section, we saw an example of a conditional `GOTO`: a `GOTO` combined with an `IF` statement. Let's modify our printing program to print only the first 20 integers.
+### Conditional jumps
+
+In the previous section, we also saw an example of a conditional GOTO: a GOTO combined with an `if` statement.
 
 ```c
 void main()
@@ -178,11 +150,11 @@ void main()
 next:
     x++;
     printf("%d", x);
-    if (x < 20) goto next;
+    if (x < 21) goto next;
 }
 ```
 
-And here's the assembly code version of this new program:
+Here's the assembly code version of this new program:
 
 ```asm
 .LC0:
@@ -193,11 +165,11 @@ main:
         sub     rsp, 16
         mov     DWORD PTR [rbp-4], 1
 .L2:
-        ; ...skipping print instructions...
+        ; ** we'll skip the print instructions... **
 
         ; compare 19 and the 4 bytes stored in rbp-4
-        cmp     DWORD PTR [rbp-4], 19
-        ; ...and, if the result is "greater than" (i.e. the 4 bytes in rbp-4 equal 20 or more), jump to .L3
+        cmp     DWORD PTR [rbp-4], 20
+        ; ...and, if the result is "greater than" (i.e. the 4 bytes in rbp-4 equal 21 or more), jump to .L3
         jg      .L3
         ; jump to .L2
         jmp     .L2
@@ -208,11 +180,11 @@ main:
         ret
 ```
 
-Here, we see a new type of jump instruction, `jg`. `jg` jumps to a label if the result of the last arithmetic operation was "greater than".
+We see a new type of jump instruction here, `jg`. `jg` jumps to a label if the result of the last arithmetic operation was "greater than".
 
-There are a few other conditional jump instructions like `je <label>` (jump when equal), `jne <label>` (jump when not equal), `jl <label>` (jump when less than), and more. These instructions correspond to the combination of GOTOs with `if (a == b)`, `if (a != b)`, `if (a < b)`, respectively, etc.
+`je <label>` (jump when equal), `jne <label>` (jump when not equal), and `jl <label>` (jump when less than) are some other examples of conditional jump instructions. These instructions correspond to combining GOTOs with `if (a == b)`, `if (a != b)`, `if (a < b)`, respectively, etc.
 
-We can rewrite this conditional GOTO program with a for loop.
+We can rewrite this conditional GOTO program with a `for` loop.
 
 ```c
 void main()
@@ -227,7 +199,7 @@ Again, this program prints the same output as its GOTO version using similar con
 
 ### Conditional blocks
 
-The conditional jump instructions are also used in the conditional blocks like we have in if-else statements. Here's a program with a simple conditional outside a loop.
+Compilers also use conditional jump instructions for conditional blocks. Here's a program with an `if-else` structure outside a loop:
 
 ```c
 int main() {
@@ -240,7 +212,7 @@ int main() {
 }
 ```
 
-This program compiles into the following assembly code instructions.
+And its assembly instructions:
 
 ```asm {linenos=table,hl_lines=["9-10"],linenostart=1}
 main:
@@ -259,35 +231,27 @@ main:
         ret
 ```
 
-Here, `.L2` represents the else block. On the 6th line, we jump to `.L2` if the value of `rbp-4` is not equal to 1. And we make an unconditional jump on the 8th line to jump over the else block since we have completed the instructions for the `if` block.
+The highlighted section, `.L2`, is the else block. We jump to the block from line 6 if the value of `rbp-4` is not equal to 1. Line 7 represents the `if` block, and on the next line, we jump over the `else` section to the end of the program. In some sense, `if-else`s are GOTOs too.
 
-In a sense, If-elses are GOTOs too.
+## Use
 
-## The decline of GOTOs
+GOTOs were fairly common in high-level programs in the early days of programming. But, with time, it became clear that, when used carelessly, GOTOs create spaghetti code that is difficult to understand and unmaintainable.
 
-GOTOs were fairly common in the early days of software, but declined in popularity in the 1960s and 1970s with the rise of structured programming. The primary criticism is that code that uses goto statements is harder to understand than alternative constructions. Also leads to unmaintainable spaghetti code.
+In the 1960s and 1970s, structured programming techniques that focused on producing clear, quality programs caught on. These techniques favoured structured constructs like blocks, loops, conditionals, and subroutines (or, functions) over GOTOs.
 
-Structured programming is a programming paradigm aimed at improving the clarity, quality, and development time of a computer program by making extensive use of the structured control flow constructs of selection (if/then/else) and repetition (while and for), block structures, and subroutines.
+In 1968, Edsger Dijkstra wrote a [critical letter](http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html) about GOTOs where he argued that GOTO statements make it harder to analyze a program and verify its correctness. He concludes that they are "too much an invitation to make a mess of one's program," and should be abolished from all higher-level programs.
 
-The structured program theorem proved that the goto statement is not necessary to write programs that can be expressed as flow charts; some combination of the three programming constructs of sequence, selection/choice, and repetition/iteration are sufficient for any computation that can be performed by a Turing machine, with the caveat that code duplication and additional variables may need to be introduced.
+The [structured program theorem](https://simple.wikipedia.org/wiki/Structured_program_theorem), first published in 1966, also showed that sequences (execute one then another), conditionals (execute based on a condition), and repetition (execute a number of times) are sufficient to represent any computer program. In other words, it is always possible to rewrite a program to not use GOTOs.
 
-In 1968, Edsger Dijkstra wrote a critical letter about GOTOs called [Go To Statement Considered Harmful](http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html). In this letter he argued that GOTO statements make it harder to analyze and verify the correctness of programs. They make it harder to find a meaningful set of coordinates in which to describe the progress of the program. They are "too much an invitation to make a mess of one's program", and should be abolished from all higher-level programs.
-
-## When GOTOs are useful
-
-These examples can be written with structured programming. The structured programming theorem proves... Most of the examples cannot be simplified without introducing a new variable, conditional statement, or loop. It is arguable that these programs are more readable and easier to follow than without GOTOs.
-
-Still Knuth concludes that GOTOs should be abolished from high-level languages to train programmers to formulate their abstractions more carefully.
-
-Sometimes, within the constraint of a particular language and problem, GOTOs can be the optimal—or at least a good way—to solve a task.
+There's a good chance this isn't news to you. If you write modern high-level languages, you may have never needed to write a GOTO statement before. However, there are some situations where GOTO can be a good way, if not the optimal way, to solve a task.
 
 ### Error handling
 
-In Donald Knuth's response[^jkw] to Dijkstra's letter, he analyzes different ALGOL programs and finds that in some of them, GOTOs are a good way to solve a particular task. One of such tasks is error exits.
+In Donald Knuth's 1974 paper, "Structured Programming with _go to_ Statements," he found that GOTOs are a good way to solve some tasks in ALGOL programs.[^jkw] One of the tasks was the error exit.
 
-[^jkw]: [Structured Programming with go to Statements](https://dl.acm.org/doi/10.1145/356635.356640) (1974)
+[^jkw]: Donald E. Knuth. 1974. Structured Programming with _go to_ Statements. _ACM Comput. Surv._ 6, 4 (Dec. 1974), 261–301. DOI:[https://doi.org/10.1145/356635.356640](https://doi.org/10.1145/356635.356640)
 
-When an error happens in a program, we might want to skip over the rest of the program and do some cleanup (like deallocating resources and logging the error) instead. In some programming languages, we can perform this cleanup with exceptions and try-catch clauses. For example, in JavaScript:
+Sometimes, when an error happens in a program, we skip over the rest of the code to perform some cleanup tasks, like deallocating resources and closing connections, instead. In languages like JavaScript, we can handle errors with exceptions and try-catch blocks:
 
 ```javascript
 function main() {
@@ -301,36 +265,46 @@ function main() {
 }
 ```
 
-At the time when Knuth wrote his letter, the two most common languages, Algol and PL/I, did not have support for structured exception handling with try-catch clauses. C, which is still much commonly in use today, also does not have exceptions or try-catch. In the absence of exceptions, we can use GOTOs to handle errors:
+When Knuth wrote his paper in 1974, the most common programming languages did not support such structured exception handling. And neither does C, which is still widely used today. In the abscence of exceptions and try-catch blocks, we can use GOTOs to handle errors:
 
 ```c
-void main(int argc, char **argv)
+void main()
 {
-    FILE *f;
+    struct *db;
+    struct *migrate_res;
+    struct *update_res;
 
-    if (argc < 2) {
-        fprintf(stderr, "not enough arguments\n");
+    db = get_db();
+    if (db == NULL) {
+        fprintf("could not get db\n");
         goto err;
     }
 
-    f = fopen(argv[1], "r");
-    if (f == NULL) {
-        fprintf(stderr, "error opening file %s\n", argv[1]);
+    migrate_res = migrate_db(&db);
+    if (res == NULL) {
+        fprintf("could not migrate the db");
         goto err;
     }
 
-  // **do things with the file**
+    update_res = update_data(&db);
+    if (update_res == NULL) {
+        fprintf("could not update data");
+        goto undo_migration;
+    }
 
-  err:
-    free(buf);
-
+    // everything went fine, return
     return 0;
+
+undo_migration:
+    undo_migration(&db);
+err:
+   return -1;
 }
 ```
 
 ### Multi-level breaks
 
-In another case, we might want to jump out of a deeply nested loop. Some languages provide a labeled break statement for this reason. For example, in this JavaScript program, we print two counters till their product is greater than 10, and then we print "done":
+In languages like JavaScript, you can break out a nested loop using a labelled break statement.
 
 ```js
 function main(a, b) {
@@ -342,11 +316,11 @@ function main(a, b) {
       console.log(`i = ${i}, j = ${j}`);
     }
   }
-  console.log('done');
+  console.log('finished printing counters with product <= 10');
 }
 ```
 
-A few other languages do not implement multi-level breaks (and continues). And in those languages, GOTOs are useful for jumping out of nested loops. In C, for example, we can rewrite the previous program as:
+But in languages like C, which do not have labelled breaks (and labelled continues), GOTOs can act as substitutes.
 
 ```c
 void main()
@@ -360,37 +334,94 @@ void main()
     }
   }
 
-  done:
-  printf("done");
+done:
+  printf("finished printing counters with product <= 10");
 }
 ```
 
-Here, you might already be thinking of other ways to solve this problem without a GOTO. We could wrap the loops in a separate function and return when we meet the condition, or we could add a Boolean flag. But these other solutions require more work and may be more difficult to read and understand.
+There are a few alternative solutions to this problem. We could wrap the loops in another function and return from the function when we meet the condition, or we could add a boolean flag. But it isn't obvious that these alternatives would make the program clearer or easier to understand.
+
+Because the program with the GOTO statement performs the same operation as the one with the labelled break, you might also think that breaks and continues, labelled and unlabelled, are only fancy jump assembly instructions too. And you would be correct.
 
 ### Finite state machines
 
-GOTOs also have a peculiar use case in representing finite state machines. A **finite state machine** is a model of a machine with a fixed number of states. The machine can only be in one state at a time, and can transition from one state to the other based on some input.
+GOTOs also have a peculiar use case in [representing finite state machines](https://www.thibault.org/newhome/thoughts/goto-and-fsms.html). A **finite state machine** is a model of a machine with a fixed number of states. The machine can only be in one state at a time, and can transition from one state to the other based on some input.
 
-## Support for GOTOs
+For example, a traffic light is a finite state machine with three states: red, yellow, and green. Based on a timer, the indicator changes from red to yellow to green and back to red again.
 
-- JavaScript - Break with label
-- Python - <https://github.com/snoack/python-goto> <http://entrian.com/goto/> (April Fool's joke)
-- Java - Used to have GOTO <https://www.youtube.com/watch?v=9ei-rbULWoA&t=1045s>, labeled loops
-- C# - GOTO <https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/goto>
-- PHP - GOTO <https://www.php.net/manual/en/control-structures.goto.php> Example: <https://www.php.net/manual/en/control-structures.goto.php#125935>
-- C++ - GOTO: <https://en.cppreference.com/w/cpp/language/goto>. If transfer of control enters the scope of any automatic variables (e.g. by jumping forward over a declaration statement), the program is ill-formed (cannot be compiled), unless all variables whose scope is entered have
-  - 1. scalar types declared without initializers
-  - 2. class types with trivial default constructors and trivial destructors declared without initializers
-  - 3. cv-qualified versions of one of the above
-  - 4. arrays of one of the above
-- C - Same as C++, but with fewer restrictions. In the C programming language, the goto statement has fewer restrictions and can enter the scope of any variable other than variable-length array or variably-modified pointer.
-- Go - GOTO <https://golang.org/ref/spec#Goto_statements>
-  - Executing the "goto" statement must not cause any variables to come into scope that were not already in scope at the point of the goto. For instance, this example:
-  - A "goto" statement outside a block cannot jump to a label inside that block.
-- Ruby - Library <https://github.com/bb/ruby-goto>
+![]()
 
-## Conclusion
+Regular expression matchers are also finite state machines. For example, `^[0-9]+\-[a-z]+$` matches a sequence of one or more digits followed by a hyphen followed by one or more letters.
 
-Most languages still have a safe form of GOTO. Powerful construct, use wisely.
+![]()
+
+And we can represent this state diagram with a function with GOTO statements.
+
+```c
+int matches(const char* str)
+{
+  const char* curr = str;
+  
+  // Fail if the string is empty
+  if (!curr) return 0;
+
+  firstDigit:
+  // Fail if the next character is not a digit
+  if (!isDigit(*(curr++))) return 0;
+
+  nextDigits:
+  // Skip over any more digits
+  if (isDigit(*(curr++))) goto nextDigits;
+
+  dash:
+  // We've moved one character past the non-digit, so move back one step
+  curr--;
+  // Fail if the next character is not a hyphen
+  if ((*(curr++)) != "-") return 0;
+
+  firstLetter:
+  // Fail if the next character is not a letter
+  if (!isLetter(*(curr++))) return 0;
+
+  nextLetters:
+  // Skip over any more letters
+  if (isLetter(*(curr++))) goto nextLetters;
+
+  // We've moved one character past the non-letter, so move back one step
+  curr--;
+  // Fail if there are any other characters after the last letter
+  if(*curr) return 0;
+
+  // All is well, return true
+  return 1;
+}
+```
+
+Again, there are other ways to write this matcher. We could use loops and breaks or a generic regex library[^enx] in place of the GOTO statements. But if we don't have such a library, or we don't want to use one, GOTOs can be a simple, clear way to represent the different states and transitions of a finite-state machine.
+
+[^enx]: Interestingly, some regex libraries like [re2](https://en.wikipedia.org/wiki/RE2_(software)) work by generating finite-state machines like ours.
+
+## Support
+
+**JavaScript** and **Java** both don't support GOTO, but they have labelled continues and breaks to skip over or exit nested loops. **Java** once had GOTO, but [it was removed in its early days](https://www.youtube.com/watch?v=9ei-rbULWoA&t=1045s).
+
+**Python** also doesn't have GOTO, but some libraries mimic the functionality. [One library](http://entrian.com/goto/) uses [trace](https://docs.python.org/3/library/trace.html#module-trace) to change the program execution, and [another](https://github.com/snoack/python-goto) works by rewriting the compiled bytecode. One **Ruby** [library](https://github.com/bb/ruby-goto) also adds GOTO to the language by rescuing raised exceptions and replaying the stack. These libraries are all experimental and should be used with caution.
+
+Many other high-level programming languages have GOTO statements along with different safety controls.
+
+In **C**, the GOTO statement is local to a function: the statement must be in the same function as the label it is referring to.[^whd] And the jump can't enter the scope of a variable-length array or another variably-modified type.[^lwn] In **C++**, the jump also can't enter the scope of any automatic variables.[^xgw]
+
+[^whd]: C also provides [`setjmp`](https://en.cppreference.com/w/cpp/utility/program/setjmp) and [`lngjmp`](https://en.cppreference.com/w/cpp/utility/program/lngjmp), however. The complementary functions can perform non-local jumps across multiple levels of function calls. GOTO on steroids.
+[^xgw]: [https://en.cppreference.com/w/cpp/language/goto](https://en.cppreference.com/w/cpp/language/goto)
+[^lwn]: [https://en.cppreference.com/w/c/language/goto](https://en.cppreference.com/w/c/language/goto)
+
+In **Go**, GOTO can also only jump to a statement within the same function, and it must not cause any variables to come into scope that were not in scope at the point of the GOTO.[^lwm] Similarly, in **PHP**, a GOTO statement can't jump into a function or method, or out of one. The target label must be within the same file and context.[^jwk] In both languages, GOTO can't jump into a loop or switch structure, but can jump out of them, to exit deeply nested loops, for example.
+
+[^lwm]: [https://golang.org/ref/spec#Goto_statements](https://golang.org/ref/spec#Goto_statements)
+[^jwk]: [https://www.php.net/manual/en/control-structures.goto.php](https://www.php.net/manual/en/control-structures.goto.php) 
+
+GOTO in **C#** is also function-scoped, although it can also jump from one case statement in a switch structure to another.[^jep]
+
+[^jep]: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/goto
 
 ## Notes
