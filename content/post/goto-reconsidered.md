@@ -424,4 +424,6 @@ GOTO in **C#** is also function-scoped, although it can also jump from one case 
 
 [^jep]: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/goto
 
+In these languages, GOTO statements can still produce programs that are clear, readable, and maintainable when used carefully.
+
 ## Notes
