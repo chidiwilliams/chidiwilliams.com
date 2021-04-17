@@ -210,6 +210,8 @@ article .post-meta {
 
 article img {
   max-width: 100%;
+  display: block;
+  margin: auto;
 }
 
 article.post pre {
