@@ -22,7 +22,9 @@
     <!-- -->
     {{ partial "twitter_cards.html" . }}
 
-    <title>{{ .Site.Title }}{{ with .Params.Title }}: {{ . }}{{ end }}</title>
+    <title>
+      {{ if .Params.Title }}{{ .Params.Title }}{{ else }}{{ .Site.Title }}{{ end }}
+    </title>
 
     {{ range .AlternativeOutputFormats -}} {{ printf `
     <link rel="%s" type="%s" href="%s" title="%s" />

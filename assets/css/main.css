@@ -210,6 +210,8 @@ article .post-meta {
 
 article img {
   max-width: 100%;
+  display: block;
+  margin: auto;
 }
 
 article.post pre {
@@ -218,6 +220,7 @@ article.post pre {
   font-size: 13px;
   border: 2px solid var(--border-color);
   border-radius: 3px;
+  white-space: pre-wrap;
 }
 
 article.post figure {
