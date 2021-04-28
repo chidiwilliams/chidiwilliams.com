@@ -1,7 +1,7 @@
 ---
 title: 'About'
 date: 2021-04-28T20:44:23+01:00
-draft: true
+draft: false
 layout: static
 images:
   [
