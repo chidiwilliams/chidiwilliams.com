@@ -9,15 +9,5 @@
   <section class="articles">
     {{ range $section }}{{ partial "summary.html" . }}{{ end }}
   </section>
-
-  <h2>Links</h2>
-  <div class="articles">
-    {{ range .Site.Taxonomies.categories.featured }}
-    <article>
-      <h3><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a></h3>
-      <div class="post-meta">{{ .Page.Description }}</div>
-    </article>
-    {{ end }}
-  </div>
 </div>
 {{ end }}
