@@ -1,53 +1,15 @@
 <header>
   <nav>
     <h1 class="main">
-      <a href="/">
-        {{.Site.Title}}
-      </a>
+      <a href="/">{{.Site.Title}}</a>
     </h1>
+    {{ if .IsHome }}
     <div class="separator"></div>
     <ul class="social-icons">
       <li>
-        <a
-          href="https://github.com/chidiwilliams"
-          target="_blank"
-          rel="noopener"
-          class="primary"
-        >
-          <span class="sr-only">Github</span>
-          {{ partial "svg/github.html" . }}
-        </a>
+        <a href="/about" class="text-link">About</a>
       </li>
-      <li>
-        <a
-          href="https://linkedin.com/in/chidiwilliams"
-          target="_blank"
-          class="primary"
-          rel="noopener"
-        >
-          <span class="sr-only">LinkedIn</span>
-          {{ partial "svg/linkedin.html" . }}
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/ChidiWilliams__"
-          target="_blank"
-          class="primary"
-          rel="noopener"
-        >
-          <span class="sr-only">Twitter</span>
-          {{ partial "svg/twitter.html" . }}
-        </a>
-      </li>
-      {{ with .OutputFormats.Get "rss" -}}
-      <li>
-        <a href="{{.Permalink}}" class="primary">
-          <span class="sr-only">RSS Feed</span>
-          {{ partial "svg/rss.html" . }}
-        </a>
-      </li>
-      {{ end -}}
     </ul>
+    {{ end }}
   </nav>
 </header>
