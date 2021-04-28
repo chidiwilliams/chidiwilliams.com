@@ -3,10 +3,6 @@ title: 'About'
 date: 2021-04-28T20:44:23+01:00
 draft: false
 layout: static
-images:
-  [
-    https://res.cloudinary.com/cwilliams/image/upload/v1619649025/Blog/EIxuQfNv_400x400.jpg,
-  ]
 ---
 
 ![Chidi](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_200/v1619649025/Blog/EIxuQfNv_400x400.jpg)

@@ -5,9 +5,8 @@ theme = "chidiwilliams"
 googleAnalytics = "UA-167812981-1"
 
 [params]
-description = "Posts from Chidi Williams, a software engineer from Lagos, Nigeria."
 images = [
-  "https://res.cloudinary.com/cwilliams/image/upload/v1592140043/chidiwilliams_-_twitter_icon_small.png"
+  "https://res.cloudinary.com/cwilliams/image/upload/v1619649025/Blog/EIxuQfNv_400x400.jpg"
 ]
 
 [markup.highlight]
