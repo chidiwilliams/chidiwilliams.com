@@ -64,12 +64,6 @@ h6 a,
 a.text-link {
   color: var(--primary-color);
   text-decoration: none;
-  border-bottom: 1px solid transparent;
-  -webkit-transition: all 0.3s ease-in;
-  -moz-transition: all 0.3s ease-in;
-  -ms-transition: all 0.3s ease-in;
-  -o-transition: all 0.3s ease-in;
-  transition: all 0.3s ease-in;
 }
 
 p a:focus,
@@ -89,7 +83,6 @@ a.text-link:hover,
 h6 a:focus,
 h6 a:hover {
   text-decoration: none;
-  border-bottom: 1px solid var(--link-highlight-color);
   color: var(--link-highlight-color);
 }
 

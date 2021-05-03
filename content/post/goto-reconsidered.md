@@ -1,5 +1,5 @@
 ---
-title: 'GOTO Reconsidered'
+title: 'GOTO reconsidered'
 date: 2021-04-18T12:00:00+00:00
 draft: false
 tags: [basic, c, assembly]
@@ -359,7 +359,7 @@ We can write a function in C that matches this regex expression using GOTOs:
 int matches(const char* str)
 {
   const char* curr = str;
-  
+
   // Fail if the string is empty
   if (!curr) return 0;
 
@@ -397,7 +397,7 @@ int matches(const char* str)
 
 Again, there are other ways to write this matcher. We could use loops and breaks or a generic regex library[^enx] in place of the GOTO statements. But if we don't have such a library or we don't want to use one, GOTOs can be a simple, clear way to represent the states and transitions of a finite-state machine.
 
-[^enx]: Interestingly, some regex libraries like [re2](https://en.wikipedia.org/wiki/RE2_(software)) work by generating finite-state machines like ours.
+[^enx]: Interestingly, some regex libraries like [re2](<https://en.wikipedia.org/wiki/RE2_(software)>) work by generating finite-state machines like ours.
 
 ## Support
 
@@ -416,7 +416,7 @@ In **C**, the GOTO statement is local to a function: the statement must be in th
 In **Go**, GOTO can also only jump to a statement within the same function, and it must not cause any variable to come into scope that was not in scope at the point of the GOTO.[^lwm] Similarly, in **PHP**, a GOTO statement can't jump into a function or method or out of one. The target label must be within the same file and context.[^jwk] In both **Go** and **PHP**, GOTO can't jump into a loop or switch structure but can jump out of them to exit deeply nested loops.
 
 [^lwm]: [https://golang.org/ref/spec#Goto_statements](https://golang.org/ref/spec#Goto_statements)
-[^jwk]: [https://www.php.net/manual/en/control-structures.goto.php](https://www.php.net/manual/en/control-structures.goto.php) 
+[^jwk]: [https://www.php.net/manual/en/control-structures.goto.php](https://www.php.net/manual/en/control-structures.goto.php)
 
 GOTO in **C#** is also function-scoped, although it can jump from one case statement to another within a switch structure.[^jep] In these languages, GOTO statements can still produce clear, readable, and maintainable programs when used thoughtfully.
 

@@ -1,10 +1,10 @@
 <div class="post-meta">
   <span>{{ .Page.PublishDate.Format "January 2, 2006" }}</span>
-  {{ if .Tags }} ·
+  {{ if .Tags }} {{ $tags := (.Page.GetTerms "tags") }} {{ if len $tags }} ·
   <span>
     {{ $tags := (.Page.GetTerms "tags") }} {{ range $index, $tag := $tags }}
     <a href="{{ .Permalink }}" class="text-link">{{ .LinkTitle }}</a>
     {{- if lt $index (sub (len $tags) 1) }}, {{ end -}} {{- end -}}
   </span>
-  {{ end }}
+  {{ end }} {{ end }}
 </div>
