@@ -40,4 +40,4 @@ It doesn't often happen that I use technology in a way I would describe as bring
 
 My time in the Metaverse was a journey into the past that reminded me of childlike playfulness and a time before Solving Problems and Creating Value™ when I just wanted to have fun with technology. It showed me a different way to be present. An other-worldly kind of presence. A presence untangled from physical space and time. And it gave me a glimpse into new ways of interacting with technology and ourselves, prompting me to rethink what part I wanted to play in building this future.
 
-![Picture of my Oculus Quest 2](https://res.cloudinary.com/cwilliams/image/upload/v1620074571/Blog/IMG_1102.jpg)
+{{< figure src="https://res.cloudinary.com/cwilliams/image/upload/v1620074571/Blog/IMG_1102.jpg" alt="The Oculus Quest 2" attr="The Oculus Quest 2" >}}
