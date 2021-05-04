@@ -16,15 +16,13 @@ The problem isn't that I find these nascent technologies uninteresting or worthl
 
 Fortunately (and unexpectedly), for my twenty-third birthday last week, my friend sent me an Oculus Quest 2, and I got to try out virtual reality for the first time. While I'm tragically late to the VR party, and I've watched and heard many people speak passionately about it for years, I was still thoroughly impressed by my experience with it.
 
-After setting up an Oculus—adjusting the lens, setting up the Wi-Fi, creating an account—the headset takes you to a "First Steps" tutorial where you learn to use the Oculus controllers and interact with the virtual environment. You can bat ping-pong balls lying on a desk in front of you, hurl small boxes around, fly a blimp using a virtual remote control, and launch a miniature rocket by pulling on its tail. Also lying on the virtual desk are two game cartridges and a drive that you can use to teleport into a virtual game arena.
+After setting up an Oculus—adjusting the lens, configuring the Wi-Fi, creating an account—the headset takes you to a "First Steps" tutorial to learn how to use the Oculus controllers and interact with the virtual environment. You can bat ping-pong balls lying on a desk in front of you, hurl small boxes around, fly a blimp using a virtual remote control, and launch a miniature rocket by pulling on its tail. Also lying on the virtual desk are two game cartridges and a drive that you can use to teleport into a virtual game arena.
 
 The first game I played was a shooting game set inside a Star Wars-like spaceship, where you shoot at shiny, floating objects using laser guns.
 
 The "shooting at things in space" theme reminded me of Chicken Invaders. I loved Chicken Invaders as a kid. And I spent hours on end shooting at space chickens in every one of the first four games in the series.
 
-Even more nostalgically, the shooting tutorial reminded me of a game I played even earlier in my childhood. It was a console-based game with a light gun. You would point the gun at the television and shoot at objects running across the screen.
-
-As fondly as I remember how much I loved playing the game and how much better it was than the other keyboard- and mouse-based computer games I had played before then, I can't remember its name or what console I played it on. I must have been seven or eight at the time.
+Even more nostalgically, the shooting tutorial reminded me of a game I played even earlier in my childhood. It was a console-based game with a light gun. And you could point the gun at the television and shoot at objects running across the screen. But, as fondly as I remember how much I loved playing the game and how much better it was than the other keyboard- and mouse-based computer games I had played before then, I can't remember its name or what console I played it on. I must have been seven or eight at the time.
 
 The Oculus shooting tutorial was to me a few days ago what these games were years ago. It wasn't just a fun game to play. It changed what I understood games to be. And it let me interact with gaming in a way I hadn't ever done before.
 
@@ -36,7 +34,7 @@ I offer my hand. We take one step forward. And then back. We do a slide to the s
 
 Here I was, throwing my arms in the air and spinning animatedly alone in my room. But I wasn't really alone. In reality, in _virtual_ reality, I was dancing with a robot. And we were having fun.
 
-It doesn't often happen that I use technology in a way I would describe as bringing me joy. But this brief dance with this beaming, virtual robot brought me joy.
+It doesn’t often happen that I use technology in a way I would describe as bringing me joy. But this brief dance I shared with the beaming, virtual robot did just that.
 
 My time in the Metaverse was a journey into the past that reminded me of childlike playfulness and a time before Solving Problems and Creating Value™ when I just wanted to have fun with technology. It showed me a different way to be present. An other-worldly kind of presence. A presence untangled from physical space and time. And it gave me a glimpse into new ways of interacting with technology and ourselves, prompting me to rethink what part I wanted to play in building this future.
 
