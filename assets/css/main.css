@@ -1,6 +1,5 @@
 :root {
   --primary-color: #3a74d2;
-  --link-highlight-color: #144dab;
   --secondary-color: #555555;
   --body-color: #333333;
   --border-color: #e9e9e9;
@@ -24,7 +23,7 @@ h6 {
 
 h1 {
   margin: 15px 0 0;
-  font-size: 36px;
+  font-size: 28px;
 }
 
 h2 {
@@ -82,8 +81,7 @@ a.text-link:focus,
 a.text-link:hover,
 h6 a:focus,
 h6 a:hover {
-  text-decoration: none;
-  color: var(--link-highlight-color);
+  text-decoration: underline;
 }
 
 hr {
@@ -167,18 +165,8 @@ a.primary svg {
   fill: var(--primary-color);
 }
 
-a.primary:focus svg,
-a.primary:hover svg {
-  fill: var(--link-highlight-color);
-}
-
 a.secondary svg {
   fill: var(--secondary-color);
-}
-
-a.secondary:focus svg,
-a.secondary:hover svg {
-  fill: var(--body-color);
 }
 
 .articles article h2 {
