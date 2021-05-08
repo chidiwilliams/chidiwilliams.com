@@ -1,6 +1,5 @@
 :root {
   --primary-color: #3a74d2;
-  --link-highlight-color: #144dab;
   --secondary-color: #555555;
   --body-color: #333333;
   --border-color: #e9e9e9;
@@ -24,7 +23,7 @@ h6 {
 
 h1 {
   margin: 15px 0 0;
-  font-size: 36px;
+  font-size: 28px;
 }
 
 h2 {
@@ -44,7 +43,7 @@ blockquote {
 
 body {
   font-size: 16px;
-  line-height: 1.8;
+  line-height: 1.7;
   color: var(--body-color);
   background-color: #fff;
   font-family: var(--serif-font);
@@ -54,36 +53,9 @@ button {
   font-family: var(--serif-font);
 }
 
-p a,
-h1 a,
-h2 a,
-h3 a,
-h4 a,
-h5 a,
-h6 a,
-a.text-link {
+a {
   color: var(--primary-color);
-  text-decoration: none;
-}
-
-p a:focus,
-p a:hover,
-h1 a:focus,
-h1 a:hover,
-h2 a:focus,
-h2 a:hover,
-h3 a:focus,
-h3 a:hover,
-h4 a:focus,
-h4 a:hover,
-h5 a:focus,
-h5 a:hover,
-a.text-link:focus,
-a.text-link:hover,
-h6 a:focus,
-h6 a:hover {
-  text-decoration: none;
-  color: var(--link-highlight-color);
+  text-decoration: underline;
 }
 
 hr {
@@ -116,6 +88,11 @@ h2#notes {
   margin-block-start: 3em;
 }
 
+li {
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+}
+
 nav {
   display: flex;
   height: 100%;
@@ -142,6 +119,7 @@ nav ul.social-icons li a {
 header nav a {
   border-bottom: none;
   line-height: 30px;
+  text-decoration: none;
 }
 
 header nav a:focus,
@@ -167,18 +145,8 @@ a.primary svg {
   fill: var(--primary-color);
 }
 
-a.primary:focus svg,
-a.primary:hover svg {
-  fill: var(--link-highlight-color);
-}
-
 a.secondary svg {
   fill: var(--secondary-color);
-}
-
-a.secondary:focus svg,
-a.secondary:hover svg {
-  fill: var(--body-color);
 }
 
 .articles article h2 {
