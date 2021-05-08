@@ -6,8 +6,12 @@
   {{ $section := where .Site.RegularPages "Section" "in" $mainSections }}
 
   <h1>Posts</h1>
-  <section class="articles">
-    {{ range $section }}{{ partial "summary.html" . }}{{ end }}
-  </section>
+  <ul>
+    {{ range $section }}
+    <li>
+      <a href="{{ .RelPermalink }}" class="text-link">{{ .Title }}</a>
+    </li>
+    {{ end }}
+  </ul>
 </div>
 {{ end }}
