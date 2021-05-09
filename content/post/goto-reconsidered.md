@@ -351,7 +351,7 @@ For example, a traffic light is a finite state machine with three states: red, y
 
 Regular expression matchers are also finite state machines. For example, `^[0-9]+\-[a-z]+$` matches a sequence of one or more digits followed by a hyphen followed by one or more letters.
 
-![Finite state diagram of the regex matcher](https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_150/v1618702780/Blog/regex-fsm.png)
+![Finite state diagram of the regex matcher](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_400/v1618702780/Blog/regex-fsm-2.png)
 
 We can write a function in C that matches this regex expression using GOTOs:
 
