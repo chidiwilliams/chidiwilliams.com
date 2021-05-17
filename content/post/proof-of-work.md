@@ -33,12 +33,12 @@ Finally, the cost function should be parameterizable. It should be possible to a
 
 In the Hashcash implementation of this cost function, before sending an email, the sender's computer prepares a header:
 
-![Parts of a Hashcash header](TODO)
+![Parts of a Hashcash header](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1621282181/Blog/hashcash-header.png)
 
 The Hashcash header contains:
 
 1. The Hashcash **version number**, 1.
-2. The **number of zero bits** in the hashed code, which represents the difficulty of the process. The default value is 20, but the email recipient can request for a larger or smaller value to make it harder or easier to find a valid header.
+2. The **number of leading zero bits** in the hashed code, which represents the difficulty of the process. The default value is 20, but the email recipient can request for a larger or smaller value to make it harder or easier to find a valid header.
 3. The **time** of sending the email, in the format `YYMMDD[hhmm[ss]]`
 4. The **resource** the header refers to, which is the email address of the recipient.
 5. An optional **extension** value for extra metadata.
