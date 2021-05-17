@@ -64,7 +64,7 @@ Hash: 00000485adb791b968e11defa30d9a3ab1ffc3fb
 
 The SHA-1 hash function produces a 160-bit value. So, there are $$2^{160}$$ possible hash values in total and $$2^{140}$$ hashes where the first 20 bits are 0. On average, a sender would have to try $$2^{20}$$ different binary counters to find a valid hash.
 
-To increase the amount of time it takes to find a solution (to further slow down a spammer), we can increase the number of leading zero bits we wish to find in the hash. For example, it would take about $$2^{25}$$ different tries on average to find a hash with 25 leading zero bits. The time needed to find a valid hash increases exponentially with the number of zero bits.[^qed]
+To increase the amount of time it takes to find a solution (to further slow down a spammer), we can increase the number of leading zero bits we wish to find in the hash. For example, it would take about $$2^{25}$$ different tries on average to find a hash with 25 leading zero bits. The time needed to find a valid hash increases exponentially with the number of zero bits.[^1]
 
 After finding a valid header, the email sender attaches it to the email request:
 
@@ -98,4 +98,4 @@ And so, Adam Back's brainchild found a new expression under this distributed net
 
 ## Notes
 
-[^qed]: I ran benchmarks on my computer (1.4GHz Quad-Core Intel Core i5 CPU, 8 GB 2133 MHz RAM) and found that it can generate 9,112,333 SHA-1 hashes a second. The projected time to find a hash with 20 leading zero bits was 0.115 seconds, 24 bits 1.841 seconds, 28 bits 29.458 seconds, and 30 bits 117.834 seconds.
+[^1]: I ran a few benchmarks on my computer (1.4GHz Quad-Core Intel Core i5 CPU, 8 GB 2133 MHz RAM). The hash generation speed was 9,112,333 SHA-1 hashes a second. The projected time to find a hash with 20 leading zero bits was 0.115 seconds, 24 bits 1.841 seconds, 28 bits 29.458 seconds, and 30 bits 117.834 seconds.
