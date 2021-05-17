@@ -1,7 +1,7 @@
 ---
 title: 'Proof of Work'
 date: 2021-05-16T11:18:39+01:00
-draft: true
+draft: false
 url: proof-of-work
 math: true
 markup: 'mmark'
