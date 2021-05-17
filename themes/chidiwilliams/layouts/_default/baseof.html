@@ -23,8 +23,7 @@
     {{ partial "twitter_cards.html" . }}
 
     <title>
-      {{ if .Params.Title }}{{ .Params.Title }}{{ else }}{{ .Site.Title }} <!--
-      --> {{ end }}
+      {{ if .Params.Title }}{{ .Params.Title }}{{ else }}{{ .Site.Title }}{{ end }}
     </title>
 
     {{ range .AlternativeOutputFormats -}} {{ printf `
