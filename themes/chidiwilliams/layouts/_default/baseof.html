@@ -23,7 +23,8 @@
     {{ partial "twitter_cards.html" . }}
 
     <title>
-      {{ if .Params.Title }}{{ .Params.Title }}{{ else }}{{ .Site.Title }}{{ end }}
+      {{ if .Params.Title }}{{ .Params.Title }}{{ else }}{{ .Site.Title }} <!--
+      --> {{ end }}
     </title>
 
     {{ range .AlternativeOutputFormats -}} {{ printf `
@@ -32,6 +33,8 @@
     <!--  -->
     {{ $css := resources.Get "css/main.css" | resources.Minify }}
     <link href="{{ $css.Permalink }}" rel="stylesheet" />
+
+    {{ if .Params.math}}{{ partial "math.html" . }}{{ end }}
 
     <link rel="preconnect" href="https://www.google-analytics.com/" />
     {{ template "_internal/google_analytics.html" . }}
