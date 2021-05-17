@@ -7,7 +7,7 @@ layout: static
 
 ![Chidi](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_200/v1619649025/Blog/EIxuQfNv_400x400.jpg)
 
-Hi, my name is Chidi. I'm a software engineer from Nigeria, and I currently work in London. Before my current role, I built consumer and business fintech products at [a startup in Lagos](/2020/#changing-jobs). I've also written a few [open-source projects](https://github.com/chidiwilliams/), including some [Web-based simulations](/simulations/).
+Hi, my name is Chidi. I'm a software engineer, and I work at an investment bank in London. Before my current role, I built consumer and business fintech products at [a startup in Lagos](/2020/#changing-jobs). I've also written a few [open-source projects](https://github.com/chidiwilliams/), including some [Web-based simulations](/simulations/).
 
 I love playing the piano and guitar and reading about computing, science, and philosophy. You can find a list of books I'm currently reading or curious about on [my bookshelf](/bookshelf/).
 
