@@ -1,6 +1,6 @@
 ---
 title: 'Proof of Work'
-date: 2021-05-16T11:18:39+01:00
+date: 2021-05-18T12:00:00+01:00
 draft: false
 url: proof-of-work
 math: true
