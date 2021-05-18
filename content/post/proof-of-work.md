@@ -4,6 +4,7 @@ date: 2021-05-16T11:18:39+01:00
 draft: false
 url: proof-of-work
 math: true
+description: Notes on an early proof-of-work system called Hashcash
 ---
 
 In the early 1970s, a British comedy group ran a series called Monty Python's Flying Circus. One of the sketches opens with two customers descending into a greasy spoon cafe. The waitress reads out the breakfast menu. But almost all the dishes contain Spam (a brand of cooked and canned pork). As one of the customers complains about the dull menu, a group of Vikings start to chant, "Spam, Spam, Spam... Lovely Spam! Wonderful Spam!"
