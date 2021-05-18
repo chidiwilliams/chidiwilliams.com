@@ -4,67 +4,70 @@ date: 2021-05-16T11:18:39+01:00
 draft: false
 url: proof-of-work
 math: true
-markup: 'mmark'
+# markup: 'mmark'
 ---
 
-In the early 1970s, a group of British comedians ran a series of surreal comedy sketches called Monty Python's Flying Circus. One of the sketches opens with two customers descending into a greasy spoon cafe. They ask for the breakfast menu. But, much to the annoyance of one of the customers, almost all the dishes contain Spam, a brand of cooked and canned pork. Out of the blue, a group of Vikings also sitting in the cafe start to sing "Spam, Spam, Spam... Lovely Spam! Wonderful Spam!", drowning out the other conversations.
+In the early 1970s, a British comedy group ran a series called Monty Python's Flying Circus. One of the sketches opens with two customers descending into a greasy spoon cafe. The waitress reads out the breakfast menu. But almost all the dishes contain Spam (a brand of cooked and canned pork). As one of the customers complains about the dull menu, a group of Vikings start to chant, "Spam, Spam, Spam... Lovely Spam! Wonderful Spam!"
 
-A few years later, in 1993, a bug in a user's software accidentally posted more than 200 messages to the "news.admin.policy" channel on Usenet, an early discussion system before the Internet. And in response to the bulk post, someone used the term "spam" to refer to the bulk sending of unwanted messages for the first time.
+Years later, that sketch inspired a new meaning to the word "spam". Usenet was an early discussion system before the Internet started in 1980. And in the late 1980s and early 1990s, Usenet members began to refer to unwanted messages in the groups as "spam".
 
-As internet usage exploded in the early 1990s, spam messages also sky-rocketed. And software programmers began creating technologies to control spam. One of the first technologies of this kind was The Mail Abuse Prevention System (MAPS), developed by two software engineers, Dave Rand and Paul Vixie. MAPS worked by maintaining a blacklist of IP addresses reported for spam. Email servers would query this list, the Real-time Blackhole List (RBL), and reject incoming emails from the listed sites.
+As internet usage exploded in the early 1990s, spam messages also sky-rocketed. And software programmers began creating technologies to control spam. One of them was the Mail Abuse Prevention System (MAPS). And it maintained a blacklist of IP addresses reported for spam. Email servers would query the list and then reject incoming emails from the listed sites.
 
-Another early spam-limiting software, proposed by British cryptographer Adam Back, was called Hashcash. Hashcash worked by generating a "postage stamp" for emails. The sender would attach this stamp to an email, and the recipient would verify the stamp.
+Another early spam-limiting software, proposed by British cryptographer Adam Back, was Hashcash. Hashcash worked by generating a "postage stamp" for emails. The sender would attach this stamp to an email, and the recipient would verify it.
 
-Unlike physical mail where you pay for a postage stamp, sending an email takes almost no time and costs almost nothing once you have a computer and an Internet connection. This is great news for regular Internet users, but it's also great news for malicious spammers. The cheaper and quicker it is to send an email, the more trivial it becomes to send several spam messages.
+Sending an email takes no time and costs nothing. That's great news for regular Internet users. But it's also great news for spammers. The cheaper and quicker it is to send an email, the more trivial it to send several spam messages.
 
-One proposal that came before Hashcash was to charge email senders. The price of sending a single email would be small enough for regular users but significant enough to make spamming unprofitable. But this introduces an extra layer of complexity. To make the system work, we would need a payment service to collect, record, and verify payments for emails.
+One proposal that came before Hashcash involved charging for email. The price of sending a single email would be small enough for regular users. But it would be significant enough to make spamming unprofitable.
 
-Another problem with the proposal is that it disincentivizes lower-income Internet users from using email. As we increase the charge to make spamming more unprofitable, we also make email more expensive for regular Internet users.
+But this adds an extra layer of complexity. To make the system work, we need a payment service to collect, record, and verify payments for emails. It also makes it harder for lower-income Internet users to use email. We may need to increase the charge to make spamming more unprofitable. But that also makes email more expensive for everyone else.
 
-Is there a more equitable way to charge email senders? Is it possible to charge them using something they already have? Something like...their computers? That was Hashcash's ingenuity: make email senders "spend" their CPU processing time. To "pay" for an email with Hashcash, the sender will first need to solve a puzzle, or a cost function, with their computer.
+Is there a fairer way to charge email senders? Can they pay using something they already have? Something like...their computers? That was Hashcash's ingenuity. Make email senders "spend" their CPU processing time. To "pay" for an email with Hashcash, the sender's computer would solve a cost function.
 
-This cost function would introduce an artificial slowness, or throttling, to sending an email. It would be sufficiently difficult to slow down a spammer or discourage them altogether. But it would not be difficult enough to trouble regular users.
+This cost function introduces an artificial slowness, or throttling, to sending an email. It would be difficult enough to slow down a spammer or discourage them altogether. But not enough to trouble regular users.
 
-The solution to the cost function would also be easy to verify. It should take an email sender some time to find the solution, but it should be much easier for the recipient to check that the sender's solution, or "proof of work", is correct. One example of a function like this is the square root function. Finding the square root of a number usually requires trying different values until they approach a reasonably close result. But checking that a square root result is correct is only a matter of multiplying the number by itself.
+The solution to the cost function would also be easy to verify. It should take an email sender some time to solve. But it should be much easier for the recipient to check the solution, or "proof of work". One example of a function like this is the square root function. To find the square root of a number, we [try different values till we find a good result](https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Babylonian_method). But verifying the solution is only a matter of multiplying the number by itself.
 
-The cost function should not have a shortcut that makes it easy for the spammer to break. In technical terms, the function should not be amenable to amortization. Given $$l$$ values $$m_1...m_l$$, computing $$f(m_1),...,f(m_l)$$ should have amortized cost comparable to computing $$f(m_i)$$ for any $$1 \leq i \leq l$$. Or in plain language, the cost function should not be much easier to solve sometimes than it is other times.
+The cost function should not have a shortcut that makes it easy for the spammer to break. In technical terms, the function should not be amenable to amortization. Given \\(l\\) values \\(m_1...m_l\\), computing \\(f(m_1),...,f(m_l)\\) should have amortized cost comparable to computing \\(f(m_i)\\) for any \\(1 \leq i \leq l\\). Or, in plain language, the cost function should not be much easier to solve sometimes than it is other times.
 
-Finally, the cost function should be parameterizable. It should be possible to adjust the function such that it requires the email senders to do more or less work depending on the recipient's needs.
+Finally, the cost function should be parameterizable. The email recipient may want senders to do more or less work. So it should be possible to adjust the difficulty of the cost function.
 
-In the Hashcash implementation of this cost function, before sending an email, the sender's computer prepares a header:
+In Hashcash, the sender's computer first prepares a header before sending an email:
 
 ![Parts of a Hashcash header](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1621282181/Blog/hashcash-header.png)
 
 The Hashcash header contains:
 
-1. The Hashcash **version number**, 1.
-2. The **number of leading zero bits** in the hashed code, which represents the difficulty of the process. The default value is 20, but the email recipient can request for a larger or smaller value to make it harder or easier to find a valid header.
+1. The Hashcash **version number**, 1
+2. The **number of leading zero bits** in the hashed code
 3. The **time** of sending the email, in the format `YYMMDD[hhmm[ss]]`
-4. The **resource** the header refers to, which is the email address of the recipient.
-5. An optional **extension** value for extra metadata.
-6. A string of **random characters** (in base64).
-7. A **binary counter** (in base64).
+4. The **resource** the header refers to, which is the email address of the recipient
+5. An optional **extension** value for extra metadata
+6. A string of **random characters** (in base64)
+7. A **binary counter** (in base64)
 
-The sender initializes the binary counter to a random number, creates the Hashcash header, and then hashes the header using SHA-1. If the resulting hash starts with the required number of zero bits (in our case, 20), then the header is valid. Or else, the sender increments the binary counter and retries the hashing with the new header.
+The number of leading zero bits represents the difficulty of the process. The default value is 20. But an email recipient can ask for a larger or smaller value to make it harder or easier to find a valid header.
 
-For example, the sender could start with a binary counter `4g67` and then check for its hash value.
+The sender sets the counter to a random number and creates the Hashcash header. Then it hashes the header using SHA-1. If the resulting hash starts with the required number of zero bits (in our case, 20), then the header is valid. Or else, the sender increments the binary counter and retries the hashing.
 
-```text
-Header: 1:20:2105021058:example@chidiwilliams.com::38a82d0eab70d3ab:4g67
-Hash: f28a029e0771e4e7b4c957274ac4d8e3fb5bf1de
-```
-
-Since the resulting hash does not start with 20 zero bits, the sender will increment the binary counter and hash again until it finds a valid hash.
-At a binary counter value of `de580`, we find a valid hash that starts with 20 zero bits (5 zeroes in hexadecimal).
+For example, the sender could start with a binary counter `4g67` and then check its hash value.
 
 ```text
-Header: 1:20:2105021058:example@chidiwilliams.com::38a82d0eab70d3ab:de580
-Hash: 00000485adb791b968e11defa30d9a3ab1ffc3fb
+Header: 1:20:2105031017:user@example.com::45734c1e80133cf2:4g67
+Hash: 9644352301bdac38585d06ae4e7fec5bd4b4b1ea
 ```
 
-The SHA-1 hash function produces a 160-bit value. So, there are $$2^{160}$$ possible hash values in total and $$2^{140}$$ hashes where the first 20 bits are 0. On average, a sender would have to try $$2^{20}$$ different binary counters to find a valid hash.
+The resulting hash does not start with 20 zero bits. So, the sender increments the binary counter and hashes again until it finds a valid hash.
 
-To increase the amount of time it takes to find a solution (to further slow down a spammer), we can increase the number of leading zero bits we wish to find in the hash. For example, it would take about $$2^{25}$$ different tries on average to find a hash with 25 leading zero bits. The time needed to find a valid hash increases exponentially with the number of zero bits.[^1]
+At a binary counter value of `136cae`, the hash of the header starts with 20 zero bits (5 zeroes in hexadecimal). We've found a valid header.
+
+```text
+Header: 1:20:2105031017:user@example.com::45734c1e80133cf2:136cae
+Hash: 00000bf1b6a5d3a5e16ca0d68e20baec639e3070
+```
+
+SHA-1 produces a 160-bit value. There are \\(2^{160}\\) possible hash values in total and \\(2^{140}\\) hashes where the first 20 bits are 0. So, to find a valid hash, a sender has to try \\(2^{20}\\) different binary counters on average.
+
+To slow down spammers more, we can increase the number of leading zero bits we need in the hash. For example, it would take about \\(2^{25}\\) tries to find a hash with 25 leading zero bits. For each extra zero bit, the average time it takes to find a valid hash doubles.[^1]
 
 After finding a valid header, the email sender attaches it to the email request:
 
@@ -72,29 +75,29 @@ After finding a valid header, the email sender attaches it to the email request:
 X-Hashcash: 1:20:2105021058:example@chidiwilliams.com::38a82d0eab70d3ab:de580
 ```
 
-When a recipient receives an email, it first checks that the email contains the Hashcash header. Then it hashes the header and checks that it contains the required number of leading zero bits. The email recipient only needs to compute the hash once, so it takes much less time to verify a stamp than to find a valid stamp.
+When a recipient receives an email, it first checks that the email has the Hashcash header. Then it hashes the header and checks that it has the required number of leading zero bits. The recipient only needs to compute the hash once. So it takes much less time to verify a stamp than to find a valid one.
 
-If the recipient confirms that the hash is valid, and the email address and date on the header are correct, then it accepts the email. The recipient also stores the hash in a database to check that the header isn't reused in subsequent emails.
+If the hash is valid and the email address and date on the header are correct, the recipient accepts the email. Then it stores the hash in a database. When it gets a new email, it checks this database to see if it has received the header before.
 
-If the email header fails the Hashcash checks, the recipient stores the email in a separate spam folder or discards it.
+If the email fails the Hashcash checks, the recipient moves it to a spam folder or discards it.
 
-By adding this extra proof-of-work computation, Hashcash helps to slow down spammers without charging for emails. Yet, it's difficult to find the balance between making it hard for spammers to send emails and keeping email accessible to regular users. As computers get faster, email recipients would need to increase the difficulty of the Hashcash computation (by demanding for more leading zero bits). But this would also make it increasingly difficult for lower-income individuals with slow hardware to use email.
+By adding this extra computation, Hashcash slows down spammers without charging for emails. But it's hard to find a balance. As computers get faster, email recipients would increase the Hashcash difficulty. And sending emails would become more difficult for lower-income individuals with slow hardware.
 
-Spam filters today rely on a different set of techniques. In a process known as **Bayesian filtering**, a spam filter would correlate some identifiers with spam messages and other identifiers with legitimate emails. The filter then calculates the probability that an incoming email is a spam email based on the presence of those identifiers, and marks emails with scores below a certain threshold as spam.
+Spam filters today rely on a different set of techniques. A **Bayesian filter** correlates some identifiers with spam and others with legitimate emails. It checks for the presence of these identifiers in an incoming email. And then, it calculates the probability that the email is spam. If the email scores below a certain threshold, the filter marks it as spam.
 
-Bayesian filters consider all the different parts of an email while making decisions: words and phrases in the subject and body of the email, source IP addresses, and other technical metadata. The filters also get better over time. A user can manually mark or unmark an email as spam to teach their filter to make better decisions.
+Bayesian filters extract the identifiers from different parts of an email. Like, phrases in the subject and body, the source IP address, and other technical metadata. The filters also get better over time. A user can mark or unmark an email as spam to teach their filter to make better decisions.
 
-But the Hashcash story doesn't end there. In 2009, someone found an innovative way to use the Hashcash proof-of-work algorithm to provide consensus in a distributed network.
+But the Hashcash story doesn’t end there. In 2009, someone found an innovative way to use Hashcash in a distributed network.
 
-In this network, "miners" compete with each other to add blocks of transactions to a shared chain. To add a new block to the network, a miner must complete a proof-of-work task using the block's data. When the miner finds the correct solution, they publish their work to the network for other miners to verify that their solution is correct.
+In this network, “miners” compete with each other to add blocks of transactions to a shared chain. To add a new block to the network, a miner must complete a proof-of-work task using the block’s data. When one miner finds a correct solution, they publish their work for others to verify.
 
-All the miners share a large 256-bit number called the **target**. For the network to accept a new block, the SHA-256 hash of the block's header must be lower than or equal to the current target. And every 2016 blocks, each client checks how long it took to generate the last 2016 blocks and then adjusts the target to match the desired rate of 2016 blocks every two weeks.
+All the miners share a large 256-bit number called the **target**. For the network to accept a new block, the SHA-256 hash of its header must be lower than or equal to the current target. And every 2016 blocks, each client checks how long it took to generate the last 2016 blocks. And then, it adjusts the target to match the desired rate of 2016 blocks every two weeks.
 
-This speed regulation protects the network from tampering. To change an existing block in the network, an attacker would need to regenerate all the successors of the block, which would require enormous computational effort.
+This speed regulation protects the network from tampering. To change an existing block, an attacker would need to regenerate all its successors. It would take an enormous computational effort, and the attack would be impractical.
 
-The Hashcash proof-of-work also gives all the network clients a fair opportunity to participate. Just as it protected lower-income users from higher-income spammers by making email senders pay with computation instead of money, Hashcash prevents higher-income nodes from taking control of the entire network.
+Hashcash also gives all the miners a fair opportunity to participate. Miners compete with computation instead of money. And that prevents high-income nodes from taking control of the entire network.
 
-And so, Adam Back's brainchild found a new expression under this distributed network proposed by a pseudonymous Satoshi Nakamoto. And what was first a tool for controlling pesky email spams inspired the revolutionary, distributed financial technology called Bitcoin.
+Adam Back’s brainchild found a new expression here. It began as a tool for controlling pesky email spams. And then, it inspired the revolutionary, distributed financial technology called Bitcoin.
 
 ## Notes
 
