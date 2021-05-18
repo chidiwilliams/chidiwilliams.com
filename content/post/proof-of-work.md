@@ -96,7 +96,7 @@ This speed regulation protects the network from tampering. To change an existing
 
 Hashcash also gives all the miners a fair opportunity to participate. Miners compete with computation instead of money. And that prevents high-income nodes from taking control of the entire network.
 
-Adam Back’s brainchild found a new expression here. It began as a tool for controlling pesky email spams. And then, it inspired the revolutionary, distributed financial technology called Bitcoin.
+Adam Back’s brainchild found a new expression here. It began as a tool for controlling pesky email spams. But it went on to inspire the revolutionary new financial network called Bitcoin.
 
 ## Notes
 
