@@ -1,6 +1,6 @@
 ---
 title: 'The Proof-of-Work Spam Filter'
-date: 2021-05-18T12:00:00+01:00
+date: 2021-05-19T08:00:00+01:00
 draft: false
 url: proof-of-work
 math: true
