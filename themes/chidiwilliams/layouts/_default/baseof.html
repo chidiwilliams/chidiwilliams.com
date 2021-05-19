@@ -33,10 +33,12 @@
     {{ $css := resources.Get "css/main.css" | resources.Minify }}
     <link href="{{ $css.Permalink }}" rel="stylesheet" />
 
-    {{ if .Params.math}}{{ partial "math.html" . }}{{ end }}
+    {{ if .Params.math }}{{ partial "math.html" . }}{{ end }}
 
-    <link rel="preconnect" href="https://www.google-analytics.com/" />
-    {{ template "_internal/google_analytics.html" . }}
+    {{- if not .Site.IsServer -}}
+      <link rel="preconnect" href="https://www.google-analytics.com/" />
+      {{ template "_internal/google_analytics.html" . }}
+    {{- end -}}
   </head>
   <body>
     <div class="container">
