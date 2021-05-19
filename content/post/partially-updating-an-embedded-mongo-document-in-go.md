@@ -1,5 +1,5 @@
 ---
-title: "Partially updating an embedded Mongo document in Go"
+title: "Partially Updating an Embedded Mongo Document in Go"
 date: 2020-05-21T19:12:50Z
 draft: false
 tags: [go, mongo]

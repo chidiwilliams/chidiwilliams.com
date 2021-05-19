@@ -1,5 +1,5 @@
 ---
-title: 'GOTO reconsidered'
+title: 'GOTO Reconsidered'
 date: 2021-04-18T12:00:00+00:00
 draft: false
 tags: [basic, c, assembly]

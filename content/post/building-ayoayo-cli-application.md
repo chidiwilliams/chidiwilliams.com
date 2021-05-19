@@ -1,5 +1,5 @@
 ---
-title: 'Building Ayòayò: CLI application'
+title: 'Building Ayòayò: CLI Application'
 date: 2020-06-20T19:13:31+01:00
 draft: false
 series: [Building Ayoayo]

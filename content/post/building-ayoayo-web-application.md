@@ -1,5 +1,5 @@
 ---
-title: 'Building Ayòayò: Web application'
+title: 'Building Ayòayò: Web Application'
 date: 2020-06-27T16:00:00+01:00
 draft: false
 series: [Building Ayoayo]

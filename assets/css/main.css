@@ -3,7 +3,7 @@
   --secondary-color: #555555;
   --body-color: #333333;
   --border-color: #e9e9e9;
-  --serif-font: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+  --body-font: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
     sans-serif;
 }
 
@@ -46,11 +46,11 @@ body {
   line-height: 1.7;
   color: var(--body-color);
   background-color: #fff;
-  font-family: var(--serif-font);
+  font-family: var(--body-font);
 }
 
 button {
-  font-family: var(--serif-font);
+  font-family: var(--body-font);
 }
 
 a {
@@ -75,7 +75,7 @@ hr {
   overflow: hidden;
   margin: 0 auto;
   text-align: left;
-  padding: 0 20px 50px 20px;
+  padding: 0 15px 50px;
 }
 
 header {
@@ -353,7 +353,7 @@ button#load_comments {
 }
 
 .post-next-previous .post-next-previous-arrow {
-  font-family: var(--serif-font);
+  font-family: var(--body-font);
   color: var(--secondary-color);
 }
 

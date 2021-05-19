@@ -1,5 +1,5 @@
 ---
-title: '2020: Year in review'
+title: '2020: Year in Review'
 date: 2020-12-30T11:25:33Z
 draft: false
 tags: [personal]
