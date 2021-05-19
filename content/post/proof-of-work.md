@@ -1,5 +1,5 @@
 ---
-title: 'Proof of Work'
+title: 'The Proof-of-Work Spam Filter'
 date: 2021-05-18T12:00:00+01:00
 draft: false
 url: proof-of-work
@@ -7,13 +7,13 @@ math: true
 description: Notes on an early proof-of-work system called Hashcash
 ---
 
-In the early 1970s, a British comedy group ran a series called Monty Python's Flying Circus. One of the sketches opens with two customers descending into a greasy spoon cafe. The waitress reads out the breakfast menu. But almost all the dishes contain Spam (a brand of cooked and canned pork). As one of the customers complains about the dull menu, a group of Vikings start to chant, "Spam, Spam, Spam... Lovely Spam! Wonderful Spam!"
+In the 1970s, a British comedy group ran a series called Monty Python's Flying Circus. [One sketch](https://www.dailymotion.com/video/x2hwqlw) opens with two customers descending into a greasy spoon cafe. The waitress reads out the breakfast menu. But almost all the dishes contain Spam (a brand of cooked and canned pork). As one of the customers complains about the dull menu, a group of Vikings start to chant, "Spam, Spam, Spam... Lovely Spam! Wonderful Spam!"
 
-Years later, that sketch inspired a new meaning to the word "spam". Usenet was an early discussion system before the Internet started in 1980. And in the late 1980s and early 1990s, Usenet members began to refer to unwanted messages in the groups as "spam".
+That sketch inspired a new meaning of the word "spam" years later. Usenet was an early discussion system before the Internet. And by the early 1990s, Usenet members were [referring to unwanted posts as "spam"](https://groups.google.com/g/news.admin.policy/c/fddF-U7wDE0/m/d5SlxvmhmNwJ).
 
-As internet usage exploded in the early 1990s, spam messages also sky-rocketed. And software programmers began creating technologies to control spam. One of them was the Mail Abuse Prevention System (MAPS). And it maintained a blacklist of IP addresses reported for spam. Email servers would query the list and then reject incoming emails from the listed sites.
+As internet use exploded in the later years, spam messages also sky-rocketed. And software programmers started creating technologies to control spam. One of them was the Mail Abuse Prevention System (MAPS). It maintained a blacklist of IP addresses reported for spam. And email servers would reject incoming emails from the listed IP addresses.
 
-Another early spam-limiting software, proposed by British cryptographer Adam Back, was Hashcash. Hashcash worked by generating a "postage stamp" for emails. The sender would attach this stamp to an email, and the recipient would verify it.
+Another early spam-limiting software, proposed by cryptographer Adam Back, was Hashcash. Hashcash worked by generating a "postage stamp" for emails. The sender would attach this stamp to an email, and the recipient would verify it.
 
 Sending an email takes no time and costs nothing. That's great news for regular Internet users. But it's also great news for spammers. The cheaper and quicker it is to send an email, the more trivial it to send several spam messages.
 
@@ -67,7 +67,9 @@ Hash: 00000bf1b6a5d3a5e16ca0d68e20baec639e3070
 
 SHA-1 produces a 160-bit value. There are \\(2^{160}\\) possible hash values in total and \\(2^{140}\\) hashes where the first 20 bits are 0. So, to find a valid hash, a sender has to try \\(2^{20}\\) different binary counters on average.
 
-To slow down spammers more, we can increase the number of leading zero bits we need in the hash. For example, it would take about \\(2^{25}\\) tries to find a hash with 25 leading zero bits. For each extra zero bit, the average time it takes to find a valid hash doubles.[^1]
+To slow down spammers more, we can increase the number of leading zero bits we need in the hash. For example, it would take about \\(2^{25}\\) tries to find a hash with 25 leading zero bits. For each extra zero bit, the average time it takes to find a valid hash doubles.[^wek]
+
+[^wek]: I ran a few benchmarks on my computer (1.4GHz Quad-Core Intel Core i5 CPU, 8 GB 2133 MHz RAM). The hash generation speed was 9,112,333 SHA-1 hashes a second. The projected time to find a hash with 20 leading zero bits was 0.115 seconds, 24 bits 1.841 seconds, 28 bits 29.458 seconds, and 30 bits 117.834 seconds.
 
 After finding a valid header, the email sender attaches it to the email request:
 
@@ -87,9 +89,7 @@ Spam filters today rely on a different set of techniques. A **Bayesian filter** 
 
 Bayesian filters extract the identifiers from different parts of an email. Like, phrases in the subject and body, the source IP address, and other technical metadata. The filters also get better over time. A user can mark or unmark an email as spam to teach their filter to make better decisions.
 
-But the Hashcash story doesn’t end there. In 2009, someone found an innovative way to use Hashcash in a distributed network.
-
-In this network, “miners” compete with each other to add blocks of transactions to a shared chain. To add a new block to the network, a miner must complete a proof-of-work task using the block’s data. When one miner finds a correct solution, they publish their work for others to verify.
+But the Hashcash story doesn’t end there. In 2009, someone found an innovative way to use Hashcash in a distributed network. In this network, “miners” compete with each other to add blocks of transactions to a shared chain. To add a new block to the network, a miner must complete a proof-of-work task using the block’s data. When one miner finds a correct solution, they publish their work for others to verify.
 
 All the miners share a large 256-bit number called the **target**. For the network to accept a new block, the SHA-256 hash of its header must be lower than or equal to the current target. And every 2016 blocks, each client checks how long it took to generate the last 2016 blocks. And then, it adjusts the target to match the desired rate of 2016 blocks every two weeks.
 
@@ -97,8 +97,8 @@ This speed regulation protects the network from tampering. To change an existing
 
 Hashcash also gives all the miners a fair opportunity to participate. Miners compete with computation instead of money. And that prevents high-income nodes from taking control of the entire network.
 
-Adam Back’s brainchild found a new expression here. It began as a tool for controlling pesky email spams. But it went on to inspire the revolutionary new financial network called Bitcoin.
+Adam Back’s brainchild found a new expression here. It began as a tool for controlling pesky email spams. But it went on to inspire the revolutionary new financial network called Bitcoin.[^skc]
+
+[^skc]: Proof of work has also been a source of criticism against Bitcoin. Miners need to run expensive calculations to validate transactions. And this increases transaction costs and raises environmental concerns.
 
 ## Notes
-
-[^1]: I ran a few benchmarks on my computer (1.4GHz Quad-Core Intel Core i5 CPU, 8 GB 2133 MHz RAM). The hash generation speed was 9,112,333 SHA-1 hashes a second. The projected time to find a hash with 20 leading zero bits was 0.115 seconds, 24 bits 1.841 seconds, 28 bits 29.458 seconds, and 30 bits 117.834 seconds.
