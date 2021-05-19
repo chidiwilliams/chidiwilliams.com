@@ -1,5 +1,5 @@
 ---
-title: 'Gifts and games'
+title: 'Gifts and Games'
 date: 2021-05-03T20:30:00+01:00
 draft: false
 url: gifts-and-games

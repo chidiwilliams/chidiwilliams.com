@@ -1,5 +1,5 @@
 ---
-title: 'Writing cleaner Go web servers'
+title: 'Writing Cleaner Go Web Servers'
 date: 2020-05-01T00:00:00.000Z
 draft: false
 tags: [go]

@@ -11,17 +11,17 @@ In the 1970s, a British comedy group ran a series called Monty Python's Flying C
 
 That sketch inspired a new meaning of the word "spam" years later. Usenet was an early discussion system before the Internet. And by the early 1990s, Usenet members were [referring to unwanted posts as "spam"](https://groups.google.com/g/news.admin.policy/c/fddF-U7wDE0/m/d5SlxvmhmNwJ).
 
-As internet use exploded in the later years, spam messages also sky-rocketed. And software programmers started creating technologies to control spam. One of them was the Mail Abuse Prevention System (MAPS). It maintained a blacklist of IP addresses reported for spam. And email servers would reject incoming emails from the listed IP addresses.
+As internet use exploded, spam messages also sky-rocketed. And software programmers started creating technologies to control spam. One of them was the Mail Abuse Prevention System (MAPS). It maintained a blacklist of IP addresses reported for spam. And email servers would reject incoming emails from the listed IP addresses.
 
 Another early spam-limiting software, proposed by cryptographer Adam Back, was Hashcash. Hashcash worked by generating a "postage stamp" for emails. The sender would attach this stamp to an email, and the recipient would verify it.
 
-Sending an email takes no time and costs nothing. That's great news for regular Internet users. But it's also great news for spammers. The cheaper and quicker it is to send an email, the more trivial it to send several spam messages.
+Sending an email takes no time and costs nothing. That's great news for regular Internet users. But it's also great news for spammers. The cheaper and quicker it is to send an email, the easier it is to send thousands of spam messages.
 
 One proposal that came before Hashcash involved charging for email. The price of sending a single email would be small enough for regular users. But it would be significant enough to make spamming unprofitable.
 
-But this adds an extra layer of complexity. To make the system work, we need a payment service to collect, record, and verify payments for emails. It also makes it harder for lower-income Internet users to use email. We may need to increase the charge to make spamming more unprofitable. But that also makes email more expensive for everyone else.
+But this adds an extra layer of complexity. To make the system work, we need a payment service to collect, record, and verify payments for emails. It also makes it harder for lower-income Internet users to use email. We may need to increase the charge to make spamming more unprofitable. But that would also make email more expensive for everyone else.
 
-Is there a fairer way to charge email senders? Can they pay using something they already have? Something like...their computers? That was Hashcash's ingenuity. Make email senders "spend" their CPU processing time. To "pay" for an email with Hashcash, the sender's computer would solve a cost function.
+Is there a fairer way to charge email senders? Can they pay using something they already have? Something like...their computers? That was Hashcash's ingenuity. Make email senders "spend" their CPU processing time. To pay for an email with Hashcash, the sender's computer would solve a **cost function**.
 
 This cost function introduces an artificial slowness, or throttling, to sending an email. It would be difficult enough to slow down a spammer or discourage them altogether. But not enough to trouble regular users.
 
@@ -97,7 +97,7 @@ This speed regulation protects the network from tampering. To change an existing
 
 Hashcash also gives all the miners a fair opportunity to participate. Miners compete with computation instead of money. And that prevents high-income nodes from taking control of the entire network.
 
-Adam Back’s brainchild found a new expression here. It began as a tool for controlling pesky email spams. But it went on to inspire the revolutionary new financial network called Bitcoin.[^skc]
+Adam Back’s brainchild found a new expression here. It began as a tool for controlling pesky email spams. But it went on to inspire the revolutionary financial network called Bitcoin.[^skc]
 
 [^skc]: Proof of work has also been a source of criticism against Bitcoin. Miners need to run expensive calculations to validate transactions. And this increases transaction costs and raises environmental concerns.
 

@@ -1,5 +1,5 @@
 ---
-title: 'Building an expression evaluator'
+title: 'Building an Expression Evaluator'
 date: 2021-02-22T04:30:55Z
 draft: false
 tags: [algorithms, javascript]

@@ -1,5 +1,5 @@
 ---
-title: 'Building Ayòayò: An unbeatable player'
+title: 'Building Ayòayò: An Unbeatable Player'
 date: 2020-07-05T13:15:50+01:00
 draft: false
 series: [Building Ayoayo]
