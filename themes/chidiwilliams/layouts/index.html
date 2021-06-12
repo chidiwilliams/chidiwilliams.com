@@ -1,17 +1,30 @@
 {{ define "main" }}
 <div class="home">
-  <!--  -->
-  {{ $mainSections := .Site.Params.mainSections | default (slice "post") }}
-  <!--  -->
-  {{ $section := where .Site.RegularPages "Section" "in" $mainSections }}
-
   <h1>Posts</h1>
-  <ul>
-    {{ range $section }}
+  <ul style="margin-bottom: 40px">
+    {{ range where .Site.RegularPages "Section" "in" (slice "post") }}
     <li>
       <a href="{{ .RelPermalink }}" class="text-link">{{ .Title }}</a>
     </li>
     {{ end }}
+  </ul>
+  <ul>
+    <li><a href="/about">About</a></li>
+    <li><a href="/bookshelf">Bookshelf</a></li>
+    {{ range where .Site.RegularPages "Section" "in" (slice "page") }}
+    <li>
+      <a href="{{ .RelPermalink }}" class="text-link">{{ .Title }}</a>
+    </li>
+    {{ end }}
+    <li><a href="/simulations">Simulations</a></li>
+    <li>
+      <a
+        href="https://github.com/chidiwilliams"
+        target="_blank"
+        rel="noopener noreferrer"
+        >GitHub</a
+      >
+    </li>
   </ul>
 </div>
 {{ end }}
