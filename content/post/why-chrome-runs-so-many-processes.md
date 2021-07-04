@@ -3,6 +3,10 @@ title: 'Why Chrome Runs So Many Processes'
 date: 2021-07-04T10:18:56+01:00
 draft: false
 url: chrome-processes
+images:
+  [
+    https://res.cloudinary.com/cwilliams/image/upload/v1625394129/Blog/E4ubeZxWQAE8JdE.jpg,
+  ]
 ---
 
 _(Originally published [on Twitter](https://twitter.com/ChidiWilliams__/status/1408401252090798081))_
