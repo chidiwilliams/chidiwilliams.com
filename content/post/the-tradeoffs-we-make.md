@@ -1,7 +1,7 @@
 ---
 title: 'The Tradeoffs We Make'
-date: 2021-08-01T12:00:25+01:00
-draft: true
+date: 2021-08-03T12:00:25+01:00
+draft: false
 url: tradeoffs
 ---
 
