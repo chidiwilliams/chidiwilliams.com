@@ -3,6 +3,10 @@ title: 'The Tradeoffs We Make'
 date: 2021-08-03T12:00:25+01:00
 draft: false
 url: tradeoffs
+images:
+  [
+    'https://res.cloudinary.com/cwilliams/image/upload/c_crop,h_1937,w_3700,x_500,y_1200/v1628028726/Blog/elena-mozhvilo-j06gLuKK0GM-unsplash.jpg',
+  ]
 ---
 
 Building software is as much about making tradeoffs as it is about writing code. It involves making decisions about what strategies, tools, and processes to use. In a tradeoff, choosing some benefit from an alternative comes at a cost. There are no simple right or wrong answers, only better or worse choices in the context of the requirements and available resources.
