@@ -5,7 +5,7 @@ draft: false
 url: tradeoffs
 ---
 
-Building software is as much about making tradeoffs as it is about writing code. It involves making decisions about what strategies, tools, and processes to use. In a tradeoff situation, choosing some benefit from an alternative comes at a cost. There are no simple right or wrong answers, only better or worse choices in the context of the requirements and available resources.
+Building software is as much about making tradeoffs as it is about writing code. It involves making decisions about what strategies, tools, and processes to use. In a tradeoff, choosing some benefit from an alternative comes at a cost. There are no simple right or wrong answers, only better or worse choices in the context of the requirements and available resources.
 
 One common tradeoff in software engineering is the space-time tradeoff. In some processes, it is possible to reduce computation time by using more memory or disk storage. For example, here's a program that prints out the intersection between two arrays, _m_ and _n_:
 
@@ -48,7 +48,7 @@ function intersection(m, n) {
 
 This version has a space complexity of _O(m)_ and a time complexity of _O(m+n)_. By using a map to store the values in the first array, we reduce the time complexity of the program from quadratic time to linear.
 
-We trade space for time in other ways. For example, we sometimes use caching to store frequently requested data instead of re-querying a database. At the cost of more space (the memory of the caches), we reduce the time it takes the application to serve client requests.
+We trade space for time in other ways. For example, we sometimes use caching to store frequently requested data instead of re-querying a database. We can serve client requests more quickly at the cost of the memory of the caches.
 
 ![Application caching](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1628010158/Blog/4b49a861-2d8f-4c38-9b85-9cd25e892fab.png)
 
@@ -56,11 +56,11 @@ Content Delivery Networks (CDNs) also work as caches. They serve HTML documents,
 
 ![Content Delivery Networks](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1628011384/Blog/42e81ad0-039a-4c60-98cd-257280579f86.png)
 
-Distributed databases have other tradeoffs. Say we have a single database that stores application data and responds to user queries. We can create "replicas" or secondary nodes of the database and distribute incoming read traffic across the different nodes. After the primary node receives a write request, it communicates the changes to all the other nodes.
+Distributed databases have other tradeoffs. Say we have a single database that stores application data and responds to user queries. We can create "replicas" or secondary nodes of the database and distribute incoming read traffic across the nodes. After the primary node receives a write request, it communicates the changes to all the other nodes.
 
 ![Database replication](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1628011614/Blog/5361e652-778a-474d-be6e-a29c34b8cc77.png)
 
-But it takes some time for the primary node to communicate those changes. If a client tries to read from a secondary before that time difference elapses, the client may get stale data.
+But it takes some time for the primary node to communicate those changes. If a client tries to read from a secondary node before the time difference elapses, the client may get stale data.
 
 We have two choices here. The primary node can perform the write request, respond to the client that the write is successful, and then replicate the changes to the other nodes. In this case, we say that the database does not have _linearizability_. After a successful write request, a secondary node might still return a _stale read_ for some time.
 
@@ -70,7 +70,7 @@ Alternatively, the primary node can wait to replicate the changes in the other n
 
 ![Linearizability over latency in distributed databases](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1628012725/Blog/52e4e80f-4488-44fb-ae1d-d0c35d7165cf.png)
 
-In these two examples, we assume that the database nodes are able to communicate with one another. But what happens if they aren't? In the event of a network failure—a network _partition_—a secondary may be unable to guarantee that its data is up to date.
+In these two examples, we assume that the database nodes can communicate with one another. But what happens if they aren't? In the event of a network failure—a network _partition_—a disconnected node can't guarantee that its data is up to date.
 
 Again, we have two options. The first is that the secondary node can respond with a timeout or an error. Instead of breaking linearizability by returning possibly-stale data, the node opts to be unavailable. Alternatively, the node can favour availability over linearizability and return its current data.
 
@@ -92,9 +92,9 @@ Using precise language also clears the path towards making better decisions. Ins
 
 Vague descriptions can hide the full scope and impact of choosing certain alternatives. An option might perform abysmally under certain important conditions even though it performs well on average. In ancient folklore, knowing the _true name_ of a being gave you complete control over it. The mytheme rings true here. As we ask more probing questions to uncover the overall impact of a tradeoff—its _true name_—we gain more control over the decision.
 
-Learning to make thoughtful tradeoffs is also a key part of becoming a technical leader. Good engineering leadership involves understanding the context behind engineering decisions, communicating the impact to the team and other stakeholders, and re-evaluating the decisions when requirements change. As [the memes](https://twitter.com/sugarpirate_/status/1348044775887233024) put it: becoming a senior engineer is saying "it depends" over and over again until you retire.
+Learning to make thoughtful tradeoffs is also a key part of becoming a technical leader. Good engineering leadership involves understanding the context behind engineering decisions, communicating the impact to the team and other stakeholders, and re-evaluating the decisions when requirements change. As [the memes](https://twitter.com/sugarpirate_/status/1348044775887233024) go: becoming a senior engineer is saying "it depends" over and over again until you retire.
 
-In any case, making good tradeoff decisions is a skill every software engineer should learn. These decisions make real, significant differences. And thinking carefully about them helps ensure that software we build continues to provide value to users.
+In any case, making good tradeoff decisions is a skill every software engineer should learn. These decisions make concrete, significant differences. And thinking about them carefully helps ensure that the software we build continues to provide value to users.
 
 <!--
 Thinking of adding:
