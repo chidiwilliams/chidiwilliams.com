@@ -5,7 +5,7 @@ draft: false
 url: tradeoffs
 images:
   [
-    'https://res.cloudinary.com/cwilliams/image/upload/c_crop,h_1937,w_3700,x_500,y_1200/v1628028726/Blog/elena-mozhvilo-j06gLuKK0GM-unsplash.jpg',
+    'https://res.cloudinary.com/cwilliams/image/upload/c_crop,h_2088,w_3989,x_500,y_1100/v1628028726/Blog/elena-mozhvilo-j06gLuKK0GM-unsplash.jpg',
   ]
 ---
 
@@ -96,7 +96,7 @@ Using precise language also clears the path towards making better decisions. Ins
 
 Vague descriptions can hide the full scope and impact of choosing certain alternatives. An option might perform abysmally under certain important conditions even though it performs well on average. In ancient folklore, knowing the _true name_ of a being gave you complete control over it. The mytheme rings true here. As we ask more probing questions to uncover the overall impact of a tradeoff—its _true name_—we gain more control over the decision.
 
-Learning to make thoughtful tradeoffs is also a key part of becoming a technical leader. Good engineering leadership involves understanding the context behind engineering decisions, communicating the impact to the team and other stakeholders, and re-evaluating the decisions when requirements change. As [the memes](https://twitter.com/sugarpirate_/status/1348044775887233024) go: becoming a senior engineer is saying "it depends" over and over again until you retire.
+Learning to make thoughtful tradeoffs is also a key part of becoming a technical leader. Good engineering leadership involves understanding the context behind engineering decisions, communicating the impact to stakeholders, and re-evaluating the decisions when requirements change. As [the memes](https://twitter.com/sugarpirate_/status/1348044775887233024) go: becoming a senior engineer is saying "it depends" over and over again until you retire.
 
 In any case, making good tradeoff decisions is a skill every software engineer should learn. These decisions make concrete, significant differences. And thinking about them carefully helps ensure that the software we build continues to provide value to users.
 
