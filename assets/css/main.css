@@ -21,6 +21,7 @@ h5,
 h6 {
   font-weight: 500;
   font-family: var(--header-font);
+  letter-spacing: initial;
 }
 
 h1 {
