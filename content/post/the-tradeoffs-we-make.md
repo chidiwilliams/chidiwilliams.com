@@ -68,7 +68,7 @@ We also make tradeoffs in distributed databases. Say we have a database that sto
 
 After the primary node receives a write request, it needs to inform the other nodes about the updates. But it takes some time to send those updates. If a client tries to read from a secondary node before the time difference elapses, the client may get stale data.
 
-We have two choices here. On receiving a write request, the primary node can update its copy of the data and then inform the client that the write was successful. Then, it would replicate the updates to the other nodes. In this case, we say that the database does not have _linearizability_. After a successful write request, a secondary node might still return a _stale read_ for some time.
+We have two choices here. On receiving a write request, the primary node can update its copy of the data and then inform the client that the write was successful. Then, it would replicate the updates to the other nodes asynchronously. In this case, we say that the database does not have _linearizability_. After a successful write request, a secondary node might still return a _stale read_ for some time.
 
 Alternatively, the primary node can wait for all the nodes to update their copies of the data before confirming that the write is successful. This configuration would be linearizable. Every read request would return the most up-to-date view of the data from the last successful write request. But the cost would be that write requests take longer to complete.
 
