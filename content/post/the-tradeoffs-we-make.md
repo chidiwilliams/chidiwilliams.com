@@ -64,19 +64,19 @@ Content Delivery Networks (CDNs) also work as caches. They serve HTML documents,
 
 ## Distributed databases
 
-Say we have a database that stores application data and responds to user queries. We can replicate the database into secondary nodes and distribute incoming read traffic across the nodes. After the primary node receives a write request, it communicates the changes to the secondary nodes.
+We also make tradeoffs in distributed databases. Say we have a database that stores application data and responds to user queries. We can replicate the database into secondary nodes and distribute incoming read traffic across the nodes.
 
-But it takes some time for the primary node to relay those changes. If a client tries to read from a secondary node before the time difference elapses, the client may get stale data.
+After the primary node receives a write request, it needs to inform the other nodes about the updates. But it takes some time to send those updates. If a client tries to read from a secondary node before the time difference elapses, the client may get stale data.
 
-We have two choices here. The primary node can perform the write request and then respond to the client. Then, it would replicate the changes to the other nodes. In this case, we say that the database does not have _linearizability_. After a successful write request, a secondary node might still return a _stale read_ for some time.
+We have two choices here. On receiving a write request, the primary node can update its copy of the data and then inform the client that the write was successful. Then, it would replicate the updates to the other nodes. In this case, we say that the database does not have _linearizability_. After a successful write request, a secondary node might still return a _stale read_ for some time.
 
-Alternatively, the primary node can wait to replicate the changes in the other nodes before confirming that the write is successful. This configuration would be linearizable. Every read request would return the most up-to-date view of the data from the last successful write request. But the cost would be that write requests take longer to complete.
+Alternatively, the primary node can wait for all the nodes to update their copies of the data before confirming that the write is successful. This configuration would be linearizable. Every read request would return the most up-to-date view of the data from the last successful write request. But the cost would be that write requests take longer to complete.
 
 ![Latency over linearizability in distributed databases](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1628012359/Blog/78afe71c-b04e-4f93-ab9a-bfbcc055ec40.png)
 
 ![Linearizability over latency in distributed databases](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1628012725/Blog/52e4e80f-4488-44fb-ae1d-d0c35d7165cf.png)
 
-In these two examples, we assume that the database nodes can communicate with one another. But what happens if they can't? In the event of a network failure—a network _partition_—a disconnected node can't guarantee that its data is up to date.
+In these two examples, we assume that the database nodes can communicate with one another. But what happens if they can't? In the event of a network _partition_, a disconnected node can't guarantee that its data is up to date.
 
 Again, we have two options. The secondary node can respond with an error. Instead of returning possibly-stale data, the node chooses to be unavailable. Or, the node can favour availability over linearizability and return its current data.
 
@@ -88,11 +88,11 @@ In the event of a partition, the latency-linearizability tradeoff becomes an ava
 
 ## Being thoughtful
 
-Building useful software requires being thoughtful about making good tradeoffs. It takes a deep understanding of the requirements, constraints, resources, and the pros and cons of the alternatives.
+Building useful software requires being thoughtful about making good tradeoffs. It takes a deep understanding of requirements, constraints, resources, and the pros and cons of the alternatives.
 
 While making these decisions, we should ask: What do users expect from this software? Strong consistency could be critical for a financial application. But, for a blog? Probably not. We should also find out how to use available resources to get the results we want. The space-time tradeoffs we discussed earlier were reasonable because memory was accessible.
 
-Using precise language clears the path towards making better decisions. Instead of saying an alternative is "faster" or "more reliable", use more descriptive terms. Be less vague. "Faster" by how much? By how many seconds? Or by what percentage? "More reliable" under what conditions?
+Using precise language clears the path towards making better decisions. Instead of saying an alternative is "faster" or "more reliable", use more specific terms. Be less vague. "Faster" by how much? By how many seconds? Or by what percentage? "More reliable" under what conditions?
 
 Vague descriptions can hide the full scope and impact of choosing certain alternatives. An option might perform abysmally under certain important conditions, even though it performs well on average. According to some ancient folklore, knowing the _true name_ of a being gave you complete control over it. The mytheme rings true here. As we ask more probing questions to uncover the full impact of a tradeoff—its _true name_—we gain more control over the overall decision.
 
