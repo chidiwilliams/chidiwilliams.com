@@ -7,6 +7,7 @@ images:
   [
     'https://res.cloudinary.com/cwilliams/image/upload/c_crop,h_2088,w_3989,x_500,y_1100/v1628028726/Blog/elena-mozhvilo-j06gLuKK0GM-unsplash.jpg',
   ]
+footnotes: 'Thanks to Ayomide Oyekanmi and Opeyemi Onikute for reviewing drafts of this.'
 ---
 
 Building software is as much about making tradeoffs as it is about writing code. It involves making decisions about what strategies, tools, and processes to use. In a tradeoff, choosing some benefit from an alternative comes at a cost. There are no right or wrong answers, only better or worse choices in the context of the requirements and available resources.

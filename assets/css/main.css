@@ -182,7 +182,12 @@ article img {
   margin: auto;
 }
 
-article.post p {
+article.post .post-content {
+  margin-bottom: 2em;
+}
+
+article.post .post-footer {
+  font-style: italic;
 }
 
 article.post pre {
