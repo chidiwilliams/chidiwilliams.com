@@ -10,7 +10,7 @@ images:
 footnotes: 'Thanks to Ayomide Oyekanmi and Opeyemi Onikute for reviewing drafts of this.'
 ---
 
-Building software is as much about making tradeoffs as it is about writing code. It involves making decisions about what strategies, tools, and processes to use. In a tradeoff, choosing some benefit from an alternative comes at a cost. There are no right or wrong answers, only better or worse choices in the context of the requirements and available resources.
+Building software is as much about making tradeoffs as it is about writing code. It involves making decisions about what tools and techniques to use. In a tradeoff, choosing some benefit from an alternative comes at a cost. There are no right or wrong answers, only better or worse choices in the context of the requirements and available resources.
 
 ## Space-time
 
