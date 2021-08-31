@@ -416,11 +416,13 @@ form.embeddable-buttondown-form p {
 
 form.embeddable-buttondown-form .input-group {
   display: flex;
+  flex-wrap: wrap;
+  margin: 0 -5px -10px;
 }
 
 form.embeddable-buttondown-form .input-group input[type='email'] {
-  flex: 1;
-  margin-right: 10px;
+  flex: 9999 250px;
+  margin: 0 5px 10px;
   background: #ffffff;
   border: 1px solid #dddddd;
 }
@@ -437,4 +439,6 @@ form.embeddable-buttondown-form .input-group input[type='submit'] {
   border: 0;
   cursor: pointer;
   padding: 15px 30px;
+  margin: 0 5px 10px;
+  flex: 1 130px;
 }
