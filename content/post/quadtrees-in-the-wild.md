@@ -1,7 +1,7 @@
 ---
 title: 'Quadtrees in the Wild'
-date: 2021-09-07T08:49:21+01:00
-draft: true
+date: 2021-09-15T08:49:21+01:00
+draft: false
 url: quadtrees
 ---
 
@@ -261,6 +261,11 @@ function nearest(node, location, nearestPoint) {
   // Check the child node where the location falls first, before checking
   // the adjacent nodes, and then the opposite node.
 
+  // true if location is at the top half
+  const tb = location.y < (node.boundary.topLeft.y + node.boundary.bottomRight.y) / 2;
+  // true if location is at the left half
+  const lr = location.x < (node.boundary.topLeft.x + node.boundary.bottomRight.x) / 2;
+
   const childNodes = [
     node.topLeftChild,
     node.topRightChild,
@@ -268,16 +273,10 @@ function nearest(node, location, nearestPoint) {
     node.bottomRightChild,
   ];
 
-  // True if location is at the top half of this node's boundary
-  const tb = location.y < (node.boundary.topLeft.y + node.boundary.bottomRight.y) / 2;
-  // True if location is at the left half of this node's boundary
-  const lr = location.x < (node.boundary.topLeft.x + node.boundary.bottomRight.x) / 2;
-
   // containing node
   nearestPoint = nearest(childNodes[2 * (1 - tb) + 1 * (1 - lr)], location, nearestPoint);
-  // adjacent node
+  // adjacent nodes
   nearestPoint = nearest(childNodes[2 * (1 - tb) + 1 * lr], location, nearestPoint);
-  // adjacent node
   nearestPoint = nearest(childNodes[2 * tb + 1 * (1 - lr)], location, nearestPoint);
   // opposite node
   nearestPoint = nearest(childNodes[2 * tb + 1 * lr], location, nearestPoint);
@@ -288,7 +287,7 @@ function nearest(node, location, nearestPoint) {
 
 (To get the containing, adjacent, and opposite nodes, we use the top-bottom and left-right positions of the search location.)[^ksl]
 
-![The time it takes to find the nearest point grows slower with a quadtree than with a list](https://res.cloudinary.com/cwilliams/image/upload/v1631630410/Blog/Finding_the_nearest_neighbour.png)
+{{<figure src="https://res.cloudinary.com/cwilliams/image/upload/v1631630410/Blog/Finding_the_nearest_neighbour.png" caption="The time it takes to find the nearest point grows much slower with a quadtree than with a list">}}
 
 ## Image compression
 
@@ -354,7 +353,7 @@ function compress(pixels, w, h, node, maxError) {
 
 By varying the maximum amount of error in each section, we can change the amount of compression done to the image:
 
-{{<iframefigure src="https://chidiwilliams.github.io/dsaw/quadtrees/4.html" height="370px">}}
+{{<iframefigure src="https://chidiwilliams.github.io/dsaw/quadtrees/4.html" height="370px" caption="Move the slider to change the maximum compression error">}}
 
 ---
 
@@ -364,13 +363,46 @@ The complete code for the examples in this post are available [on GitHub](https:
 
 [^snk]: Adapted from Patrick Surry's [D3JS quadtree nearest neighbor algorithm](http://bl.ocks.org/patricksurry/6478178)
 [^ksl]:
-    Here, we're trying to find the containing, adjacent, and opposite nodes, given the top-bottom and left-right positions.
+    What we're trying to do here is to sort the child nodes by their closeness to the search location. We can use a simple heuristic: the node where the point falls (the containing node) is closest, followed by the adjacent nodes, and the farthest, the opposite node.
 
-    First, we split the grid into four quadrants: top-left, top-right, bottom-left, and bottom-right. We can represent the value of "top" with 1 and "bottom" with 0, and "left" with 1 and "right" with 0. The quadrants become:
+    For example, if the search location falls on the bottom-left corner, the bottom-left node is closest, followed by the top-left and bottom-right nodes, and last, the top-right node.
 
-    |                  |                   |
-    | ---------------- | ----------------- |
-    | 11 (top-left)    | 10 (top-right)    |
-    | 01 (bottom-left) | 00 (bottom-right) |
+    First, we check what position the search location is in:
+
+    ```js
+    const tb = location.y < (node.boundary.topLeft.y + node.boundary.bottomRight.y) / 2;
+    const lr = location.x < (node.boundary.topLeft.x + node.boundary.bottomRight.x) / 2;
+    ```
+
+    These two bits tell us whether the search location is at the top-left (`true`-`true`), top-right (`true`-`false`), bottom-left (`false`-`true`), or bottom-right (`false`-`false`) corner.
+
+    Then, we can create a list of the child nodes based on their top-bottom and left-right positions.
+
+    ```js
+    const childNodes = [
+      node.topLeftChild, // true-true at 0
+      node.topRightChild, // true-false at 1
+      node.bottomLeftChild, // false-true at 2
+      node.bottomRightChild, // false-false at 3
+    ];
+    ```
+
+    We can see that given a value of `tb` and `lr`, the containing node will be at the position equivalent to flipping both bits. For example, if the search location is at the top-left corner, (`tb` = true, `lr` = true), the containing node will be at position `00` (`0` in decimal).
+
+    The adjacent nodes will be at the positions equivalent to flipping one bit: positions `01` (`1` in decimal) and `10` (`2` in decimal). And the opposite node will be at the position equivalent to flipping no bits: position `11` (`3` in decimal).
+
+    ```js
+    // containing node
+    nearestPoint = nearest(
+      childNodes[2 * (1 - tb) + 1 * (1 - lr)],
+      location,
+      nearestPoint
+    );
+    // adjacent nodes
+    nearestPoint = nearest(childNodes[2 * (1 - tb) + 1 * lr], location, nearestPoint);
+    nearestPoint = nearest(childNodes[2 * tb + 1 * (1 - lr)], location, nearestPoint);
+    // opposite node
+    nearestPoint = nearest(childNodes[2 * tb + 1 * lr], location, nearestPoint);
+    ```
 
 [^djc]: This type of quadtree, where each node covers a region and a data value corresponding to the region, is called a [region quadtree](https://en.wikipedia.org/wiki/Quadtree#Region_quadtree). The quadtree we used in the first two sections is a [point-region (PR) quadtree](<https://en.wikipedia.org/wiki/Quadtree#Point-region_(PR)_quadtree>). A point-region quadtree is similar to a region quadtree, but each region holds items up to a predefined capacity before splitting.
