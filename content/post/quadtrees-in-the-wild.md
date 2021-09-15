@@ -21,13 +21,7 @@ Say we have an app that shows a user the locations of grocery stores close to th
 
 Given the locations of all the stores, can we write a program that returns all the points within a boundary?
 
-> Convert to image/gif
-
-{{< rawhtml >}}
-
-<iframe src="http://localhost:1234/1.html" width="100%" height="315px" style="border: 0; margin-top: 10px;"></iframe>
-
-{{</ rawhtml >}}
+{{<iframefigure src="https://chidiwilliams.github.io/dsaw/quadtrees/1.html" caption="Click anywhere to find points within a boundary" height="315px" >}}
 
 One quick approach could be to keep all the store locations in a list of points. To find the points within a boundary, we loop over the list and return all the points within the boundary.
 
@@ -61,23 +55,11 @@ This `search` function has a runtime complexity of _O(n)_. Because we loop throu
 
 But what if we split up the space into sections? This way, we only need to search the sections that intersect with the search boundary, and we can ignore the other sections.
 
-{{< rawhtml >}}
-
-<iframe src="http://localhost:1234/2.html" width="100%" height="315px" style="border: 0; margin-top: 10px;"></iframe>
-
-{{</ rawhtml >}}
-
-{{< figure src="" alt="Finding the points within a boundary when the space is split into four sections" attr="Only the orange points (the points in sections that intersect with the search boundary) are checked">}}
+{{<iframefigure src="https://chidiwilliams.github.io/dsaw/quadtrees/2.html" caption="Click anywhere to find points within a boundary. Only the points in sections that intersect with the search boundary (marked orange) are checked" height="315px" >}}
 
 This is essentially how quadtrees work. We start by adding points to the root node of the quadtree, which defines the entire possible space. When the number of points in the node reaches a predefined maximum capacity, it splits into four child nodes. And when any of those nodes reaches the maximum capacity of points, it splits again into four child nodes, and so on.
 
-{{< rawhtml >}}
-
-<iframe src="http://localhost:1234/3.html" width="100%" height="315px" style="border: 0; margin-top: 10px;"></iframe>
-
-{{</ rawhtml >}}
-
-{{< figure src="" alt="Finding the points within a boundary when the space is split into four sections" attr="Each section contains at most four points. Sections with darker shades are deeper in the quadtree.">}}
+{{<iframefigure src="https://chidiwilliams.github.io/dsaw/quadtrees/3.html" caption="Each section contains at most four points, after which it splits into four child sections. Sections with darker shades are deeper in the quadtree." height="345px" >}}
 
 <!-- Compared to a list, it takes more time to insert a new point into a quadtree, because we need to find the correct section (the correct node) to place the point in. The quadtree also takes up more space than a list, because we store extra information about the position of each node. But on the other hand, it takes much less time to find the points inside a search boundary. -->
 
@@ -173,7 +155,6 @@ function subdivide(node) {
     if (insert(node.bottomRightChild, point)) return;
   });
 
-  // We no longer need to keep the points in node
   node.points = [];
 }
 
@@ -210,9 +191,9 @@ function search(node, boundary) {
 
 By first checking whether the node's boundary intersects with the search boundary, we can skip over large sections of space we don't need to search.
 
-Consequently, quadtrees perform best when the data points are fairly evenly scattered. If most of the points are positioned close to one another, the quadtree becomes _unbalanced_ (i.e. some branches will be much longer than others). And the performance of `search` will tend closer towards the linear runtime complexity we previously saw with the list.
+![The time it takes to find points within a boundary grows slower with a quadtree than with a list](https://res.cloudinary.com/cwilliams/image/upload/v1631579887/Blog/Finding_points_within_a_boundary.png)
 
-> Graph: plot random points of increasing n and search random boundary, linear search vs quadtree search
+Consequently, quadtrees perform best when the data points are fairly evenly scattered. If most of the points are positioned close to one another, the quadtree becomes _unbalanced_ (i.e. some branches will be much longer than others). And the performance of `search` will tend closer towards the linear runtime complexity we previously saw with the list.
 
 ## Nearest point to a location
 
@@ -240,35 +221,36 @@ function distance(p1, p2) {
 }
 ```
 
-Here, quadtrees can perform better than lists because of a simple principle: the nearest point to a location is more likely to be in the same section as the location than to be in other sections.
+Alternatively, with a quadtree, we can check the smallest section (the deepest node in the tree) which surrounds the search location first. This node would likely have points that are very close to the search location. Then, when we check through the rest of the tree, we can exclude sections that are too far away without even checking their sub-sections and points.[^snk]
 
-Following this principle, when we search through a quadtree, we check the points in the sections closest to the location first. Once we find a point close to the location, we can skip through other sections far from the location without ever looking through all the points.
+{{<iframefigure src="https://chidiwilliams.github.io/dsaw/quadtrees/5.html" height="315px" caption="Click anywhere to find the nearest neighbour (shown in red). Green sections are visited, with saturation indicating depth in the quadtree. Only the orange points are checked. The other sections are excluded with a distance test.">}}
 
-> Maybe images here showing a grid and a quadrant and more likely to find point
+We follow a few steps:
 
-At each node of the quadtree, we check to see if the node has been subdivided. If it hasn't, we loop through all the points in the node and return the nearest point. But if it has, we recursively check its child nodes, checking the section containing the search location first, before checking the other sections.[^snk]
-
-And if we have already found a point that is closer than the current section (the current node), we can ignore it and all of its sub-sections (its child nodes) without even looping through its points.
+- At each node of the quadtree, we check to see if the node has been subdivided.
+- If it has, we recursively check its child nodes. Importantly, we'll check the child node that contains the search location first, before checking the other child nodes.
+- When we get to a node that has not been subdivided, we'll loop through all its points and return the point nearest to the search location.
+- As we recurse back up the tree, when we get to a node that is farther away than the nearest point we've found, we can safely discard that section without checking its subsections or points.
 
 ```js
 function nearest(node, location, nearestPoint) {
-  // If the node's boundary is farther than the nearest point, no need to check here or any of the child nodes
+  // If this node is farther away than the nearest point,
+  // no need to check here or any of its child nodes
   if (
-    Math.abs(location.x - node.boundary.topLeft.x) > nearestPoint.distance ||
-    Math.abs(location.x - node.boundary.bottomRight.x) >
-      nearestPoint.distance ||
-    Math.abs(location.y - node.boundary.topLeft.y) > nearestPoint.distance ||
-    Math.abs(location.y - node.boundary.bottomRight.y) > nearestPoint.distance
+    location.x < node.boundary.topLeft.x - nearestPoint.distance || // location too left
+    location.x > node.boundary.bottomRight.x + nearestPoint.distance || // location too right
+    location.y < node.boundary.topLeft.y - nearestPoint.distance || // location too top
+    location.y > node.boundary.bottomRight.y + nearestPoint.distance // location too bottom
   ) {
     return nearestPoint;
   }
 
   // Not yet subdivided, return the nearest point in this node
   if (!node.topLeftChild) {
-    node.points.forEach((nodePoint) => {
-      const d = distance(nodePoint, location);
+    node.points.forEach((point) => {
+      const d = distance(point, location);
       if (d < nearestPoint.distance) {
-        nearestPoint.point = nodePoint;
+        nearestPoint.point = point;
         nearestPoint.distance = d;
       }
     });
@@ -287,30 +269,16 @@ function nearest(node, location, nearestPoint) {
   ];
 
   // True if location is at the top half of this node's boundary
-  const tb =
-    location.y < (node.boundary.topLeft.y + node.boundary.bottomRight.y) / 2;
+  const tb = location.y < (node.boundary.topLeft.y + node.boundary.bottomRight.y) / 2;
   // True if location is at the left half of this node's boundary
-  const lr =
-    location.x < (node.boundary.topLeft.x + node.boundary.bottomRight.x) / 2;
+  const lr = location.x < (node.boundary.topLeft.x + node.boundary.bottomRight.x) / 2;
 
   // containing node
-  nearestPoint = nearest(
-    childNodes[2 * (1 - tb) + 1 * (1 - lr)],
-    location,
-    nearestPoint
-  );
+  nearestPoint = nearest(childNodes[2 * (1 - tb) + 1 * (1 - lr)], location, nearestPoint);
   // adjacent node
-  nearestPoint = nearest(
-    childNodes[2 * (1 - tb) + 1 * lr],
-    location,
-    nearestPoint
-  );
+  nearestPoint = nearest(childNodes[2 * (1 - tb) + 1 * lr], location, nearestPoint);
   // adjacent node
-  nearestPoint = nearest(
-    childNodes[2 * tb + 1 * (1 - lr)],
-    location,
-    nearestPoint
-  );
+  nearestPoint = nearest(childNodes[2 * tb + 1 * (1 - lr)], location, nearestPoint);
   // opposite node
   nearestPoint = nearest(childNodes[2 * tb + 1 * lr], location, nearestPoint);
 
@@ -318,37 +286,35 @@ function nearest(node, location, nearestPoint) {
 }
 ```
 
-(To get the containing, adjacent, and opposite nodes, we use the top-bottom and left-right positions of the search location.[^ksl])
+(To get the containing, adjacent, and opposite nodes, we use the top-bottom and left-right positions of the search location.)[^ksl]
 
-> Add visualization. On click on a location, highlight the nodes that were actually checked
->
-> Graph: plot random points of increasing n and search random nearest, linear search vs quadtree search
+![The time it takes to find the nearest point grows slower with a quadtree than with a list](https://res.cloudinary.com/cwilliams/image/upload/v1631630410/Blog/Finding_the_nearest_neighbour.png)
 
 ## Image compression
 
 Quadtrees can also be used to compress pictures. The algorithm works in four steps:
 
 1. Split up the image into four sections.
-2. Calculate the amount of _detail_ in each section. For each pixel in the section, calculate the difference between the color of the pixel and the average color of the entire section. The average of all the differences will be the amount of detail in the section.
-3. If the detail in a section exceeds some predefined maximum value, split the section into four child sections and repeat step 2.
+2. Calculate the amount of _error_ in each section. For each pixel in the section, calculate the difference between the color of the pixel and the average color of the entire section. The average of all the differences will be the error in the section.
+3. If the error in a section exceeds some predefined maximum value, split the section into four child sections and repeat step 2.
 4. At the end of the process, each quadtree node will contain the average color (within the specified error limit) of some section of the compressed image.[^djc]
 
 Converting this into code:
 
 ```js
-function compress(pixels, w, h, node, maxDetail) {
+function compress(pixels, w, h, node, maxError) {
   const avg = average(pixels, w, h);
-  const det = detail(pixels, w, h, avg);
+  const err = error(pixels, w, h, avg);
 
-  // If the node has less than the maximum allowed detail,
-  // store the color and detail values in the node
-  if (det < maxDetail) {
+  // If the node has less than the maximum allowed error,
+  // store the color and error values in the node
+  if (err < maxError) {
     node.color = avg;
-    node.detail = det;
+    node.error = err;
     return;
   }
 
-  // If the node has more than the maximum allowed detail,
+  // If the node has more than the maximum allowed error,
   // split the node into child nodes and compress each child node
 
   const { topLeft, bottomRight } = node.boundary;
@@ -359,20 +325,11 @@ function compress(pixels, w, h, node, maxDetail) {
 
   node.children = [
     // Top-left
-    createNode(
-      { x: topLeft.x, y: topLeft.y },
-      { x: midPoint.x, y: midPoint.y }
-    ),
+    createNode({ x: topLeft.x, y: topLeft.y }, { x: midPoint.x, y: midPoint.y }),
     // Bottom-left
-    createNode(
-      { x: topLeft.x, y: midPoint.y + 1 },
-      { x: midPoint.x, y: bottomRight.y }
-    ),
+    createNode({ x: topLeft.x, y: midPoint.y + 1 }, { x: midPoint.x, y: bottomRight.y }),
     // Top-right
-    createNode(
-      { x: midPoint.x + 1, y: topLeft.y },
-      { x: bottomRight.x, y: midPoint.y }
-    ),
+    createNode({ x: midPoint.x + 1, y: topLeft.y }, { x: bottomRight.x, y: midPoint.y }),
     // Bottom-right
     createNode(
       { x: midPoint.x + 1, y: midPoint.y + 1 },
@@ -390,16 +347,14 @@ function compress(pixels, w, h, node, maxDetail) {
     const childW = midPoint.x - topLeft.x;
     const childH = midPoint.y - topLeft.y;
 
-    compress(childPixels, childW, childH, child, maxDetail);
+    compress(childPixels, childW, childH, child, maxError);
   });
 }
 ```
 
-{{< rawhtml >}}
+By varying the maximum amount of error in each section, we can change the amount of compression done to the image:
 
-<iframe src="https://chidiwilliams.github.io/dsaw/" width="100%" height="370px" style="border: 0; margin-top: 10px;"></iframe>
-
-{{</ rawhtml >}}
+{{<iframefigure src="https://chidiwilliams.github.io/dsaw/quadtrees/4.html" height="370px">}}
 
 ---
 
@@ -408,5 +363,14 @@ The complete code for the examples in this post are available [on GitHub](https:
 ## Notes
 
 [^snk]: Adapted from Patrick Surry's [D3JS quadtree nearest neighbor algorithm](http://bl.ocks.org/patricksurry/6478178)
-[^ksl]: How to find the location of the containing, nearest, and opposite nodes
+[^ksl]:
+    Here, we're trying to find the containing, adjacent, and opposite nodes, given the top-bottom and left-right positions.
+
+    First, we split the grid into four quadrants: top-left, top-right, bottom-left, and bottom-right. We can represent the value of "top" with 1 and "bottom" with 0, and "left" with 1 and "right" with 0. The quadrants become:
+
+    |                  |                   |
+    | ---------------- | ----------------- |
+    | 11 (top-left)    | 10 (top-right)    |
+    | 01 (bottom-left) | 00 (bottom-right) |
+
 [^djc]: This type of quadtree, where each node covers a region and a data value corresponding to the region, is called a [region quadtree](https://en.wikipedia.org/wiki/Quadtree#Region_quadtree). The quadtree we used in the first two sections is a [point-region (PR) quadtree](<https://en.wikipedia.org/wiki/Quadtree#Point-region_(PR)_quadtree>). A point-region quadtree is similar to a region quadtree, but each region holds items up to a predefined capacity before splitting.
