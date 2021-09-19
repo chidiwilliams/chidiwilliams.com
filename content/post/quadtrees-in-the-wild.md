@@ -5,7 +5,7 @@ draft: false
 url: quadtrees
 images:
   [
-    https://res.cloudinary.com/cwilliams/image/upload/v1632075497/Blog/pexels-min-an-962312.jpg,
+    https://res.cloudinary.com/cwilliams/image/upload/v1632075791/Blog/pexels-sunil-patel-599708.jpg,
   ]
 ---
 
