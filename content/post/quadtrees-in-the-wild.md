@@ -3,6 +3,10 @@ title: 'Quadtrees in the Wild'
 date: 2021-09-19T12:49:21+01:00
 draft: false
 url: quadtrees
+images:
+  [
+    https://res.cloudinary.com/cwilliams/image/upload/v1632075497/Blog/pexels-min-an-962312.jpg,
+  ]
 ---
 
 Choosing good data structures and algorithms can have a significant impact on the performance of a program. Some data structures store information faster (but retrieve the information slower) than other data structures. And, for the same operation, one algorithm can perform faster on average (but slower in important edge cases) than another algorithm.
