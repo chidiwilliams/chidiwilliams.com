@@ -5,8 +5,6 @@ draft: false
 url: quadtrees
 ---
 
-<!-- The phrase "data structures and algorithms" sometimes brings to mind unnerving programming interviews, tedious Computer Science lectures, and strange-looking code nobody ever seems to use in the real world. But we use them all the time. Whenever we store, retrieve, and process data in programs, we make use of data structures and algorithms. -->
-
 Choosing good data structures and algorithms can have a significant impact on the performance of a program. Some data structures store information faster (but retrieve the information slower) than other data structures. And, for the same operation, one algorithm can perform faster on average (but slower in important edge cases) than another algorithm.
 
 Learning about the performance benefits and [tradeoffs](/tradeoffs/) of using different data structures and algorithms can help us write programs that solve problems more effectively. And so, starting with this post, I'll be writing a series called _Data Structures and Algorithms in the Wild_. Throughout the series, we'll explore a few different data structures and algorithms to see how they work and what kinds of problems they solve.
@@ -60,7 +58,7 @@ This is essentially how quadtrees work. We start by adding points to the root no
 
 ## Points within a boundary
 
-To insert a point into a quadtree, we first check if the node has the capacity to receive the point. If it does, we save the point in that node. But if it doesn't, we split the node into four quadrants and then insert the point into the quadrant it falls into.
+To insert a point into a quadtree, we first check if the node has enough capacity to receive the point. If it does, we save the point in that node. But if it doesn't, we split the node into four quadrants and then insert the point into the quadrant where it falls.
 
  <!-- When would a quadtree be good or bad? In the worst case, all the points are close to each other, and the quadtree behaves like a list. In the best case, the points are scattered sparsely across the entire space, and we can exclude many points from the search. -->
 
@@ -181,7 +179,7 @@ At each node, we first check to see if the node's boundary intersects with the s
 
 {{<figure src="https://res.cloudinary.com/cwilliams/image/upload/v1631579887/Blog/Finding_points_within_a_boundary.png" caption="The time it takes to find points within a boundary grows slower with a quadtree than with a list">}}
 
-Consequently, quadtrees perform best when the data points are fairly evenly scattered. If most of the points are positioned close to one another, the quadtree becomes _unbalanced_, i.e. only a few nodes would hold most of the points. And the runtime performance of searching the quadtree will tend closer towards that of the list.
+Consequently, quadtrees perform best when the data points are fairly evenly scattered. If most of the points are positioned close to one another, the quadtree becomes _unbalanced_. Only a few nodes would hold most of the points, and the runtime performance of searching the quadtree will tend closer towards that of the list.[^ger]
 
 ## Nearest point to a location
 
@@ -209,7 +207,7 @@ function distance(p1, p2) {
 }
 ```
 
-Alternatively, with a quadtree, we can check the smallest quadrant (the deepest node in the tree) which surrounds the search location first. This node would likely have points that are very close to the search location. Then, when we check through the rest of the tree, we can exclude quadrants that are too far away without even checking their child quadrants and points.[^snk]
+Alternatively, with a quadtree, we can check the smallest quadrant which surrounds the search location first. This node would likely have points that are very close to the search location. Then, when we check through the rest of the tree, we can exclude quadrants that are too far away without even checking their child quadrants and points.[^snk]
 
 {{<iframefigure src="https://chidiwilliams.github.io/dsaw/quadtrees/4.html" height="315px" caption="Click anywhere to find the nearest neighbour (shown in red). Green quadrants are visited, with saturation indicating depth in the quadtree. Only the orange points are checked.">}}
 
@@ -278,10 +276,10 @@ function nearest(node, location, nearestPoint) {
 Quadtrees can also be used to compress pictures. The algorithm works in three steps:
 
 1. Split up the image into four quadrants.
-2. Calculate the amount of _error_ in each quadrant. For each pixel in the quadrant, calculate the difference between the color of the pixel and the average color of the entire quadrant. The average of all the differences will be the error in the quadrant.
+2. Calculate the amount of _error_ in each quadrant. First, calculate the average colour in the quadrant. Then, for each pixel in the quadrant, calculate the difference between the pixel's colour and the average colour. The average of all the differences will be the error in the quadrant.
 3. If the error in a quadrant exceeds some predefined maximum value, split the quadrant into four child quadrants and repeat step 2.
 
-At the end of the process, each quadtree node will contain the average color (within the specified error limit) of some section of the compressed image.[^djc]
+At the end of the process, each quadtree node will contain the average colour (within the specified error limit) of some section of the compressed image.[^djc]
 
 Converting this into code:
 
@@ -332,7 +330,7 @@ const quadtree = { boundary: { x1: 0, y1: 0, x2: w - 1, y2: h - 1 } };
 compress(pixels, w, h, quadtree);
 ```
 
-To display the compressed image, we draw the colors in each leaf node of the tree.
+To display the compressed image, we draw the colours in each leaf node of the tree.
 
 ```js
 function drawTree(tree, width, height) {
@@ -369,9 +367,22 @@ The complete code for the examples in this post is available [on GitHub](https:/
 
 ## Notes
 
+[^ger]:
+    In the worst-case scenario (when the quadtree is unbalanced or when the search boundary covers the entire space), searching through the quadtree has a linear time complexity.
+
+    But in the best case—when the points are evenly distributed across the nodes and the search boundary is small—searching the quadtree takes _O(log{{< rawhtml >}}<sub>4</sub>{{</ rawhtml >}}(n))_ time.
+
+    If we have 4 (or fewer) points in the tree, the tree would have only its root node.
+
+    If we have 16 evenly distributed points, the tree would have its root node and four leaf nodes. If the search boundary only covers a small area (only intersects with one leaf node), searching through the tree would take twice as long as before: check the root node, check the child node, then check the points in the child node in constant time. (Checking the points within a node takes constant time because we know a node can only hold a maximum of 4 points.)
+
+    Similarly, if we have 64 evenly distributed points, the tree would have its root node with four child nodes, each also having four child nodes. In other words, the tree would have a depth of 3. Again, if the search boundary only intersects with one leaf node, searching through the tree would take three times as long as the first time: check the root node, check the child node, check the grand-child node, then check the points in the grand-child node in constant time.
+
+    The time it takes to search the tree grows in proportion to the fourth root of the number of points in the tree: 4 points -> 1x, 16 -> 2x, 64 -> 3x, etc. So, we say that the search algorithm (in this best-case scenario) has a runtime complexity of _O(log{{< rawhtml >}}<sub>4</sub>{{</ rawhtml >}}(n))_.
+
 [^snk]: Adapted from Patrick Surry's [D3JS quadtree nearest neighbor algorithm](http://bl.ocks.org/patricksurry/6478178)
 [^ksl]:
-    What we're trying to do here is to sort the child nodes by their closeness to the search location. We can use a simple heuristic: the node where the point falls (the containing node) is closest, followed by the adjacent nodes, and the farthest, the opposite node.
+    What we're trying to do here is to sort the child nodes by their closeness to the search location. We can use a simple heuristic: the node where the point falls (the containing node) is closest, followed by the adjacent nodes, and the farthest is the opposite node.
 
     For example, if the search location falls on the bottom-left corner, the bottom-left node is closest, followed by the top-left and bottom-right nodes, and last, the top-right node.
 
@@ -386,33 +397,26 @@ The complete code for the examples in this post is available [on GitHub](https:/
 
     These two booleans (`tb`-`lr`) tell us whether the search location is at the top-left (`true`-`true`), top-right (`true`-`false`), bottom-left (`false`-`true`), or bottom-right (`false`-`false`) corner.
 
-    Then, we can create a list of the child nodes based on their top-bottom and left-right positions.
+    Then, we can create a list of the child nodes from left to right and top to bottom.
 
     ```js
     const childNodes = [
-      node.topLeftChild, // true-true at position 0
-      node.topRightChild, // true-false at position 1
-      node.bottomLeftChild, // false-true at position 2
-      node.bottomRightChild, // false-false at position 3
+      node.topLeftChild,
+      node.topRightChild,
+      node.bottomLeftChild,
+      node.bottomRightChild,
     ];
     ```
 
-    We can see that given a value of `tb` and `lr`, the containing node will be at the position equivalent to flipping both booleans. For example, if the search location is at the top-left corner, (`tb` = true, `lr` = true), the containing node will be at position `00` (`0` in decimal).
+    We can see that, given a value of `tb` and `lr`, the containing node will be at the array index equivalent to flipping both booleans. For example, if the search location is at the top-left corner, (`tb` = true, `lr` = true), the containing node will be at index `00` (`0` in decimal) in the `childNodes` array. The adjacent nodes will be at the indexes equivalent to flipping one boolean: `01` (`1` in decimal) and `10` (`2` in decimal). And the opposite node will be at the index equivalent to flipping no booleans: index `11` (`3` in decimal).
 
-    The adjacent nodes will be at the positions equivalent to flipping one bit: positions `01` (`1` in decimal) and `10` (`2` in decimal). And the opposite node will be at the position equivalent to flipping no booleans: position `11` (`3` in decimal).
+    Similarly, if the search location is at the bottom-left corner, (`tb` = false, `lr` = true), the containing node will be at index `10` (`2` in decimal). The adjacent nodes will be at indexes `00` (`0` in decimal) and `11` (`3` in decimal). And the opposite node will be at index `01` (`1` in decimal). The same works for any combination of `tb` and `lr`.
 
     ```js
-    // containing node
-    nearestPoint = nearest(
-      childNodes[2 * (1 - tb) + 1 * (1 - lr)],
-      location,
-      nearestPoint
-    );
-    // adjacent nodes
-    nearestPoint = nearest(childNodes[2 * (1 - tb) + 1 * lr], location, nearestPoint);
-    nearestPoint = nearest(childNodes[2 * tb + 1 * (1 - lr)], location, nearestPoint);
-    // opposite node
-    nearestPoint = nearest(childNodes[2 * tb + 1 * lr], location, nearestPoint);
+    const containingNode = childNodes[2 * (1 - tb) + 1 * (1 - lr)];
+    const adjacentNode1 = childNodes[2 * (1 - tb) + 1 * lr];
+    const adjacentNode2 = childNodes[2 * tb + 1 * (1 - lr)];
+    const oppositeNode = childNodes[2 * tb + 1 * lr];
     ```
 
-[^djc]: This type of quadtree, where each node covers a region and a data value corresponding to the region, is called a [region quadtree](https://en.wikipedia.org/wiki/Quadtree#Region_quadtree). The quadtree we used in the first two quadrants is a [point-region (PR) quadtree](<https://en.wikipedia.org/wiki/Quadtree#Point-region_(PR)_quadtree>). A point-region quadtree is similar to a region quadtree, but each region holds items up to a predefined capacity before splitting.
+[^djc]: This type of quadtree, where each node covers a region and a data value, is called a [region quadtree](https://en.wikipedia.org/wiki/Quadtree#Region_quadtree). The quadtree we used in the first two quadrants is a [point-region (PR) quadtree](<https://en.wikipedia.org/wiki/Quadtree#Point-region_(PR)_quadtree>). A point-region quadtree is similar to a region quadtree, but each region holds items up to a predefined capacity before splitting.
