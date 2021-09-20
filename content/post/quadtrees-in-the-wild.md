@@ -1,6 +1,6 @@
 ---
 title: 'Quadtrees in the Wild'
-date: 2021-09-19T12:49:21+01:00
+date: 2021-09-20T08:49:21+01:00
 draft: false
 url: quadtrees
 images:
@@ -375,15 +375,15 @@ The complete code for the examples in this post is available [on GitHub](https:/
 [^ger]:
     In the worst-case scenario (when the quadtree is unbalanced or when the search boundary covers the entire space), searching through the quadtree has a linear time complexity.
 
-    But in the best case—when the points are evenly distributed across the nodes and the search boundary is small—searching the quadtree takes _O(log{{< rawhtml >}}<sub>4</sub>{{</ rawhtml >}}(n))_ time.
+    But in the best case (when the points are evenly distributed across the nodes and the search boundary is small), searching the quadtree takes _O(log{{< rawhtml >}}<sub>4</sub>{{</ rawhtml >}}(n))_ time.
 
     If we have 4 (or fewer) points in the tree, the tree would have only its root node.
 
-    If we have 16 evenly distributed points, the tree would have its root node and four leaf nodes. If the search boundary only covers a small area (only intersects with one leaf node), searching through the tree would take twice as long as before: check the root node, check the child node, then check the points in the child node in constant time. (Checking the points within a node takes constant time because we know a node can only hold a maximum of 4 points.)
+    If we have 16 evenly distributed points, the tree would have its root node and 4 leaf nodes, each holding 4 points. If the search boundary only covers a small area (only intersects with one leaf node), searching through the tree would take twice as long as before: check the root node, check the child node, then check the points in the child node in constant time. (Checking the points within a node takes constant time because we know a node can only hold a maximum of 4 points.)
 
-    Similarly, if we have 64 evenly distributed points, the tree would have its root node with four child nodes, each also having four child nodes. In other words, the tree would have a depth of 3. Again, if the search boundary only intersects with one leaf node, searching through the tree would take three times as long as the first time: check the root node, check the child node, check the grand-child node, then check the points in the grand-child node in constant time.
+    Similarly, if we have 64 evenly distributed points, the tree would have its root node with 4 child nodes, each also having 4 child nodes. In other words, the tree would have a depth of 3, with 16 leaf nodes each holding 4 points. Again, if the search boundary only intersects with one leaf node, searching through the tree would take three times as long as the first time: check the root node, check the child node, check the grand-child node, then check the points in the grand-child node in constant time.
 
-    The time it takes to search the tree grows in proportion to the fourth root of the number of points in the tree: 4 points -> 1x, 16 -> 2x, 64 -> 3x, etc. So, we say that the search algorithm (in this best-case scenario) has a runtime complexity of _O(log{{< rawhtml >}}<sub>4</sub>{{</ rawhtml >}}(n))_.
+    The time it takes to search the tree grows in proportion to the base-4 logarithm of the number of points in the tree: 4 points -> 1x, 16 -> 2x, 64 -> 3x, etc. So, we say that the search algorithm (in this best-case scenario) has a runtime complexity of _O(log{{< rawhtml >}}<sub>4</sub>{{</ rawhtml >}}(n))_.
 
 [^snk]: Adapted from Patrick Surry's [D3JS quadtree nearest neighbor algorithm](http://bl.ocks.org/patricksurry/6478178)
 [^ksl]:
