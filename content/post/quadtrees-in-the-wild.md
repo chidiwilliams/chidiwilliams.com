@@ -8,6 +8,7 @@ images:
     https://res.cloudinary.com/cwilliams/image/upload/v1632075791/Blog/pexels-sunil-patel-599708.jpg,
   ]
 description: Quadtrees are tree structures used to efficiently store data in two-dimensional space. They are useful in spatial indexing and image compression.
+footnotes: 'Thanks to Ayomide Oyekanmi and Opeyemi Onikute for reviewing drafts of this.'
 ---
 
 Choosing good data structures and algorithms can have a significant impact on the performance of a program. Some data structures store information faster (but retrieve the information slower) than other data structures. And, for the same operation, one algorithm can perform faster on average (but slower in important edge cases) than another algorithm.
