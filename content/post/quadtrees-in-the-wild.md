@@ -12,11 +12,15 @@ description: Quadtrees are tree structures used to efficiently store data in two
 
 Choosing good data structures and algorithms can have a significant impact on the performance of a program. Some data structures store information faster (but retrieve the information slower) than other data structures. And, for the same operation, one algorithm can perform faster on average (but slower in important edge cases) than another algorithm.
 
-Learning about the performance benefits and [tradeoffs](/tradeoffs/) of using different data structures and algorithms can help us write programs that solve problems more effectively. And so, starting with this post, I'll be writing a series called _Data Structures and Algorithms in the Wild_. Throughout the series, we'll explore a few different data structures and algorithms to see how they work and what kinds of problems they solve.
+And so, learning about the performance benefits and [tradeoffs](/tradeoffs/) of using different data structures and algorithms can help us write programs that solve problems more effectively.
+
+Starting with this post, I'll be writing a series called _Data Structures and Algorithms in the Wild_. Throughout the series, we'll review a few different data structures and algorithms to see how they work and what kinds of problems they solve.
+
+We'll start with a data structure called the **quadtree** and explore its applications in [spatial indexing](#points-within-a-boundary) and [image compression](#image-compression).
 
 ## Why we use quadtrees
 
-We'll start with a data structure called the **quadtree**. Quadtrees are tree structures used to efficiently store data in two-dimensional space.
+Quadtrees are tree structures used to efficiently store data in two-dimensional space.
 
 Say we have an app that shows a user the locations of grocery stores close to them. A store signs up by submitting its location. And when a user opens the app, they see all the stores within a certain distance from their current location. Given the locations of all the stores, can we write a program that returns all the points within a boundary?
 
