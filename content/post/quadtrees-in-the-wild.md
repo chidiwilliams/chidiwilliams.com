@@ -1,6 +1,6 @@
 ---
 title: 'Quadtrees in the Wild'
-date: 2021-09-20T08:49:21+01:00
+date: 2021-09-21T08:49:21+01:00
 draft: false
 url: quadtrees
 images:
