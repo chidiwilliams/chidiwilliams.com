@@ -1,47 +1,52 @@
 ---
 title: Conway's Game of Life
-date: 2021-10-05T16:23:28+01:00
+date: 2021-10-12T14:23:28+01:00
 draft: true
 ---
 
-As long as humans have been around, we have always wanted to explore. Prehistoric humans may have peeked in curiously at the entrance of caves, wandered into unknown wildernesses, or ^^...^^. Then, we built sailing ships setting out on voyages to seek out distant lands. And now, we build space probes to investigate moons and planets billions of kilometres away.
+As long as humans have been around, we have been exploring—by curiously wandering into unknown wildernesses by foot, by sailing across seas to seek out distant lands, by sending high-speed spacecraft to investigate moons and planets billions of kilometres away.
 
-As we've explored farther, we've needed more and more technology and resources. Colonizing outer space requires machines that need lots of fuel and other resources, and they go through wear and tear. ^^Need food to take humans, need part replacements...^^
+At each step in the history of exploration, we required more technology than the previous one. Sea exploration depended on the invention of boats and ships, as did space exploration, the invention of spacecraft.
 
-The Hungarian mathematician, physicist, and inventor, John von Neumann thought that the solution to this problem was to build machines that could create copies of themselves: self-replicating machines.
+To explore distant space, in particular, spacecraft need enough fuel to travel long distances and a way to replace worn-out mechanical parts. John von Neumann, the Hungarian mathematician, physicist, and inventor, thought that the best way to maintain these far-travelling spacecraft was to make them _self-replicating machines_: machines that could create copies of themselves. Instead of waiting for spare parts from Earth, these self-replicating machines (later eponymously named "von Neumann probes") would extract raw materials from planets and moons and manufacture replicas of themselves for further exploration.
 
-These self-replicating machines, later eponymously termed "von Neumann probes", would extract raw materials from planets and moons for space exploration and large-scale mining operations, and also create replicas of themselves.
+Von Neumann shared these ideas for non-biological self-replicating systems in lectures he delivered in the late 1940s, but he found his models difficult to work with at the time.[^ksl] Instead, he went on to design an abstract representation of self-replicators based on _cellular automata_.
 
-Von Neumann shared these ideas for non-biological self-replicating systems in lectures he delivered in the late 1940s. But he found the models difficult to analyze mathematically; the ideas were far ahead of the technology of the time. These days, we have 3D printers capable of creating many of their own parts, but the idea of self-replicating machines wasn't very common at the time.
+[^ksl]: Today, we have 3D printers that can create many of their own parts, but the idea of self-replicating machines wasn't very common at the time.
 
-Instead, he went on to design an abstract model of self-replicators based on cellular automata. Cellular automata is a system of cells laid out in a two-dimensional grid. Each cell is a finite-state machine, having one of a predefined number of states at each turn. At the next timestep, each cell transitions to its next state based on the states of its surrounding cells, according to a predefined set of rules. In [von Neumann's cellular automata](https://en.wikipedia.org/wiki/Von_Neumann_cellular_automaton), each cell could be in one of 29 possible states. And the next state was determined by the states of the cells north, west, east, and south of each cell.
+Cellular automata is a system of cells laid out in a two-dimensional grid. Each cell is a finite-state machine, having one of a predefined number of states at each turn. And at the next turn, each cell transitions to its next state based on the states of its surrounding cells, according to a predefined set of rules.
 
-> ^^Simple demo maybe of vN's automata; but might be easier to explain when we get to Conway, but easy to lose reader here^^
+![Simple diagram of cellular automata]()
 
-With this model, von Neumann showed that there is a certain pattern of cell states, called the [von Neumann universal constructor](https://en.wikipedia.org/wiki/Von_Neumann_universal_constructor), which could make infinite copies of itself within the cellular universe.
+In [von Neumann's cellular automata](https://en.wikipedia.org/wiki/Von_Neumann_cellular_automaton), each cell could be in one of 29 possible states, and its next state was determined by the states of the cells to its north, west, east, and south.
 
-The constructor was made up of two parts: the constructing machine and a line of cells that serve as the blueprint of the machine. The machine reads the instructions from the blueprint one cell after the other, and performs the corresponding actions. The actions direct the machine to build what turns out to be an identical machine, after which the machine makes a copy of the blueprint for the child machine to use.[^djd]
+With this model, von Neumann showed that there is [a certain pattern of cells](https://en.wikipedia.org/wiki/Von_Neumann_universal_constructor), that can make infinite copies of itself within the cellular universe. The pattern is made up of two parts: the constructing machine and a line of cells that serve as the blueprint of the machine. The constructing machine reads the instructions from the blueprint one cell after the other and performs the corresponding actions which result in an identical machine pattern.[^djd]
+
+[^djd]: The process of constructing from a description or blueprint and the process of copying the description mirrors the processes of [DNA translation](https://en.wikipedia.org/wiki/Translation_%28biology%29) and [DNA replication](https://en.wikipedia.org/wiki/DNA_replication). Interestingly, von Neumann proposed his self-replicating automata ideas even before the discovery of the structure of DNA molecules and the processes of translation and replication in biological cells.
+
+{{< figure src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Nobili_Pesavento_2reps.png" caption="The first implementation of von Neumann's constructor, showing three generations of the machine (the second generation has nearly finished construcing the third). The line of cells running to the right are the machine blueprints." attr="Wikipedia" attrlink="https://upload.wikimedia.org/wikipedia/commons/c/c4/Nobili_Pesavento_2reps.png" width="450" >}}
 
 ## Life
 
-Years later, von Neumann's creation of the universal constructor, the British mathematician, John Conway read about von Neumann's ideas for self-replicating cellular automata in a book called **Automata Studies**. Conway thought that von Neumann's implementation was more complex than it had to be. Also, von Neumann had explicitly made the rules of the game in such a way as to facilitate making a machine that could read its own instructions to create a copy of itself. Conway thought that as long as the game rules were sufficiently complex, self-replicating patterns would emerge.
+Years after von Neumann first proposed his universal constructor, the British mathematician John Conway, read about his ideas. Conway found that von Neumann's implementation could be much simpler and that it didn't need to be explicitly programmed for self-replication. As long as the automata rules were sufficiently complex, self-replicating patterns would emerge.
 
-And so John Conway started working on creating a new kind of cellular automata with simpler rules. Conway played around with different rules: some led to patterns that were too chaotic and died off too quickly, and others led to patterns that were too static and didn't have any interesting behaviour. Till he settled on a set of rules that were somewhere in between. He called this system the Game of Life, or Life for short.
+John Conway started working on a new kind of cellular automata with simpler game rules. He played around with many different rules at first—some led to patterns that were too chaotic and died off too quickly; others led to patterns that were too static and didn't have any interesting behaviour—until he found rules that fell somewhere in between. He called this system the Game of Life, or Life for short.
 
-Like von Neumann's automata, the Game of Life runs on an infinite, two-dimensional grid of square cells. But unlike von Neumann's automata, each cell can be in one of only two possible states, **live** or **dead**. Each cell interacts with its eight neighbouring cells: the cells that are horizontally, vertically, or diagonally adjacent to it.
-
-After each timestep, the cells transition following these rules:
+Like von Neumann's automata, the Game of Life runs on an infinite, two-dimensional grid of square cells. But unlike von Neumann's automata, each cell can be in one of only two possible states, **live** or **dead**. And each cell interacts with its eight neighbouring cells: the cells that are horizontally, vertically, or diagonally adjacent to it. After each timestep, the cells transition following these rules:
 
 1. Any live cell with fewer than two live neighbours dies (as if by underpopulation)
 2. Any live cell with two or three live neighbours lives on to the next generation
 3. Any live cell with more than three neighbours dies (as if by overpopulation)
-4. Any dead cell with exactly three live neighbours becomes a live cell (as if by overpopulation)
+4. Any dead cell with exactly three live neighbours becomes a live cell (as if by reproduction)
 
-The Game of Life is a no-player game. The initial pattern acts as the seed of the system. And each successive generation is a **pure function** of the previous generation, gotten by applying the game rules without any further outside input.
+The Game of Life is a "no-player" game, just like von Neumann's automata. The initial pattern acts as the seed of the system. And each successive generation is gotten by applying the game rules to the previous generation without any new input.
 
-> ^^Diagram showing application of rules^^
+![Diagrams showing application of rules]()
+
+We may implement these rules in code as:
 
 ```javascript
+// Returns the next state of the cells applying the Game of Life rules
 function next(grid) {
   // First, we create a new grid with the same
   // dimensions as the current grid
@@ -50,7 +55,7 @@ function next(grid) {
     nextGrid[i] = new Array(grid[i].length);
   }
 
-  // For each cell in the existing grid...
+  // For each cell in the current grid...
   for (let x = 0; x < grid.length; x++) {
     for (let y = 0; y < grid[x].length; y++) {
       let c = 0;
@@ -82,45 +87,48 @@ function next(grid) {
 
   return nextGrid;
 }
+
+next([
+  [false, false, false],
+  [true, true, true],
+  [false, false, false],
+]);
+// Returns:
+//   [[false, true, false],
+//    [false, true, false],
+//    [false, true, false]]
 ```
 
-> ^^Add demo for the game. Ask reader to play around with adding random initial states and seeing it play out.^^
+{{<iframefigure src="" caption="Click on a few cells to set the initial state, then click Play." height="345px" >}}
 
 ## Life forms
 
-Many different types of patterns occur in the Game of Life, and they are commonly classified according to their behaviour.
+Many different types of patterns occur in the Game of Life, and we typically classify them according to their behaviour.
 
-**Still lifes** are patterns that don't change from one generation to the next (as long as they're not disturbed by other patterns).
+_Still lifes_ are patterns that don't change from one generation to the next (as long as they're not disturbed by other patterns).
 
-> ^^Demo of still lifes: blocks, bee-hives, loafs, boats, tubs^^
+{{<iframefigure src="" caption="L-R: A block, a bee-hive, a loaf, a boat, and a tub" height="345px" >}}
 
-**Oscillators** are patterns that return to their initial state after a finite number of generations. The number of generations it takes to return to the initial state is called the pattern's **period**.
+_Oscillators_ are patterns that return to their initial state after a finite number of generations. The number of generations it takes to return to the initial state is called the pattern's _period_.
 
-> ^^Demo of oscillators: blinkers, toads, beacons, pulsars, penta-decathlons^^
+{{<iframefigure src="" caption="L-R: A blinker, a toad, a beacon, a pulsar, and a penta-decathlon" height="345px" >}}
 
-**Spaceships** can move in some direction across the board.
+_Spaceships_ can move across the board.
 
-> ^^Demo of spaceships: gliders, light-weight, middle-weight, heavy-weight spaceships^^
+{{<iframefigure src="" caption="L-R: A glider, a light-weight, and a middle-weight" height="345px" >}}
 
-**Methuselahs** evolve for many generations before stabilizing. The **R-pentomino** takes 1103 generations to stabilize. **Diehard**, on the other hand, eventually disappears after 130 generations.
+_Methuselahs_, like the R-pentomino, evolve for many generations before stabilizing.
 
-> ^^Demo of Methuselahs; might be too complex/large to demo?^^
+{{<iframefigure src="" caption="L-R: The R-pentomino takes 1103 generations to stabilize" height="345px" >}}
 
 There are more complex patterns, like stationary guns that produce gliders and other spaceships, puffer trains that move along leaving behind a trail of debris, and rakes that move and emit spaceships.
 
-> ^^Demo of guns, trains, rakes; might be even more complex to demo, idk^^
+{{<iframefigure src="" caption="L-R: A gun and a puffer train" height="345px" >}}
 
-And it gets even more interesting. If two gliders are shot at a block placed in a specific position, the block moves closer to the gliders. If three gliders are shot at a block in a specific position, the block moves farther away from the gliders. This sliding block movement can be used to simulate a counter.
+And it gets even more interesting. We can construct [logic gates](https://youtu.be/vGWGeund3eA) (like AND, OR, and NOT gates) and memory blocks based on the interactions of gliders. And we can combine these logic gates and memory blocks to create patterns that can perform computations. In fact, the Game of Life is Turing-complete. In theory, it can simulate any computation that a typical computer can perform—including [simulating itself](https://youtu.be/xP5-iIeKXE8)!
 
-> ^^Demo maybe? For demos that are too complex, leave links to articles/YT videos.^^
+Remember John von Neumann's vision of machines that can replicate themselves? Different patterns in Life have been developed that make copies of themselves. One, called [Gemini](https://youtu.be/A8B5MbHPlH0), creates a copy of itself while destroying its parent. Another, the [linear propagator](https://www.conwaylife.com/wiki/Linear_propagator), which has a bounding box with 15 million cells on each side, creates a complete copy of itself in 237 million generations while retaining its parent.
 
-We can also construct logic gates, like AND, OR, and NOT gates, based on the movements and interactions between gliders ^^link?^^. John Conway showed that we can combine counter memory and logic gates to build a pattern that can create patterns by reading other patterns as input, essentially acting like a universal Turing machine.
-
-Remember von Neumann's vision of machines that can replicate themselves? Different patterns in Life have been developed that make copies of themselves. One, called Gemini, creates a copy of itself while destroying its parent. Another, the linear propagator, creates a complete copy of itself, retaining the parent.[^rbk]
-
-The Game of Life is an interesting game and programming exercise. But it's a little more than that. It illustrates how complex patterns can arise from a simple set of rules. ^^emergence theory^^ ^^without explicit, upfront design.^^ ^^goes against our intuitions about complexity.^^ ^^[Sierpinski Hexagon](https://chidiwilliams.github.io/sierpinski-hexagon/)^^. Life, as it turns out, is more than just a game.
+On the surface, the Game of Life is an interesting mathematical game and a fun programming exercise. But it illustrates something even deeper. Against our intuitions that complex things must arise out of even more complex things, it shows how complexity and organization can emerge from simplicity. Life, as it turns out, is more than just a game.
 
 ## Notes
-
-[^djd]: The process of constructing from a description or blueprint and the process of copying the description mirrors the processes of [DNA translation](https://en.wikipedia.org/wiki/Translation_%28biology%29) and [DNA replication](https://en.wikipedia.org/wiki/DNA_replication). Interestingly, von Neumann proposed his self-replicating automata ideas even before the discovery of the structure of DNA molecules and the process of translation and replication in biological cells.
-[^rbk]: These patterns are far too large to show here. The linear propagator has a bounding box with 15 million cells on each side and replicates in 237 million generations. But you can watch a video of Gemini [on YouTube](https://youtu.be/A8B5MbHPlH0?t=76).
