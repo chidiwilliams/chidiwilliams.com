@@ -44,7 +44,7 @@ Like von Neumann's automaton, the Game of Life runs on an infinite, two-dimensio
 
 Conway's Game of Life is a "no-player" game, just like von Neumann's automaton. The initial pattern acts as the seed of the system. And each successive generation is gotten by applying the game rules to the previous generation without any new input.
 
-{{<figure src="https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2FChidi%2FA5Iwqjjcor.png?alt=media&token=f8d7f8f0-cdef-4fca-86af-247894c23372" caption="At each generation, we check for the number of neighbours each cell has. Then, we apply the Game of Life rules to find the next generation.">}}
+{{<figure src="https://res.cloudinary.com/cwilliams/image/upload/v1634496238/Blog/Game%20of%20Life.png" caption="Four generations of the Game of Life shown, with live cells shown in black and dead cells in white. At each generation, we check for the number of neighbours each cell has. Then, we apply the game rules to find the next generation.">}}
 
 We can implement these rules in code as:
 
