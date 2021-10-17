@@ -1,7 +1,7 @@
 ---
 title: On Conway's Game of Life
 date: 2021-10-16T14:23:28+01:00
-draft: true
+draft: false
 url: game-of-life
 description: On the history and implementation of John Conway's Game of Life
 footnotes: 'Thanks to Ayomide Oyekanmi and Opeyemi Onikute for reviewing drafts of this.'
