@@ -134,4 +134,8 @@ Remember John von Neumann's vision of machines that can replicate themselves? Di
 
 On the surface, the Game of Life is an interesting mathematical game and a fun programming exercise. But Life illustrates something even deeper. Against our intuitions that complex things must arise out of even more complex things, it shows how complexity and organization can emerge from simplicity. Life, as it turns out, is more than just a game.
 
+---
+
+Check out the [online demo](https://chidiwilliams.github.io/conway-game-of-life) for Conway's Game of Life and the [source code on GitHub](https://github.com/chidiwilliams/conway-game-of-life).
+
 ## Notes
