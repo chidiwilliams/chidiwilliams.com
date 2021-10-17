@@ -102,7 +102,7 @@ next([
 //    [false, true, false]]
 ```
 
-{{<iframefigure src="http://localhost:1234/?size=lg&speed=0.5" caption="Click on a few cells to set the initial state, then click Play." height="750px" >}}
+{{<iframefigure src="https://chidiwilliams.github.io/conway-game-of-life/?size=lg&speed=0.5" caption="Click on a few cells to set the initial state, then click Play." height="750px" >}}
 
 ## Life forms
 
@@ -110,23 +110,23 @@ Many different patterns occur in the Game of Life, and we typically classify the
 
 _Still lifes_ are patterns that don't change from one generation to the next (as long as they are not disturbed by other patterns).
 
-{{<iframefigure src="http://localhost:1234/?init=18d-,18d-,7d-2l-4d-2l-3d-,2d-2l-2d-1l-2d-1l-2d-1l-2d-1l-2d-,2d-2l-3d-2l-4d-1l-1d-1l-2d-,14d-1l-3d-,18d-,4d-2l-4d-1l-7d-,4d-1l-1d-1l-2d-1l-1d-1l-6d-,5d-1l-4d-1l-7d-,18d-,18d-,&speed=2&random=false&clear=false&reset=true" caption="L-R: A block, a bee-hive, a loaf, a boat, and a tub" height="750px" >}}
+{{<iframefigure src="https://chidiwilliams.github.io/conway-game-of-life/?init=18d-,18d-,7d-2l-4d-2l-3d-,2d-2l-2d-1l-2d-1l-2d-1l-2d-1l-2d-,2d-2l-3d-2l-4d-1l-1d-1l-2d-,14d-1l-3d-,18d-,4d-2l-4d-1l-7d-,4d-1l-1d-1l-2d-1l-1d-1l-6d-,5d-1l-4d-1l-7d-,18d-,18d-,&speed=2&random=false&clear=false&reset=true" caption="L-R: A block, a bee-hive, a loaf, a boat, and a tub" height="750px" >}}
 
 _Oscillators_ are patterns that return to their initial state after a finite number of generations. The number of generations it takes to return to the initial state is called the pattern's _period_.
 
-{{<iframefigure src="http://localhost:1234/?init=19d-,19d-,9d-1l-3d-2l-4d-,2d-3l-2d-1l-2d-1l-2d-1l-5d-,7d-1l-2d-1l-5d-1l-2d-,8d-1l-6d-2l-2d-,19d-,19d-,19d-,5d-3l-3d-3l-5d-,19d-,3d-1l-4d-1l-1d-1l-4d-1l-3d-,3d-1l-4d-1l-1d-1l-4d-1l-3d-,3d-1l-4d-1l-1d-1l-4d-1l-3d-,5d-3l-3d-3l-5d-,19d-,5d-3l-3d-3l-5d-,3d-1l-4d-1l-1d-1l-4d-1l-3d-,3d-1l-4d-1l-1d-1l-4d-1l-3d-,3d-1l-4d-1l-1d-1l-4d-1l-3d-,19d-,5d-3l-3d-3l-5d-,19d-,19d-,19d-,19d-,19d-,19d-,19d-,19d-,19d-,19d-,&speed=2&random=false&clear=false&reset=true" caption="Top, L-R: A blinker (period 2), a toad (period 2), and a beacon (period 2). Bottom: A pulsar (period 3)." height="750px" >}}
+{{<iframefigure src="https://chidiwilliams.github.io/conway-game-of-life/?init=19d-,19d-,9d-1l-3d-2l-4d-,2d-3l-2d-1l-2d-1l-2d-1l-5d-,7d-1l-2d-1l-5d-1l-2d-,8d-1l-6d-2l-2d-,19d-,19d-,19d-,5d-3l-3d-3l-5d-,19d-,3d-1l-4d-1l-1d-1l-4d-1l-3d-,3d-1l-4d-1l-1d-1l-4d-1l-3d-,3d-1l-4d-1l-1d-1l-4d-1l-3d-,5d-3l-3d-3l-5d-,19d-,5d-3l-3d-3l-5d-,3d-1l-4d-1l-1d-1l-4d-1l-3d-,3d-1l-4d-1l-1d-1l-4d-1l-3d-,3d-1l-4d-1l-1d-1l-4d-1l-3d-,19d-,5d-3l-3d-3l-5d-,19d-,19d-,19d-,19d-,19d-,19d-,19d-,19d-,19d-,19d-,&speed=2&random=false&clear=false&reset=true" caption="Top, L-R: A blinker (period 2), a toad (period 2), and a beacon (period 2). Bottom: A pulsar (period 3)." height="750px" >}}
 
 _Spaceships_ can move across the board.
 
-{{<iframefigure src="http://localhost:1234/?init=35d-,35d-,3d-4l-28d-,2d-1l-3d-1l-28d-,6d-1l-28d-,2d-1l-2d-1l-29d-,35d-,35d-,35d-,4d-1l-24d-1l-5d-,5d-1l-22d-1l-6d-,3d-3l-22d-3l-4d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,&speed=2&random=false&clear=false&reset=true" caption="Top: A light-weight spaceship. Bottom: Two gliders collide." height="750px" >}}
+{{<iframefigure src="https://chidiwilliams.github.io/conway-game-of-life/?init=35d-,35d-,3d-4l-28d-,2d-1l-3d-1l-28d-,6d-1l-28d-,2d-1l-2d-1l-29d-,35d-,35d-,35d-,4d-1l-24d-1l-5d-,5d-1l-22d-1l-6d-,3d-3l-22d-3l-4d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,&speed=2&random=false&clear=false&reset=true" caption="Top: A light-weight spaceship. Bottom: Two gliders collide." height="750px" >}}
 
 _Methuselahs_, like the R-pentomino, evolve for many generations before stabilizing.
 
-{{<iframefigure src="http://localhost:1234/?init=116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,55d-2l-59d-,54d-2l-60d-,55d-1l-60d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,&speed=50&random=false&clear=false&reset=true" caption="L-R: The R-pentomino takes 1103 generations to stabilize" height="750px" >}}
+{{<iframefigure src="https://chidiwilliams.github.io/conway-game-of-life/?init=116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,55d-2l-59d-,54d-2l-60d-,55d-1l-60d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,&speed=50&random=false&clear=false&reset=true" caption="L-R: The R-pentomino takes 1103 generations to stabilize" height="750px" >}}
 
 There are more complex patterns, like stationary guns that produce gliders and other spaceships; puffer trains that move along, leaving behind a trail of debris; and rakes that move and emit spaceships.
 
-{{<iframefigure src="http://localhost:1234/?init=90d-,26d-1l-63d-,24d-1l-1d-1l-63d-,14d-2l-6d-2l-12d-2l-52d-,13d-1l-3d-1l-4d-2l-12d-2l-52d-,2d-2l-8d-1l-5d-1l-3d-2l-66d-,2d-2l-8d-1l-3d-1l-1d-2l-4d-1l-1d-1l-63d-,12d-1l-5d-1l-7d-1l-63d-,13d-1l-3d-1l-72d-,14d-2l-74d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,&speed=50&random=false&clear=false&reset=true" caption="L-R: A Gosper glider gun emitting gliders" height="750px" >}}
+{{<iframefigure src="https://chidiwilliams.github.io/conway-game-of-life/?init=90d-,26d-1l-63d-,24d-1l-1d-1l-63d-,14d-2l-6d-2l-12d-2l-52d-,13d-1l-3d-1l-4d-2l-12d-2l-52d-,2d-2l-8d-1l-5d-1l-3d-2l-66d-,2d-2l-8d-1l-3d-1l-1d-2l-4d-1l-1d-1l-63d-,12d-1l-5d-1l-7d-1l-63d-,13d-1l-3d-1l-72d-,14d-2l-74d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,&speed=50&random=false&clear=false&reset=true" caption="L-R: A Gosper glider gun emitting gliders" height="750px" >}}
 
 And it gets even more interesting. We can use glider guns as digital signal generators, construct [logic gates](https://youtu.be/vGWGeund3eA) (like AND, OR, and NOT gates) and memory blocks based on the interactions of gliders, and combine these logic gates and memory blocks to create patterns that can perform computations. In fact, the Game of Life is Turing-complete. In theory, it can simulate any computation that a typical computer can perform—including [simulating itself](https://youtu.be/xP5-iIeKXE8)!
 
