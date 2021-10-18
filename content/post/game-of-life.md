@@ -1,5 +1,5 @@
 ---
-title: On Conway's Game of Life
+title: The Game Called Life
 date: 2021-10-16T14:23:28+01:00
 draft: false
 url: game-of-life
@@ -102,7 +102,7 @@ next([
 //    [false, true, false]]
 ```
 
-{{<iframefigure src="https://chidiwilliams.github.io/conway-game-of-life/?size=lg&speed=0.5" caption="Click on a few cells to set the initial state, then click Play." height="750px" >}}
+{{<iframefigure src="https://chidiwilliams.github.io/conway-game-of-life/?size=lg&speed=1" caption="Click on a few cells to set the initial state, then click Play." height="750px" >}}
 
 ## Life forms
 
