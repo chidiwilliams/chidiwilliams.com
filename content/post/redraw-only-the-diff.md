@@ -5,7 +5,7 @@ draft: false
 url: redraw-only-the-diff
 ---
 
-To illustrate the concepts in some of the posts on this blog, I sometimes make small, interactive JavaScript programs (see [Conway's Game of Life](/game-of-life/), [Quadtrees in the Wild](/quadtrees/), and [Building Ayòayò: Web Application](http://localhost:1313/post/building-ayoayo-web-application/), for example).
+To illustrate the concepts in some of the posts on this blog, I sometimes make small, interactive JavaScript programs (see [Conway's Game of Life](/game-of-life/), [Quadtrees in the Wild](/quadtrees/), and [Building Ayòayò: Web Application](/post/building-ayoayo-web-application/), for example).
 
 Most of these programs are in plain JavaScript (to move HTML elements around or draw on a canvas element). Others use libraries like [D3.js](https://d3js.org/). But the general idea is usually the same: when someone clicks or presses a key, draw something on the page. And while making these interactive programs, I've learned a simple but useful UI optimization: when rendering from state, redraw only the changed views.
 
