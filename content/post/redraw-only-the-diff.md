@@ -1,6 +1,6 @@
 ---
 title: 'Redraw Only The Diff'
-date: 2021-10-18T20:10:44+01:00
+date: 2021-10-19T20:10:44+01:00
 draft: false
 ---
 
@@ -144,7 +144,7 @@ When someone toggles one cell, only that cell will be redrawn. And in `onNextAni
 
 ![Graph of frames per second in random play with diffing vs without diffing](https://res.cloudinary.com/cwilliams/image/upload/v1634715380/Blog/Frames_per_second_in_random_play_with_diffing_vs_without_diffing.png)
 
-While this "diffing-the-next-state" optimization worked well in this example, it can be limited in some other cases. To see what these limitations are, we'll take a detour into the foremost declarative UI library in JavaScript-land: React.
+While this "diffing-the-next-state" optimization worked well in this example, it can be limited in some other use cases. To see what these limitations are, we'll take a detour into the foremost declarative UI library in JavaScript-land: React.
 
 ## When it's difficult to diff
 
