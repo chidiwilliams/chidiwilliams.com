@@ -142,7 +142,7 @@ function render(grid) {
 
 When someone toggles one cell, only that cell will be redrawn. And in `onNextAnimationFrame`, only the cells that have changed since the previous generation will be redrawn.
 
-{{<figure src="" caption="Adding this one-line optimization to the Game of Life program improved the frame rate from 0.9 FPS to 20 FPS (for a 34-rows-by-45-columns grid)">}}
+![Graph of frames per second in random play with diffing vs without diffing](https://res.cloudinary.com/cwilliams/image/upload/v1634715380/Blog/Frames_per_second_in_random_play_with_diffing_vs_without_diffing.png)
 
 While this "diffing-the-next-state" optimization worked well in this example, it can be limited in some other cases. To see what these limitations are, we'll take a detour into the foremost declarative UI library in JavaScript-land: React.
 
@@ -152,6 +152,7 @@ Say we want to write a program that displays the number of times someone has cli
 
 ```js
 // HTML:
+//   <p>I am a click counter!</p>
 //   <button>Click</button>
 //   <div>Clicked <span></span> times!</div>
 
@@ -165,7 +166,7 @@ buttonElement.addEventListener('click', () => {
 });
 ```
 
-As we've seen earlier, this is an imperative approach to rendering. On receiving a click event, we directly change the content of the target element.
+As we've seen earlier, this is an imperative approach to rendering. On receiving a click event, we directly change the view.
 
 Alternatively, React lets us write this program declaratively as:
 
@@ -175,11 +176,11 @@ function ClickCounter() {
 
   return (
     <>
+      <p>I am a click counter!</p>
       <button onClick={() => setCount(count + 1)}>Click</button>
       <div>
         Clicked <span>{count}</span> times!
       </div>
-      <p>I am a click counter!</p>
     </p>
   );
 }
