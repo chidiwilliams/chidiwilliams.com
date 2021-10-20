@@ -11,11 +11,11 @@ images:
   ]
 ---
 
-As long as humans have been around, we have been exploring—by curiously wandering into unknown wildernesses by foot, by sailing across seas to seek out distant lands, by sending high-speed spacecraft to investigate moons and planets billions of kilometres away.
+As long as humans have been around, we have been exploring: by curiously wandering into unknown wildernesses by foot; by sailing across seas to seek out distant lands; by sending high-speed spacecraft to investigate moons and planets billions of kilometres away.
 
-At each step in the history of exploration, we required more technology than the previous one. Sea exploration depended on the invention of boats and ships, as did space exploration, the invention of spacecraft.
+At each step in the history of exploration, we required more technology than the previous one. Sea exploration depended on the invention of sailing ships. Space exploration needed the invention of spacecraft.
 
-In particular, to explore distant space, spacecraft need enough fuel to travel long distances and a way to replace worn-out mechanical parts. John von Neumann, the Hungarian mathematician, physicist, and inventor, thought that the best way to maintain these far-travelling spacecraft was to make them _self-replicating machines_: machines that could create copies of themselves. Instead of waiting for spare parts from Earth, these self-replicating machines would extract raw materials from planets and moons and manufacture replicas of themselves for further exploration.
+In particular, to explore distant space, spacecraft need enough fuel to travel long distances and a way to replace worn-out mechanical parts. John von Neumann, the Hungarian mathematician, physicist, and inventor, thought that the best way to maintain these far-travelling spacecraft was to make them _self-replicating machines_: machines that could create copies of themselves. Instead of waiting for spare parts from Earth, these machines would extract raw materials from planets and moons and manufacture replicas of themselves for further exploration.
 
 Von Neumann shared these ideas for non-biological self-replicating systems in lectures he delivered in the late 1940s. But he found his models challenging to work with at the time. Instead, he went on to design an abstract representation of self-replicators based on _cellular automata_.
 
