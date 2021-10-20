@@ -2,6 +2,7 @@
 title: 'Redraw Only The Diff'
 date: 2021-10-19T20:10:44+01:00
 draft: false
+url: redraw-only-the-diff
 ---
 
 To illustrate the concepts in some of the posts on this blog, I sometimes make small, interactive JavaScript programs (see [Conway's Game of Life](/game-of-life/), [Quadtrees in the Wild](/quadtrees/), and [Building Ayòayò: Web Application](http://localhost:1313/post/building-ayoayo-web-application/), for example).
