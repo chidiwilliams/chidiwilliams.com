@@ -1,6 +1,6 @@
 ---
 title: The Game Called Life
-date: 2021-10-21T12:23:28+01:00
+date: 2021-10-22T12:00:28+01:00
 draft: false
 url: game-of-life
 description: On the history and implementation of John Conway's Game of Life
