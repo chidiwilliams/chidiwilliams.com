@@ -2,7 +2,8 @@
 title: 'The Tradeoffs We Make'
 date: 2021-08-06T12:00:25+01:00
 draft: false
-url: tradeoffs
+slug: tradeoffs
+aliases: [/tradeoffs]
 images:
   [
     'https://res.cloudinary.com/cwilliams/image/upload/c_crop,h_2088,w_3989,x_500,y_1100/v1628028726/Blog/elena-mozhvilo-j06gLuKK0GM-unsplash.jpg',

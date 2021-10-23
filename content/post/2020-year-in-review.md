@@ -3,7 +3,8 @@ title: '2020: Year in Review'
 date: 2020-12-30T11:25:33Z
 draft: false
 tags: [personal]
-url: 2020
+slug: 2020
+aliases: [/2020]
 ---
 
 I've spent the past few days reflecting on the past year. 2020 has been an eventful year in many different ways, and I thought it was important to review some of its highlights and what I learned along the way. I also decided to write a year-in-review post to document my journey for myself and to share with anyone else who may find it useful.

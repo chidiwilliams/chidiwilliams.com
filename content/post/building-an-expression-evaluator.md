@@ -3,7 +3,8 @@ title: 'Building an Expression Evaluator'
 date: 2021-02-22T04:30:55Z
 draft: false
 tags: [algorithms, javascript]
-url: evaluator
+slug: evaluator
+aliases: [/evaluator]
 ---
 
 In a spreadsheet application, like Microsoft Excel or Google Sheets, you can enter an expression like `=3 + 5 * 3 - 8` into a cell and calculate the result by pressing `ENTER`.

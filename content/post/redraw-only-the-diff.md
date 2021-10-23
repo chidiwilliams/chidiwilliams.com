@@ -2,12 +2,13 @@
 title: 'Redraw Only The Diff'
 date: 2021-10-23T08:10:44+01:00
 draft: false
-url: redraw-only-the-diff
+slug: redraw-only-the-diff
+aliases: [/redraw-only-the-diff]
 ---
 
 To illustrate the concepts in some of the posts on this blog, I sometimes make small, interactive JavaScript programs (see [Conway's Game of Life](/game-of-life/), [Quadtrees in the Wild](/quadtrees/), and [Building Ayòayò: Web Application](/post/building-ayoayo-web-application/), for example).
 
-Most of these programs are in plain JavaScript (to move HTML elements around or draw on a canvas element). Others use libraries like [D3.js](https://d3js.org/). But the general idea is usually the same: when someone clicks or presses a key, draw something on the page. 
+Most of these programs are in plain JavaScript (to move HTML elements around or draw on a canvas element). Others use libraries like [D3.js](https://d3js.org/). But the general idea is usually the same: when someone clicks or presses a key, draw something on the page.
 
 While making these interactive programs, I've learned a simple but useful UI optimization: when rendering from state, redraw only the changed views.
 
@@ -50,7 +51,7 @@ function render(grid) {
   for (let row = 0; row < grid.length; row++) {
     for (let col = 0; col < grid[row].length; col++) {
       const cell = grid[row][col];
-      
+
       // Draw the cell
       ctx.beginPath();
       ctx.fillStyle = grid[row][col] ? liveColor : deadColor;
