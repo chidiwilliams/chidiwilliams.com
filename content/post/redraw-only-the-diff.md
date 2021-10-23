@@ -7,7 +7,9 @@ url: redraw-only-the-diff
 
 To illustrate the concepts in some of the posts on this blog, I sometimes make small, interactive JavaScript programs (see [Conway's Game of Life](/game-of-life/), [Quadtrees in the Wild](/quadtrees/), and [Building Ayòayò: Web Application](/post/building-ayoayo-web-application/), for example).
 
-Most of these programs are in plain JavaScript (to move HTML elements around or draw on a canvas element). Others use libraries like [D3.js](https://d3js.org/). But the general idea is usually the same: when someone clicks or presses a key, draw something on the page. And while making these interactive programs, I've learned a simple but useful UI optimization: when rendering from state, redraw only the changed views.
+Most of these programs are in plain JavaScript (to move HTML elements around or draw on a canvas element). Others use libraries like [D3.js](https://d3js.org/). But the general idea is usually the same: when someone clicks or presses a key, draw something on the page. 
+
+While making these interactive programs, I've learned a simple but useful UI optimization: when rendering from state, redraw only the changed views.
 
 ## Imperative and declarative rendering
 
@@ -44,11 +46,15 @@ We can then write a render function that draws a grid on the screen.
 function render(grid) {
   const ctx = canvas.getContext('2d');
 
+  // For each cell in the grid...
   for (let row = 0; row < grid.length; row++) {
     for (let col = 0; col < grid[row].length; col++) {
+      const cell = grid[row][col];
+      
+      // Draw the cell
       ctx.beginPath();
       ctx.fillStyle = grid[row][col] ? liveColor : deadColor;
-      //      (x,             y,             width,     height)
+      //      (x,               y,               width,     height)
       ctx.rect(col * cellWidth, row * cellWidth, cellWidth, cellWidth);
       ctx.fill();
     }
@@ -96,7 +102,7 @@ Declarative rendering simplifies the implementation by introducing an abstractio
 
 ![Declarative rendering: Event -> State -> View](https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_150/v1634652729/Blog/3b851a70-8e20-418e-92ab-13beab317979.png)
 
-Ideally, we should expect the same view whether we render imperatively or declaratively. But are both approaches _really_ the same?
+We should expect the same view whether we render imperatively or declaratively. But are both approaches _really_ the same?
 
 ## The trouble with being declarative
 
@@ -141,11 +147,13 @@ function render(grid) {
 }
 ```
 
-When someone toggles one cell, only that cell will be redrawn. And in `onNextAnimationFrame`, only the cells that have changed since the previous generation will be redrawn.
+Now, when someone toggles one cell, only that cell will be redrawn. And when the game is running, only the cells that have changed since the previous generation will be redrawn.
 
-![Graph of frames per second in random play with diffing vs without diffing](https://res.cloudinary.com/cwilliams/image/upload/v1634715380/Blog/Frames_per_second_in_random_play_with_diffing_vs_without_diffing.png)
+With this "diffing-the-next-state" optimization, games with large grids perform much better.
 
-While this "diffing-the-next-state" optimization worked well in this example, it can be limited in some other use cases. To see what these limitations are, we'll take a detour into the foremost declarative UI library in JavaScript-land: React.
+![Graph of frames per second in random play with diffing vs without diffing](https://res.cloudinary.com/cwilliams/image/upload/v1634976678/Blog/Frames_per_second_in_random_play_with_diffing_and_without_diffing.png)
+
+But while the optimization worked well in this example, it can be limited in some other use cases. To see what these limitations are, we'll take a detour into the foremost declarative UI library in JavaScript-land: React.
 
 ## When it's difficult to diff
 
@@ -155,7 +163,7 @@ Say we want to write a program that displays the number of times someone has cli
 // HTML:
 //   <p>I am a click counter!</p>
 //   <button>Click</button>
-//   <div>Clicked <span></span> times!</div>
+//   <div>Clicked <span>0</span> times!</div>
 
 const buttonElement = document.querySelector('button');
 const countTargetElement = document.querySelector('span');
@@ -169,7 +177,7 @@ buttonElement.addEventListener('click', () => {
 
 As we've seen earlier, this is an imperative approach to rendering. On receiving a click event, we directly change the view.
 
-Alternatively, React lets us write this program declaratively as:
+Alternatively, React lets us write this program declaratively:
 
 ```jsx
 function ClickCounter() {
@@ -193,7 +201,7 @@ But we run into a similar issue as we did with the declarative implementation of
 
 To diff efficiently, React keeps an internal representation of the DOM. This ["virtual DOM"](https://reactjs.org/docs/faq-internals.html) holds the React elements that represent the rendered UI. When state changes, a React component generates a new tree of React elements. React compares this new tree with the previous tree and only applies the diff to the real DOM.
 
-But in some cases, it can be difficult to find the correct diff. For example, if we sort the below list alphabetically, React will mutate every child element instead of re-ordering them. This inefficiency can become crucial in large lists.
+But in some cases, it can be difficult to find the correct diff. For example, if we sort the list below alphabetically, React will mutate every child element instead of re-ordering them. This inefficiency can become significant in large lists.
 
 ```jsx
 // Before
@@ -237,13 +245,14 @@ For this reason, React provides a [`key`](https://reactjs.org/docs/reconciliatio
 </ul>
 ```
 
-In some other cases, even the `key` property isn't enough to help React efficiently find the diff. In the current implementation of React's [reconciliation algorithm](https://reactjs.org/docs/reconciliation.html#tradeoffs), you can express that an element has moved amongst its siblings. But you cannot tell React that it has moved somewhere else.
+But in some other cases, even the `key` property isn't enough to help React efficiently find the diff. In the current implementation of React's [reconciliation algorithm](https://reactjs.org/docs/reconciliation.html#tradeoffs), you can express that an element has moved amongst its siblings. But you cannot tell React that it has moved somewhere else.
 
 React will re-render `<Target />` as it moves outside its parent.
 
 ```jsx
 const targetElement = <Target />;
 
+// Toggles `targetElement` between two different parents
 function TargetToggler() {
   const [inDefaultPosition, setInDefaultPosition] = useState(true);
 
@@ -251,9 +260,11 @@ function TargetToggler() {
     <>
       <button onClick={() => setInDefaultPosition(!inDefaultPosition)}>Toggle</button>
       <div className="default-position">
+        {/* Element is here when `inDefaultPosition` is true */}
         <p>{inDefaultPosition && targetElement}</p>
       </div>
       <div className="non-default-position">
+        {/* Element is here when `inDefaultPosition` is false */}
         <p>{!inDefaultPosition && targetElement}</p>
       </div>
     </>
@@ -265,6 +276,6 @@ function TargetToggler() {
 
 Computing a diff before re-rendering is useful when it's easier to find the diff than to render. In the Game of Life program, comparing the current and next states of the cell takes less time than redrawing the cell. And in React, comparing two trees of React elements takes less time than rendering the entire tree on the real DOM. If it took more time to produce the diff than to render, it would be more reasonable to just redraw the entire view.
 
-The diff optimization is also useful when most of the view remains the same between states. In the Game of Life program, only one cell in the grid changes when someone clicks the grid. And when the game is running, only the cells close to live cells change state. In the React components we saw, only a few properties of the tree (like the text content) changed between states, while most of the DOM remained unchanged. If most of the view changes between states (for example, in games with moving cameras), diffing only introduces additional overhead.
+The diff optimization is also useful when most of the view remains the same between states. In the Game of Life program, only one cell in the grid changes when someone clicks the grid. And when the game is running, only the cells close to live cells change state. In the React components we saw, only a few properties of the tree (like the text content) changed between states, while most of the DOM remained unchanged. If most of the view changes between states (for example, in games with moving cameras), diffing only ends up introducing additional overhead.
 
-With those factors in mind, we may recap: when rendering a view declaratively from state, if only some of the view changes between states, and it takes much less time to compute a diff than to render, redraw only the diff.
+With those considerations in mind, we can recap: when rendering a view declaratively from state, if only some of the view changes between states, and it takes much less time to compute a diff than to render, redraw only the diff.
