@@ -3,7 +3,8 @@ title: 'GOTO Reconsidered'
 date: 2021-04-18T12:00:00+00:00
 draft: false
 tags: [basic, c, assembly]
-url: goto
+slug: goto
+aliases: [/goto]
 ---
 
 Before I learned to program, I had used computers to play games like Solitaire and Road Rash and explore Microsoft Encarta. I had also taken a few computer classes in school, learning what parts computers had, who the pioneers of computing were, and how to navigate around Windows. But I hardly knew how computer applications worked, and I hadn't ever built one myself.

@@ -3,7 +3,8 @@ title: 'Building an Expression Evaluator (continued)'
 date: 2021-03-17T08:00:00Z
 draft: false
 tags: [algorithms, javascript]
-url: evaluator-2
+slug: evaluator-2
+aliases: [/evaluator-2]
 ---
 
 In my [previous post](/evaluator/), we explored how expression evaluation works and built a program, `evaluate`, that returns the result of an arithmetic expression.

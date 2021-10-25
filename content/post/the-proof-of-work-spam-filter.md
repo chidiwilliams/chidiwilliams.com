@@ -2,7 +2,8 @@
 title: 'The Proof-of-Work Spam Filter'
 date: 2021-05-19T08:00:00+01:00
 draft: false
-url: proof-of-work
+slug: proof-of-work
+aliases: [/proof-of-work]
 math: true
 description: Notes on an early proof-of-work system called Hashcash
 ---

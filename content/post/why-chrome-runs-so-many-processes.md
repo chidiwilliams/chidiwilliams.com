@@ -2,7 +2,8 @@
 title: 'Why Chrome Runs So Many Processes'
 date: 2021-07-04T10:18:56+01:00
 draft: false
-url: chrome-processes
+slug: chrome-processes
+aliases: [/chrome-processes]
 images:
   [
     'https://res.cloudinary.com/cwilliams/image/upload/c_crop,h_350,w_670,x_0/v1625394129/Blog/E4ubeZxWQAE8JdE.jpg',

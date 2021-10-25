@@ -2,7 +2,8 @@
 title: 'Quadtrees in the Wild'
 date: 2021-09-21T08:49:21+01:00
 draft: false
-url: quadtrees
+slug: quadtrees
+aliases: [/quadtrees]
 images:
   [
     https://res.cloudinary.com/cwilliams/image/upload/v1632075791/Blog/pexels-sunil-patel-599708.jpg,
