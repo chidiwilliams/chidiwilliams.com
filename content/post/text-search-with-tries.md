@@ -53,7 +53,7 @@ To find the matches in this program, we check every word in the dictionary. And,
 
 ### Grouping by the first character
 
-In the previous post on quadtrees, we learned that we can improve search performance by grouping related entities together. Let's see if a similar technique can help us in this case.
+In the previous post on quadtrees, we learned that we can improve search performance by grouping related entities together. Let's see if a similar technique can help us here.
 
 Instead of putting all the words in one list, we can group the words by their first characters. All words starting with 'a' will be in one list, 'b' in another list, and so on. We can think of each group as a child dictionary.
 
@@ -123,9 +123,11 @@ Instead of searching through the entire dictionary, we only check the child dict
 
 If we assume that the words are evenly distributed among the child dictionaries, the time complexity of this implementation will be _O(1 + n\*(m/26))_. We check for the correct child dictionary in constant time, _O(1)_. Then we compare the prefix with the words in a child dictionary 1/26 times the size of the entire dictionary, giving _O(n\*(m/26))_.
 
+(We can simplify the time complexity to _O(n\*m/26)_, but leaving it expanded as _O(1 + n\*(m/26))_ will help us understand the implementation better as we proceed.)
+
 ### Grouping by the first two characters
 
-The performance of the the current implementation, _O(1 + n\*(m/26))_, is already better than what we started with, _O(n\*m)_. But we can do even better.
+The performance of the current implementation, _O(1 + n\*(m/26))_, is already better than what we started with, _O(n\*m)_. But we can do even better.
 
 We can take the grouping a step further. Just like we split the dictionary, we'll split the child dictionaries by the second characters of the words. All words starting with 'aa' will be in one "grand-child" dictionary, 'ab' in another, and so on.
 
@@ -154,95 +156,71 @@ insert(dictionary, 'bee'); //   [[..., ['apple'], ...], [..., ['bear', 'bee'], .
 insert(dictionary, 'bull'); //  [[..., ['apple'], ...], [..., ['bear', 'bee'], ..., ['bull'], ...], ...]
 ```
 
-As before, to find the words beginning with a prefix, we search through the correct child dictionary:
+As before, to find the words beginning with a prefix, we search through the correct grand-child dictionary:
 
 ```javascript
 function startsWith(dictionary, prefix) {
-  const child = dictionary[alphabet.indexOf(prefix[0])][alphabet.indexOf(prefix[1])];
-  return getMatches(child, prefix);
+  const grandChild = dictionary[alphabet.indexOf(prefix[0])][alphabet.indexOf(prefix[1])];
+  return getMatches(grandChild, prefix);
 }
 
 startsWith(dictionary, 'be'); // ['bear', 'bee']
 ```
 
-Now, `startsWith` has an even better performance than before, because the buckets are even smaller. If we assume the words are evenly distributed, we should have `26*26` buckets for all the different combinations from `aa` to `zz`. We can find the correct bucket in constant time, **O(1)**. Then we find the words in the bucket in **O(n/(26\*26))** time.
+Because the buckets get even smaller, the search performance improves further. If we assume the words are evenly distributed, we should have `26*26` groups for all the different combinations from 'aa' to 'zz'. The time complexity of the implementation becomes _O(1 + 1 + n\*(m/(26\*26))_.
 
-But there's a little problem with this approach. How do we add words that have less than 2 characters. For example, if we wanted to add the word 'a' to the dictionary. Since we compulsorily need two levels of buckets, our implementation can only support words with two or more characters.
+As you might expect, we can take this a third step, still. But before we consider that, there's a little problem we need to address. How do we add one-character words, like "a", to the dictionary? In the current implementation, we expect words to have at least two characters.
 
-To fix this, we can go add a flag to each bucket to say whether or not the bucket is a word itself. Every bucket is now no longer an array of children characters, but also contains information about whether the bucket is the end of a word or not. We can rewrite the `insert` function as:
+To fix this, we can add a flag to each level of the tree, to say whether the level itself is a word. For example, the group for 'a' will hold the child dictionaries ('aa', 'ab', ...) as well a flag that says whether or not 'a' itself is a word in the dictionary.
+
+We can rewrite the `insert` function as:
 
 ```js
 function insert(dictionary, word) {
-  // Create a new bucket for words starting with the first character
+  // As we go deeper into the dictionary, we need to keep track
+  // of the current level we're on, starting from the root dictionary
+  let current = dictionary;
+
+  // Create a child dictionary for words starting with the first character
   const firstLetterIndex = alphabet.indexOf(word[0]);
+  if (!current.children[firstLetterIndex]) {
+    // The `isWord` flag denotes whether this child dictionary is itself a word
+    current.children[firstLetterIndex] = { isWord: false, children: new Array(26) };
+  }
+  // Update current to point to the child dictionary
+  current = current.children[firstLetterIndex];
 
-  // Create a bucket for words starting with the first character
-  if (!dictionary.children[firstLetterIndex]) {
-    dictionary.children[firstLetterIndex] = { children: new Array(26) };
-    // TODO: Maybe push word? and save isWord = true
+  // If the word has only one character, then the child dictionary is a word
+  if (word.length === 1) {
+    current.isWord = true;
+    return;
   }
 
+  // Create a child dictionary for words starting with the second character
   const secondLetterIndex = alphabet.indexOf(word[1]);
+  if (!current.children[secondLetterIndex]) {
+    current.children[secondLetterIndex] = { isWord: false, children: new Array(26) };
+  }
+  current = current.children[secondLetterIndex];
 
-  // Create a bucket for words starting with the first and second character
-  if (!dictionary[firstLetterIndex][secondLetterIndex]) {
-    dictionary[firstLetterIndex][secondLetterIndex] = { children: new Array(26) };
-    // TODO: Maybe push word? and save isWord = true
+  // If the word has two characters, then the current child dictionary is a word
+  if (word.length === 2) {
+    current.isWord = true;
+    return;
   }
 
-  // Push the word to its bucket
-  dictionary[firstLetterIndex][secondLetterIndex].push(word);
+  // The word has more than two characters, push it to the current child dictionary
+  current.children.push(word);
 }
-
-// TODO: Maybe convert this to use visualization instead
-const dictionary = { children: new Array(26) };
-insert(dictionary, 'h');
-insert(dictionary, 'heat');
 ```
 
-To check for whether a word exists in the dictionary, we check each level taking note of the `isWord` flag.
+{{<iframefigure caption="Add words to the dictionary" >}}
 
-```js
-function startsWith(dictionary, prefix) {
-  let bucket = dictionary;
-  const words = [];
+### Grouping by all the characters
 
-  const firstLetterIndex = alphabet.indexOf(prefix[0]);
-  if (!bucket.children[firstLetterIndex]) {
-    return words;
-  }
+In the previous section, we improved the performance of searching a dictionary by grouping the words by their first two characters. But the implementation is still not as optimal as it can be. For example, if we try to find words starting with the prefix 'abc', we currently loop through all the words in the 'ab' dictionary.
 
-  // If this bucket is itself a word, push the word
-  if (bucket.children[firstLetterIndex].isWord) {
-    words.push(prefix[0]);
-  }
-
-  if (prefix.length > 1) {
-    const secondLetterIndex = alphabet.indexOf(prefix[0]);
-    if (!bucket.children[secondLetterIndex]) {
-      return words;
-    }
-
-    if (bucket.children[secondLetterIndex].isWord) {
-      words.push(prefix[0] + prefix[1]);
-    }
-
-    // Check for matches in this bucket
-  }
-}
-
-startsWith(dictionary, 'be'); // ['bear', 'bee']
-```
-
-<!-- TODO: Animate each level of this -->
-
-Now we can add words with one or more characters and we can find the words using a prefix with only one character. We've also seen that when we add deeper layers to the tree, we no longer need to store the words themselves in the layer. For example, instead of storing the words starting with 'a', we can instead store words starting with 'aa', 'ab', 'ac', etc.
-
-### Grouping in as many buckets as needed
-
-We can take this to a conclusion. Instead of keeping an arbitrary number of buckets, i.e. make buckets for the first characters or the first two characters, we can make as many buckets as we need for each word we add in the dictionary.
-
-When we insert a new word to the dictionary, we make as many levels of buckets as we need to store the prefixes of the word. To store the word 'apple', we would store the prefixes: 'a', 'ap', 'app', 'appl', and 'apple'.
+Alternatively, instead of specifying a number of levels beforehand, we can group by *all* the characters in each word. When we add 'apple' to the dictionary, for example, we'll create sub-dictionaries for 'a', 'ap', 'app', 'appl', and 'apple'.
 
 ```javascript
 function insert(dictionary, word) {
