@@ -1,22 +1,20 @@
 ---
-title: 'Tries'
-date: 2021-11-05T00:06:52Z
+title: 'Text Search with Tries'
+date: 2021-11-10T00:06:52Z
 draft: true
 series: [Data Structures and Algorithms in the Wild]
 ---
 
-_This is the second post in the Data Structures and Algorithms in the Wild series._
+In the [previous post](/post/quadtrees/) in the [Data Structures and Algorithms in the Wild](/series/data-structures-and-algorithms-in-the-wild/) series, we explored the quadtree, a tree data structure used to index locations in two-dimensionsional space.
 
----
-
-In this post, we look at another data structure called the Trie. Just like the quadtree, the trie is also a tree structure, but used in a different set of use cases. Tries come in text based operations, like prefix searching and autocomplete. And also spell-checking and hyphenation?
+In this post, we'll look into another data structure called the _trie_. Like the quadtree, the trie is also a tree structure. But, while quadtrees search through locations, tries search through text.
 
 ## Prefix tries
 
-For example, let's say we wanted to write a program to search a dictionary of words to find words that match a prefix. If we represent the dictionary as a list, we can check for the words in linear time.
+Say we wish to write a program to find all the words in a dictionary that start with a prefix. We can represent the dictionary as a list of words:
 
 ```javascript
-// Returns words in the dictionary that start with `prefix`
+// Returns all the words in the dictionary that start with the prefix
 function startsWith(dictionary, prefix) {
   const matches = [];
 
@@ -28,15 +26,15 @@ function startsWith(dictionary, prefix) {
 
     // Check each character in the prefix
     for (let j = 0; j < prefix.length; j++) {
-      // If the character is not in the correct position in this word,
-      // then the word does not start with the prefix
+      // If the character is not in the correct position in this word...
       if (prefix[j] !== word[j]) {
+        // ...then the word does not start with the prefix
         prefixed = false;
       }
     }
 
-    // After checking all the characters in the prefix, if
-    // `prefixed` is still true, we have a match!
+    // If `prefixed` is still true after checking all the
+    // characters in the prefix, we have a match!
     if (prefixed) {
       matches.push(word);
     }
@@ -51,14 +49,15 @@ exists(dictionary, 'ant'); // ['ant', 'antelope']
 exists(dictionary, 'lion'); // []
 ```
 
-As the size of the dictionary increases, the time it takes to find the matching words in the dictionary increases linearly. This is actually O(n \* l), where l is the length of the prefix.
+To find the matches in this program, we check every word in the dictionary. And, for each word, we check whether it matches the prefix. Consequently, the runtime complexity of the program is _O(m\*n)_, where `m` is the number of words in the dictionary and `n` is the length of the prefix.
 
-> I'm thinking maybe write an example with a hash here...
+### Grouping by the first character
 
-### One bucket groups
+In the previous post on quadtrees, we learned that we can improve search performance by grouping related entities together. Let's see if a similar technique can help us in this case.
 
-But if you remember the previous post on Quadtrees, we saw how you can improve the search performance by grouping related entities together. We can use a similar mental model to improve the performance of this search.
-By putting all the words into a plain list, we are not as optimized as we can be. Instead, let's group the words in the dictionary by their first letter. We'll put all words starting with a in one "bucket", all words starting with b in another bucket, and so on.
+Instead of putting all the words in one list, we can group the words by their first characters. All words starting with 'a' will be in one list, 'b' in another list, and so on. We can think of each group as a child dictionary.
+
+ <!-- TODO: Talk about the unstated assumption that we would make insertion more difficult vs making search easier -->
 
 <!-- prettier-ignore -->
 ```javascript
@@ -70,36 +69,43 @@ const alphabet = [
 
 // Adds a new word to the dictionary
 function insert(dictionary, word) {
-  // Get the index of the first letter in the alphabet.
+  // Get the index of the first character in the alphabet.
   // `index` will be a number from 0 to 25.
   const index = alphabet.indexOf(word[0]);
 
-  // If a `bucket` has not been made for this letter, create it
+  // If a group has not been made for this letter, create it
   if (!dictionary[index]) {
-    dictionary[index] = new Array(26);
+    dictionary[index] = [];
   }
 
   // Push the word to its bucket
   dictionary[index].push(word);
 }
 
+// Initialize `dictionary` with 26 child dictionaries
 const dictionary = new Array(26); // [...]
 insert(dictionary, 'ant'); //        [['ant'], ...]
 insert(dictionary, 'antelope'); //   [['ant', 'antelope'], ...]
 insert(dictionary, 'chicken'); //    [['ant', 'antelope'], ..., ['chicken'], ...]
 ```
 
-Now to search the dictionary for words that begin with a prefix, we only need to check the corresponding bucket.
+To find words that begin with a prefix, we only need to check the correct child dictionary.
 
 ```javascript
 function startsWith(dictionary, prefix) {
-  // Get the bucket where the words with the prefix will be
-  const bucket = dictionary[alphabet.indexOf(prefix[0])];
+  // Get the child dictionary where the words starting with the prefix will be
+  const child = dictionary[alphabet.indexOf(prefix[0])];
+
+  // Return the matches from the correct child dictionary
+  return getMatches(child, prefix);
+}
+
+// Returns the prefix matches from a list
+function getMatches(dictionary, prefix) {
   const matches = [];
 
-  // Check for the matches only in the correct bucket
-  for (let i = 0; i < bucket.length; i++) {
-    const word = bucket[i];
+  for (let i = 0; i < dictionary.length; i++) {
+    const word = dictionary[i];
 
     let prefixed = true;
     for (let j = 0; j < prefix.length; j++) {
@@ -113,45 +119,47 @@ function startsWith(dictionary, prefix) {
 }
 ```
 
-We should expect that this implementation works slightly better than the first one. Instead of searching through the entire list, we only need to check the list for the correct first letter. If we assume that the words in the dictionary are evenly distributed among the buckets, the time complexity for this implementation would be **O(1 + n/26)**. We check for the correct bucket in constant time, **O(1)**. And then we get the word from the bucket in **O(n/26)** time.
+Instead of searching through the entire dictionary, we only check the child dictionary starting with the same first character as the prefix.
 
-### Grouping in two buckets
+If we assume that the words are evenly distributed among the child dictionaries, the time complexity of this implementation will be _O(1 + n\*(m/26))_. We check for the correct child dictionary in constant time, _O(1)_. Then we compare the prefix with the words in a child dictionary 1/26 times the size of the entire dictionary, giving _O(n\*(m/26))_.
 
-But we can take this a step further. We can put words starting with 'aa' in one bucket, words starting with 'ab' in a different bucket, and so on. We would modify both `insert` and `startsWith` as follows:
+### Grouping by the first two characters
+
+The performance of the the current implementation, _O(1 + n\*(m/26))_, is already better than what we started with, _O(n\*m)_. But we can do even better.
+
+We can take the grouping a step further. Just like we split the dictionary, we'll split the child dictionaries by the second characters of the words. All words starting with 'aa' will be in one "grand-child" dictionary, 'ab' in another, and so on.
 
 ```javascript
 function insert(dictionary, word) {
-  // Create a new bucket for words starting with the first character
+  // If a group has not been made for the first letter, create it
   const firstLetterIndex = alphabet.indexOf(word[0]);
-  const secondLetterIndex = alphabet.indexOf(word[1]);
-
-  // Create a bucket for words starting with the first character
   if (!dictionary[firstLetterIndex]) {
-    dictionary[firstLetterIndex] = [];
+    dictionary[firstLetterIndex] = new Array(26);
   }
 
-  // Create a bucket for words starting with the first and second character
+  // If a group hasn't been made for the second letter, create it
+  const secondLetterIndex = alphabet.indexOf(word[1]);
   if (!dictionary[firstLetterIndex][secondLetterIndex]) {
     dictionary[firstLetterIndex][secondLetterIndex] = [];
   }
 
-  // Push the word to its bucket
+  // Push the word to its correct group
   dictionary[firstLetterIndex][secondLetterIndex].push(word);
 }
 
 const dictionary = new Array(26);
-insert(dictionary, 'bear'); // [..., [..., ['bear'], ...], ...]
-insert(dictionary, 'bee'); //  [..., [..., ['bear', 'bee'], ...], ...]
-insert(dictionary, 'bull'); // [..., [..., ['bear', 'bee'], ..., ['bull'], ...], ...]
+insert(dictionary, 'apple'); // [[..., ['apple'], ...], ...]
+insert(dictionary, 'bear'); //  [[..., ['apple'], ...], [..., ['bear'], ...], ...]
+insert(dictionary, 'bee'); //   [[..., ['apple'], ...], [..., ['bear', 'bee'], ...], ...]
+insert(dictionary, 'bull'); //  [[..., ['apple'], ...], [..., ['bear', 'bee'], ..., ['bull'], ...], ...]
 ```
 
-As before, to find the words that begin with a prefix, we check the first and second letters to find the correct bucket:
+As before, to find the words beginning with a prefix, we search through the correct child dictionary:
 
 ```javascript
 function startsWith(dictionary, prefix) {
-  const bucket = dictionary[alphabet.indexOf(prefix[0])][alphabet.indexOf(prefix[1])];
-
-  // Check for matches in this bucket...
+  const child = dictionary[alphabet.indexOf(prefix[0])][alphabet.indexOf(prefix[1])];
+  return getMatches(child, prefix);
 }
 
 startsWith(dictionary, 'be'); // ['bear', 'bee']
@@ -283,6 +291,8 @@ function startsWith(dictionary, prefix) {
 > Another way to look at a trie is like a multi-leveled hash. For each character in the prefix, we ask: give me a hash to check if the next character exists.
 
 > Ask Ayo what the runtime complexity of this is?
+>
+> TODO: How tries get their names
 
 Another advantage using a trie gives us here is that it helps us automatically sort the list of returned words. Since we traverse the tree with the children ordered by the position of the character in the alphabet, the returned list of autocompleted words will be in alphabetical order.
 

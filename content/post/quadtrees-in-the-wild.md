@@ -17,7 +17,7 @@ Choosing good data structures and algorithms can have a significant impact on th
 
 And so, learning about the performance benefits and [tradeoffs](/tradeoffs/) of using different data structures and algorithms can help us write programs that solve problems more effectively.
 
-Starting with this post, I'll be writing a series called _Data Structures and Algorithms in the Wild_. Throughout the series, we'll review a few different data structures and algorithms to see how they work and what kinds of problems they solve.
+Starting with this post, I'll be writing a series called _[Data Structures and Algorithms in the Wild](/series/data-structures-and-algorithms-in-the-wild)_. Throughout the series, we'll review a few different data structures and algorithms to see how they work and what kinds of problems they solve.
 
 We'll start with a data structure called the **quadtree** and explore its applications in [spatial indexing](#points-within-a-boundary) and [image compression](#image-compression).
 
