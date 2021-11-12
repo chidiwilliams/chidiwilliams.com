@@ -1,13 +1,13 @@
 ---
 title: 'Text Search with Tries'
-date: 2021-11-10T00:06:52Z
+date: 2021-11-12T00:06:52Z
 draft: true
 series: [Data Structures and Algorithms in the Wild]
 ---
 
 In the [previous post](/post/quadtrees/) in the [Data Structures and Algorithms in the Wild](/series/data-structures-and-algorithms-in-the-wild/) series, we explored the quadtree, a tree data structure used to index locations in two-dimensionsional space.
 
-In this post, we'll look into another data structure called the _trie_. Like the quadtree, the trie is also a tree structure. But, while quadtrees search through locations, tries search through text.
+In this post, we'll look into another data structure called the trie. Like the quadtree, the trie is also a tree structure. But, while quadtrees search through locations, tries search through text.
 
 ## Prefix tries
 
@@ -49,15 +49,13 @@ exists(dictionary, 'ant'); // ['ant', 'antelope']
 exists(dictionary, 'lion'); // []
 ```
 
-To find the matches in this program, we check every word in the dictionary. And, for each word, we check whether it matches the prefix. Consequently, the runtime complexity of the program is _O(m\*n)_, where `m` is the number of words in the dictionary and `n` is the length of the prefix.
+To find the matches in this program, we check every word in the dictionary. And, for each word, we check whether it matches the prefix. Consequently, the runtime complexity of the program is _O(p\*q)_, where `p` is the number of words in the dictionary and `q` is the length of the prefix.
 
 ### Grouping by the first character
 
 In the previous post on quadtrees, we learned that we can improve search performance by grouping related entities together. Let's see if a similar technique can help us here.
 
 Instead of putting all the words in one list, we can group the words by their first characters. All words starting with 'a' will be in one list, 'b' in another list, and so on. We can think of each group as a child dictionary.
-
- <!-- TODO: Talk about the unstated assumption that we would make insertion more difficult vs making search easier -->
 
 <!-- prettier-ignore -->
 ```javascript
@@ -88,6 +86,8 @@ insert(dictionary, 'ant'); //        [['ant'], ...]
 insert(dictionary, 'antelope'); //   [['ant', 'antelope'], ...]
 insert(dictionary, 'chicken'); //    [['ant', 'antelope'], ..., ['chicken'], ...]
 ```
+
+{{<iframefigure caption="Add words to the dictionary" >}}
 
 To find words that begin with a prefix, we only need to check the correct child dictionary.
 
@@ -121,13 +121,13 @@ function getMatches(dictionary, prefix) {
 
 Instead of searching through the entire dictionary, we only check the child dictionary starting with the same first character as the prefix.
 
-If we assume that the words are evenly distributed among the child dictionaries, the time complexity of this implementation will be _O(1 + n\*(m/26))_. We check for the correct child dictionary in constant time, _O(1)_. Then we compare the prefix with the words in a child dictionary 1/26 times the size of the entire dictionary, giving _O(n\*(m/26))_.
+If we assume that the words are evenly distributed among the child dictionaries, the time complexity of this implementation will be _O(1 + (p/26)\*q)_. We check for the correct child dictionary in constant time, _O(1)_. Then we compare the prefix with the words in a child dictionary 1/26 times the size of the entire dictionary, giving _O((p/26)\*q)_.
 
-(We can simplify the time complexity to _O(n\*m/26)_, but leaving it expanded as _O(1 + n\*(m/26))_ will help us understand the implementation better as we proceed.)
+(We can simplify the time complexity to _O((p/26)\*q)_, but leaving it expanded as _O(1 + (p/26)\*q)_ will help us understand the implementation better as we proceed.)
 
 ### Grouping by the first two characters
 
-The performance of the current implementation, _O(1 + n\*(m/26))_, is already better than what we started with, _O(n\*m)_. But we can do even better.
+The performance of the current implementation, _O(1 + (p/26)\*q)_, is already better than what we started with, _O(p\*q)_. But we can do even better.
 
 We can take the grouping a step further. Just like we split the dictionary, we'll split the child dictionaries by the second characters of the words. All words starting with 'aa' will be in one "grand-child" dictionary, 'ab' in another, and so on.
 
@@ -167,7 +167,7 @@ function startsWith(dictionary, prefix) {
 startsWith(dictionary, 'be'); // ['bear', 'bee']
 ```
 
-Because the buckets get even smaller, the search performance improves further. If we assume the words are evenly distributed, we should have `26*26` groups for all the different combinations from 'aa' to 'zz'. The time complexity of the implementation becomes _O(1 + 1 + n\*(m/(26\*26))_.
+Because the buckets get even smaller, the search performance improves further. If we assume the words are evenly distributed, we should have `26*26` groups for all the different combinations from 'aa' to 'zz'. The time complexity of the implementation becomes _O(1 + (p/(26\*26))\*q)_.
 
 As you might expect, we can take this a third step, still. But before we consider that, there's a little problem we need to address. How do we add one-character words, like "a", to the dictionary? In the current implementation, we expect words to have at least two characters.
 
@@ -210,6 +210,7 @@ function insert(dictionary, word) {
   }
 
   // The word has more than two characters, push it to the current child dictionary
+  // TOOD: Change this from children to words maybe
   current.children.push(word);
 }
 ```
@@ -218,113 +219,145 @@ function insert(dictionary, word) {
 
 ### Grouping by all the characters
 
-In the previous section, we improved the performance of searching a dictionary by grouping the words by their first two characters. But the implementation is still not as optimal as it can be. For example, if we try to find words starting with the prefix 'abc', we currently loop through all the words in the 'ab' dictionary.
+In the previous section, we improved the performance of searching a dictionary by grouping words by their first two characters. But the implementation is still not as optimal as it can be. When we try to find words starting with the prefix 'abc', for example, we currently loop through all the words in the 'ab' dictionary.
 
-Alternatively, instead of specifying a number of levels beforehand, we can group by *all* the characters in each word. When we add 'apple' to the dictionary, for example, we'll create sub-dictionaries for 'a', 'ap', 'app', 'appl', and 'apple'.
+Alternatively, instead of specifying a number of levels beforehand, we can group by _all_ the characters in each word. When we add 'apple' to the dictionary, for example, we'll create sub-dictionaries for 'a', 'ap', 'app', 'appl', and 'apple'.
 
 ```javascript
 function insert(dictionary, word) {
-  // The initial bucket is the dictionary itself
-  let bucket = dictionary;
+  let current = dictionary;
 
   // For each character in the word...
-  for (let i = 0; i < word.length - 1; i++) {
+  for (let i = 0; i < word.length; i++) {
+    // Create a new child dictionary for this character
     const index = alphabet.indexOf(word[i]);
-
-    // Create a new bucket for this character in the
-    // current bucket if it doesn't already exist
-    if (!bucket.children[index]) {
-      bucket.children[index] = { isWord: false, children: new Array(26) };
+    if (!current.children[index]) {
+      current.children[index] = { isWord: false, children: new Array(26) };
     }
 
-    // Set the current bucket for the next iteration
-    bucket = bucket[index];
+    // Update the current child dictionary
+    current = current.children[index];
   }
 
-  // Set the current bucket to be a word
-  bucket.isWord = true;
+  // The deepest child dictionary represents the last character in the word
+  current.isWord = true;
 }
 ```
 
-Notice that we no longer need to keep the list of words for the prefixes, because they're stored in the relationships to other nodes instead.
+{{<iframefigure caption="Add words to the dictionary" >}}
 
-To get the words starting with a prefix, we first find its corresponding node and then check for the words in all its children.
+To get the words that begin with a prefix, we first find the child dictionary corresponding to the prefix, and then collect all the words in its children.
 
 ```js
 function startsWith(dictionary, prefix) {
-  let bucket = dictionary;
+  let current = dictionary;
+
+  // For each character in the prefix...
   for (let i = 0; i < prefix.length; i++) {
     const index = alphabet.indexOf(prefix[i]);
-    if (!dictionary.children[index]) {
-      return [];
-    }
 
-    bucket = dictionary.children[index];
+    // If there is no child dictionary, there
+    // are no words starting with the prefix
+    if (!current.children[index]) return [];
+
+    current = current.children[index];
   }
 
-  // Get all the matches from this point, recursive...
+  // At the end of the prefix, we collect the words
+  // in the current child dictionary and its children
+  const matches = [];
+  collectWords(current, prefix, matches);
+  return matches;
+}
+
+// Collects the words in the dictionary and its children into `words`
+function collectWords(dictionary, currentWord, words) {
+  // If the current dictionary is the end of the word, collect the word
+  if (dictionary.isWord) words.push(currentWord);
+
+  // Collect the words from each child dictionary
+  dictionary.children.forEach((childNode, i) => {
+    collectWords(childNode, currentWord + alphabet[i], words);
+  });
 }
 ```
 
-> Another way to look at a trie is like a multi-leveled hash. For each character in the prefix, we ask: give me a hash to check if the next character exists.
+The time complexity of this implementation is the time it takes to check all the characters in the prefix, _O(q)_, _plus_ the time it takes to collect the remaining characters in the matched words (let's call this _O(a\*b)_, where `a` is the number of matched words and `b` is the average number of characters in each matched word). And so, the time complexity of this implementation is _O(q + a\*b)_.
 
-> Ask Ayo what the runtime complexity of this is?
->
-> TODO: How tries get their names
+We can compare this to the list implementation in the first section which had a time complexity of _O(p\*q)_. If we make the reasonable assumption that the number of matches from a search is much smaller than the total number of words in the dictionary, i.e. `a << p`, we see that _O(q + a\*b)_ is a much better time complexity than _O(p\*q)_.
 
-Another advantage using a trie gives us here is that it helps us automatically sort the list of returned words. Since we traverse the tree with the children ordered by the position of the character in the alphabet, the returned list of autocompleted words will be in alphabetical order.
+Tries let us efficiently re*trie*ve textual information, which is how it gets its name.
 
 ## Suffix tries
 
-In the previous section, we saw how to use a prefix tree, or _trie_, to quickly search through words in a dictionary. Prefix trees let us do interesting things like find words that start with a given prefix. But we can do even more interesting things with tries.
+In the previous section, we saw how to use a prefix tree, or _trie_, to search through words in a dictionary. Let's consider a slightly different problem tries help us solve.
 
-For example, let's say we wanted to check if see if some text exists _anywhere_ in a large text. For example, given the string 'ERTCSORN', we want to search for 'CSOR'. We can write out a list implementation of this algorithm:
+Say we want to check whether some text appears in a larger text. For example, whether 'ERTCSORN' appears in 'CSOR'.
+
+We can write this as:
 
 ```js
-function substringList(text, substr) {
-  for (let i = 0; i <= text.length - substr.length; i++) {
-    let j = 0;
+function contains(str, substr) {
+  // Walking through the characters in `str`...
+  for (let i = 0; i <= str.length - substr.length; i++) {
+    // At each point, we'll keep a flag to say whether the
+    // characters from that point match the substring
+    let sameChars = true;
 
-    for (j = 0; j < substr.length; j++) {
-      if (text[i + j] !== substr[j]) break;
+    // Check if all the characters in the string
+    // (counting from index `i`) match the substring
+    for (let j = 0; j < substr.length; j++) {
+      if (str[i + j] !== substr[j]) {
+        sameChars = false;
+        break;
+      }
     }
 
-    if (j === substr.length) return true;
+    // If all the characters are the same, we have a match! :)
+    if (sameChars) return true;
   }
 
+  // At this point, we've checked through the
+  // entire string, but there's no match :(
   return false;
 }
 ```
 
-To find whether the text contains the substring, we loop through the list of characters in the text, _O(n-m)_. Then at each character, we check to see if there is a match with the next characters starting from the current character, _O(m)_. Which gives us a runtime complexity of _O(m\*n)_.[^mfs] (m\*n because we expect n to be much smaller than m).
+To check whether the string contains the substring, we loop through the characters in the string, and at each character, we check whether the substring matches from that point. We can represent this as _O(p\*q)_, where `p` is the length of the string and `q` is the length of the substring.
 
-Another way to put what substringList is doing is that we loop through all the suffixes in the word and try to fing the occurence of the substring in each suffix.
-
-For the string 'ERTCSORN', we check the following suffixes:
+There's another way to look at this implementation. Looping through the characters in the string is much like looping through an array of the string's suffixes. When we look for 'CSOR' in 'ERTCSORN', we're checking whether any string in this array starts with 'CSOR':
 
 ```js
 ['ERTCSORN', 'RTCSORN', 'TCSORN', 'CSORN', 'SORN', 'ORN', 'RN', 'N'];
 ```
 
-The number of suffixes is `n` the length of the string, and for each prefix, we only need to check the first `n-m` suffixes. Which is how we get an `O(n-m)` performance.
+We're in familiar territory here. We have a list of "words" and we want to check whether one of the words starts with a prefix. We already know a good way to solve this problem: the trie!
 
-But we seem to be in very familiar territory. We have a list of "words" in a list and we want to check for whether a word contains a prefix. We already know a good way to do this: the trie! We can add all the suffixes as words into a trie and then check the trie for the occurence of the prefix (the substring).
+We can add all the suffixes into a trie and then check the trie for the substring:
 
 ```js
-function hasPrefix(dictionary, prefix) {
-  let node = dictionary;
+function hasPrefix(tree, prefix) {
+  let current = tree;
+
+  // For each character in the prefix...
   for (let i = 0; i < prefix.length; i++) {
     const index = alphabet.indexOf(prefix[i]);
-    if (!node.children[index]) return false;
-    node = node.children[index];
+
+    // If there is no child tree, there
+    // are no words starting with the prefix
+    if (!current.children[index]) return false;
+
+    current = current.children[index];
   }
 
+  // If child trees exist till the end of the
+  // prefix, then the tree contains the prefix!
   return true;
 }
 ```
 
-As we've discussed earlier, the time complexity of finding the prefix in the tree is _O(l)_, where _l_ is the length of the prefix.
+The time complexity of checking whether the prefix exists in the tree is _O(q)_, where n is the length of the substring. Effectively, by _indexing_ the string into a suffix trie beforehand, we improve the performance of searching for a substring from _O(p\*q)_ to _O(q)_.
 
-Let's recap what we've learned in this section. The problem was to write a program to find whether a given string contains a substring. We found that, using a list, we found that we could find the occurence of the substring in _O(m\*n)_ time, where m is the length of the text and n is the length of the substring. However, we found that instead, we can index the suffixes of the word into a trie. Then we can search for the substring through the suffix trie in _O(n)_ time.
+{{<iframefigure caption="Search for substring in a string" >}}
 
-Suffix tries take up a lot of space, by storing all the possible suffixes of the word. So a compressed version, known as the suffix tree, is used instead. Suffix trees have many applications in text editing, free-text search, and for finding patterns in DNA or protein sequences.
+Suffix tries are typically much larger than the text they represent. (Compare the suffix trie we just discussed to its original text, 'ERTCSORN', for example.) And so, a compressed version of the suffix trie, known as the [suffix tree](https://en.wikipedia.org/wiki/Suffix_tree), is usually used instead. These suffix trees are useful in many text-based operations, like free-text search and for finding patterns in DNA and protein sequences.
