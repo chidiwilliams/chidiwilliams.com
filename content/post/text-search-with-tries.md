@@ -3,11 +3,15 @@ title: 'Text Search with Tries'
 date: 2021-11-13T00:06:52Z
 draft: false
 series: [Data Structures and Algorithms in the Wild]
+images:
+  [
+    'https://res.cloudinary.com/cwilliams/image/upload/v1636824748/Blog/pexels-photo-261763.jpg',
+  ]
 ---
 
-In the [previous post](/post/quadtrees/) in the [Data Structures and Algorithms in the Wild](/series/data-structures-and-algorithms-in-the-wild/) series, we explored the quadtree, a tree data structure used to index locations in two-dimensionsional space.
+In the [previous post](/post/quadtrees/) in the [Data Structures and Algorithms in the Wild](/series/data-structures-and-algorithms-in-the-wild/) series, we discussed the quadtree, a tree data structure used to index locations in two-dimensional space. In this post, we'll look into another data structure called the trie.
 
-In this post, we'll look into another data structure called the trie. Like the quadtree, the trie is also a tree structure. But, while quadtrees search through locations, tries search through text.
+Like the quadtree, the trie is also a tree structure. But, while quadtrees search through locations, tries search through text.
 
 ## Prefix tries
 
@@ -53,9 +57,9 @@ To find the matches in this program, we check every word in the dictionary. And,
 
 ### Grouping by the first character
 
-In the previous post on quadtrees, we learned that we can improve search performance by grouping related entities together. Let's see if a similar technique can help us here.
+In the previous post on quadtrees, we learned to improve search performance by grouping related entities together. Let's see if a similar technique can help us here.
 
-Instead of putting all the words in one list, we can group the words by their first characters. All words starting with 'a' will be in one list, 'b' in another list, and so on. We can think of each group as a child dictionary.
+Instead of putting all the words in one list, we can group them by their first characters. All words starting with 'a' will be in one list, 'b' in another list, and so on. We can think of each group as a child dictionary.
 
 <!-- prettier-ignore -->
 ```javascript
@@ -121,9 +125,9 @@ function getMatches(dictionary, prefix) {
 
 Instead of searching through the entire dictionary, we only check the child dictionary starting with the same first character as the prefix.
 
-If we assume that the words are evenly distributed among the child dictionaries, the time complexity of this implementation will be _O(1 + (p/26)\*q)_. We check for the correct child dictionary in constant time, _O(1)_. Then we compare the prefix with the words in a child dictionary 1/26 times the size of the entire dictionary, giving _O((p/26)\*q)_.
+Assuming the words are evenly distributed among the child dictionaries, the time complexity of this implementation will be _O(1 + (p/26)\*q)_. We check for the correct child dictionary in constant time, _O(1)_. Then we compare the prefix with the words in a child dictionary 1/26 times the size of the entire dictionary, giving _O((p/26)\*q)_.
 
-(We can simplify the time complexity to _O((p/26)\*q)_, but leaving it expanded as _O(1 + (p/26)\*q)_ will help us understand the implementation better as we proceed.)
+(We can simplify the time complexity to _O((p/26)\*q)_, but leaving it expanded as _O(1 + (p/26)\*q)_ will help us understand the implementation better as we go on.)
 
 ### Grouping by the first two characters
 
@@ -167,11 +171,11 @@ function startsWith(dictionary, prefix) {
 startsWith(dictionary, 'be'); // ['bear', 'bee']
 ```
 
-Because the buckets get even smaller, the search performance improves further. If we assume the words are evenly distributed, we should have `26*26` groups for all the different combinations from 'aa' to 'zz'. The time complexity of the implementation becomes _O(1 + (p/(26\*26))\*q)_.
+Because the buckets get even smaller, the search performance improves further. Assuming the words are evenly distributed, we should have `26*26` groups for all the different combinations from 'aa' to 'zz'. The time complexity of the implementation becomes _O(1 + (p/(26\*26))\*q)_.
 
 As you might expect, we can take this a third step, still. But before we consider that, there's a little problem we need to address. How do we add one-character words, like "a", to the dictionary? In the current implementation, we expect words to have at least two characters.
 
-To fix this, we can add a flag to each level of the tree, to say whether the level itself is a word. For example, the group for 'a' will hold the child dictionaries ('aa', 'ab', ...) as well a flag that says whether or not 'a' itself is a word in the dictionary.
+To fix this, we can add a flag to each level of the tree that says whether the level itself is a word. For example, the group for 'a' will hold its child groups ('aa', 'ab', ...) as well a flag that says whether or not 'a' itself is a word in the dictionary.
 
 We can rewrite the `insert` function as:
 
@@ -209,7 +213,7 @@ function insert(dictionary, word) {
     return;
   }
 
-  // The word has more than two characters, push it to the current child dictionary
+  // The word has more than two characters. Push it to the current child dictionary.
   current.children.push(word);
 }
 ```
@@ -218,9 +222,9 @@ function insert(dictionary, word) {
 
 ### Grouping by all the characters
 
-In the previous section, we improved the performance of searching a dictionary by grouping words by their first two characters. But the implementation is still not as optimal as it can be. When we try to find words starting with the prefix 'abc', for example, we currently loop through all the words in the 'ab' dictionary.
+In the previous section, we improved the runtime of searching a dictionary by grouping words by their first two characters. But the implementation is still not as optimal as it can be. For example, when we try to find words starting with the prefix ‘abc’, we still loop through all the words in the ‘ab’ dictionary.
 
-Alternatively, instead of specifying a number of levels beforehand, we can group by _all_ the characters in each word. When we add 'apple' to the dictionary, for example, we'll create sub-dictionaries for 'a', 'ap', 'app', 'appl', and 'apple'.
+Alternatively, instead of specifying the number of levels beforehand, we can group by _all_ the characters in each word. When we add 'apple' to the dictionary, we'll create sub-dictionaries for 'a', 'ap', 'app', 'appl', and 'apple'.
 
 ```javascript
 function insert(dictionary, word) {
@@ -245,7 +249,7 @@ function insert(dictionary, word) {
 
 {{<iframefigure src="https://chidiwilliams.github.io/dsaw/tries/demos/trie.html" height="500px" caption="Type into the textbox to add words to the dictionary. Child dictionaries that are the end of words are coloured purple." >}}
 
-To get the words that begin with a prefix, we first find the child dictionary corresponding to the prefix, and then collect all the words in its children.
+To get the words that begin with a prefix, we first find the child dictionary corresponding to the prefix. Then we collect all the words in its children.
 
 ```js
 function startsWith(dictionary, prefix) {
@@ -281,9 +285,14 @@ function collectWords(dictionary, currentWord, words) {
 }
 ```
 
-The time complexity of this implementation is the time it takes to check all the characters in the prefix, _O(q)_, _plus_ the time it takes to collect the remaining characters in the matched words (let's call this _O(a\*b)_, where `a` is the number of matched words and `b` is the average number of characters in each matched word). And so, the time complexity of this implementation is _O(q + a\*b)_.
+The time complexity of this implementation is:
 
-We can compare this to the list implementation in the first section which had a time complexity of _O(p\*q)_. If we make the reasonable assumption that the number of matches from a search is much smaller than the total number of words in the dictionary, i.e. `a << p`, we see that _O(q + a\*b)_ is a much better time complexity than _O(p\*q)_.
+- the time it takes to check all the characters in the prefix, _O(q)_, _plus_
+- the time it takes to collect the remaining characters in the matched words. (Let's call this _O(a\*b)_, where `a` is the number of matched words and `b` is the average number of characters in each matched word).
+
+The time complexity becomes _O(q + a\*b)_.
+
+We can compare this to the list implementation in the first section which had a time complexity of _O(p\*q)_. If we assume—and it is reasonable to do so—that the number of matches from a search is much smaller than the total number of words in the dictionary, i.e. `a << p`, we see that _O(q + a\*b)_ is a much better time complexity than _O(p\*q)_.
 
 Tries let us efficiently re*trie*ve textual information, which is how it gets its name.
 
@@ -291,7 +300,7 @@ Tries let us efficiently re*trie*ve textual information, which is how it gets it
 
 In the previous section, we saw how to use a prefix tree, or _trie_, to search through words in a dictionary. Let's consider a slightly different problem tries help us solve.
 
-Say we want to check whether some text appears in a larger text. For example, whether 'side' appears in 'consider'.
+Say we want to check whether some text appears in a larger text. For example, whether 'rshi' appears in 'entrepreneurship'.
 
 We can write this as:
 
@@ -322,13 +331,15 @@ function contains(str, substr) {
 }
 ```
 
-To check whether the string contains the substring, we loop through the characters in the string, and at each character, we check whether the substring matches from that point. We can represent this as _O(p\*q)_, where `p` is the length of the string and `q` is the length of the substring.
+To check whether the string contains the substring, we loop through the characters in the string. And at each character, we check whether the substring matches from that point. We can represent this as _O(p\*q)_, where `p` is the length of the string and `q` is the length of the substring.
 
-There's another way to look at this implementation. Looping through the characters in the string is much like looping through an array of the string's suffixes. When we look for 'side' in 'consider', we're checking whether any string in this array starts with 'side':
+There's another way to look at this implementation. Looping through the characters in the string is much like looping through an array of the string's suffixes. When we look for 'rshi' in 'entrepreneurship', we're checking whether any string in this array starts with 'rshi':
 
 <!-- prettier-ignore -->
 ```js
-['consider', 'onsider', 'nsider', 'sider', 'ider', 'de', 'r']
+['entrepreneurship', 'ntrepreneurship', 'trepreneurship', 'repreneurship',
+ 'epreneurship', 'preneurship', 'reneurship', 'eneurship', 'neurship',
+ 'eurship', 'urship', 'rship', 'ship', 'hip', 'ip', 'p']
 ```
 
 We're in familiar territory here. We have a list of "words" and we want to check whether one of the words starts with a prefix. We already know a good way to solve this problem: the trie!
@@ -361,3 +372,7 @@ The time complexity of checking whether the prefix exists in the tree is _O(q)_,
 {{<iframefigure src="https://chidiwilliams.github.io/dsaw/tries/demos/substring.html" height="400px" caption="Search for a substring within a text. Only the nodes coloured green or red are checked. Correct matches will have all green nodes. Wrong matches will end in a red node." >}}
 
 Suffix tries are typically much larger than the text they represent. And so, a compressed version of the suffix trie, known as the [_suffix tree_](https://en.wikipedia.org/wiki/Suffix_tree), is usually used instead. These suffix trees are useful in many text-based operations, like free-text search and for finding patterns in long DNA and protein sequences.
+
+---
+
+The complete code for the examples in this post is available [on GitHub](https://github.com/chidiwilliams/dsaw/).
