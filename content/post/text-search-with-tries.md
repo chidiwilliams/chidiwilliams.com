@@ -1,7 +1,7 @@
 ---
 title: 'Text Search with Tries'
 date: 2021-11-13T00:06:52Z
-draft: true
+draft: false
 series: [Data Structures and Algorithms in the Wild]
 ---
 
@@ -87,7 +87,7 @@ insert(dictionary, 'antelope'); //   [['ant', 'antelope'], ...]
 insert(dictionary, 'chicken'); //    [['ant', 'antelope'], ..., ['chicken'], ...]
 ```
 
-{{<iframefigure src="https://chidiwilliams.github.io/dsaw/tries/group-1.html" height="500px" caption="Type into the textbox to add words to the dictionary" >}}
+{{<iframefigure src="https://chidiwilliams.github.io/dsaw/tries/demos/group-1.html" height="500px" caption="Type into the textbox to add words to the dictionary" >}}
 
 To find words that begin with a prefix, we only need to check the correct child dictionary.
 
@@ -214,7 +214,7 @@ function insert(dictionary, word) {
 }
 ```
 
-{{<iframefigure src="https://chidiwilliams.github.io/dsaw/tries/group-2.html" height="500px" caption="Type into the textbox to add words to the dictionary. Child dictionaries that are the end of words are coloured orange." >}}
+{{<iframefigure src="https://chidiwilliams.github.io/dsaw/tries/demos/group-2.html" height="500px" caption="Type into the textbox to add words to the dictionary. Child dictionaries that are the end of words are coloured brown." >}}
 
 ### Grouping by all the characters
 
@@ -243,7 +243,7 @@ function insert(dictionary, word) {
 }
 ```
 
-{{<iframefigure src="https://chidiwilliams.github.io/dsaw/tries/trie.html" height="500px" caption="Type into the textbox to add words to the dictionary. Child dictionaries that are the end of words are coloured purple." >}}
+{{<iframefigure src="https://chidiwilliams.github.io/dsaw/tries/demos/trie.html" height="500px" caption="Type into the textbox to add words to the dictionary. Child dictionaries that are the end of words are coloured purple." >}}
 
 To get the words that begin with a prefix, we first find the child dictionary corresponding to the prefix, and then collect all the words in its children.
 
@@ -358,6 +358,6 @@ function hasPrefix(tree, prefix) {
 
 The time complexity of checking whether the prefix exists in the tree is _O(q)_, where _q_ is the length of the substring. Effectively, by _indexing_ the string into a suffix trie beforehand, we improve the performance of searching for a substring from _O(p\*q)_ to _O(q)_.
 
-{{<iframefigure src="https://chidiwilliams.github.io/dsaw/tries/substring.html" height="400px" caption="Search for a substring within a text. Only the nodes coloured green or red are checked. Correct matches will have all green nodes. Wrong matches will end in a red node." >}}
+{{<iframefigure src="https://chidiwilliams.github.io/dsaw/tries/demos/substring.html" height="400px" caption="Search for a substring within a text. Only the nodes coloured green or red are checked. Correct matches will have all green nodes. Wrong matches will end in a red node." >}}
 
 Suffix tries are typically much larger than the text they represent. And so, a compressed version of the suffix trie, known as the [_suffix tree_](https://en.wikipedia.org/wiki/Suffix_tree), is usually used instead. These suffix trees are useful in many text-based operations, like free-text search and for finding patterns in DNA and protein sequences.
