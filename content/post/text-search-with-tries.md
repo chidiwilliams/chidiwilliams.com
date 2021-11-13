@@ -1,6 +1,6 @@
 ---
 title: 'Text Search with Tries'
-date: 2021-11-12T00:06:52Z
+date: 2021-11-13T00:06:52Z
 draft: true
 series: [Data Structures and Algorithms in the Wild]
 ---
@@ -87,7 +87,7 @@ insert(dictionary, 'antelope'); //   [['ant', 'antelope'], ...]
 insert(dictionary, 'chicken'); //    [['ant', 'antelope'], ..., ['chicken'], ...]
 ```
 
-{{<iframefigure caption="Add words to the dictionary" >}}
+{{<iframefigure src="https://chidiwilliams.github.io/dsaw/tries/group-1.html" height="500px" caption="Type into the textbox to add words to the dictionary" >}}
 
 To find words that begin with a prefix, we only need to check the correct child dictionary.
 
@@ -184,38 +184,37 @@ function insert(dictionary, word) {
   // Create a child dictionary for words starting with the first character
   const firstLetterIndex = alphabet.indexOf(word[0]);
   if (!current.children[firstLetterIndex]) {
-    // The `isWord` flag denotes whether this child dictionary is itself a word
-    current.children[firstLetterIndex] = { isWord: false, children: new Array(26) };
+    // The `isEndOfWord` flag denotes whether this child dictionary is itself a word
+    current.children[firstLetterIndex] = { isEndOfWord: false, children: new Array(26) };
   }
   // Update current to point to the child dictionary
   current = current.children[firstLetterIndex];
 
   // If the word has only one character, then the child dictionary is a word
   if (word.length === 1) {
-    current.isWord = true;
+    current.isEndOfWord = true;
     return;
   }
 
   // Create a child dictionary for words starting with the second character
   const secondLetterIndex = alphabet.indexOf(word[1]);
   if (!current.children[secondLetterIndex]) {
-    current.children[secondLetterIndex] = { isWord: false, children: new Array(26) };
+    current.children[secondLetterIndex] = { isEndOfWord: false, children: new Array(26) };
   }
   current = current.children[secondLetterIndex];
 
   // If the word has two characters, then the current child dictionary is a word
   if (word.length === 2) {
-    current.isWord = true;
+    current.isEndOfWord = true;
     return;
   }
 
   // The word has more than two characters, push it to the current child dictionary
-  // TOOD: Change this from children to words maybe
   current.children.push(word);
 }
 ```
 
-{{<iframefigure caption="Add words to the dictionary" >}}
+{{<iframefigure src="https://chidiwilliams.github.io/dsaw/tries/group-2.html" height="500px" caption="Type into the textbox to add words to the dictionary. Child dictionaries that are the end of words are coloured orange." >}}
 
 ### Grouping by all the characters
 
@@ -232,7 +231,7 @@ function insert(dictionary, word) {
     // Create a new child dictionary for this character
     const index = alphabet.indexOf(word[i]);
     if (!current.children[index]) {
-      current.children[index] = { isWord: false, children: new Array(26) };
+      current.children[index] = { isEndOfWord: false, children: new Array(26) };
     }
 
     // Update the current child dictionary
@@ -240,11 +239,11 @@ function insert(dictionary, word) {
   }
 
   // The deepest child dictionary represents the last character in the word
-  current.isWord = true;
+  current.isEndOfWord = true;
 }
 ```
 
-{{<iframefigure caption="Add words to the dictionary" >}}
+{{<iframefigure src="https://chidiwilliams.github.io/dsaw/tries/trie.html" height="500px" caption="Type into the textbox to add words to the dictionary. Child dictionaries that are the end of words are coloured purple." >}}
 
 To get the words that begin with a prefix, we first find the child dictionary corresponding to the prefix, and then collect all the words in its children.
 
@@ -273,7 +272,7 @@ function startsWith(dictionary, prefix) {
 // Collects the words in the dictionary and its children into `words`
 function collectWords(dictionary, currentWord, words) {
   // If the current dictionary is the end of the word, collect the word
-  if (dictionary.isWord) words.push(currentWord);
+  if (dictionary.isEndOfWord) words.push(currentWord);
 
   // Collect the words from each child dictionary
   dictionary.children.forEach((childNode, i) => {
@@ -292,7 +291,7 @@ Tries let us efficiently re*trie*ve textual information, which is how it gets it
 
 In the previous section, we saw how to use a prefix tree, or _trie_, to search through words in a dictionary. Let's consider a slightly different problem tries help us solve.
 
-Say we want to check whether some text appears in a larger text. For example, whether 'ERTCSORN' appears in 'CSOR'.
+Say we want to check whether some text appears in a larger text. For example, whether 'side' appears in 'consider'.
 
 We can write this as:
 
@@ -325,10 +324,11 @@ function contains(str, substr) {
 
 To check whether the string contains the substring, we loop through the characters in the string, and at each character, we check whether the substring matches from that point. We can represent this as _O(p\*q)_, where `p` is the length of the string and `q` is the length of the substring.
 
-There's another way to look at this implementation. Looping through the characters in the string is much like looping through an array of the string's suffixes. When we look for 'CSOR' in 'ERTCSORN', we're checking whether any string in this array starts with 'CSOR':
+There's another way to look at this implementation. Looping through the characters in the string is much like looping through an array of the string's suffixes. When we look for 'side' in 'consider', we're checking whether any string in this array starts with 'side':
 
+<!-- prettier-ignore -->
 ```js
-['ERTCSORN', 'RTCSORN', 'TCSORN', 'CSORN', 'SORN', 'ORN', 'RN', 'N'];
+['consider', 'onsider', 'nsider', 'sider', 'ider', 'de', 'r']
 ```
 
 We're in familiar territory here. We have a list of "words" and we want to check whether one of the words starts with a prefix. We already know a good way to solve this problem: the trie!
@@ -356,8 +356,8 @@ function hasPrefix(tree, prefix) {
 }
 ```
 
-The time complexity of checking whether the prefix exists in the tree is _O(q)_, where n is the length of the substring. Effectively, by _indexing_ the string into a suffix trie beforehand, we improve the performance of searching for a substring from _O(p\*q)_ to _O(q)_.
+The time complexity of checking whether the prefix exists in the tree is _O(q)_, where _q_ is the length of the substring. Effectively, by _indexing_ the string into a suffix trie beforehand, we improve the performance of searching for a substring from _O(p\*q)_ to _O(q)_.
 
-{{<iframefigure caption="Search for substring in a string" >}}
+{{<iframefigure src="https://chidiwilliams.github.io/dsaw/tries/substring.html" height="400px" caption="Search for a substring within a text. Only the nodes coloured green or red are checked. Correct matches will have all green nodes. Wrong matches will end in a red node." >}}
 
-Suffix tries are typically much larger than the text they represent. (Compare the suffix trie we just discussed to its original text, 'ERTCSORN', for example.) And so, a compressed version of the suffix trie, known as the [suffix tree](https://en.wikipedia.org/wiki/Suffix_tree), is usually used instead. These suffix trees are useful in many text-based operations, like free-text search and for finding patterns in DNA and protein sequences.
+Suffix tries are typically much larger than the text they represent. And so, a compressed version of the suffix trie, known as the [_suffix tree_](https://en.wikipedia.org/wiki/Suffix_tree), is usually used instead. These suffix trees are useful in many text-based operations, like free-text search and for finding patterns in DNA and protein sequences.
