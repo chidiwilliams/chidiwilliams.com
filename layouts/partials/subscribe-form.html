@@ -1,0 +1,20 @@
+<form
+  action="https://buttondown.email/api/emails/embed-subscribe/chidiwilliams"
+  method="post"
+  target="popupwindow"
+  onsubmit="window.open('https://buttondown.email/chidiwilliams', 'popupwindow')"
+  class="embeddable-buttondown-form"
+>
+  <p>{{ default "Get new articles delivered to your inbox" .title }}</p>
+  <div class="input-group">
+    <input
+      type="email"
+      name="email"
+      id="bd-email"
+      placeholder="Enter your email address"
+      required
+    />
+    <input type="hidden" value="1" name="embed" />
+    <input type="submit" value="Subscribe" />
+  </div>
+</form>

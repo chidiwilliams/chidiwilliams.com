@@ -1,0 +1,52 @@
+{{ define "header" }}
+<!--  -->
+{{ end }} {{ define "main" }}
+<div class="newsletter-header">
+  <img
+    src="{{ index (.Site.Params.images) 0}}"
+    alt="Chidi Williams"
+    class="newsletter-header__image"
+  />
+  <h1 class="newsletter-header__title">{{.Title}}</h1>
+  <div class="newsletter-header__description">{{.Description}}</div>
+</div>
+
+{{ partial "subscribe-form.html" (dict "title" "Subscribe to Chidi's Newsletter") }}
+
+<!--  -->
+<div class="archive" style="margin: 50px 0">
+  <h2>Latest</h2>
+  <ul class="archive-list">
+    {{ range where .Site.RegularPages "Section" "in" (slice "newsletter") }}
+    <li class="archive-list-item">
+      <a href="{{ .RelPermalink }}" class="text-link">
+        <div class="archive-list-item__image">
+          {{ with .Params.images }} {{ $url := index . 0 | absURL }}
+          <div
+            class="archive-list-item-image"
+            style="background-size: cover; background-image: url({{ $url }})"
+          ></div>
+          {{else}}
+          <div class="archive-list-item-image"></div>
+          {{end}}
+        </div>
+        <div class="archive-list-item__meta">
+          <h3 class="archive-list-item-meta__title">{{ .Title }}</h3>
+          <p class="archive-list-item-meta__summary">
+            {{ htmlUnescape (slicestr .Summary 0 150) }}...
+          </p>
+          <div class="archive-list-item-meta__date">
+            <span>{{ .PublishDate.Format "2 Jan 2006" }}</span>
+          </div>
+        </div>
+      </a>
+    </li>
+    {{ end }}
+  </ul>
+</div>
+
+<div style="text-align: center; font-size: 0.9rem">
+  <a href="/">← Back to homepage</a>
+</div>
+<!--  -->
+{{ end }}

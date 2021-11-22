@@ -46,7 +46,7 @@
   </head>
   <body>
     <div class="container">
-      {{ block "header" . }}{{ partial "header.html" .}}{{ end }}
+      {{- block "header" . }}{{ partial "header.html" .}}{{- end }}
       <div class="main">{{- block "main" . }}{{- end }}</div>
       {{- block "footer" . }}{{- end }}
     </div>
