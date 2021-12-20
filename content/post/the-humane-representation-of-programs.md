@@ -4,7 +4,7 @@ date: 2021-12-20T00:30:08Z
 draft: false
 ---
 
-{{<figure link="https://dynamicland.org/" src="https://dynamicland.org/Images/0-drawings.jpg" caption="Dynamicland" >}}
+{{<figure link="https://dynamicland.org/" src="https://res.cloudinary.com/cwilliams/image/upload/v1640009010/Blog/dynamicland.jpg" caption="Dynamicland" >}}
 
 I recently watched [The Humane Representation of Thought](https://vimeo.com/115154289), a conference talk by [Bret Victor](http://worrydream.com/), where he discusses why and how we should design new representations of ideas that fit better with our human capabilities.
 
