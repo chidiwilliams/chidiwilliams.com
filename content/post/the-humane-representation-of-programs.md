@@ -1,6 +1,6 @@
 ---
 title: 'The Humane Representation of Programs'
-date: 2021-12-19T14:30:08Z
+date: 2021-12-20T00:30:08Z
 draft: false
 ---
 
