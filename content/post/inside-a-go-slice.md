@@ -3,6 +3,10 @@ title: 'Inside a Go Slice'
 date: 2020-11-19T03:59:54+01:00
 draft: false
 tags: [go]
+images:
+  [
+    'https://res.cloudinary.com/cwilliams/image/upload/v1605754968/Blog/inside-a-go-slice-reslice.png',
+  ]
 ---
 
 Two weeks ago, a friend of mine, who is learning to write Go, asked me to explain the output of this snippet.

@@ -9,7 +9,7 @@ images:
 
 {{<figure link="https://dynamicland.org/" src="https://res.cloudinary.com/cwilliams/image/upload/v1640009010/Blog/dynamicland.jpg" caption="Dynamicland" >}}
 
-I recently watched [The Humane Representation of Thought](https://vimeo.com/115154289), a conference talk by [Bret Victor](http://worrydream.com/), where he discusses why and how we should design new representations of ideas that fit better with our human capabilities.
+I recently watched [_The Humane Representation of Thought_](https://vimeo.com/115154289), a conference talk by [Bret Victor](http://worrydream.com/), where he discusses why and how we should design new representations of ideas that fit better with our human capabilities.
 
 Bret highlights how, throughout history, intellectual progress has been connected to the development of new ways of representing and communicating knowledge. The Hindu-Arabic numerals and place-value notation expanded the space of possibilities in the world of mathematics. Better representations of the atom—from Dalton’s to Rutherford’s to Bohr’s—facilitated the advancement of physics and engineering. And the development of print and electronic media shaped how we learn, work, and share ideas. These forms of media changed not just what we thought and how we thought, but what was _thinkable_.
 

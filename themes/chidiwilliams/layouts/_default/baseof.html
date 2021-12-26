@@ -30,19 +30,24 @@
     <link rel="%s" type="%s" href="%s" title="%s" />
     ` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }} {{ end -}}
     <!--  -->
-    {{ $css := resources.Get "css/main.css" | resources.Minify }}
-    <link href="{{ $css.Permalink }}" rel="stylesheet" />
+
+    {{ $scss := resources.Get "scss/main.scss" | resources.ToCSS | resources.Minify}}
+    <link href="{{ $scss.Permalink }}" rel="stylesheet" />
+
+    <!--  -->
 
     {{ if .Params.math }}{{ partial "math.html" . }}{{ end }}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
 
     {{- if (and (not .Site.IsServer) (eq (getenv "ENV") "production")) -}}
-      <link rel="preconnect" href="https://www.google-analytics.com/" />
-      {{ template "_internal/google_analytics.html" . }}
-    {{- end -}}
+    <link rel="preconnect" href="https://www.google-analytics.com/" />
+    {{ template "_internal/google_analytics.html" . }} {{- end -}}
   </head>
   <body>
     <div class="container">

@@ -5,6 +5,10 @@ draft: false
 tags: [algorithms, javascript]
 slug: evaluator-2
 aliases: [/evaluator-2]
+images:
+  [
+    'https://res.cloudinary.com/cwilliams/image/upload/v1640475927/Blog/chris-liverani-ViEBSoZH6M4-unsplash.jpg',
+  ]
 ---
 
 In my [previous post](/evaluator/), we explored how expression evaluation works and built a program, `evaluate`, that returns the result of an arithmetic expression.

@@ -5,6 +5,10 @@ draft: false
 tags: [algorithms, javascript]
 slug: evaluator
 aliases: [/evaluator]
+images:
+  [
+    'https://res.cloudinary.com/cwilliams/image/upload/v1640476018/Blog/pexels-monstera-6238068.jpg',
+  ]
 ---
 
 In a spreadsheet application, like Microsoft Excel or Google Sheets, you can enter an expression like `=3 + 5 * 3 - 8` into a cell and calculate the result by pressing `ENTER`.

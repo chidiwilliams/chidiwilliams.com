@@ -16,33 +16,9 @@
 <!--  -->
 <div class="archive" style="margin: 50px 0">
   <h2>Latest</h2>
-  <ul class="archive-list">
-    {{ range where .Site.RegularPages "Section" "in" (slice "newsletter") }}
-    <li class="archive-list-item">
-      <a href="{{ .RelPermalink }}" class="text-link">
-        <div class="archive-list-item__image">
-          {{ with .Params.images }} {{ $url := index . 0 | absURL }}
-          <div
-            class="archive-list-item-image"
-            style="background-size: cover; background-image: url({{ $url }})"
-          ></div>
-          {{else}}
-          <div class="archive-list-item-image"></div>
-          {{end}}
-        </div>
-        <div class="archive-list-item__meta">
-          <h3 class="archive-list-item-meta__title">{{ .Title }}</h3>
-          <p class="archive-list-item-meta__summary">
-            {{ htmlUnescape (slicestr .Summary 0 150) }}...
-          </p>
-          <div class="archive-list-item-meta__date">
-            <span>{{ .PublishDate.Format "2 Jan 2006" }}</span>
-          </div>
-        </div>
-      </a>
-    </li>
-    {{ end }}
-  </ul>
+  {{ $posts := where .Site.RegularPages "Section" "in" (slice "newsletter") }}
+  <!--  -->
+  {{ partial "post_list.html" (dict "posts" $posts) }}
 </div>
 
 <div style="text-align: center; font-size: 0.9rem">

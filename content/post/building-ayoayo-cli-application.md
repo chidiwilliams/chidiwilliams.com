@@ -7,7 +7,7 @@ tags: [algorithms, javascript]
 description: In this post, I implement a CLI for Ayòayò with Node's Readline module.
 images:
   [
-    https://res.cloudinary.com/cwilliams/image/upload/v1592677234/Building_Ayoayo__CLI_Application.png,
+    'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_400/v1640476505/Blog/ayoayo-cli.png',
   ]
 ---
 
@@ -109,10 +109,7 @@ function requestUserInput() {
   readline.question(question, (cell) => {
     const cellNum = Number(cell);
 
-    if (
-      Number.isNaN(cellNum) ||
-      !ayoayo.permissibleMoves.includes(cellNum - 1)
-    ) {
+    if (Number.isNaN(cellNum) || !ayoayo.permissibleMoves.includes(cellNum - 1)) {
       readline.write('Please enter a valid and allowed cell index.');
       requestUserInput();
       return;

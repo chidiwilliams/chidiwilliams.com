@@ -4,7 +4,7 @@ date: 2020-06-14T15:21:03+01:00
 draft: false
 images:
   [
-    https://res.cloudinary.com/cwilliams/image/upload/v1592065048/Building_Ayoayo__Implementation.png,
+    'https://res.cloudinary.com/cwilliams/image/upload/v1592147195/Children_gather_over_a_game_of_Ayo.jpg',
   ]
 tags: [algorithms, javascript]
 series: [Building Ayoayo]
@@ -101,10 +101,7 @@ Ayoayo.prototype.relaySow = function relaySow(cell) {
     numSeedsInHand--;
 
     // Move to the next cell
-    [nextPositionRow, nextPositionCell] = Ayoayo.next(
-      nextPositionRow,
-      nextPositionCell,
-    );
+    [nextPositionRow, nextPositionCell] = Ayoayo.next(nextPositionRow, nextPositionCell);
   }
 };
 
@@ -207,12 +204,10 @@ Next, we'll update `play()` with the winning condition.
 // If next player can't move, capture remaining seeds. Game over.
 if (this.permissibleMoves.length == 0) {
   let numRemainingSeeds = 0;
-  this.board[this.nextPlayer] = this.board[this.nextPlayer].map(
-    (cell, index) => {
-      numRemainingSeeds += cell;
-      return 0;
-    },
-  );
+  this.board[this.nextPlayer] = this.board[this.nextPlayer].map((cell, index) => {
+    numRemainingSeeds += cell;
+    return 0;
+  });
   this.captured[this.nextPlayer] += numRemainingSeeds;
   this.isGameOver = true;
   this.winner = Ayoayo.getWinner(this.captured);

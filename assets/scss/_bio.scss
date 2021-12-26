@@ -1,0 +1,14 @@
+.bio {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__image {
+    margin-right: 20px;
+  }
+
+  &__description {
+    font-size: 0.85rem;
+    margin-top: -1em;
+    flex: 1 400px;
+  }
+}
