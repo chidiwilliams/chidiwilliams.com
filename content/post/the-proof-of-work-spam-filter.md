@@ -6,7 +6,7 @@ slug: proof-of-work
 aliases: [/proof-of-work]
 math: true
 description: Notes on an early proof-of-work system called Hashcash
-thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1621282181/Blog/hashcash-header.png'
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_200/v1621282181/Blog/hashcash-header.png'
 images:
   [
     'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1621282181/Blog/hashcash-header.png',
