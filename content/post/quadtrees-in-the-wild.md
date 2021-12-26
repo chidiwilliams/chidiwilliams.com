@@ -28,7 +28,7 @@ Quadtrees are tree structures used to efficiently store data in two-dimensional 
 
 Say we have an app that shows a user the locations of grocery stores close to them. A store signs up by submitting its location. And when a user opens the app, they see all the stores within a certain distance from their current location. Given the locations of all the stores, can we write a program that returns all the points within a boundary?
 
-{{<iframefigure src="https://chidiwilliams.github.io/dsaw/quadtrees/1.html" caption="Click anywhere to find points within a boundary" height="315px" >}}
+{{<iframefigure src="https://chidiwilliams.github.io/dsaw/quadtrees/demos/1.html" caption="Click anywhere to find points within a boundary" height="315px" >}}
 
 One quick solution could be to keep all the store locations in a list of (x, y) points. To find the points within a boundary, we loop over the list and return all the points that fall within the boundary.
 
@@ -63,11 +63,11 @@ This `search` function has a runtime complexity of _O(n)_. Because we loop throu
 
 But what if we split up the space into sections? This way, we only need to search the sections that intersect with the search boundary, and we can ignore the other sections.
 
-{{<iframefigure src="https://chidiwilliams.github.io/dsaw/quadtrees/2.html" caption="Click anywhere to find points within a boundary. Only the points in sections that intersect with the search boundary (marked orange) are checked" height="315px" >}}
+{{<iframefigure src="https://chidiwilliams.github.io/dsaw/quadtrees/demos/2.html" caption="Click anywhere to find points within a boundary. Only the points in sections that intersect with the search boundary (marked orange) are checked" height="315px" >}}
 
 This is essentially how quadtrees work. We start by adding points to the root node of the quadtree, which defines the entire possible space. When the number of points in the node reaches a predefined maximum capacity, it splits into four child nodes (four quadrants). And when any of those nodes reaches the maximum capacity of points, it splits again into four child nodes, and so on.
 
-{{<iframefigure src="https://chidiwilliams.github.io/dsaw/quadtrees/3.html" caption="Click to add a new point. Each quadrant contains at most four points, after which it splits into four child quadrants. Quadrants with darker shades are deeper in the quadtree." height="345px" >}}
+{{<iframefigure src="https://chidiwilliams.github.io/dsaw/quadtrees/demos/3.html" caption="Click to add a new point. Each quadrant contains at most four points, after which it splits into four child quadrants. Quadrants with darker shades are deeper in the quadtree." height="345px" >}}
 
 ## Points within a boundary
 
@@ -222,7 +222,7 @@ function distance(p1, p2) {
 
 Alternatively, with a quadtree, we can check the smallest quadrant which surrounds the search location first. This node would likely have points that are very close to the search location. Then, when we check through the rest of the tree, we can exclude quadrants that are too far away without even checking their child quadrants and points.[^snk]
 
-{{<iframefigure src="https://chidiwilliams.github.io/dsaw/quadtrees/4.html" height="315px" caption="Click anywhere to find the nearest neighbour (shown in red). Green quadrants are visited, with saturation indicating depth in the quadtree. Only the orange points are checked.">}}
+{{<iframefigure src="https://chidiwilliams.github.io/dsaw/quadtrees/demos/4.html" height="315px" caption="Click anywhere to find the nearest neighbour (shown in red). Green quadrants are visited, with saturation indicating depth in the quadtree. Only the orange points are checked.">}}
 
 We follow a few steps:
 
@@ -372,7 +372,7 @@ drawTree(quadtree, w, h);
 
 By varying the maximum amount of error in each quadrant, we can change the amount of compression done to the image:
 
-{{<iframefigure src="https://chidiwilliams.github.io/dsaw/quadtrees/5.html" height="370px" caption="Move the slider to change the maximum compression error. Click on the image to randomize.">}}
+{{<iframefigure src="https://chidiwilliams.github.io/dsaw/quadtrees/demos/5.html" height="370px" caption="Move the slider to change the maximum compression error. Click on the image to randomize.">}}
 
 ---
 
