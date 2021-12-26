@@ -5,6 +5,7 @@ draft: false
 tags: [basic, c, assembly]
 slug: goto
 aliases: [/goto]
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1618702780/Blog/regex-fsm-2.png'
 images:
   [
     'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_400/v1618702780/Blog/regex-fsm-2.png',

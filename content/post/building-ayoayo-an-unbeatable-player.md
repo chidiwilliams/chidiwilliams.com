@@ -5,10 +5,8 @@ draft: false
 series: [Building Ayoayo]
 tags: [algorithms, javascript]
 description: Minimax is a simple and effective decision rule used in game theory and artificial intelligence. In this post, we'll implement an unbeatable AI player for Ayòayò using minimax.
-images:
-  [
-    https://res.cloudinary.com/cwilliams/image/upload/v1593960311/Ayoayo_Minimax.png,
-  ]
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1593960311/Ayoayo_Minimax.png'
+images: [https://res.cloudinary.com/cwilliams/image/upload/v1593960311/Ayoayo_Minimax.png]
 ---
 
 In the previous posts in this series, we built a CLI and web game for Ayòayò (Ayò) with JavaScript. In this post, we'll implement an unbeatable AI player for the game using a decision rule called minimax.
@@ -165,12 +163,7 @@ function minimax(game, depth, moves, maximizing) {
       const gameCopy = game.clone();
       gameCopy.play(move);
       // Recurse into minimizing children.
-      const [score, childMoves] = minimax(
-        gameCopy,
-        depth - 1,
-        moves + move,
-        false,
-      );
+      const [score, childMoves] = minimax(gameCopy, depth - 1, moves + move, false);
       if (score > maxScore) {
         maxScore = score;
         maxMoves = childMoves;
@@ -186,12 +179,7 @@ function minimax(game, depth, moves, maximizing) {
       const gameCopy = game.clone();
       gameCopy.play(move);
       // Recurse into maximizing children.
-      const [score, childMoves] = minimax(
-        gameCopy,
-        depth - 1,
-        moves + move,
-        true,
-      );
+      const [score, childMoves] = minimax(gameCopy, depth - 1, moves + move, true);
       if (score < minScore) {
         minScore = score;
         minMoves = childMoves;

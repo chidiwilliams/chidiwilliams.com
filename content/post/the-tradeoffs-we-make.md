@@ -4,6 +4,7 @@ date: 2021-08-06T12:00:25+01:00
 draft: false
 slug: tradeoffs
 aliases: [/tradeoffs]
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1640515602/Blog/scales.png'
 images:
   [
     'https://res.cloudinary.com/cwilliams/image/upload/c_crop,h_2088,w_3989,x_500,y_1100/v1628028726/Blog/elena-mozhvilo-j06gLuKK0GM-unsplash.jpg',

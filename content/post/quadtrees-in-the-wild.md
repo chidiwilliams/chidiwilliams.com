@@ -4,6 +4,7 @@ date: 2021-09-21T08:49:21+01:00
 draft: false
 slug: quadtrees
 aliases: [/quadtrees]
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1632075791/Blog/pexels-sunil-patel-599708.jpg'
 images:
   [
     https://res.cloudinary.com/cwilliams/image/upload/v1632075791/Blog/pexels-sunil-patel-599708.jpg,

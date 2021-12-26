@@ -3,19 +3,26 @@
   <li class="post-list-item">
     <a href="{{ .RelPermalink }}" class="text-link">
       <div class="post-list-item__image">
-        {{ with .Params.images }} {{ $url := index . 0 | absURL }}
+        <!-- Set thumbnail to `thumbnail` param or default to first image in the `images` param -->
+        {{ $thumbnail := .Params.thumbnail }}
+        <!--  -->
+        {{ if (not $thumbnail) }} {{ with .Params.images }}
+        <!--  -->
+        {{ $thumbnail = default (index . 0 | absURL) "" }} {{ end }} {{ end }}
+
+        <!--  -->
+        {{ if $thumbnail }}
         <div
           class="post-list-item-image"
           style="
-            background: url({{ $url }}) center;
+            background: url({{ $thumbnail }}) center;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
             background-size: cover;
           "
         ></div>
-        {{else}}
-
+        {{ else }}
         <div
           class="post-list-item-image"
           style="
@@ -23,14 +30,18 @@
             background: linear-gradient(45deg, #3975cd 0%, #76d2c4 100%);
           "
         ></div>
-        {{end}}
+        {{ end }}
       </div>
       <div class="post-list-item__meta">
         <h3 class="post-list-item-meta__title">{{ .Title }}</h3>
         <p class="post-list-item-meta__summary">
-          {{ $randomChars := index (seq 120 150 | shuffle) 1 }}
+          {{ $randomNum := index (seq 120 150 | shuffle) 1 }}
           <!--  -->
-          {{ htmlUnescape (slicestr .Summary 0 $randomChars) }}...
+          {{ $summary := htmlUnescape (slicestr .Summary 0 $randomNum) }}
+          <!--  -->
+          {{ $summaryText := printf "%s%s" $summary "..." }}
+          <!--  -->
+          {{ default $summaryText .Description }}
         </p>
         <div class="post-list-item-meta__date post-meta">
           <span>{{ .PublishDate.Format "January 2, 2006" }}</span>

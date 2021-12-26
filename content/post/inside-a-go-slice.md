@@ -3,6 +3,7 @@ title: 'Inside a Go Slice'
 date: 2020-11-19T03:59:54+01:00
 draft: false
 tags: [go]
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1605754968/Blog/inside-a-go-slice-reslice.png'
 images:
   [
     'https://res.cloudinary.com/cwilliams/image/upload/v1605754968/Blog/inside-a-go-slice-reslice.png',

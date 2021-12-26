@@ -4,6 +4,7 @@ date: 2021-10-23T08:10:44+01:00
 draft: false
 slug: redraw-only-the-diff
 aliases: [/redraw-only-the-diff]
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1634652735/Blog/9e5b183e-d264-4818-b741-5c508da2f35c.png'
 images:
   [
     'https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_150/v1634652735/Blog/9e5b183e-d264-4818-b741-5c508da2f35c.png',

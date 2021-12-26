@@ -4,6 +4,7 @@ date: 2020-05-01T00:00:00.000Z
 draft: false
 tags: [go]
 description: Writing clean, high-quality code makes programs easier to understand, maintain, improve, and test. In this post, I share some tips for writing clean, effective Go web servers.
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1605275488/Blog/CleanArchitecture.jpg'
 images:
   [
     'https://res.cloudinary.com/cwilliams/image/upload/v1605275488/Blog/CleanArchitecture.jpg',

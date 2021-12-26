@@ -4,6 +4,7 @@ date: 2021-07-04T10:18:56+01:00
 draft: false
 slug: chrome-processes
 aliases: [/chrome-processes]
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1625394129/Blog/E4ubeZxWQAE8JdE.jpg'
 images:
   [
     'https://res.cloudinary.com/cwilliams/image/upload/c_crop,h_350,w_670,x_0/v1625394129/Blog/E4ubeZxWQAE8JdE.jpg',

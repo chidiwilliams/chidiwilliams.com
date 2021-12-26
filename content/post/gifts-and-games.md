@@ -5,6 +5,7 @@ draft: false
 slug: gifts-and-games
 aliases: [/gifts-and-games]
 tags: [personal, vr]
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1620074571/Blog/IMG_1102.jpg'
 images: [https://res.cloudinary.com/cwilliams/image/upload/v1620074571/Blog/IMG_1102.jpg]
 ---
 

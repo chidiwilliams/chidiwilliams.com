@@ -3,6 +3,7 @@ title: 'The Humane Representation of Programs'
 date: 2021-12-20T00:30:08Z
 draft: false
 description: 'Better tools for learning and communicating'
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_200/v1640009010/Blog/dynamicland.jpg'
 images:
   ['https://res.cloudinary.com/cwilliams/image/upload/v1640009010/Blog/dynamicland.jpg']
 ---

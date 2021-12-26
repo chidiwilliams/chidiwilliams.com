@@ -5,6 +5,7 @@ draft: false
 series: [Building Ayoayo]
 tags: [algorithms, javascript]
 description: In this post, I implement a CLI for Ayòayò with Node's Readline module.
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1640476505/Blog/ayoayo-cli.png'
 images:
   [
     'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_400/v1640476505/Blog/ayoayo-cli.png',
