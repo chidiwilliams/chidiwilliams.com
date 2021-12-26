@@ -2,10 +2,12 @@
 title: 'Introductions, Math Games, and UI Optimizations'
 date: 2021-10-26T16:48:15Z
 draft: false
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_200/v1634496238/Blog/Game%20of%20Life.png'
 images:
   [
     'https://res.cloudinary.com/cwilliams/image/upload/v1634496238/Blog/Game%20of%20Life.png',
   ]
+aliases: [/newsletter/archive/introductions-math-games-and-ui-optimizations]
 ---
 
 Once a month or so, since May 2020, I write an article about a programming topic on my blog. So far, I've written about [the spam filter that inspired Bitcoin](https://chidiwilliams.com/post/proof-of-work/), [how Go slices work](https://chidiwilliams.com/post/inside-a-go-slice/), [the GOTO statement](https://chidiwilliams.com/post/goto/), [building the game of Ayoayo](https://chidiwilliams.com/post/building-ayoayo-implementation/), and more.

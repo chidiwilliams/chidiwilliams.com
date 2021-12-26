@@ -5,6 +5,7 @@ theme = "chidiwilliams"
 googleAnalytics = "UA-167812981-1"
 
 [params]
+description = "Chidi's Blog"
 images = [
   "https://res.cloudinary.com/cwilliams/image/upload/v1621417333/Blog/FN6_Nerp_400x400.jpg"
 ]

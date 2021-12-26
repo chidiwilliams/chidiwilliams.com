@@ -2,8 +2,10 @@
 title: 'Fooled by Complexity'
 date: 2021-11-21T20:06:15Z
 draft: false
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1637524489/Blog/lieborf03.jpg'
 images:
   ['https://res.cloudinary.com/cwilliams/image/upload/v1637524489/Blog/lieborf03.jpg']
+aliases: [/newsletter/archive/fooled-by-complexity]
 ---
 
 I enjoy writing software best when I fully appreciate why it exists.

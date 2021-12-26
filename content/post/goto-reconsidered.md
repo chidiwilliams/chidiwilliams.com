@@ -5,6 +5,11 @@ draft: false
 tags: [basic, c, assembly]
 slug: goto
 aliases: [/goto]
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_200/v1618702780/Blog/regex-fsm-2.png'
+images:
+  [
+    'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_400/v1618702780/Blog/regex-fsm-2.png',
+  ]
 ---
 
 Before I learned to program, I had used computers to play games like Solitaire and Road Rash and explore Microsoft Encarta. I had also taken a few computer classes in school, learning what parts computers had, who the pioneers of computing were, and how to navigate around Windows. But I hardly knew how computer applications worked, and I hadn't ever built one myself.

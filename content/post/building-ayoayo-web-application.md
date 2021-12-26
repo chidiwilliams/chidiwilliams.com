@@ -5,6 +5,7 @@ draft: false
 series: [Building Ayoayo]
 tags: [algorithms, javascript]
 description: In the previous posts in this series, we wrote the game logic for Ayòayò and built a CLI application. In this post, we’ll build an interactive web application for the game with JavaScript.
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1593099586/Ayoayo_Web_App_Post_1.png'
 images:
   [
     https://res.cloudinary.com/cwilliams/image/upload/v1593099586/Ayoayo_Web_App_Post_1.png,

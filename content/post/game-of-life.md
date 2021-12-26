@@ -6,6 +6,7 @@ slug: game-of-life
 aliases: [/game-of-life]
 description: On the history and implementation of John Conway's Game of Life
 footnotes: 'Thanks to Ayomide Oyekanmi and Opeyemi Onikute for reviewing drafts of this.'
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1634464272/Blog/pexels-photo-2102850.jpg'
 images:
   [
     'https://res.cloudinary.com/cwilliams/image/upload/v1634464272/Blog/pexels-photo-2102850.jpg',

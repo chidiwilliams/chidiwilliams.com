@@ -1,30 +1,26 @@
 {{ define "main" }}
 <div class="home">
-  <h1>Posts</h1>
-  <ul style="margin-bottom: 40px">
-    {{ range where .Site.RegularPages "Section" "in" (slice "post") }}
-    <li>
-      <a href="{{ .RelPermalink }}" class="text-link">{{ .Title }}</a>
-    </li>
-    {{ end }}
-  </ul>
-  <ul>
-    <li><a href="/about">About</a></li>
-    <li><a href="/bookshelf">Bookshelf</a></li>
-    {{ range where .Site.RegularPages "Section" "in" (slice "page") }}
-    <li>
-      <a href="{{ .RelPermalink }}" class="text-link">{{ .Title }}</a>
-    </li>
-    {{ end }}
-    <li><a href="/simulations">Simulations</a></li>
-    <li>
-      <a href="/newsletter">Newsletter</a>
-    </li>
-    <li>
-      <a href="https://github.com/chidiwilliams" target="_blank" rel="noopener noreferrer"
-        >GitHub</a
-      >
-    </li>
-  </ul>
+  <div class="bio">
+    <div class="bio__image">
+      <img
+        src="https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_150/v1621417333/Blog/FN6_Nerp_400x400.jpg"
+        alt="Chidi"
+        width="150"
+        height="150"
+      />
+    </div>
+
+    <div class="bio__description">
+      {{ readFile "/content/templates/about.md" | markdownify }}
+    </div>
+  </div>
+
+  <div class="recent-posts">
+    <h2>Recent</h2>
+
+    {{ $posts := where .Site.RegularPages "Section" "in" (slice "post") }}
+    <!--  -->
+    {{ partial "post_list.html" (dict "posts" $posts) }}
+  </div>
 </div>
 {{ end }}

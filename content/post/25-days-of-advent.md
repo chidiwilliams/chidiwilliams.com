@@ -2,6 +2,7 @@
 title: '25 Days of Advent'
 date: 2021-12-12T17:36:17Z
 draft: false
+aliases: [/newsletter/archive/25-days-of-advent]
 ---
 
 Every December since 2015, as a countdown to Christmas Day, [thousands](https://adventofcode.com/2020/stats) of software programmers around the world participate in a daily programming challenge called [Advent of Code](https://adventofcode.com/). I had heard about the challenge from a [few](https://twitter.com/sophiebits/status/1070917206605611009) [people](https://twitter.com/jdan/status/1334950611817816065) I follow in the dev community on Twitter, but I only got around to participating for the first time this year.
