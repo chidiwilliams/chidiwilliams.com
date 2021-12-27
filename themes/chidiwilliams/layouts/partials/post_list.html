@@ -2,42 +2,26 @@
   {{ range .posts }}
   <li class="post-list-item">
     <a href="{{ .RelPermalink }}" class="text-link">
+      {{ if .Params.thumbnail }}
       <div class="post-list-item__image">
-        <!-- Set thumbnail to `thumbnail` param or default to first image in the `images` param -->
-        {{ $thumbnail := .Params.thumbnail }}
-        <!--  -->
-        {{ if (not $thumbnail) }} {{ with .Params.images }}
-        <!--  -->
-        {{ $thumbnail = default (index . 0 | absURL) "" }} {{ end }} {{ end }}
-
-        <!--  -->
-        {{ if $thumbnail }}
         <div
           class="post-list-item-image"
           style="
-            background: url({{ $thumbnail }}) center;
+            background: url({{ .Params.thumbnail }}) center;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
             background-size: cover;
           "
         ></div>
-        {{ else }}
-        <div
-          class="post-list-item-image"
-          style="
-            background: #3975cd;
-            background: linear-gradient(45deg, #3975cd 0%, #76d2c4 100%);
-          "
-        ></div>
-        {{ end }}
       </div>
+      {{ end }}
       <div class="post-list-item__meta">
         <h3 class="post-list-item-meta__title">{{ .Title }}</h3>
         <p class="post-list-item-meta__summary">
           {{ $randomNum := index (seq 120 150 | shuffle) 1 }}
           <!--  -->
-          {{ $summary := htmlUnescape (slicestr .Summary 0 $randomNum) }}
+          {{ $summary := htmlUnescape (slicestr .Summary 0 160) }}
           <!--  -->
           {{ $summaryText := printf "%s%s" $summary "..." }}
           <!--  -->

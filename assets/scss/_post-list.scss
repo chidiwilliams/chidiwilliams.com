@@ -6,22 +6,23 @@
   &-item {
     padding: 20px 0;
     border-radius: 3px;
+    margin: 0 -10px;
 
     &:not(:last-child) {
       border-bottom: 1px solid $border-color;
     }
 
     &__image {
-      flex: 0 0 180px;
-      margin: 0 20px 20px 0;
+      $image-flex-width: 180px;
+      flex: 0 0 150px;
+      margin: 0 10px 5px;
 
       .post-list-item-image {
-        height: 120px;
+        height: 100px;
       }
 
-      @media only screen and (max-width: 644px) {
+      @media only screen and (max-width: 599px) {
         flex-grow: 1;
-        margin: 0 0 10px;
 
         .post-list-item-image {
           height: 200px;
@@ -31,6 +32,7 @@
 
     &__meta {
       flex: 1 400px;
+      margin: 0 10px;
 
       .post-list-item-meta__summary {
         margin: 0 0 5px;
