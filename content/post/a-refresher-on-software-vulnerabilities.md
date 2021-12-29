@@ -78,7 +78,7 @@ But because the endpoint allows any value as the email address, an attacker can 
 </div>
 ```
 
-Most popular web servers and frameworks provide functionality to validate and escape user input to protect web applications from this vulnerability.
+Most popular web servers and frameworks provide functionality to validate and neutralize user input to protect web applications from this vulnerability. Validation typically involves checking that the input matches the correct format, type, length, etc., while neutralization makes the input safe to use, like by encoding HTML characters, for example.
 
 3\. **Out-of-bounds read**
 
