@@ -3,7 +3,7 @@ title: 'A refresher on software vulnerabilities'
 description: 'Reviewing the 2021 CWE Top 25 Most Dangerous Software Weaknesses'
 date: 2021-12-29T08:00:00Z
 draft: false
-thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1640782118/Blog/vulnerabilities.jpg'
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_500/v1640782118/Blog/vulnerabilities.jpg'
 images:
   [
     'https://res.cloudinary.com/cwilliams/image/upload/v1640782118/Blog/vulnerabilities.jpg',
