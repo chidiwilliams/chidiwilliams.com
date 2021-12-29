@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 
 If the user provides a string longer than 5 bytes, the program can overwrite local stack data such as the function’s return address. And if the program was running with special privileges, the attacker can gain privileged access to the machine.
 
-One interesting example of this vulnerability was in the [Twilight Hack](http://wiibrew.org/wiki/Twilight_Hack#Explanation) of The Legend of Zelda: Twilight Princess, discovered in 2008. The hack worked by loading a custom save file that stored a horse’s name with a string that was longer than the game expected. And the extra characters in the name caused the game to run a file on the SD card that gave the user complete low-level control of the Nintendo Wii.
+One interesting example of this vulnerability was in the [Twilight Hack](http://wiibrew.org/wiki/Twilight_Hack#Explanation) of The Legend of Zelda: Twilight Princess, discovered in 2008. The hack worked by loading a custom save file that stored a horse’s name with a string longer than the game expected. And the extra characters in the name caused the game to run a file on the SD card that gave the user complete low-level control of the Nintendo Wii.
 
 Modern languages and operating systems have different mechanisms for preventing stack buffer overflows, like [randomizing the memory layout](https://www.techtarget.com/searchsecurity/definition/address-space-layout-randomization-ASLR) and [disabling stack execution](https://en.wikipedia.org/wiki/Executable_space_protection).
 
@@ -148,7 +148,7 @@ SELECT * FROM items
 
 7\. **Use after free**
 
-In memory-unsafe languages like C and C++, referencing memory after it has been freed can also cause crashes, unexpected behavior, or arbitrary code execution.
+In memory-unsafe languages like C and C++, referencing memory after it has been freed can also cause crashes, unexpected behaviour, or arbitrary code execution.
 
 Consider a program that obtains a reference to a memory address and then frees the memory the reference points to (without deleting the reference). If the program allocates some other data to the old address, the stale reference—which is now a "dangling pointer"—can be used to get the new data.
 
@@ -170,19 +170,19 @@ A malicious user can exploit this weakness by setting the filename as a relative
 
 In this vulnerability, a web application does not, or can not, verify whether a request was intentionally initiated by the user who submitted the request.
 
-When a web application uses session authentication, for example, a user’s browser will include their session cookie in every request from the application. And if an attacker tricks the user into making an unintentional request (like by convincing them to click a link in an email message), the web server may treat the request as authentic and potentially expose sensitive user information.
+When a web application uses session authentication, for example, a user’s browser will include their session cookie in every request from the application. And, if an attacker tricks the user into making an unintentional request (like, by convincing them to click a link in an email message), the web server may treat the request as authentic and potentially expose sensitive user information.
 
-CSRF tokens protect web applications and users from this kind of attacks. In a server-rendered application, the server generates a CSRF token (which should be unique, secret, and unpredictable) for each user session. And then, it adds the token as a hidden input field in the forms on the page. When the server receives a form request, it checks that the CSRF token field has the correct value.
+CSRF tokens protect web applications and users from this kind of attack. In a server-rendered application, the server generates a CSRF token (which should be unique, secret, and unpredictable) for each user session. And then, it adds the token as a hidden input field in the forms on the page. When the server receives a form request, it checks that the CSRF token field has the correct value.
 
 ```html
 <input type="hidden" name="csrf-token" value="95Lzr2jnMFwSAeTeQCpV5YaEunXrkU99" />
 ```
 
-Single-page applications, on the other hand, can use [cookie-to-header tokens](https://en.wikipedia.org/wiki/Cross-site_request_forgery#Cookie-to-header_token). The server sets the CSRF token in a cookie on either page load or the first GET request. And on subsequent requests, the server checks that the the value of a custom CSRF header on the request matches the cookie. If the cookie in the initial request is scoped to match only the appropriate site domain, requests initiated from external sites or emails will not be able to read the cookie value to copy into the custom header.
+Single-page applications, on the other hand, can use [cookie-to-header tokens](https://en.wikipedia.org/wiki/Cross-site_request_forgery#Cookie-to-header_token). The server sets the CSRF token in a cookie on either page load or the first GET request. And on subsequent requests, the server checks that the value of a custom CSRF header on the request matches the cookie. If the cookie in the initial request is scoped to match only the appropriate site domain, requests initiated from external sites or emails will be unable to read the cookie value to copy into the custom header.
 
 10\. **Unrestricted upload of a file with dangerous type**
 
-When a program fails to validate the type of an uploaded file, it can allow an attacker upload and execute code on the server.
+When a program fails to validate the type of an uploaded file, it can let an attacker upload and execute code on the server.
 
 For example, consider a PHP server that intends to store users’ profile pictures. If the server doesn't check the file type of the uploads, a malicious user can upload a PHP file to the directory.
 
