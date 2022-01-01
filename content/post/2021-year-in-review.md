@@ -1,7 +1,7 @@
 ---
 title: '2021: Year in Review'
 date: 2022-01-01T00:45:07Z
-draft: true
+draft: false
 description: Reflecting on what I worked on and learnt in 2021
 ---
 
