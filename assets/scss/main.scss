@@ -7,15 +7,8 @@
 
 html,
 body {
-  font-size: 18px;
+  font-size: 16px;
   margin: 0;
-}
-
-@media screen and (max-width: 480px) {
-  html,
-  body {
-    font-size: 16px;
-  }
 }
 
 h1,
@@ -47,7 +40,7 @@ blockquote {
 }
 
 body {
-  line-height: 1.8;
+  line-height: 1.7;
   color: $body-color;
   background-color: #fff;
   font-family: $body-font;
@@ -76,7 +69,7 @@ hr {
 
 .container {
   position: relative;
-  max-width: 700px;
+  max-width: 600px;
   overflow: hidden;
   margin: 0 auto;
   text-align: left;
