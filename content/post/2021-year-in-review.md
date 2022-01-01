@@ -45,11 +45,11 @@ Here's a quick recap of the posts from 2021:
 
 I also tried out a few experiments with the blog's format within the year. The tech stack (Hugo static site running on Netlify) is still the same, but I made minor design changes. I also started sending out [a newsletter focused on the blog](https://buttondown.email/chidiwilliams). I've sent out five emails so far, and the newsletter currently has about 80 subscribers. I like the medium as a way to directly reach readers who want to keep up with the blog.
 
-I (casually) also started a [Substack newsletter](https://chidi.ws/) a few months ago. I'd initially wanted it as a place to write about topics unrelated to programming. But after publishing one article, a [book review](https://chidi.ws/p/recent-reads-the-outsider-and-before), I don't think I'll be writing there anymore. Managing two different newsletters feels like more work than necessary at the moment. Plus, I still prefer hosting and controlling my own work for myself.
+I also (casually) started a [Substack newsletter](https://chidi.ws/) a few months ago. I'd initially wanted it as a place to write about topics unrelated to programming. But after publishing one article, a [book review](https://chidi.ws/p/recent-reads-the-outsider-and-before), I don't think I'll be writing there anymore. Managing two different newsletters feels like more work than necessary at the moment. And I still prefer hosting and controlling my own work myself.
 
 ## Projects
 
-I didn't get to work on as many new hobby projects as I would have liked this past year. But I enjoyed building the interactive programs I use to illustrate blog posts, like [chidiwilliams/conway-game-of-life](https://github.com/chidiwilliams/conway-game-of-life) (for the post on Conway's Game of Life) and [chidiwilliams/dsaw](https://github.com/chidiwilliams/dsaw) (for the data structures and algorithms series). I also open-sourced all my [Advent of Code solutions](https://github.com/chidiwilliams/advent-of-code).
+I didn't get to work on as many new hobby projects as I would have liked this past year. But I enjoyed building the interactive programs I use to illustrate blog posts, like the programs for [Conway's Game of Life](https://github.com/chidiwilliams/conway-game-of-life) and the [data structures and algorithms series](https://github.com/chidiwilliams/dsaw). I also open-sourced all my [Advent of Code solutions](https://github.com/chidiwilliams/advent-of-code/tree/master/2021).
 
 ## Reading
 
