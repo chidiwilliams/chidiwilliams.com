@@ -1,5 +1,5 @@
 ---
-title: 'A refresher on software vulnerabilities'
+title: 'A Refresher on Software Vulnerabilities'
 description: 'Reviewing the 2021 CWE Top 25 Most Dangerous Software Weaknesses'
 date: 2021-12-29T08:00:00Z
 draft: false
