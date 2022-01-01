@@ -43,7 +43,7 @@ Here's a quick recap of the posts from 2021:
 
 (The posts marked with asterisks were the five most popular.)
 
-I also tried out a few experiments with the blog's format within the year. The tech stack (Hugo static site running on Netlify) is still the same, but I made minor design changes. I also started sending out [a newsletter focused on the blog](https://buttondown.email/chidiwilliams). I've sent out five emails so far, and the newsletter currently has about 80 subscribers. I like the medium to directly connect with readers who want to keep up with the blog.
+I also tried out a few experiments with the blog's format within the year. The tech stack (Hugo static site running on Netlify) is still the same, but I made minor design changes. I also started sending out [a newsletter focused on the blog](https://buttondown.email/chidiwilliams). I've sent out five emails so far, and the newsletter currently has about 80 subscribers. I like the medium as a way to directly reach readers who want to keep up with the blog.
 
 I (casually) also started a [Substack newsletter](https://chidi.ws/) a few months ago. I'd initially wanted it as a place to write about topics unrelated to programming. But after publishing one article, a [book review](https://chidi.ws/p/recent-reads-the-outsider-and-before), I don't think I'll be writing there anymore. Managing two different newsletters feels like more work than necessary at the moment. Plus, I still prefer hosting and controlling my own work for myself.
 
