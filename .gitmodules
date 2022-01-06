@@ -1,0 +1,4 @@
+[submodule "themes/mayflower"]
+path = themes/mayflower
+url = https://github.com/chidiwilliams/mayflower
+branch = main
