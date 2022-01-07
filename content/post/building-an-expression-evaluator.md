@@ -5,10 +5,10 @@ draft: false
 tags: [algorithms, javascript]
 slug: evaluator
 aliases: [/evaluator]
-thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1640476018/Blog/pexels-monstera-6238068.jpg'
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1640476018/Blog/pexels-monstera-6238068.webp'
 images:
   [
-    'https://res.cloudinary.com/cwilliams/image/upload/v1640476018/Blog/pexels-monstera-6238068.jpg',
+    'https://res.cloudinary.com/cwilliams/image/upload/v1640476018/Blog/pexels-monstera-6238068.webp',
   ]
 ---
 

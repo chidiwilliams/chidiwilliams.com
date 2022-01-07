@@ -2,9 +2,9 @@
 title: 'Fooled by Complexity'
 date: 2021-11-21T20:06:15Z
 draft: false
-thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1637524489/Blog/lieborf03.jpg'
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1637524489/Blog/lieborf03.webp'
 images:
-  ['https://res.cloudinary.com/cwilliams/image/upload/v1637524489/Blog/lieborf03.jpg']
+  ['https://res.cloudinary.com/cwilliams/image/upload/v1637524489/Blog/lieborf03.webp']
 aliases: [/newsletter/archive/fooled-by-complexity]
 ---
 

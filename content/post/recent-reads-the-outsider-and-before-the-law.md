@@ -2,14 +2,14 @@
 title: 'Recent Reads: The Outsider and Before the Law'
 date: 2021-11-28T00:00:00Z
 draft: false
-thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_500/v1641234959/Blog/https_3A_2F_2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com_2Fpublic_2Fimages_2F877bd49c-0596-4c0e-9274-4102b6aae86d_4558x2945.jpg'
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_500/v1641234959/Blog/https_3A_2F_2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com_2Fpublic_2Fimages_2F877bd49c-0596-4c0e-9274-4102b6aae86d_4558x2945.webp'
 images:
   [
-    'https://res.cloudinary.com/cwilliams/image/upload/v1641234959/Blog/https_3A_2F_2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com_2Fpublic_2Fimages_2F877bd49c-0596-4c0e-9274-4102b6aae86d_4558x2945.jpg',
+    'https://res.cloudinary.com/cwilliams/image/upload/v1641234959/Blog/https_3A_2F_2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com_2Fpublic_2Fimages_2F877bd49c-0596-4c0e-9274-4102b6aae86d_4558x2945.webp',
   ]
 ---
 
-![Open gate](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_700/v1641234959/Blog/https_3A_2F_2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com_2Fpublic_2Fimages_2F877bd49c-0596-4c0e-9274-4102b6aae86d_4558x2945.jpg)
+![Open gate](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_700/v1641234959/Blog/https_3A_2F_2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com_2Fpublic_2Fimages_2F877bd49c-0596-4c0e-9274-4102b6aae86d_4558x2945.webp)
 
 One of the frequent themes of [Lex Fridman’s podcast](https://lexfridman.com/podcast/), of which I’m a long-time listener, is his love of the existentialist/absurdist literature of Dostoevsky and Albert Camus (right next to his love of Python and Brazilian Jiu-Jitsu). While I haven’t been writing Python code or grappling much, I recently got around to reading Camus’ _L’Étranger_ (_The Outsider_).
 _The Outsider_ follows the story of Mersault, a man who refuses to satisfy the expectations of others. The famous opening of the novel goes: _“My mother died today. Or maybe yesterday, I don’t know.”_ And throughout the book, Mersault’s character remains completely indifferent to events in his life.

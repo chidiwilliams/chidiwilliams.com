@@ -4,10 +4,10 @@ date: 2020-05-01T00:00:00.000Z
 draft: false
 tags: [go]
 description: Writing clean, high-quality code makes programs easier to understand, maintain, improve, and test. In this post, I share some tips for writing clean, effective Go web servers.
-thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1605275488/Blog/CleanArchitecture.jpg'
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1605275488/Blog/CleanArchitecture.webp'
 images:
   [
-    'https://res.cloudinary.com/cwilliams/image/upload/v1605275488/Blog/CleanArchitecture.jpg',
+    'https://res.cloudinary.com/cwilliams/image/upload/v1605275488/Blog/CleanArchitecture.webp',
   ]
 ---
 
@@ -21,7 +21,7 @@ A complete project containing all the examples is available on [GitHub](https://
 
 Clean architecture is a design pattern for separating concerns. Robert "Uncle Bob" Martin, in his book, [Clean Architecture: A Craftsman’s Guide to Software Structure and Design](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164), presents this architecture as a way of breaking up an application into loosely-coupled components.
 
-{{< figure src="https://res.cloudinary.com/cwilliams/image/upload/v1605275488/Blog/CleanArchitecture.jpg" alt="Clean Architecture diagram" attr="The Clean Architecture - Clean Coder" attrlink="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">}}
+{{< figure src="https://res.cloudinary.com/cwilliams/image/upload/v1605275488/Blog/CleanArchitecture.webp" alt="Clean Architecture diagram" attr="The Clean Architecture - Clean Coder" attrlink="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">}}
 
 The architecture divides the application into four main components.
 

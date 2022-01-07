@@ -4,10 +4,10 @@ date: 2021-07-04T10:18:56+01:00
 draft: false
 slug: chrome-processes
 aliases: [/chrome-processes]
-thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1625394129/Blog/E4ubeZxWQAE8JdE.jpg'
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1625394129/Blog/E4ubeZxWQAE8JdE.webp'
 images:
   [
-    'https://res.cloudinary.com/cwilliams/image/upload/c_crop,h_350,w_670,x_0/v1625394129/Blog/E4ubeZxWQAE8JdE.jpg',
+    'https://res.cloudinary.com/cwilliams/image/upload/c_crop,h_350,w_670,x_0/v1625394129/Blog/E4ubeZxWQAE8JdE.webp',
   ]
 ---
 
@@ -15,7 +15,7 @@ _(Originally published [on Twitter](https://twitter.com/ChidiWilliams__/status/1
 
 If you've ever tried force quitting Chrome and wondered why there were so many different Google Chromes to close, here's why:
 
-![Screenshot of Activity Monitor on Mac showing Chrome running on several processes](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1625394129/Blog/E4ubeZxWQAE8JdE.jpg)
+![Screenshot of Activity Monitor on Mac showing Chrome running on several processes](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1625394129/Blog/E4ubeZxWQAE8JdE.webp)
 
 A process is a collection of a program and its resources: its separate memory space (or "virtual address space"), its process identifier, handles to files and other system objects, etc. And a thread is an entity within a process that can be scheduled for the operating system to execute.
 
@@ -53,7 +53,7 @@ But the cost of this multi-process architecture is that it uses more memory than
 
 Since this architecture is a feature of Chromium, other Chromium-based browsers like Brave, Edge, and Torch work in the same way. Non-Chromium browsers like Safari and Firefox also use similar architectures.
 
-![Screenshot of Activity Monitor on Mac showing Safari running on multiple processes](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1625394255/Blog/E4uiAUpWUAQUGeN.jpg)
+![Screenshot of Activity Monitor on Mac showing Safari running on multiple processes](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1625394255/Blog/E4uiAUpWUAQUGeN.webp)
 
 So, the next time your computer is running hot, fans blazing, and you're trying to rage quit your browser, you'll remember that there are so many processes because your browser isolates tabs to protect your data. And maybe that'll make you feel a little better... Or not 👀
 

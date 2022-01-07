@@ -2,10 +2,10 @@
 title: 'Building Ayòayò: Implementation'
 date: 2020-06-14T15:21:03+01:00
 draft: false
-thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1592147195/Children_gather_over_a_game_of_Ayo.jpg'
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1592147195/Children_gather_over_a_game_of_Ayo.webp'
 images:
   [
-    'https://res.cloudinary.com/cwilliams/image/upload/v1592147195/Children_gather_over_a_game_of_Ayo.jpg',
+    'https://res.cloudinary.com/cwilliams/image/upload/v1592147195/Children_gather_over_a_game_of_Ayo.webp',
   ]
 tags: [algorithms, javascript]
 series: [Building Ayoayo]
@@ -32,9 +32,9 @@ The history of mancala dates back to ancient times in Egypt [as far back as 1000
 
 {{< external-image
   title="Dotun55 / CC BY-SA (<https://creativecommons.org/licenses/by-sa/4.0>)"
-  href="https://commons.wikimedia.org/wiki/File:Children_gather_over_a_game_of_Ayo.jpg"
+  href="https://commons.wikimedia.org/wiki/File:Children_gather_over_a_game_of_Ayo.webp"
   alt="Children gather over a game of Ayo"
-  src="https://res.cloudinary.com/cwilliams/image/upload/v1592147195/Children_gather_over_a_game_of_Ayo.jpg" >}}
+  src="https://res.cloudinary.com/cwilliams/image/upload/v1592147195/Children_gather_over_a_game_of_Ayo.webp" >}}
 
 ## Rules of the game
 

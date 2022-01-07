@@ -4,10 +4,10 @@ date: 2021-09-21T08:49:21+01:00
 draft: false
 slug: quadtrees
 aliases: [/quadtrees]
-thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1632075791/Blog/pexels-sunil-patel-599708.jpg'
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1632075791/Blog/pexels-sunil-patel-599708.webp'
 images:
   [
-    https://res.cloudinary.com/cwilliams/image/upload/v1632075791/Blog/pexels-sunil-patel-599708.jpg,
+    https://res.cloudinary.com/cwilliams/image/upload/v1632075791/Blog/pexels-sunil-patel-599708.webp,
   ]
 description: Quadtrees are tree structures used to efficiently store data in two-dimensional space. They are useful in spatial indexing and image compression.
 footnotes: 'Thanks to Ayomide Oyekanmi and Opeyemi Onikute for reviewing drafts of this.'
