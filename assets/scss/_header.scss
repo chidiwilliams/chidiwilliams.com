@@ -23,27 +23,5 @@ header {
         }
       }
     }
-
-    ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-
-      li {
-        display: inline;
-        font-size: 0.75rem;
-        font-family: $secondary-font;
-        text-transform: uppercase;
-        color: $secondary-color;
-
-        &:not(:last-child):after {
-          content: ' • ';
-        }
-
-        a {
-          color: $secondary-color;
-        }
-      }
-    }
   }
 }
