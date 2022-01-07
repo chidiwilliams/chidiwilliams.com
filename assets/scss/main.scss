@@ -130,35 +130,6 @@ footer {
   margin-top: 2.5em;
 }
 
-.share-links {
-  margin-bottom: 1.25em;
-}
-
-.share-links .header {
-  font-weight: 600;
-  margin: 0 0 20px;
-  color: $secondary-color;
-  font-size: 0.75rem;
-}
-
-ul.social-icons {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  align-items: center;
-  line-height: 1;
-}
-
-ul.social-icons li {
-  margin-right: 0.75em;
-}
-
-ul.social-icons svg {
-  width: 20px;
-  height: 20px;
-}
-
 .articles article a.github-link {
   border-bottom: none;
 }

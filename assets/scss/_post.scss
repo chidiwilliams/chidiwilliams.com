@@ -16,7 +16,7 @@
 
 .post-meta {
   color: $secondary-color;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-family: $secondary-font;
   text-transform: uppercase;
 }
@@ -42,6 +42,14 @@ article.post {
     font-style: italic;
   }
 
+  p code {
+    font-size: 0.875rem;
+    background: #ffefef;
+    padding: 2px 5px;
+    border-radius: 3px;
+    color: #522;
+  }
+
   pre {
     overflow-x: auto;
     padding: 20px;
@@ -57,7 +65,7 @@ article.post {
 
     figcaption {
       text-align: center;
-      font-size: 0.75rem;
+      font-size: 0.875rem;
       font-style: italic;
     }
 
