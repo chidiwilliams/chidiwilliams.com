@@ -8,7 +8,7 @@ enableRobotsTXT = true
 [params]
 description = "Chidi's Blog"
 images = [
-  "https://res.cloudinary.com/cwilliams/image/upload/v1621417333/Blog/FN6_Nerp_400x400.jpg"
+  "https://res.cloudinary.com/cwilliams/image/upload/v1621417333/Blog/FN6_Nerp_400x400.webp"
 ]
 
 [markup.highlight]

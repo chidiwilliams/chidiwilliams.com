@@ -3,12 +3,12 @@ title: 'The Humane Representation of Programs'
 date: 2021-12-20T00:30:08Z
 draft: false
 description: 'Better tools for learning and communicating'
-thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_200/v1640009010/Blog/dynamicland.jpg'
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_200/v1640009010/Blog/dynamicland.webp'
 images:
-  ['https://res.cloudinary.com/cwilliams/image/upload/v1640009010/Blog/dynamicland.jpg']
+  ['https://res.cloudinary.com/cwilliams/image/upload/v1640009010/Blog/dynamicland.webp']
 ---
 
-{{<figure link="https://dynamicland.org/" src="https://res.cloudinary.com/cwilliams/image/upload/v1640009010/Blog/dynamicland.jpg" caption="Dynamicland" >}}
+{{<figure link="https://dynamicland.org/" src="https://res.cloudinary.com/cwilliams/image/upload/v1640009010/Blog/dynamicland.webp" caption="Dynamicland" >}}
 
 I recently watched [_The Humane Representation of Thought_](https://vimeo.com/115154289), a conference talk by [Bret Victor](http://worrydream.com/), where he discusses why and how we should design new representations of ideas that fit better with our human capabilities.
 

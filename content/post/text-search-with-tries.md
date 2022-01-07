@@ -3,10 +3,10 @@ title: 'Text Search with Tries'
 date: 2021-11-13T00:06:52Z
 draft: false
 series: [Data Structures and Algorithms in the Wild]
-thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1636824748/Blog/pexels-photo-261763.jpg'
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1636824748/Blog/pexels-photo-261763.webp'
 images:
   [
-    'https://res.cloudinary.com/cwilliams/image/upload/v1636824748/Blog/pexels-photo-261763.jpg',
+    'https://res.cloudinary.com/cwilliams/image/upload/v1636824748/Blog/pexels-photo-261763.webp',
   ]
 ---
 
