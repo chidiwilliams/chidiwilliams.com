@@ -1,0 +1,49 @@
+@import 'variables';
+
+header {
+  border-bottom: 1px solid $border-color;
+  padding: 20px 0 15px;
+  margin: 0 0 50px;
+
+  nav {
+    h1.main {
+      font-size: 1.2rem;
+      margin: 0;
+
+      a {
+        color: $body-color;
+        border-bottom: none;
+        line-height: 30px;
+        text-decoration: none;
+
+        &:focus,
+        &:hover {
+          text-decoration: none;
+          border-bottom: none;
+        }
+      }
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        display: inline;
+        font-size: 0.75rem;
+        font-family: $secondary-font;
+        text-transform: uppercase;
+        color: $secondary-color;
+
+        &:not(:last-child):after {
+          content: ' • ';
+        }
+
+        a {
+          color: $secondary-color;
+        }
+      }
+    }
+  }
+}

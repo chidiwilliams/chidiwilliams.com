@@ -1,0 +1,26 @@
+{{ define "main" }}
+<div class="home">
+  <div class="bio">
+    <div class="bio__image">
+      <img
+        src="https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_150/v1621417333/Blog/FN6_Nerp_400x400.jpg"
+        alt="Chidi"
+        width="150"
+        height="150"
+      />
+    </div>
+
+    <div class="bio__description">
+      {{ readFile "/content/templates/about.md" | markdownify }}
+    </div>
+  </div>
+
+  <div class="recent-posts">
+    <h2>Recent</h2>
+
+    {{ $posts := where .Site.RegularPages "Section" "in" (slice "post") }}
+    <!--  -->
+    {{ partial "post_list.html" (dict "posts" $posts) }}
+  </div>
+</div>
+{{ end }}

@@ -1,0 +1,17 @@
+.bio {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__image {
+    margin-right: 20px;
+  }
+
+  &__description {
+    margin-top: -1em;
+    flex: 1 400px;
+
+    @media screen and (min-width: 615px) {
+      font-size: 0.85rem;
+    }
+  }
+}
