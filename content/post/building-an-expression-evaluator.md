@@ -34,7 +34,7 @@ We'll break down our evaluation process into three stages.
 
 In the first stage, we'll extract the numbers and arithmetic operators from the expression and return an array of the _tokens_. In the second stage, we'll convert the tokens from infix notation to Reverse Polish notation (RPN). (We'll find out what those notations mean in a minute.) And in the final stage, we'll evaluate the RPN expression and return the resulting value.
 
-![Stages of the expression evaluator](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_900,f_auto/v1613925510/Blog/expression-evaluator-diagram.png)
+![Stages of the expression evaluator](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_900,f_auto/v1613925510/Blog/expression-evaluator-diagram.webp)
 
 ## Tokenization
 

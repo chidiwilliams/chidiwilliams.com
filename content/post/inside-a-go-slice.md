@@ -3,10 +3,10 @@ title: 'Inside a Go Slice'
 date: 2020-11-19T03:59:54+01:00
 draft: false
 tags: [go]
-thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1605754968/Blog/inside-a-go-slice-reslice.png'
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1605754968/Blog/inside-a-go-slice-reslice.webp'
 images:
   [
-    'https://res.cloudinary.com/cwilliams/image/upload/v1605754968/Blog/inside-a-go-slice-reslice.png',
+    'https://res.cloudinary.com/cwilliams/image/upload/v1605754968/Blog/inside-a-go-slice-reslice.webp',
   ]
 ---
 
@@ -206,11 +206,11 @@ Next, we'll explore the relationship between the length and capacity of a slice.
 
 As we have already discussed, a slice is a descriptor of an array segment. The length of the slice is the number of elements in the segment. And the capacity of the slice is the maximum length to which we can grow the segment.
 
-![Length and capacity of a Go slice](https://res.cloudinary.com/cwilliams/image/upload/v1605754974/Blog/inside-a-go-slice-len-cap.png)
+![Length and capacity of a Go slice](https://res.cloudinary.com/cwilliams/image/upload/v1605754974/Blog/inside-a-go-slice-len-cap.webp)
 
 Re-slicing a slice does not copy the slice's data. It creates a slice value that points to the original array.
 
-![Re-slicing a Go slice](https://res.cloudinary.com/cwilliams/image/upload/v1605754968/Blog/inside-a-go-slice-reslice.png)
+![Re-slicing a Go slice](https://res.cloudinary.com/cwilliams/image/upload/v1605754968/Blog/inside-a-go-slice-reslice.webp)
 
 Therefore, modifying the elements of a re-slice modifies the elements of the original slice.
 

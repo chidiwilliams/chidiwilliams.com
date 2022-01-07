@@ -5,8 +5,8 @@ draft: false
 series: [Building Ayoayo]
 tags: [algorithms, javascript]
 description: Minimax is a simple and effective decision rule used in game theory and artificial intelligence. In this post, we'll implement an unbeatable AI player for Ayòayò using minimax.
-thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1593960311/Ayoayo_Minimax.png'
-images: [https://res.cloudinary.com/cwilliams/image/upload/v1593960311/Ayoayo_Minimax.png]
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1593960311/Ayoayo_Minimax.webp'
+images: [https://res.cloudinary.com/cwilliams/image/upload/v1593960311/Ayoayo_Minimax.webp]
 ---
 
 In the previous posts in this series, we built a CLI and web game for Ayòayò (Ayò) with JavaScript. In this post, we'll implement an unbeatable AI player for the game using a decision rule called minimax.
@@ -51,7 +51,7 @@ We'll assume the game started with a board value of `[[2,6,6,1,1,7], [0,2,7,2,7,
 
 The following diagram shows the possible game moves for the next three turns and the final game scores. The diagram omits some moves for the sake of brevity (shown with "..."). We'll represent the game scores as `[player1Score, player2Score]`.
 
-![Ayòayò game tree](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_900,f_auto/v1593958488/Ayoayo_Minimax_Tree.png)
+![Ayòayò game tree](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_900,f_auto/v1593958488/Ayoayo_Minimax_Tree.webp)
 
 The next diagram shows how we select the optimal minimax move. Moving upwards from the bottom of the tree, we select nodes according to whether the layer is maximizing or minimizing.
 
@@ -59,7 +59,7 @@ In the maximizing layers, we choose the child node whose value favours Player 1 
 
 The value at the top of the tree would be the minimax value: the optimal move to make assuming the opponent is also playing optimally.
 
-![Selecting minimax move for Ayòayò](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_900,f_auto/v1593958934/Ayoayo_Minimax_Select_Move.png)
+![Selecting minimax move for Ayòayò](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_900,f_auto/v1593958934/Ayoayo_Minimax_Select_Move.webp)
 
 (Because minimax expects optimal opposition, it is usually possible for irrational real-life players to obtain higher-than-expected results by playing some sub-optimal moves.)
 
@@ -246,7 +246,7 @@ We'll also use different depths for the minimax algorithm. An `n`-depth minimax 
 | Random | Random | 15,000 | 4,581 | 6,095 | 4,324 |
 {{</ responsive-table >}}
 
-![Minimax Performance vs Random](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_900,f_auto/v1593958191/Minimax_Performance_vs_Random.png)
+![Minimax Performance vs Random](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_900,f_auto/v1593958191/Minimax_Performance_vs_Random.webp)
 
 These results prove that increasing the depth of the constructed tree improves the success rate of the minimax algorithm (although it also increases the runtime exponentially as we've already seen).
 

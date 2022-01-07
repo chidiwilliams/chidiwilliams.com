@@ -2,10 +2,10 @@
 title: 'Introductions, Math Games, and UI Optimizations'
 date: 2021-10-26T16:48:15Z
 draft: false
-thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_200/v1634496238/Blog/Game%20of%20Life.png'
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_200/v1634496238/Blog/Game%20of%20Life.webp'
 images:
   [
-    'https://res.cloudinary.com/cwilliams/image/upload/v1634496238/Blog/Game%20of%20Life.png',
+    'https://res.cloudinary.com/cwilliams/image/upload/v1634496238/Blog/Game%20of%20Life.webp',
   ]
 aliases: [/newsletter/archive/introductions-math-games-and-ui-optimizations]
 ---
@@ -29,7 +29,7 @@ If you're not familiar with the Game of Life, it's a game that runs on a 2D grid
 3. Live cells with more than three neighbours die
 4. Dead cells with exactly three live neighbours become alive
 
-![Four generations of the Game of Life](https://res.cloudinary.com/cwilliams/image/upload/v1634496238/Blog/Game%20of%20Life.png)
+![Four generations of the Game of Life](https://res.cloudinary.com/cwilliams/image/upload/v1634496238/Blog/Game%20of%20Life.webp)
 
 The kicker, though, is that these four simple rules give rise to very complex behaviour. You can create patterns that oscillate, patterns that move across the screen, patterns that can create copies of themselves, patterns that can simulate the Game of Life itself. It's a simple and fun program to write, but it's also a curious lesson about emergence: how the interactions of simple entities can create complexity.
 

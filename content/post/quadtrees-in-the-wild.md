@@ -190,7 +190,7 @@ search(quadtree, { x1: 3, y1: 3, x2: 7, y2: 7 });
 
 At each node, we first check to see if the node's boundary intersects with the search boundary. If it doesn't, we can skip the node and all its child nodes. This saves us from wasting time looping through points we already know do not fall inside the search boundary.
 
-{{<figure src="https://res.cloudinary.com/cwilliams/image/upload/v1631579887/Blog/Finding_points_within_a_boundary.png" caption="The time it takes to find points within a boundary grows slower with a quadtree than with a list">}}
+{{<figure src="https://res.cloudinary.com/cwilliams/image/upload/v1631579887/Blog/Finding_points_within_a_boundary.webp" caption="The time it takes to find points within a boundary grows slower with a quadtree than with a list">}}
 
 Consequently, quadtrees perform best when the data points are fairly evenly scattered. If most of the points are positioned close to one another, the quadtree becomes _unbalanced_. Only a few nodes would hold most of the points, and the runtime performance of searching the quadtree will tend closer towards that of the list.[^ger]
 
@@ -282,7 +282,7 @@ function nearest(node, location, nearestPoint) {
 }
 ```
 
-{{<figure src="https://res.cloudinary.com/cwilliams/image/upload/v1631630410/Blog/Finding_the_nearest_neighbour.png" caption="The time it takes to find the nearest point grows much slower with a quadtree than with a list">}}
+{{<figure src="https://res.cloudinary.com/cwilliams/image/upload/v1631630410/Blog/Finding_the_nearest_neighbour.webp" caption="The time it takes to find the nearest point grows much slower with a quadtree than with a list">}}
 
 ## Image compression
 

@@ -6,10 +6,10 @@ slug: proof-of-work
 aliases: [/proof-of-work]
 math: true
 description: Notes on an early proof-of-work system called Hashcash
-thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_200/v1621282181/Blog/hashcash-header.png'
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_200/v1621282181/Blog/hashcash-header.webp'
 images:
   [
-    'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1621282181/Blog/hashcash-header.png',
+    'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1621282181/Blog/hashcash-header.webp',
   ]
 ---
 
@@ -39,7 +39,7 @@ Finally, the cost function should be parameterizable. The email recipient may wa
 
 In Hashcash, the sender's computer first prepares a header before sending an email:
 
-![Parts of a Hashcash header](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1621282181/Blog/hashcash-header.png)
+![Parts of a Hashcash header](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1621282181/Blog/hashcash-header.webp)
 
 The Hashcash header contains:
 

@@ -4,10 +4,10 @@ date: 2021-10-23T08:10:44+01:00
 draft: false
 slug: redraw-only-the-diff
 aliases: [/redraw-only-the-diff]
-thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1634652735/Blog/9e5b183e-d264-4818-b741-5c508da2f35c.png'
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1634652735/Blog/9e5b183e-d264-4818-b741-5c508da2f35c.webp'
 images:
   [
-    'https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_150/v1634652735/Blog/9e5b183e-d264-4818-b741-5c508da2f35c.png',
+    'https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_150/v1634652735/Blog/9e5b183e-d264-4818-b741-5c508da2f35c.webp',
   ]
 ---
 
@@ -32,7 +32,7 @@ canvasElement.addEventListener('click', (evt) => {
 
 We may call this an _imperative_ approach to rendering. When we receive an event, we draw on the screen step-by-step.
 
-![Imperative rendering: Event -> View](https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_150/v1634652735/Blog/9e5b183e-d264-4818-b741-5c508da2f35c.png)
+![Imperative rendering: Event -> View](https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_150/v1634652735/Blog/9e5b183e-d264-4818-b741-5c508da2f35c.webp)
 
 Alternatively, we can take a _declarative_ approach. We can model the view as a function of the current state of the system. Then, when we receive an event, we compute the next state of the system and redraw the view based on the new state.
 
@@ -106,7 +106,7 @@ canvasElement.addEventListener('click', (evt) => {
 
 Declarative rendering simplifies the implementation by introducing an abstraction layer between the event and the view. Instead of immediately drawing on the page when an event happens, we determine what the state should be and then `render()` the state.
 
-![Declarative rendering: Event -> State -> View](https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_150/v1634652729/Blog/3b851a70-8e20-418e-92ab-13beab317979.png)
+![Declarative rendering: Event -> State -> View](https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_150/v1634652729/Blog/3b851a70-8e20-418e-92ab-13beab317979.webp)
 
 We should expect the same view whether we render imperatively or declaratively. But are both approaches _really_ the same?
 
@@ -157,7 +157,7 @@ Now, when someone toggles one cell, only that cell will be redrawn. And when the
 
 With this "diffing-the-next-state" optimization, games with large grids perform much better.
 
-![Graph of frames per second in random play with diffing vs without diffing](https://res.cloudinary.com/cwilliams/image/upload/v1634976678/Blog/Frames_per_second_in_random_play_with_diffing_and_without_diffing.png)
+![Graph of frames per second in random play with diffing vs without diffing](https://res.cloudinary.com/cwilliams/image/upload/v1634976678/Blog/Frames_per_second_in_random_play_with_diffing_and_without_diffing.webp)
 
 But while the optimization worked well in this example, it can be limited in some other use cases. To see what these limitations are, we'll take a detour into the foremost declarative UI library in JavaScript-land: React.
 
