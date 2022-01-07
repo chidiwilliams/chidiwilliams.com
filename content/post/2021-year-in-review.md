@@ -17,7 +17,7 @@ I also had a good year at work. I worked remotely for most of the year, and I go
 
 ## Blog
 
-![Blog stats for 2020 and 2021](https://res.cloudinary.com/cwilliams/image/upload/v1640998883/Blog/E60DC86A-40A5-4247-855F-330311136BC9.png)
+![Blog stats for 2020 and 2021](https://res.cloudinary.com/cwilliams/image/upload/v1640998883/Blog/E60DC86A-40A5-4247-855F-330311136BC9.webp)
 
 This past year, I wrote sixteen blog posts (including three newsletter issues), twice as much as the eight posts I wrote in 2020. (I started this blog in May 2020.) In total, I wrote about 25k words, which is also about twice as much as the 12k words I wrote in 2020.
 

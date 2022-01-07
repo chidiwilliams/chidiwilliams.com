@@ -5,10 +5,10 @@ draft: false
 tags: [basic, c, assembly]
 slug: goto
 aliases: [/goto]
-thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_200/v1618702780/Blog/regex-fsm-2.png'
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_200/v1618702780/Blog/regex-fsm-2.webp'
 images:
   [
-    'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_400/v1618702780/Blog/regex-fsm-2.png',
+    'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_400/v1618702780/Blog/regex-fsm-2.webp',
   ]
 ---
 
@@ -353,11 +353,11 @@ For example, a traffic light is a finite state machine with three states: red, y
 
 [^wnx]: Unless you're in a left-lane country, where it changes from green to yellow to red and back to green again.
 
-![Finite state diagram of traffic light](https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_150/v1618701925/Blog/traffic-light-fsm.png)
+![Finite state diagram of traffic light](https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_150/v1618701925/Blog/traffic-light-fsm.webp)
 
 Regular expression matchers are also finite state machines. For example, `^[0-9]+\-[a-z]+$` matches a sequence of one or more digits followed by a hyphen followed by one or more letters.
 
-![Finite state diagram of the regex matcher](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_400/v1618702780/Blog/regex-fsm-2.png)
+![Finite state diagram of the regex matcher](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_400/v1618702780/Blog/regex-fsm-2.webp)
 
 We can write a function in C that matches this regex expression using GOTOs:
 

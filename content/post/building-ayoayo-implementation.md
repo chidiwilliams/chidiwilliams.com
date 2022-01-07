@@ -31,7 +31,7 @@ Ayòayò [*ah-yo-ah-yo*], or just Ayò, is a variant of mancala played by the Yo
 The history of mancala dates back to ancient times in Egypt [as far back as 1000 BC](https://books.google.com.ng/books?id=IyFHvy-SCIYC&lpg=PA22&dq=mancala%20middle%20east&pg=PA22#v=onepage&q=mancala%20middle%20east&f=false). Since then, the game and its variants have spread all around the world.
 
 {{< external-image
-  title="Dotun55 / CC BY-SA (https://creativecommons.org/licenses/by-sa/4.0)"
+  title="Dotun55 / CC BY-SA (<https://creativecommons.org/licenses/by-sa/4.0>)"
   href="https://commons.wikimedia.org/wiki/File:Children_gather_over_a_game_of_Ayo.jpg"
   alt="Children gather over a game of Ayo"
   src="https://res.cloudinary.com/cwilliams/image/upload/v1592147195/Children_gather_over_a_game_of_Ayo.jpg" >}}
@@ -47,7 +47,7 @@ In this section, we'll discuss how to play the game of Ayòayò. Depending on wh
 5. If a player ends their turn with no seeds left in their pits, the next player must **"feed"** them. To feed, the next player chooses a move that leaves the opponent with seeds to play on their turn. If such a move is not possible, the player with seeds left in their row captures all the remaining seeds and the game ends. The player with more seeds wins.
 6. If a player captures more than 24 seeds, they immediately win the game.
 
-![Ayoayo: Direction of Play](https://res.cloudinary.com/cwilliams/image/upload/v1592055237/Ayoayo_-_Direction_of_Play.png)
+![Ayoayo: Direction of Play](https://res.cloudinary.com/cwilliams/image/upload/v1592055237/Ayoayo_-_Direction_of_Play.webp)
 
 ## The implementation
 

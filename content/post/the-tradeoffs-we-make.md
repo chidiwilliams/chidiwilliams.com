@@ -4,10 +4,10 @@ date: 2021-08-06T12:00:25+01:00
 draft: false
 slug: tradeoffs
 aliases: [/tradeoffs]
-thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1640515602/Blog/scales.png'
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1640515602/Blog/scales.webp'
 images:
   [
-    'https://res.cloudinary.com/cwilliams/image/upload/c_crop,h_2088,w_3989,x_500,y_1100/v1628028726/Blog/elena-mozhvilo-j06gLuKK0GM-unsplash.jpg',
+    'https://res.cloudinary.com/cwilliams/image/upload/c_crop,h_2088,w_3989,x_500,y_1100/v1628028726/Blog/elena-mozhvilo-j06gLuKK0GM-unsplash.webp',
   ]
 footnotes: 'Thanks to Ayomide Oyekanmi and Opeyemi Onikute for reviewing drafts of this.'
 ---
@@ -59,11 +59,11 @@ This version has a space complexity of _O(m)_ and a time complexity of _O(m+n)_.
 
 We trade space for time in other ways. For example, we sometimes use caching to store frequently requested data instead of re-querying a database. We can serve client requests quicker at the cost of the memory overhead introduced by the caches.
 
-![Application caching](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1628010158/Blog/4b49a861-2d8f-4c38-9b85-9cd25e892fab.png)
+![Application caching](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1628010158/Blog/4b49a861-2d8f-4c38-9b85-9cd25e892fab.webp)
 
 Content Delivery Networks (CDNs) also work as caches. They serve HTML documents, stylesheets, scripts, and media files from a globally distributed network of servers. Instead of sending requests to a single global server, clients send requests to the network. The CDN reduces the time it takes to retrieve a resource at the cost of more storage space.
 
-![Content Delivery Networks](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1628011384/Blog/42e81ad0-039a-4c60-98cd-257280579f86.png)
+![Content Delivery Networks](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1628011384/Blog/42e81ad0-039a-4c60-98cd-257280579f86.webp)
 
 ## Distributed databases
 
@@ -75,17 +75,17 @@ We have two choices here. On receiving a write request, the primary node can upd
 
 Alternatively, the primary node can wait for all the nodes to update their copies of the data before confirming that the write is successful. This configuration would be linearizable. Every read request would return the most up-to-date view of the data from the last successful write request. But the cost would be that write requests take longer to complete.
 
-![Latency over linearizability in distributed databases](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1628012359/Blog/78afe71c-b04e-4f93-ab9a-bfbcc055ec40.png)
+![Latency over linearizability in distributed databases](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1628012359/Blog/78afe71c-b04e-4f93-ab9a-bfbcc055ec40.webp)
 
-![Linearizability over latency in distributed databases](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1628012725/Blog/52e4e80f-4488-44fb-ae1d-d0c35d7165cf.png)
+![Linearizability over latency in distributed databases](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1628012725/Blog/52e4e80f-4488-44fb-ae1d-d0c35d7165cf.webp)
 
 In these two examples, we assume that the database nodes can communicate with one another. But what happens if they can't? In the event of a network _partition_, a disconnected node can't guarantee that its data is up to date.
 
 Again, we have two options. The secondary node can respond with an error. Instead of returning possibly-stale data, the node chooses to be unavailable. Or, the node can favour availability over linearizability and return its current data.
 
-![Linearizability over availability in distributed databases](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1628018818/Blog/2b9795e5-cb77-468c-9875-e17e92b86cc5.png)
+![Linearizability over availability in distributed databases](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1628018818/Blog/2b9795e5-cb77-468c-9875-e17e92b86cc5.webp)
 
-![Availability over linearizability in distributed databases](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1628014104/Blog/51480821-42e8-4456-a59d-58fa156a8fe6.png)
+![Availability over linearizability in distributed databases](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1628014104/Blog/51480821-42e8-4456-a59d-58fa156a8fe6.webp)
 
 In the event of a partition, the latency-linearizability tradeoff becomes an availability-linearizability tradeoff. Together, these two tradeoffs are formally known as the [PACELC theorem](https://en.wikipedia.org/wiki/PACELC_theorem). PACELC is an extension of the [CAP theorem](https://en.wikipedia.org/wiki/CAP_theorem), which only considers the latter tradeoff.[^enb]
 
