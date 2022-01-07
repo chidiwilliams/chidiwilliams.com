@@ -1,0 +1,47 @@
+@import 'variables';
+
+form.embeddable-buttondown-form {
+  padding: 30px;
+  border-radius: 5px;
+  background: #f0f4f7;
+  border: solid 1px $border-color;
+  font-family: $secondary-font;
+  font-size: 0.875rem;
+
+  p {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 0;
+  }
+
+  input {
+    font-size: 0.875rem;
+    padding: 15px;
+    -webkit-appearance: none;
+    -webkit-border-radius: none;
+    border-radius: 3px;
+  }
+
+  .input-group {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -5px -10px;
+
+    input[type='email'] {
+      flex: 9999 250px;
+      margin: 0 5px 10px;
+      background: #ffffff;
+      border: 1px solid #dddddd;
+    }
+
+    input[type='submit'] {
+      background: $primary-color;
+      color: #ffffff;
+      border: 0;
+      cursor: pointer;
+      padding: 15px 30px;
+      margin: 0 5px 10px;
+      flex: 1 130px;
+    }
+  }
+}

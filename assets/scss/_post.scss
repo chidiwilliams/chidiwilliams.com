@@ -1,0 +1,69 @@
+@import 'variables';
+
+.articles article h2 {
+  font-size: 1.25rem;
+  margin: 5px 0 0;
+  color: $primary-color;
+}
+
+.articles article .post-meta {
+  margin-bottom: 5px;
+}
+
+.articles article {
+  margin-bottom: 30px;
+}
+
+.post-meta {
+  color: $secondary-color;
+  font-size: 0.75rem;
+  font-family: $secondary-font;
+  text-transform: uppercase;
+}
+
+article .post-meta {
+  margin: 5px 0 20px;
+}
+
+article img {
+  max-width: 100%;
+  display: block;
+  margin: auto;
+}
+
+article.post {
+  margin-bottom: 3em;
+
+  .post-content {
+    margin-bottom: 2em;
+  }
+
+  .post-footer {
+    font-style: italic;
+  }
+
+  pre {
+    overflow-x: auto;
+    padding: 20px;
+    font-size: 0.75rem;
+    border: 1px solid $border-color;
+    border-radius: 3px;
+  }
+
+  figure {
+    display: flex;
+    flex-direction: column;
+    margin: 1em 0;
+
+    figcaption {
+      text-align: center;
+      font-size: 0.75rem;
+      font-style: italic;
+    }
+
+    figcaption p {
+      margin-block-start: 0.5em;
+      margin-block-end: 0.5em;
+    }
+  }
+}

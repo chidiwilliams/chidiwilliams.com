@@ -1,0 +1,8 @@
+{{ define "main" }}
+<article class="post">
+  <h1>{{ .Title }}</h1>
+  {{ partial "post-meta.html" (dict "Page" . "Tags" true) }}
+  <!--  -->
+  {{ partial "serieslist.html" . }} {{ .Content }}
+</article>
+{{ end }}
