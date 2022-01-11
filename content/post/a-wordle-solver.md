@@ -237,7 +237,7 @@ sortBy(alphabet, frequencies.get).forEach((letter, i) => {
 });
 ```
 
-{{< figure src="https://res.cloudinary.com/cwilliams/image/upload/v1641914245/Blog/3D422A06-03F3-43D1-85FE-1C65EBF71F3B.webp" alt="Frequency distribution of letters" width="771" height="493" caption="The number of times each letter occurs in a set of about 12,000 words." >}}
+{{< figure src="https://res.cloudinary.com/cwilliams/image/upload/v1641914245/Blog/3D422A06-03F3-43D1-85FE-1C65EBF71F3B.webp" alt="Frequency distribution of letters" width="771" height="493" caption="The number of times each letter occurs in a set of 12,483 words." >}}
 
 To find `getScore()`, the score of each word, we first sum up the scores of all its letters:
 
