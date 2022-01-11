@@ -8,7 +8,7 @@ images:
   ['https://res.cloudinary.com/cwilliams/image/upload/v1640009010/Blog/dynamicland.webp']
 ---
 
-{{<figure link="https://dynamicland.org/" src="https://res.cloudinary.com/cwilliams/image/upload/v1640009010/Blog/dynamicland.webp" caption="Dynamicland" >}}
+{{<figure link="https://dynamicland.org/" src="https://res.cloudinary.com/cwilliams/image/upload/v1640009010/Blog/dynamicland.webp" caption="Dynamicland" width="1000" height="267" >}}
 
 I recently watched [_The Humane Representation of Thought_](https://vimeo.com/115154289), a conference talk by [Bret Victor](http://worrydream.com/), where he discusses why and how we should design new representations of ideas that fit better with our human capabilities.
 
@@ -32,6 +32,6 @@ Bret also proposes what he calls **“explore-the-model” reading material**. I
 
 It was here that the lightbulbs lit up for me. Without being able to put it in such clear terms, I've attempted creating explorable models here on this blog. Some articles I've written, like [Text Search with Tries](https://chidiwilliams.com/post/text-search-with-tries/) and [Quadtrees in the Wild](https://chidiwilliams.com/post/quadtrees/), have inlined interactions where the reader can play around with the material being taught.
 
-![Interactive visualization of a quadtree](https://res.cloudinary.com/cwilliams/image/upload/v1639944470/Blog/Dec-19-2021_20-04-08.gif)
+{{<figure src="https://res.cloudinary.com/cwilliams/image/upload/v1639944470/Blog/Dec-19-2021_20-04-08.gif" alt="Interactive visualization of a quadtree" width="756" height="380" >}}
 
 By clicking and dragging on controls and watching the visualizations, the reader augments syntax with the visual and the tactile and can gain a richer understanding of the subject. I fully agree with Bret that models like these can help improve the way we teach and communicate programming. If we build better tools that capture the richness of our human capabilities and make better use of our means of understanding and experience, what new possibilities will that open up?

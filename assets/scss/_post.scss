@@ -25,12 +25,6 @@ article .post-meta {
   margin: 5px 0 20px;
 }
 
-article img {
-  max-width: 100%;
-  display: block;
-  margin: auto;
-}
-
 article.post {
   margin-bottom: 3em;
 
@@ -42,6 +36,13 @@ article.post {
     font-style: italic;
   }
 
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+  }
+
   p code {
     font-size: 0.875rem;
     background: #ffefef;
@@ -51,9 +52,9 @@ article.post {
   }
 
   pre {
-    overflow-x: auto;
+    white-space: pre-wrap;
     padding: 20px;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     border: 1px solid $border-color;
     border-radius: 3px;
   }
