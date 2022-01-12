@@ -21,9 +21,13 @@
         <p class="post-list-item-meta__summary">
           {{ $randomNum := index (seq 120 150 | shuffle) 1 }}
           <!--  -->
+          {{ $summaryText := "" }}
+          <!--  -->
+          {{ if (gt (len .Summary) 160) }}
+          <!--  -->
           {{ $summary := htmlUnescape (slicestr .Summary 0 160) }}
           <!--  -->
-          {{ $summaryText := printf "%s%s" $summary "..." }}
+          {{ $summaryText = printf "%s%s" $summary "..." }} {{ end }}
           <!--  -->
           {{ default $summaryText .Description }}
         </p>
