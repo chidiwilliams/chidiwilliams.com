@@ -37,10 +37,6 @@
     <!--  -->
 
     {{ if .Params.math }}{{ partial "math.html" . }}{{ end }}
-    <!--  -->
-    {{- if (and (not .Site.IsServer) (eq (getenv "ENV") "production")) -}}
-    <link rel="preconnect" href="https://www.google-analytics.com/" />
-    {{ template "_internal/google_analytics.html" . }} {{- end -}}
   </head>
   <body>
     <div class="container">
