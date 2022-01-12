@@ -44,7 +44,7 @@ Note how the result highlights the correctly placed "R" first, instead of the wr
 
 Each guess we make tells us more about the correct answer. But not always. If we don't use what we learned from the result of the previous guess, we'll learn nothing new in the next guess.
 
-For example, if the correct word is "BEARD" and we guess "NAILS", the result would show that our guess has none of the letters in the answer. "SNAIL" would be a poor next guess. But "THREE", which has none of the same letters as "NAILS", would be much better.
+For example, if the correct word is "BEBOP" and we guess "NAILS", the result would show that our guess has none of the letters in the answer. "SNAIL" would be a poor next guess. But "THREE", which has none of the same letters as "NAILS", would be much better.
 
 So, we want each guess to use all the information from the previous result. We'll call guesses like these _sound guesses_ and guesses that make the same mistakes as the last guess _unsound_. Unsound guesses use up the number of tries without getting closer to the correct answer.
 
@@ -54,7 +54,7 @@ From the examples we discussed, we can say that a guess is _sound_ if:
 2. it has each of the misplaced letters in the previous result in a different position from where we last guessed it
 3. if it has a letter marked as wrong in the previous result, the letter occurs _p+q_ times in the guess, where _p_ is the number of times the letter was correct, and _q_ is the number of times the letter was misplaced
 
-The third rule looks a bit more daunting than the first two. Remember the example where the correct answer was "STARS", and we guessed "FRERE"? The first "R" was wrong, while the other "R" was correct. If the result shows a letter is wrong, it doesn't mean the letter doesn't occur in the correct answer _at all_. But that it doesn't occur any _more_ times after it was correct or misplaced. In the case of "FRERE", a word with zero or two “R”s would be an unsound next guess, while words with a single "R" in the fourth position would be sound.
+The third rule looks a bit more daunting than the first two. Remember the example where the correct answer was "STARS", and we guessed "FRERE"? The first "R" was wrong, while the other "R" was correct. If the result shows a letter as wrong, it doesn't mean the letter doesn't occur in the correct answer _at all_. But that it doesn't occur any _more_ times after it was correct or misplaced. In the case of "FRERE", a word with zero or two “R”s would be an unsound next guess, while words with a single "R" in the fourth position would be sound.
 
 We can figure out which words are worth considering for the next guess with these three rules.
 
