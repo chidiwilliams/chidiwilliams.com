@@ -286,7 +286,7 @@ And…that's all. A few if statements and a for loop here and there. That's what
 
 _If you enjoyed reading this, you might also like [Building Ayòayò: An Unbeatable Player](/post/building-ayoayo-an-unbeatable-player/)._
 
-{{<iframefigure src="https://chidiwilliams.github.io/wordle" caption="Play against the AI. Try to guess the word and then click ‘Show AI Board’ to see what the AI played." height="720px" >}}
+{{<iframefigure src="https://chidiwilliams.github.io/wordle" caption="Play against the AI. Try to guess the word and then click ‘Show AI Board’ to see what the AI played." height="720px" title="Wordle Game" >}}
 
 ## Notes
 
