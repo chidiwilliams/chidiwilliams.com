@@ -278,7 +278,7 @@ while (!isGameOver(result)) {
 
 Here's how many guesses the solver needs to figure out [these 12,483 words](https://github.com/chidiwilliams/wordle/blob/main/src/data/words.json).[^dfg]
 
-{{< figure src="https://res.cloudinary.com/cwilliams/image/upload/v1641914250/Blog/437A082B-2D4F-430A-A153-1B7094D57360.webp" alt="Number of guesses needed vs number of words" width="771" height="493" caption="The solver can complete more than eighty-five per cent of the words in six guesses or fewer. The easiest word to guess is \"aeros\" (one try), and the most difficult is \"lills\" (sixteen tries)." >}}
+{{< figure src="https://res.cloudinary.com/cwilliams/image/upload/v1641914250/Blog/437A082B-2D4F-430A-A153-1B7094D57360.webp" alt="Number of guesses needed vs number of words" width="771" height="465" caption="The solver can complete more than eighty-five per cent of the words in six guesses or fewer. The easiest word to guess is \"aeros\" (one try), and the most difficult is \"lills\" (sixteen tries)." >}}
 
 Words at the tail end of the chart, like "lills", take many tries to guess because many other words have similar letters. The solver tries guessing words like "bills", "fills", "tills", "hills", "wills", and "pills" before getting to "lills".
 
