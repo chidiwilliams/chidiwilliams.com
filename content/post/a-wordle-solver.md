@@ -44,7 +44,7 @@ Note how the result highlights the correctly placed "R" first, instead of the wr
 
 Each guess we make tells us more about the correct answer. But not always. If we don't use what we learned from the result of the previous guess, we'll learn nothing new in the next guess.
 
-For example, if the correct word is "EXTOL" and we guess "NAILS", the result would show that our guess has none of the letters in the answer. "SNAIL" would be a poor next guess. But "THREE", which has none of the same letters as "NAILS", would be much better.
+For example, if the correct word is "BEARD" and we guess "NAILS", the result would show that our guess has none of the letters in the answer. "SNAIL" would be a poor next guess. But "THREE", which has none of the same letters as "NAILS", would be much better.
 
 So, we want each guess to use all the information from the previous result. We'll call guesses like these _sound guesses_ and guesses that make the same mistakes as the last guess _unsound_. Unsound guesses use up the number of tries without getting closer to the correct answer.
 
