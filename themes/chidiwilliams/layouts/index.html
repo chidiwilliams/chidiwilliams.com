@@ -10,9 +10,7 @@
       />
     </div>
 
-    <div class="bio__description">
-      {{ readFile "/content/templates/about.md" | markdownify }}
-    </div>
+    <div class="bio__description">{{ partial "about.html" . }}</div>
   </div>
 
   <div class="recent-posts">
