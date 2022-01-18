@@ -378,8 +378,6 @@ By varying the maximum amount of error in each quadrant, we can change the amoun
 
 The complete code for the examples in this post is available [on GitHub](https://github.com/chidiwilliams/dsaw/).
 
-## Notes
-
 [^ger]:
     In the worst-case scenario (when the quadtree is unbalanced or when the search boundary covers the entire space), searching through the quadtree has a linear time complexity.
 

@@ -109,8 +109,6 @@ In the cosmological sense, new years appear to have little significance. We’ve
 
 And it is in this sense that I look forward to the new year, to the new lap, to learning more about myself and the world, to building and growing relationships with family and friends, to doing the things I value the most.
 
-## Notes
-
 [^ghk]: Lex Fridman was one of my biggest inspirations this year. I learned about many new, interesting people and ideas from his podcast.
 [^jhf]: If you want to follow my reading lists and reviews, check out [my Goodreads profile](https://www.goodreads.com/user/show/64479598-chidi-williams). I typically read books about popular science, philosophy, and technology.
 [^zth]: Admittedly, at $165/year, Roam Research is much more expensive than other note-taking apps, and it may not be worth that amount for everyone.

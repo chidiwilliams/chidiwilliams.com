@@ -427,5 +427,3 @@ In **Go**, GOTO can also only jump to a statement within the same function, and 
 GOTO in **C#** is also function-scoped, although it can jump from one case statement to another within a switch structure.[^jep] In these languages, GOTO statements can still produce clear, readable, and maintainable programs when used thoughtfully.
 
 [^jep]: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/goto
-
-## Notes

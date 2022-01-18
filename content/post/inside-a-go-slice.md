@@ -379,6 +379,4 @@ For each iteration after this point, the value of `nums` in `loopNums` will rema
 
 Because they grow dynamically and make copies only when needed, slices provide a lot of flexibility and efficiency when working with sequences of data in Go.
 
-## Notes
-
 [^cgh]: This technique of growing an array by copying to a new, larger array is the same way dynamic arrays work in languages like Python and Java. The rate of growing the new arrays, the **growth factor**, is typically around 1.5 - 2.

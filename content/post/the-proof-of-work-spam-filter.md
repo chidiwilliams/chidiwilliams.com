@@ -106,5 +106,3 @@ Hashcash also gives all the miners a fair opportunity to participate. Miners com
 Adam Back’s brainchild found a new expression here. It began as a tool for controlling pesky email spams. But it went on to inspire the revolutionary financial network called Bitcoin.[^skc]
 
 [^skc]: Proof of work has also been a source of criticism against Bitcoin. Miners need to run expensive calculations to validate transactions. And this increases transaction costs and raises environmental concerns.
-
-## Notes
