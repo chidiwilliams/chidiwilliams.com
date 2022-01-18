@@ -139,5 +139,3 @@ On the surface, the Game of Life is an interesting mathematical game and a fun p
 ---
 
 Check out the [online demo](https://chidiwilliams.github.io/conway-game-of-life) for Conway's Game of Life and the [source code on GitHub](https://github.com/chidiwilliams/conway-game-of-life).
-
-## Notes

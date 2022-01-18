@@ -524,8 +524,6 @@ The program we've built can evaluate expressions containing simple arithmetic: a
 
 In the meantime, try out [the evaluator online](https://chidiwilliams.github.io/expression-evaluator/) or check out [the code on GitHub](https://github.com/chidiwilliams/expression-evaluator/blob/main/simple.js).
 
-## Notes
-
 [^nds]: Depending on where you grew up, you may have once used a mnemonic like BODMAS, PEMDAS, or BEDMAS to memorize these precedence rules.
 [^mee]: The logician Jan Łukasiewicz invented the Polish notation in 1924. Two groups of computer scientists independently invented the Reverse Polish notation: Arthur Burks, Don Warren, and Jesse Wright in 1954, and Friedrich Bauer and Edsger Dijkstra in the early 1960s.
 [^njo]: Edsger Dijkstra invented the shunting-yard algorithm and first described it in his [1961 Mathematisch Centrum report](https://ir.cwi.nl/pub/9251).

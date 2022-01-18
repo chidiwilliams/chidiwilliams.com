@@ -288,8 +288,6 @@ _If you enjoyed reading this, you might also like [Building Ayòayò: An Unbeata
 
 {{<iframefigure src="https://chidiwilliams.github.io/wordle" caption="Play against the AI. Try to guess the word and then click ‘Show AI Board’ to see what the AI played." height="720px" title="Wordle Game" >}}
 
-## Notes
-
 [^cje]: At first, I thought the name was a play on Scrabble. But it turns out [it's a play on the creator's last name: Wardle.](https://www.nytimes.com/2022/01/03/technology/wordle-word-game-creator.html)
 [^dfg]: It might be a fun exercise to try different values of `UNIQUENESS_SCORE_WEIGHT` (or even an entirely different scoring scale) to see how the solver improves or worsens.
 [^dhs]: I got the dictionary I used for this solver from [this list](https://www.bestwordlist.com/5letterwords.htm). It was the largest collection of five-letter English words I could find (12,483 words). And it might have some words that are not in the original Wordle game.

@@ -103,6 +103,4 @@ Learning to make thoughtful tradeoffs is also a key part of becoming a technical
 
 In any case, making good tradeoffs is a skill every software engineer should learn. These decisions make significant differences. And thinking about them carefully helps ensure that we build software that remains valuable to users.
 
-## Notes
-
 [^enb]: In practice, these tradeoffs [aren't so binary](https://martin.kleppmann.com/2015/05/11/please-stop-calling-databases-cp-or-ap.html). A system that is not CAP-available may still be available to process requests from other nodes. And a system that is not CAP-consistent (or linearizable) can still offer weaker forms of consistency, like [sequential](https://en.wikipedia.org/wiki/Consistency_model#Sequential_consistency) and [causal consistency](https://en.wikipedia.org/wiki/Consistency_model#Causal_consistency). There are many possible permutations of availability and consistency levels. But the tradeoffs themselves don't disappear. Whichever way we turn, decisions we make about the consistency of distributed networks affect latency and availability and vice-versa.
