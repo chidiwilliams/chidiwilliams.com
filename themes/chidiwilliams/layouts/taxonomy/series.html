@@ -1,13 +1,7 @@
 {{ define "main" }}
 <section class="articles">
-  <h2>
-    Series: {{ with .Params.Title }} {{ . }} {{ else }} {{ .Title }} {{ end }}
-  </h2>
-
-  {{ range .Data.Pages.ByDate.Reverse }}
+  <h2>{{ with .Params.Title }} {{ . }} {{ else }} {{ .Title }} {{ end }}</h2>
   <!--  -->
-  {{ partial "summary.html" . }}
-  <!--  -->
-  {{ end }}
+  {{ partial "post_list.html" (dict "posts" .Data.Pages.ByDate.Reverse) }}
 </section>
 {{ end }}

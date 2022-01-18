@@ -2,7 +2,6 @@
 title: 'Bookshelf'
 date: 2020-08-08T17:29:00+01:00
 draft: false
-categories: [featured]
 description: A selected list from my current bookshelf
 ---
 
