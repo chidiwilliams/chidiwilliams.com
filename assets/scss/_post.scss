@@ -43,12 +43,21 @@ article.post {
     margin: auto;
   }
 
-  p code {
-    font-size: $small-font;
-    background: #ffefef;
-    padding: 2px 5px;
-    border-radius: 3px;
-    color: #522;
+  p {
+    a.image-link,
+    a.image-link:hover,
+    a.image-link:focus {
+      text-decoration: none;
+      border: none;
+    }
+
+    code {
+      font-size: $small-font;
+      background: #ffefef;
+      padding: 2px 5px;
+      border-radius: 3px;
+      color: #522;
+    }
   }
 
   pre {
@@ -82,5 +91,40 @@ article.post {
     hr {
       margin: 2rem 0 1rem;
     }
+  }
+
+  .data-table {
+    overflow: auto;
+    margin-bottom: 1rem;
+    table {
+      margin-bottom: 0;
+    }
+  }
+
+  table {
+    border: solid 2px #c6dcff;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    font-size: $small-font;
+    margin-bottom: 1rem;
+
+    thead th {
+      background-color: #e6ecf7;
+      border: solid 2px #c6dcff;
+      color: #3f5780;
+      padding: 10px;
+      text-align: left;
+    }
+
+    tbody td {
+      border: solid 2px #c6dcff;
+      color: #333;
+      padding: 10px;
+    }
+  }
+
+  video {
+    width: 100%;
   }
 }
