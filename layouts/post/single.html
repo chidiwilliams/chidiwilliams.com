@@ -6,4 +6,10 @@
   <div class="post-footer">{{ .Params.Footnotes }}</div>
 </article>
 
-{{ partial "subscribe-form.html" }} {{ end }}
+{{ partial "subscribe-form.html" }}
+<!--  -->
+{{ if (not .Site.IsServer) }}
+<div class="comments">{{ partial "disqus.html" }}</div>
+{{ end }}
+<!--  -->
+{{ end }}
