@@ -4,7 +4,6 @@ title = "Chidi Williams"
 theme = "chidiwilliams"
 googleAnalytics = "UA-167812981-1"
 enableRobotsTXT = true
-disqusShortname = "chidiwilliams"
 
 [params]
 description = "Chidi's Blog"
