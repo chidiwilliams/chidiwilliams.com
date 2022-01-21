@@ -17,14 +17,14 @@ Go has a different set of features from Java. And so, translating the book’s i
 For example, here’s how to open a file in Go:
 
 ```go
-f, err := os.Open("file.txt")
+file, err := os.Open("file.txt")
 if err != nil {
 	// handle error
 }
-// use file, f
+// use file
 ```
 
-This convention encourages you to check for errors explicitly, but it can quickly get verbose. The Lox parser contains very deeply-nested code that recursively parses statements, expressions, operators, and literals. And adding explicit error handling at each stage would have made the implementation much less readable. Instead, I made use of the panic-and-recover mechanism.
+This convention encourages you to check for errors explicitly, but it can quickly get verbose. The Lox parser contains very deeply-nested code that recursively parses statements, expressions, operators, and literals. And adding explicit error handling at each stage would have made the implementation much less readable. Instead, I made use of Go's panic-and-recover mechanism.
 
 Lox expects all statements to end with a semicolon. So, when the parser finds a statement that does not end with one, it panics with an error message.
 
@@ -101,7 +101,7 @@ func (e *encodeState) marshal(v interface{}, opts encOpts) (err error) {
 
 Each AST node corresponds to a “construct” in the source program: An `Expr.Binary` represents an expression with two operands (like an addition or division expression). An `Expr.Literal` holds a literal value (like a number or a string). And a `Stmt.Var` denotes a variable declaration statement.
 
-The interpreter includes a way to print (for debugging) and execute the AST. Instead of adding `print()` and `interpret()` methods to each node's class, it uses the [visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern). Each node class implements an `accept()` method that accepts a visitor, and visitors implement the functionality for visiting each node. This helps separate the different algorithms that use the AST nodes from the nodes themselves.
+The interpreter includes a way to print (for debugging) and execute the AST. But instead of adding `print()` and `interpret()` methods to each node's class, it uses the [visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern). Each node class implements an `accept()` method that accepts a visitor, and visitors implement the functionality for visiting each node. This helps separate the different algorithms that use the AST nodes from the nodes themselves.
 
 ```java
 public interface Visitor<T> {
@@ -113,9 +113,9 @@ public interface Visitor<T> {
 }
 ```
 
-The AST printer implements `Visitor<String>`: visiting each node returns the string representation of the node. And the interpreter implements `Visitor<Object>`: executing a node might return any type of value, like a string or a boolean.
+The AST printer implements `Visitor<String>`, since visiting each node returns the string representation of the node. And the interpreter implements `Visitor<Object>`, since executing a node might return any type of value, like a string or a boolean.
 
-Go doesn’t yet support generics (as at the latest stable version, Go 1.17), and so the visitor structs return values with `interface{}` type.
+Go doesn’t yet support generics (as at the latest stable version, Go 1.17), so the visitor structs return values with `interface{}` type.
 
 ```go
 type ExprVisitor interface {
@@ -125,7 +125,7 @@ type ExprVisitor interface {
 }
 ```
 
-And the visitors, as in the case of the AST printer, need to do further type assertions:
+And so, the visitors, as in the case of the AST printer, need to do further type assertions:
 
 ```go
 // print returns a string representation of an ast.Expr node
@@ -134,10 +134,13 @@ func (a astPrinter) print(expr ast.Expr) string {
 }
 ```
 
-**Standard tooling:** The Lox interpreter also includes a code generator for the AST nodes. The program accepts a list of nodes as generates the data classes (or structs) representing each node.
+**Standard tooling:** The Lox interpreter also includes a code generator for the AST nodes. The program accepts a list of nodes and generates the data classes (or structs) representing each node.
 
 ```go
 // cmd/ast.go
+
+// Each string generates a struct for an AST node
+// Format: "[struct-name] : [field-name] [field-type], ..."
 
 writeAst("Expr", []string{
 	"Unary    : Operator Token, Right Expr",
@@ -153,13 +156,13 @@ writeAst("Stmt", []string{
 })
 ```
 
-The Go binary includes a `go generate` command that runs code generation tools. With the comment below in the `main.go` file of the interpreter, running `go generate` in the package directory runs the `ast.go` file that generates the structs.
+The Go CLI includes a `go generate` command that runs code generation tools. With the comment below in the `main.go` file of the interpreter, running `go generate` in the package directory generates the files for the AST nodes.
 
 ```go
 //go:generate go run cmd/ast.go
 ```
 
-Go also ships with its own code formatter out of the box. It’s common to run the formatter on the command line, like `go fmt example.go`—but the formatter is also included in the standard library! Before writing the AST files to disk, the generator formats the text by calling `format.Source()`:
+Go also ships with its own code formatter out of the box. It’s common to use it on the command line, like `go fmt example.go`—but the formatter is also included in the standard library! Before writing the files to disk, the generator formats the text by calling `format.Source()`:
 
 ```go
 // import "go/format"
