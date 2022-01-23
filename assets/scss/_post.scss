@@ -18,7 +18,6 @@
   color: $secondary-color;
   font-size: $small-font;
   font-family: $secondary-font;
-  text-transform: uppercase;
 }
 
 article .post-meta {
@@ -27,6 +26,12 @@ article .post-meta {
 
 article.post {
   margin-bottom: 3em;
+
+  a {
+    color: inherit;
+    font-weight: bold;
+    text-decoration: underline;
+  }
 
   .post-content {
     margin-bottom: 2em;

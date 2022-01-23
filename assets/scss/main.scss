@@ -17,13 +17,11 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 500;
-  letter-spacing: initial;
+  font-family: $secondary-font;
 }
 
 h1 {
-  font-size: 1.8rem;
-  line-height: 1.25;
+  font-size: 1.75rem;
 }
 
 h1,
@@ -107,5 +105,5 @@ a.secondary svg {
 }
 
 section.shelf a.perfect-book-link {
-  font-weight: 600;
+  font-weight: bold;
 }

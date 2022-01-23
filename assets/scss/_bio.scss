@@ -1,6 +1,13 @@
 .bio {
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 3rem;
+
+  a {
+    color: inherit;
+    font-weight: bold;
+    text-decoration: underline;
+  }
 
   &__image {
     margin-right: 20px;
