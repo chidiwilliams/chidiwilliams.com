@@ -48,6 +48,8 @@
       display: flex;
       flex-wrap: wrap;
       color: unset;
+      text-decoration: unset;
+      font-weight: unset;
     }
   }
 }
@@ -57,5 +59,10 @@
     font-weight: normal;
     font-size: 1rem;
     color: $secondary-color;
+
+    a {
+      color: inherit;
+      text-decoration: underline;
+    }
   }
 }
