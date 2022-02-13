@@ -1,0 +1,25 @@
+# Publish draft newsletters to Buttondown
+
+name: Publish newsletter
+
+on:
+  schedule:
+    - cron: "0 0 * * 0"
+  workflow_dispatch:
+
+jobs:
+  newsletter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.5.1
+
+      - name: Install rss-buttondown
+        run: npm install -g https://github.com/chidiwilliams/rss-buttondown
+
+      - name: Run rss-buttondown
+        run: rss-buttondown
+        env:
+          BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
+          RSS_URL: ${{ secrets.RSS_URL }}
+          MAX_RECENT_POST_AGE: ${{ secrets.MAX_RECENT_POST_AGE }}
