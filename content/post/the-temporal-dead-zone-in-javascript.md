@@ -4,11 +4,11 @@ date: 2022-02-18T12:19:08Z
 draft: false
 ---
 
-JavaScript is somewhat popular within the programming community for its quirks and weird edge cases. There are countless blog posts, conference talks, and books that discuss how seemingly harmless JavaScript programs sometimes behave unexpectedly. And many of them try to steer learners away from the confusing features of the language and towards "The Good Parts".
+JavaScript is somewhat popular within the programming community for its many quirks. There are countless blog posts, conference talks, and books that discuss how seemingly harmless JavaScript programs can sometimes behave unexpectedly.
 
-But in the [_You Don't Know JS_](https://github.com/getify/You-Dont-Know-JS#you-dont-know-js-yet-book-series---2nd-edition) (YDKJS) book series, Kyle Simpson tries to do just the opposite: instead of skirting around the dark corners of JavaScript, the book "goes deep into the core mechanisms of the language to explain why it works the way it does".
+Many of these talks and books try to steer learners away from the confusing features of the language and towards "The Good Parts". But in the [_You Don't Know JS_](https://github.com/getify/You-Dont-Know-JS#you-dont-know-js-yet-book-series---2nd-edition) (YDKJS) book series, Kyle Simpson tries to do the exact opposite: instead of skirting around the dark corners of JavaScript, the book "goes deep into the core mechanisms of the language to explain why it works the way it does".
 
-I had a YDKJS moment recently. While implementing scoped variables for [my Lox interpreter](https://chidiwilliams.com/post/notes-on-crafting-interpreters-go/), I stumbled into a small JavaScript program that seemed confusing. But after studying it more closely, I found that it uncovered some of the depth and nuance with JavaScript's design and helped me understand the language even better.
+I had a YDKJS moment recently. While implementing scoped variables for [my Lox interpreter](https://chidiwilliams.com/post/notes-on-crafting-interpreters-go/), I stumbled onto a small JavaScript program that seemed confusing at first. But after studying it more closely, I found that it uncovered some of the depth and nuance with JavaScript's design and helped me understand the language even better.
 
 ## Variables in scope
 
@@ -26,7 +26,7 @@ var a = "global";
 }
 ```
 
-`showA` "captures" the value of the globally-defined variable `a`. And the scope of the second declaration is limited to the block. So, the program prints "global" twice.
+`showA` "captures" the value of the globally-defined variable `a`, and the scope of the second declaration is limited to the block. So, the program prints "global" twice.
 
 When I first came across this program, I thought its behaviour seemed consistent with how I understood other languages worked. For example, we may rewrite in Go as:
 
@@ -62,7 +62,7 @@ var a = 'global';
 }
 ```
 
-If you're familiar with scope and hoisting in JavaScript, you might be able to tell that this program isn't quite the same as the previous two. `var` statements in JavaScript declare hoisted, globally-scoped (or function-scoped) variables. So, both variable declarations are hoisted to the top of the program and point to the same variable. It's equivalent to:
+If you're familiar with variable scope and hoisting in JavaScript, you might be able to tell that this program isn't quite the same as the previous two. `var` statements in JavaScript declare hoisted, globally-scoped (or function-scoped) variables. So, both variable declarations are hoisted to the top of the program and point to the same variable. The program is equivalent to:
 
 ```js
 var a; // hoisted first declaration / a has a value of undefined at this point
@@ -81,7 +81,7 @@ a = 'global'; // a assigned to 'global'
 
 The second declaration of `a` overwrites the first, and the program prints "global" and then "local".
 
-That works out fine. We used two global variables, so it's not quite the same as the original program. We only need to change the second declaration to a block-scoped variable to revert to the original program.
+That works out fine. We used two global variables, so it's not quite the same as the original program. Now, we only need to change the second declaration to a block-scoped variable to revert to the original program.
 
 ```js
 var a = 'global';
@@ -103,7 +103,7 @@ Uncaught ReferenceError: Cannot access 'a' before initialization
     at <anonymous>:4:5
 ```
 
-That doesn't seem right. Why doesn't it print "global" twice like the Lox and Go programs? Why does it throw an error instead? Why can't it "access 'a' before initialization"?
+That doesn't seem right at all. Why doesn't it print "global" twice like the Lox and Go programs? Why does it throw an error instead? Why can't it "access 'a' before initialization"?
 
 ## The Temporal Dead Zone
 
@@ -127,7 +127,7 @@ a = 'global'; // a is "global"
 
 The `let` declaration is hoisted to the top of the block. So the first call to `showA()` prints the value of `a` after it is hoisted but before it is initialized. The variable has no value yet. And trying to access it throws a `ReferenceError`.
 
-We call this _period of time_ after entering the scope of a variable but before its initialization the Temporal Dead Zone (TDZ).
+We call this _period_ after entering the scope of a variable but before its initialization the Temporal Dead Zone (TDZ).
 
 ```js
 var a = 'global';
@@ -156,7 +156,7 @@ greet(); // ReferenceError
 let greeting = 'hello'; // <End of TDZ for greeting>
 
 function greet() {
-  console.log(greet);
+  console.log(greeting);
 }
 ```
 
@@ -194,8 +194,8 @@ If we had declared this variable with a `var` statement, it would have been auto
 
 Two different values? `undefined` and then `"hello"`? That's one too many values for a _constant_.
 
-We seem to be at an impasse: the `const` variable has to exist throughout the scope, but we can't auto-initialize it to `undefined`. What do we do when the variable exists but hasn't yet been assigned?
+We seem to be at an impasse here: the `const` variable has to exist throughout the scope, but we can't auto-initialize it to `undefined`. What do we do when the variable exists but hasn't yet been assigned?
 
-We say it's in a "dead zone". As we saw earlier, trying to access the variable in this zone is illegal and throws a `ReferenceError`. And to be consistent with this `const` behaviour, the TC39 chose to have a TDZ for `let` as well.
+We say it's in a "dead zone". As we saw earlier, trying to access the variable in this zone is illegal and throws a `ReferenceError`. And to be consistent with `const`, the TC39 chose to have a TDZ for `let` as well.
 
 There are a few other scenarios to watch out for with "dead zone" variables, like when inside loop blocks and when combining `var`s and `let`s. But to avoid many of these issues, the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#temporal_dead_zone_tdz) recommend declaring `let` (and `const`) variables at the top of the scope in which they are used.
