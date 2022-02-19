@@ -2,6 +2,11 @@
 title: 'The Temporal Dead Zone in JavaScript'
 date: 2022-02-18T12:19:08Z
 draft: false
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_500/v1645259971/Blog/pexels-brett-sayles-1662770.webp'
+images:
+  [
+    https://res.cloudinary.com/cwilliams/image/upload/v1645259971/Blog/pexels-brett-sayles-1662770.webp,
+  ]
 ---
 
 JavaScript is somewhat popular within the programming community for its many quirks. There are countless blog posts, conference talks, and books that discuss how seemingly harmless JavaScript programs can sometimes behave unexpectedly.
