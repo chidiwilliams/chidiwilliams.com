@@ -1,5 +1,5 @@
 ---
-title: On Pointers in Go
+title: Pointers in Go
 date: 2022-02-25T12:00:25+01:00
 draft: false
 thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/v1645803353/Blog/amimhgvppjxtcfbenpzy.webp'
@@ -276,7 +276,7 @@ type Interpreter struct {
 }
 ```
 
-![Interpreter with environment pointer](https://res.cloudinary.com/cwilliams/image/upload/v1645803548/Blog/kns2nhko3vmbzjp8jt5o.webp)
+![Interpreter with environment pointer](https://res.cloudinary.com/cwilliams/image/upload/v1645805936/Blog/bh9dvhg4lr7r4nataicr.webp)
 
 To execute a block, we create a new environment:
 
@@ -286,7 +286,7 @@ blockEnv := environment{enclosing: in.environment}
 
 In this version, we create a new `environment` struct. For its `enclosing` field, it takes (a copy of) the value of `in.environment`, which is a pointer to the current environment.
 
-![Block environment pointing to same as interpreter environment](https://res.cloudinary.com/cwilliams/image/upload/v1645803541/Blog/bpfwlmsqa0flfjoe65ta.webp)
+![Block environment pointing to same as interpreter environment](https://res.cloudinary.com/cwilliams/image/upload/v1645805769/Blog/vqtlsvfoua0vjx9wz133.webp)
 
 The value of `blockEnv.enclosing` is the memory address of the environment `in.environment` points to, _not_ the memory address of `in.environment` itself.
 
@@ -309,7 +309,9 @@ fmt.Printf("%p\n", blockEnv.enclosing) // 0xc00010a500
 fmt.Printf("%p\n", in.env)             // 0xc00010a510
 ```
 
-![Interpreter environment pointing to correct block environment](https://res.cloudinary.com/cwilliams/image/upload/v1645803535/Blog/sqihjbxed0z0uxp1ya08.webp)
+So when we set the interpreter's environment to the new environment we created, it links to the parent scope correctly.
+
+![Interpreter environment pointing to correct block environment](https://res.cloudinary.com/cwilliams/image/upload/v1645805756/Blog/zx3izfxjfqn8szrpn3ux.webp)
 
 ## Coda
 
