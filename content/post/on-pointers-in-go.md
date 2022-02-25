@@ -2,6 +2,11 @@
 title: On Pointers in Go
 date: 2022-02-25T12:00:25+01:00
 draft: false
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/v1645803353/Blog/amimhgvppjxtcfbenpzy.webp'
+images:
+  [
+    'https://res.cloudinary.com/cwilliams/image/upload/v1645803535/Blog/sqihjbxed0z0uxp1ya08.webp',
+  ]
 ---
 
 When I first started learning to write Go, there were two concepts I found most confusing at first: [slices](https://chidiwilliams.com/post/inside-a-go-slice/) and pointers. Because, up until that point, I'd spent most of my time working with dynamic languages like Python and JavaScript, which do not support slices and explicit pointers.
@@ -111,11 +116,11 @@ To execute a block statement, the interpreter creates a new environment, setting
 ```go
 func (in *Interpreter) VisitBlockStmt(stmt ast.BlockStmt) interface{} {
   // Create a new environment and set the current environment as enclosing
-  blockEnv := environment{enclosing: &in.environment}
+  blockEnv := environment{enclosing: &in.env}
 
   // Restore the current environment after executing this block
-  previous := in.environment
-  defer func() { in.environment = previous }()
+  previous := in.env
+  defer func() { in.env = previous }()
 
   // Set the blockEnv as the new execution environment
   in.environment = blockEnv
@@ -163,7 +168,7 @@ runtime.morestack()
 */
 ```
 
-The guilty line of code came from the `get` method of the `environment` struct, where we looked up the value of a variable from the enclosing scope.
+The offending line of code came from the `get` method of the `environment` struct, where we looked up the value of a variable from the enclosing scope.
 
 ```go
 func (e *environment) get(name ast.Token) (interface{}, error) {
@@ -183,8 +188,8 @@ I instinctively suspected the issue may have been related to defining the `env` 
 
 ```go
 type Interpreter struct {
-  // before: "environment environment"
-	environment *environment
+  // before: "env environment"
+	env *environment
 }
 
 func (in *Interpreter) VisitBlockStmt(stmt ast.BlockStmt) interface{} {
@@ -216,11 +221,11 @@ Let's take a closer look at the first implementation.
 
 ```go
 type Interpreter struct {
-	environment environment
+	env environment
 }
 ```
 
-> Image of block of interpreter, inside it a block of an environment. Inside it a map of values pointing to some map somewhere. Remember that a map is implemented as a pointer to some structure. For the enclosing, pointer to another environment.
+![Interpreter with environment struct](https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_200/v1645803451/Blog/io5iz6s6badkglvb0hrp.webp)
 
 To interpret a block statement, we created a new environment with its `enclosing` field pointing to `in.environment`.
 
@@ -230,7 +235,7 @@ blockEnv := environment{enclosing: &in.environment}
 
 Here's what that actually looks like:
 
-> Diagram of new environment block pointing to `in.environment` as enclosing.
+![Block environment pointing to interpreter environment](https://res.cloudinary.com/cwilliams/image/upload/v1645803353/Blog/amimhgvppjxtcfbenpzy.webp)
 
 When we say "pointing to `in.environment`", we mean that the **value** of `blockEnv.enclosing` is set to the **memory address** of the `in.environment` field:
 
@@ -259,7 +264,7 @@ fmt.Printf("%p", blockEnv.enclosing) // 0xc00004a510
 
 It may now be clearer how we set the environment to a structure that points to its own location when we assigned `in.env = blockEnv`.
 
-> Diagram of interpreter with enclosing pointing to its own location
+![Interpreter environment pointing to itself](https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_200/v1645803400/Blog/rifedqb9vunqwp5cma2p.webp)
 
 ## A review of the second case
 
@@ -271,7 +276,7 @@ type Interpreter struct {
 }
 ```
 
-> Image of block of interpreter, inside it a block pointing to an environment. Inside the environment a map of values pointing to some map somewhere. Remember that a map is implemented as a pointer to some structure. For the enclosing, pointer to another environment.
+![Interpreter with environment pointer](https://res.cloudinary.com/cwilliams/image/upload/v1645803548/Blog/kns2nhko3vmbzjp8jt5o.webp)
 
 To execute a block, we create a new environment:
 
@@ -281,7 +286,7 @@ blockEnv := environment{enclosing: in.environment}
 
 In this version, we create a new `environment` struct. For its `enclosing` field, it takes (a copy of) the value of `in.environment`, which is a pointer to the current environment.
 
-> Diagram of new environment pointing to the current environment
+![Block environment pointing to same as interpreter environment](https://res.cloudinary.com/cwilliams/image/upload/v1645803541/Blog/bpfwlmsqa0flfjoe65ta.webp)
 
 The value of `blockEnv.enclosing` is the memory address of the environment `in.environment` points to, _not_ the memory address of `in.environment` itself.
 
@@ -304,7 +309,7 @@ fmt.Printf("%p\n", blockEnv.enclosing) // 0xc00010a500
 fmt.Printf("%p\n", in.env)             // 0xc00010a510
 ```
 
-> Diagram of interpreter pointing to blockEnv pointing to the old interpreter environment
+![Interpreter environment pointing to correct block environment](https://res.cloudinary.com/cwilliams/image/upload/v1645803535/Blog/sqihjbxed0z0uxp1ya08.webp)
 
 ## Coda
 
