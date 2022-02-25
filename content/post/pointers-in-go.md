@@ -2,10 +2,10 @@
 title: Pointers in Go
 date: 2022-02-25T12:00:25+01:00
 draft: false
-thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/v1645803353/Blog/amimhgvppjxtcfbenpzy.webp'
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_200/v1645805756/Blog/zx3izfxjfqn8szrpn3ux.webp'
 images:
   [
-    'https://res.cloudinary.com/cwilliams/image/upload/v1645803535/Blog/sqihjbxed0z0uxp1ya08.webp',
+    'https://res.cloudinary.com/cwilliams/image/upload/v1645806676/Blog/amk7gub8bu4cuook8kwf.png',
   ]
 ---
 
