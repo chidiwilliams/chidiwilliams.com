@@ -1,5 +1,5 @@
 ---
-title: Understanding Pointers in Go
+title: On Pointers in Go
 date: 2022-02-25T12:00:25+01:00
 draft: false
 ---
@@ -286,31 +286,31 @@ In this version, we create a new `environment` struct. For its `enclosing` field
 The value of `blockEnv.enclosing` is the memory address of the environment `in.environment` points to, _not_ the memory address of `in.environment` itself.
 
 ```go
-in := interpreter{environment: &environment{}}
+in := interpreter{env: &environment{}}
 
-blockEnv := environment{enclosing: in.environment}
+blockEnv := environment{enclosing: in.env}
 
-fmt.Printf("%p\n", &in.environment)    // 0xc00011a680
+fmt.Printf("%p\n", &in.env)            // 0xc00011a680
 fmt.Printf("%p\n", blockEnv.enclosing) // 0xc00010a500
-fmt.Printf("%p\n", in.environment)     // 0xc00010a500
+fmt.Printf("%p\n", in.env)             // 0xc00010a500
 ```
 
 If we-reassign `in.environment` to a new environment, the address `&in.environment` and the value of `blockEnv.enclosing` stay the same, while the pointer value of `in.environment` changes:
 
 ```go
-in.environment = &environment{}
-fmt.Printf("%p\n", &in.environment)    // 0xc00011a680
+in.env = &environment{}
+fmt.Printf("%p\n", &in.env)            // 0xc00011a680
 fmt.Printf("%p\n", blockEnv.enclosing) // 0xc00010a500
-fmt.Printf("%p\n", in.environment)     // 0xc00010a510
+fmt.Printf("%p\n", in.env)             // 0xc00010a510
 ```
 
 > Diagram of interpreter pointing to blockEnv pointing to the old interpreter environment
 
 ## Coda
 
-Two questions I've found to help me apply pointers better:
+Two questions I've found to help me understand and apply pointers better:
 
 - Do I want to point to X or share an underlying value with X? (The former means creating a pointer to X, while the latter implies changing X to be a pointer itself and using its pointer value.)
-- What do I expect to happen when the underlying value of a pointer changes?
+- What do I expect to happen when the underlying value of the pointer changes?
 
 While working on the problem in this post, I also learned about the [memory layout of structs](https://research.swtch.com/godata) and [how structure padding affects the sizes of structs](https://go101.org/article/memory-layout.html), both of which are relevant to understanding how structs and pointers work in Go.
