@@ -9,9 +9,9 @@ images:
   ]
 ---
 
-When I first started learning to write Go, there were two concepts I found most confusing at first: [slices](https://chidiwilliams.com/post/inside-a-go-slice/) and pointers. Because, up until that point, I'd spent most of my time working with dynamic languages like Python and JavaScript, which do not support slices and explicit pointers.
+When I first started learning to write Go, I found two concepts most confusing at first: [slices](https://chidiwilliams.com/post/inside-a-go-slice/) and pointers. Because, up until that point, I'd spent most of my time working with dynamic languages like Python and JavaScript, which do not support slices and explicit pointers.
 
-"_When_ should I use a pointer?" That's the key question I've had as I've learned about pointers. In some cases, it's clear that a pointer is the way to go: [pointer receivers let methods modify their receivers](https://go.dev/tour/methods/8) and [a nil pointer signifies that a value is "missing"](https://www.digitalocean.com/community/conceptual_articles/understanding-pointers-in-go#nil-pointers). But in some other scenarios, I still have to rethink why some value should be a pointer.
+"_When_ should I use a pointer?" That's the key question I've had as I've learned about pointers. In some cases, it's clear that a pointer is the way to go: [pointer receivers let methods modify their receivers](https://go.dev/tour/methods/8), and [a nil pointer signifies that a value is "missing"](https://www.digitalocean.com/community/conceptual_articles/understanding-pointers-in-go#nil-pointers). But in some other scenarios, I still have to rethink why some value should be a pointer.
 
 ## Global variables in Lox
 
@@ -32,7 +32,7 @@ func (in *Interpreter) Interpret(statements []ast.Stmt) {
 
 (It's important to note that the `env` field has a type of `environment`. We'll discuss it in more detail in the next section.)
 
-Program execution happens within a context (or an environment) which stores all the global and local variables defined by and accessible to the program at each point in time. So, the `environment` struct defines methods to set and retrieve variable values.
+Program execution happens within a context (or an environment). The environment stores all the variables defined by and accessible to the program at each point in time. So, the `environment` struct defines methods to set and retrieve variable values.
 
 ```go
 type environment struct {
@@ -182,9 +182,9 @@ func (e *environment) get(name ast.Token) (interface{}, error) {
 }
 ```
 
-For some reason, the pointer to the enclosing environment referred to the environment itself. The linked list of `environment` structs formed a _loop_, and trying to find the last value of the loop produced the stack overflow error.
+For some reason, the pointer to the enclosing environment referred to the environment itself. The linked list of `environment` structs formed a _loop_, and looking for the last value of the loop produced the stack overflow error.
 
-I instinctively suspected the issue may have been related to defining the `env` field in the `Interpreter` as a struct. (It was.) And so I changed it to a pointer to a struct, without thinking much more about it.
+I instinctively suspected the issue might have been related to defining the `env` field in the `Interpreter` as a struct. (It was.) And so I changed it to a pointer to a struct, without thinking much more about it.
 
 ```go
 type Interpreter struct {
@@ -206,7 +206,7 @@ func (in *Interpreter) VisitBlockStmt(stmt ast.BlockStmt) interface{} {
 }
 ```
 
-Changing those three lines worked and the interpreter began to handle block scopes as expected. If you were already familiar with how pointers work, you may have caught why this happened. Here's a summary of the change and a more detailed review below.
+Changing those three lines worked, and the interpreter began to handle block scopes as expected. If you are familiar with how pointers work, you might have already caught why this happened. Here's a summary of the change and a more detailed review below.
 
 | Before                                                                                                                            | After                                                                                                                                                   |
 | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -284,7 +284,7 @@ To execute a block, we create a new environment:
 blockEnv := environment{enclosing: in.environment}
 ```
 
-In this version, we create a new `environment` struct. For its `enclosing` field, it takes (a copy of) the value of `in.environment`, which is a pointer to the current environment.
+In this version, we create a new `environment` struct. Its `enclosing` field takes (a copy of) the value of `in.environment`, which is a pointer to the current environment.
 
 ![Block environment pointing to same as interpreter environment](https://res.cloudinary.com/cwilliams/image/upload/v1645805769/Blog/vqtlsvfoua0vjx9wz133.webp)
 
