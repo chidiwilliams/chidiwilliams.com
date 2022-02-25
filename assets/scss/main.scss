@@ -4,6 +4,7 @@
 @import 'post-list';
 @import 'bio';
 @import 'post';
+@import 'syntax';
 
 html,
 body {
@@ -47,11 +48,6 @@ body {
 
 button {
   font-family: $body-font;
-}
-
-a {
-  color: $primary-color;
-  text-decoration: none;
 }
 
 hr {

@@ -36,13 +36,21 @@
 
     <!--  -->
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400;0,600;1,400;1,600&display=swap"
+      rel="stylesheet"
+    />
 
     <!--  -->
 
     {{ if .Params.math }}{{ partial "math.html" . }}{{ end }}
+    <!--  -->
+    <!-- TODO: Show only on production. Cloudflare isn't passing env variables to Hugo to be used as (getenv "ENV") -->
+    {{- if (and (not .Site.IsServer)) -}}
+    <link rel="preconnect" href="https://www.google-analytics.com/" />
+    {{ template "_internal/google_analytics.html" . }} {{- end -}}
   </head>
   <body>
     <div class="container">
