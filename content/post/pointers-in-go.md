@@ -36,7 +36,7 @@ Program execution happens within a context (or an environment). The environment 
 
 ```go
 type environment struct {
-	values    map[string]interface{}
+	values map[string]interface{}
 }
 
 func (e *environment) define(name string, value interface{}) {
@@ -315,7 +315,7 @@ So when we set the interpreter's environment to the new environment we created, 
 
 ## Coda
 
-Two questions I've found to help me understand and apply pointers better:
+Two questions I've found to help me understand and use pointers better:
 
 - Do I want to point to X or share an underlying value with X? (The former means creating a pointer to X, while the latter implies changing X to be a pointer itself and using its pointer value.)
 - What do I expect to happen when the underlying value of the pointer changes?
