@@ -16,16 +16,16 @@
   {{ $posts := where .Site.RegularPages "Section" "in" (slice "post") }}
 
   <!-- LATEST -->
-  {{ partial "post_group.html" (dict "posts" ($posts | first 5) "title" "Latest") }}
+  {{ partial "post_list.html" (dict "posts" ($posts | first 5) "title" "Latest") }}
 
   <!-- CATEGORIES -->
   {{ range $taxonomy, $taxonomyPosts := .Site.Taxonomies.categories }}<!--  -->
   {{ $title := $taxonomy }} {{ with $.Site.GetPage (printf "/%s" $taxonomy) }}<!--  -->
   {{ $title = .Params.Title }} {{ end }}<!--  -->
-  {{ partial "post_group.html" (dict "posts" $taxonomyPosts "title" $title) }} {{ end }}
+  {{ partial "post_list.html" (dict "posts" $taxonomyPosts "title" $title) }} {{ end }}
 
   <!-- UNCATEGORIZED -->
   {{ $uncategorized := where $posts "Params.categories" "==" nil }}<!--  -->
-  {{ partial "post_group.html" (dict "posts" $uncategorized "title" "More...") }}
+  {{ partial "post_list.html" (dict "posts" $uncategorized "title" "More...") }}
 </div>
 {{ end }}

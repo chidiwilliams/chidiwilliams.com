@@ -1,5 +1,5 @@
 {{ define "main" }}<!--  -->
 {{ $title := .Title }} {{ with .Params.Title }} {{ $title = . }} {{ end }}<!--  -->
 {{ $title = (printf "%s%s" "Category: " $title) }}<!--  -->
-{{ partial "post_group.html" (dict "posts" .Data.Pages.ByDate.Reverse "title" $title) }}
+{{ partial "post_list.html" (dict "posts" .Data.Pages.ByDate.Reverse "title" $title) }}
 {{ end }}

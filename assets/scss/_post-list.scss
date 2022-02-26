@@ -1,68 +1,16 @@
 .post-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-
-  &-item {
-    padding: 20px 0;
-    border-radius: 3px;
-    margin: 0 -10px;
-
-    &:not(:last-child) {
-      border-bottom: 1px solid $border-color;
-    }
-
-    &__image {
-      $image-flex-width: 180px;
-      flex: 0 0 150px;
-      margin: 0 10px 5px;
-
-      .post-list-item-image {
-        height: 100px;
-      }
-
-      @media only screen and (max-width: 599px) {
-        flex-grow: 1;
-
-        .post-list-item-image {
-          height: 200px;
-        }
-      }
-    }
-
-    &__meta {
-      flex: 1 400px;
-      margin: 0 10px;
-
-      .post-list-item-meta__summary {
-        margin: 0 0 5px;
-        font-size: $small-font;
-      }
-    }
-
-    &__meta h3 {
-      margin-top: 0;
-    }
-
-    a {
-      display: flex;
-      flex-wrap: wrap;
-      color: unset;
-      text-decoration: unset;
-      font-weight: unset;
-    }
-  }
-}
-
-.recent-posts {
   h2 {
-    font-weight: normal;
-    font-size: 1rem;
-    color: $secondary-color;
+    font-size: 1.25rem;
+  }
 
-    a {
-      color: inherit;
-      text-decoration: underline;
-    }
+  a {
+    color: $primary-color;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  &-item__date {
+    color: $secondary-color;
+    font-size: 0.875rem;
   }
 }
