@@ -7,6 +7,7 @@ images:
   [
     https://res.cloudinary.com/cwilliams/image/upload/v1645259971/Blog/pexels-brett-sayles-1662770.webp,
   ]
+categories: [languages]
 ---
 
 JavaScript is somewhat popular within the programming community for its many quirks. There are countless blog posts, conference talks, and books that discuss how seemingly harmless JavaScript programs can sometimes behave unexpectedly.

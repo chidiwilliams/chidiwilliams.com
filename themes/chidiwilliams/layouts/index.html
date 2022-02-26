@@ -13,12 +13,19 @@
     <div class="bio__description">{{ partial "about.html" . }}</div>
   </div>
 
-  <div class="recent-posts">
-    <h2>Articles / <a href="/blog">Blog</a></h2>
+  {{ $posts := where .Site.RegularPages "Section" "in" (slice "post") }}
 
-    {{ $posts := where .Site.RegularPages "Section" "in" (slice "post") }}
-    <!--  -->
-    {{ partial "post_list.html" (dict "posts" $posts) }}
-  </div>
+  <!-- LATEST -->
+  {{ partial "post_list.html" (dict "posts" ($posts | first 5) "title" "Latest") }}
+
+  <!-- CATEGORIES -->
+  {{ range $taxonomy, $taxonomyPosts := .Site.Taxonomies.categories }}<!--  -->
+  {{ $title := $taxonomy }} {{ with $.Site.GetPage (printf "/%s" $taxonomy) }}<!--  -->
+  {{ $title = .Params.Title }} {{ end }}<!--  -->
+  {{ partial "post_list.html" (dict "posts" $taxonomyPosts "title" $title) }} {{ end }}
+
+  <!-- UNCATEGORIZED -->
+  {{ $uncategorized := where $posts "Params.categories" "==" nil }}<!--  -->
+  {{ partial "post_list.html" (dict "posts" $uncategorized "title" "More...") }}
 </div>
 {{ end }}

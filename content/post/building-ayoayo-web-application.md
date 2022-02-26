@@ -10,6 +10,7 @@ images:
   [
     https://res.cloudinary.com/cwilliams/image/upload/v1593099586/Ayoayo_Web_App_Post_1.webp,
   ]
+categories: [games]
 ---
 
 In the previous posts in this series, we wrote the game logic for Ayòayò and built a CLI application. In this post, we’ll build an interactive web application for the game with JavaScript.
@@ -319,9 +320,7 @@ function handleCaptureEvent(event, fractionDone) {
   });
 
   const [pitX, pitY] = getPitPosition(row, column);
-  const [captureStoreX, captureStoreY] = getCaptureStorePosition(
-    capturingPlayer,
-  );
+  const [captureStoreX, captureStoreY] = getCaptureStorePosition(capturingPlayer);
   const currentHandX = pitX + fractionDone * (captureStoreX - pitX);
   const currentHandY = pitY + fractionDone * (captureStoreY - pitY);
   capturingHand.style.left = `${currentHandX}px`;

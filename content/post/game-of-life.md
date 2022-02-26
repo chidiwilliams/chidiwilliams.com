@@ -11,6 +11,7 @@ images:
   [
     'https://res.cloudinary.com/cwilliams/image/upload/v1634464272/Blog/pexels-photo-2102850.webp',
   ]
+categories: [games]
 ---
 
 As long as humans have been around, we have been exploring: by curiously wandering into unknown wildernesses by foot; by sailing across seas to seek out distant lands; by sending high-speed spacecraft to investigate moons and planets billions of kilometres away.

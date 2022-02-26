@@ -9,6 +9,7 @@ images:
   [
     'https://res.cloudinary.com/cwilliams/image/upload/v1605275488/Blog/CleanArchitecture.webp',
   ]
+categories: [go]
 ---
 
 Writing clean, high-quality code makes programs easier to understand, maintain, improve, and test.

@@ -7,6 +7,7 @@ tags: [algorithms, javascript]
 description: Minimax is a simple and effective decision rule used in game theory and artificial intelligence. In this post, we'll implement an unbeatable AI player for Ayòayò using minimax.
 thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1593960311/Ayoayo_Minimax.webp'
 images: [https://res.cloudinary.com/cwilliams/image/upload/v1593960311/Ayoayo_Minimax.webp]
+categories: [games]
 ---
 
 In the previous posts in this series, we built a CLI and web game for Ayòayò (Ayò) with JavaScript. In this post, we'll implement an unbeatable AI player for the game using a decision rule called minimax.

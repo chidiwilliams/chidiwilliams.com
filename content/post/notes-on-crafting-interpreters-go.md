@@ -2,6 +2,7 @@
 title: 'Notes on Crafting Interpreters: Go'
 date: 2022-01-21T11:56:59Z
 draft: false
+categories: [go, languages]
 ---
 
 Many decisions go into making a programming language: What kind of syntax will it have? Will it be dynamically or statically typed? Will it be declarative? Will it have first-class functions? These questions define the form and behaviour of the language. But some other decisions—like, in what language is the compiler or interpreter written?—are implementation details and should (ideally) be invisible to the users of the language.

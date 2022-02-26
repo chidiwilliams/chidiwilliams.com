@@ -10,6 +10,7 @@ images:
   [
     'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_400/v1640476505/Blog/ayoayo-cli.webp',
   ]
+categories: [games]
 ---
 
 In the [previous post](/post/building-ayoayo-implementation) in the [Building Ayòayò](/series/building-ayoayo) series, we wrote the game logic for Ayòayò with JavaScript. In this post, we'll build a simple Node.js command-line interface (CLI) application to test our implementation.

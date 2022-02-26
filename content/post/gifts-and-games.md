@@ -7,6 +7,7 @@ aliases: [/gifts-and-games]
 tags: [personal, vr]
 thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1620074571/Blog/IMG_1102.webp'
 images: [https://res.cloudinary.com/cwilliams/image/upload/v1620074571/Blog/IMG_1102.webp]
+categories: [games]
 ---
 
 There's something I have to confess: I don't quite keep up with all the latest trends in technology. I haven’t tried out all the new note-taking apps or written any of the many new JavaScript frameworks. I didn't own any crypto until recently. And three days ago, I wore a Virtual Reality headset for the first time.
