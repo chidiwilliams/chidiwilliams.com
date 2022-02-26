@@ -8,6 +8,7 @@ images:
   [
     'https://res.cloudinary.com/cwilliams/image/upload/v1636824748/Blog/pexels-photo-261763.webp',
   ]
+categories: [dsa]
 ---
 
 In the [previous post](/post/quadtrees/) in the [Data Structures and Algorithms in the Wild](/series/data-structures-and-algorithms-in-the-wild/) series, we discussed the quadtree, a tree data structure used to index locations in two-dimensional space. In this post, we'll look into another data structure called the trie.
@@ -294,7 +295,7 @@ The time complexity becomes _O(q + a\*b)_.
 
 We can compare this to the list implementation in the first section which had a time complexity of _O(p\*q)_. If we assume—and it is reasonable to do so—that the number of matches from searches is much smaller than the total number of words in the dictionary, i.e. `a << p`, we see that _O(q + a\*b)_ is a much better time complexity than _O(p\*q)_.
 
-Tries let us efficiently re*trie*ve textual information, which is how it gets its name.
+Tries let us efficiently re_trie_ve textual information, which is how it gets its name.
 
 ## Suffix tries
 

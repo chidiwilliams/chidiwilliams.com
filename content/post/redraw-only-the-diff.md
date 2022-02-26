@@ -9,6 +9,7 @@ images:
   [
     'https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_150/v1634652735/Blog/9e5b183e-d264-4818-b741-5c508da2f35c.webp',
   ]
+categories: [dsa]
 ---
 
 To illustrate the concepts in some of the posts on this blog, I sometimes make small, interactive JavaScript programs (see [Conway's Game of Life](/game-of-life/), [Quadtrees in the Wild](/quadtrees/), and [Building Ayòayò: Web Application](/post/building-ayoayo-web-application/), for example).

@@ -10,6 +10,7 @@ images:
 tags: [algorithms, javascript]
 series: [Building Ayoayo]
 description: This is the first post in the Building Ayòayò series. I explore the history and rules of the game and implement the game logic with JavaScript.
+categories: [games]
 ---
 
 This is the first post in the [Building Ayòayò](/series/building-ayoayo) series. The series will cover different aspects of building a simple web-based game with JavaScript.

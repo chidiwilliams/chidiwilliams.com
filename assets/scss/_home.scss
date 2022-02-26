@@ -1,0 +1,22 @@
+@import 'variables';
+
+.home {
+  section {
+    margin-bottom: 2rem;
+
+    h2 {
+      font-size: 1.25rem;
+    }
+
+    a {
+      color: $primary-color;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .post-list-item__date {
+      color: $secondary-color;
+      font-size: 0.875rem;
+    }
+  }
+}

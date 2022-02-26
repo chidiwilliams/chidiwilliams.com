@@ -3,6 +3,7 @@ title: '2021: Year in Review'
 date: 2022-01-01T00:45:07Z
 draft: false
 description: Reflecting on what I worked on and learnt in 2021
+categories: [year-in-review]
 ---
 
 _Previously: [2020](https://chidiwilliams.com/post/2020/)_

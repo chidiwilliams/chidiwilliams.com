@@ -2,6 +2,7 @@
 title: 'Ambiguous Grammars'
 date: 2022-02-12T16:27:55Z
 draft: false
+categories: [languages]
 ---
 
 **I.**

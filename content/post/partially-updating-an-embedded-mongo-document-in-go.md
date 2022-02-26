@@ -3,6 +3,7 @@ title: "Partially Updating an Embedded Mongo Document in Go"
 date: 2020-05-21T19:12:50Z
 draft: false
 tags: [go, mongo]
+categories: [go]
 ---
 
 Let's consider a Go application that stores a user's name and address information in MongoDB.
