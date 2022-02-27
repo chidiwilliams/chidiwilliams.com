@@ -9,6 +9,7 @@ images:
   [
     'https://res.cloudinary.com/cwilliams/image/upload/c_crop,h_350,w_670,x_0/v1625394129/Blog/E4ubeZxWQAE8JdE.webp',
   ]
+categories: [explanations]
 ---
 
 _(Originally published [on Twitter](https://twitter.com/ChidiWilliams__/status/1408401252090798081))_

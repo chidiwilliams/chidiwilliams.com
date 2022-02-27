@@ -6,6 +6,7 @@ thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v163
 images:
   ['https://res.cloudinary.com/cwilliams/image/upload/v1637524489/Blog/lieborf03.webp']
 aliases: [/newsletter/archive/fooled-by-complexity]
+categories: [programming-essays]
 ---
 
 I enjoy writing software best when I fully appreciate why it exists.

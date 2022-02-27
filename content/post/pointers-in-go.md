@@ -7,6 +7,7 @@ images:
   [
     'https://res.cloudinary.com/cwilliams/image/upload/v1645806676/Blog/amk7gub8bu4cuook8kwf.png',
   ]
+categories: [go]
 ---
 
 When I first started learning to write Go, I found two concepts most confusing at first: [slices](https://chidiwilliams.com/post/inside-a-go-slice/) and pointers. Because, up until that point, I'd spent most of my time working with dynamic languages like Python and JavaScript, which do not support slices and explicit pointers.
