@@ -1,6 +1,6 @@
 ---
 title: Pointers in Go
-date: 2022-02-26T12:00:25+01:00
+date: 2022-02-27T12:00:25+01:00
 draft: false
 thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_200/v1645805756/Blog/zx3izfxjfqn8szrpn3ux.webp'
 images:
@@ -12,7 +12,7 @@ categories: [go]
 
 When I first started learning to write Go, I found two concepts most confusing at first: [slices](https://chidiwilliams.com/post/inside-a-go-slice/) and pointers. Because, up until that point, I'd spent most of my time working with dynamic languages like Python and JavaScript, which do not support slices and explicit pointers.
 
-"_When_ should I use a pointer?" That's the key question I've had as I've learned about pointers. In some cases, it's clear that a pointer is the way to go: [pointer receivers let methods modify their receivers](https://go.dev/tour/methods/8), and [a nil pointer signifies that a value is "missing"](https://www.digitalocean.com/community/conceptual_articles/understanding-pointers-in-go#nil-pointers). But in some other scenarios, I still have to rethink why some value should be a pointer.
+"_When_ should I use a pointer?" That's the key question I've had as I've learned about pointers. In some cases, it's clear that a pointer is the way to go: [pointer receivers let methods modify their receivers](https://go.dev/tour/methods/8), and [a nil pointer signifies that a value is "missing"](https://www.digitalocean.com/community/conceptual_articles/understanding-pointers-in-go#nil-pointers). But in some other scenarios, I still have to rethink why some variable should be a pointer.
 
 ## Global variables in Lox
 
@@ -90,7 +90,7 @@ print c; // Error: Undefined variable c
 I implemented block scoping using a linked list of `environment` structs. In addition to its own `values`, an `environment` now holds a pointer to the `environment` of its parent (or enclosing) scope.
 
 ```go
-type environment {
+type environment struct {
 	// environment of the parent scope
 	enclosing *environment
 	// values set in this environment
@@ -112,7 +112,7 @@ func (e *environment) get(name ast.Token) (interface{}, error) {
 }
 ```
 
-To execute a block statement, the interpreter creates a new environment, setting the current one as its "parent"; executes the body of the block within this environment; and then restores the initial environment at the end of the block.
+To execute a block statement (a sequence of statements inside a block), the interpreter creates a new environment, setting the current one as its "parent"; executes the body of the block within this environment; and then restores the initial environment at the end of the block.
 
 ```go
 func (in *Interpreter) VisitBlockStmt(stmt ast.BlockStmt) interface{} {
@@ -124,7 +124,7 @@ func (in *Interpreter) VisitBlockStmt(stmt ast.BlockStmt) interface{} {
   defer func() { in.env = previous }()
 
   // Set the blockEnv as the new execution environment
-  in.environment = blockEnv
+  in.env = blockEnv
 
   // Then execute all the statements
   for _, statement := range statements {
@@ -135,7 +135,7 @@ func (in *Interpreter) VisitBlockStmt(stmt ast.BlockStmt) interface{} {
 
 ## Testing the block scope
 
-This implementation seemed to make sense. But when I tried executing some test programs, I found that it had a problem. The interpreter could look up variables defined in the current scope:
+This implementation seemed to make sense. The interpreter could look up variables defined in the current scope:
 
 ```go
 var a = 1;
@@ -183,7 +183,7 @@ func (e *environment) get(name ast.Token) (interface{}, error) {
 }
 ```
 
-For some reason, the pointer to the enclosing environment referred to the environment itself. The linked list of `environment` structs formed a _loop_, and looking for the last value of the loop produced the stack overflow error.
+For some reason, the pointer to the enclosing environment referred to the environment itself. The linked list of `environment` structs formed a _cycle_, and looking for the last value of the cycle produced the stack overflow error.
 
 I instinctively suspected the issue might have been related to defining the `env` field in the `Interpreter` as a struct. (It was.) And so I changed it to a pointer to a struct, without thinking much more about it.
 
@@ -194,14 +194,14 @@ type Interpreter struct {
 }
 
 func (in *Interpreter) VisitBlockStmt(stmt ast.BlockStmt) interface{} {
-  // before: "blockEnv := environment{enclosing: &in.environment}"
-  blockEnv := environment{enclosing: in.environment}
+  // before: "blockEnv := environment{enclosing: &in.env}"
+  blockEnv := environment{enclosing: in.env}
 
-  previous := in.environment
-  defer func() { in.environment = previous }()
+  previous := in.env
+  defer func() { in.env = previous }()
 
-  // before: "in.environment = blockEnv"
-  in.environment = &blockEnv
+  // before: "in.env = blockEnv"
+  in.env = &blockEnv
 
   // ...execute the block...
 }
@@ -209,12 +209,12 @@ func (in *Interpreter) VisitBlockStmt(stmt ast.BlockStmt) interface{} {
 
 Changing those three lines worked, and the interpreter began to handle block scopes as expected. If you are familiar with how pointers work, you might have already caught why this happened. Here's a summary of the change and a more detailed review below.
 
-| Before                                                                                                                            | After                                                                                                                                                   |
-| --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Interpreter` is a struct with an `environment` field.                                                                            | `Interpreter` is a struct with an `*environment` field.                                                                                                 |
-| The block environment is `environment{enclosing: &in.environment}`, which is enclosed by **whatever the current environment is**. | The block environment is `environment{enclosing: in.environment}`, which is enclosed by **what the current environment is pointing to**.                |
-| After setting the block environment to be the new environment, its `enclosing` field now points to **itself**.                    | After setting the block environment to be the new environment, its `enclosing` field still points to **what the previous environment was pointing to**. |
-| (Not what we want)                                                                                                                | (Exactly what we want)                                                                                                                                  |
+| Before                                                                                                                    | After                                                                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Interpreter` is a struct with an `environment` field.                                                                    | `Interpreter` is a struct with an `*environment` field.                                                                                                 |
+| The block environment is `environment{enclosing: &in.env}`, which is enclosed by **whatever the current environment is**. | The block environment is `environment{enclosing: in.env}`, which is enclosed by **what the current environment is pointing to**.                        |
+| After setting the block environment to be the new environment, its `enclosing` field now points to **itself**.            | After setting the block environment to be the new environment, its `enclosing` field still points to **what the previous environment was pointing to**. |
+| (Not what we want)                                                                                                        | (Exactly what we want)                                                                                                                                  |
 
 ## A review of the first case
 
@@ -228,23 +228,23 @@ type Interpreter struct {
 
 ![Interpreter with environment struct](https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_200/v1645803451/Blog/io5iz6s6badkglvb0hrp.webp)
 
-To interpret a block statement, we created a new environment with its `enclosing` field pointing to `in.environment`.
+To interpret a block statement, we created a new environment with its `enclosing` field pointing to `in.env`.
 
 ```go
-blockEnv := environment{enclosing: &in.environment}
+blockEnv := environment{enclosing: &in.env}
 ```
 
 Here's what that actually looks like:
 
 ![Block environment pointing to interpreter environment](https://res.cloudinary.com/cwilliams/image/upload/v1645803353/Blog/amimhgvppjxtcfbenpzy.webp)
 
-When we say "pointing to `in.environment`", we mean that the **value** of `blockEnv.enclosing` is set to the **memory address** of the `in.environment` field:
+When we say "pointing to `in.env`", we mean that the **value** of `blockEnv.enclosing` is set to the **memory address** of the `in.env` field:
 
 ```go
 // Create a new interpreter with an environment
 in := interpreter{env: environment{}}
 
-// Create a environment for the block
+// Create an environment for the block
 blockEnv := environment{enclosing: &in.env}
 
 // Print the address of in.env
@@ -282,14 +282,14 @@ type Interpreter struct {
 To execute a block, we create a new environment:
 
 ```go
-blockEnv := environment{enclosing: in.environment}
+blockEnv := environment{enclosing: in.env}
 ```
 
-In this version, we create a new `environment` struct. Its `enclosing` field takes (a copy of) the value of `in.environment`, which is a pointer to the current environment.
+In this version, we create a new `environment` struct. Its `enclosing` field takes (a copy of) the value of `in.env`, which is a pointer to the current environment.
 
 ![Block environment pointing to same as interpreter environment](https://res.cloudinary.com/cwilliams/image/upload/v1645805769/Blog/vqtlsvfoua0vjx9wz133.webp)
 
-The value of `blockEnv.enclosing` is the memory address of the environment `in.environment` points to, _not_ the memory address of `in.environment` itself.
+The value of `blockEnv.enclosing` is the memory address of the environment `in.env` points to, _not_ the memory address of `in.env` itself.
 
 ```go
 in := interpreter{env: &environment{}}
@@ -301,7 +301,7 @@ fmt.Printf("%p\n", blockEnv.enclosing) // 0xc00010a500
 fmt.Printf("%p\n", in.env)             // 0xc00010a500
 ```
 
-If we-reassign `in.environment` to a new environment, the address `&in.environment` and the value of `blockEnv.enclosing` stay the same, while the pointer value of `in.environment` changes:
+If we-reassign `in.env` to a new environment, the address `&in.env` and the value of `blockEnv.enclosing` stay the same, while the pointer value of `in.env` changes:
 
 ```go
 in.env = &environment{}
@@ -310,7 +310,7 @@ fmt.Printf("%p\n", blockEnv.enclosing) // 0xc00010a500
 fmt.Printf("%p\n", in.env)             // 0xc00010a510
 ```
 
-So when we set the interpreter's environment to the new environment we created, it links to the parent scope correctly.
+So when we set the interpreter's environment to the new environment we created, it links to the enclosing scope correctly.
 
 ![Interpreter environment pointing to correct block environment](https://res.cloudinary.com/cwilliams/image/upload/v1645805756/Blog/zx3izfxjfqn8szrpn3ux.webp)
 
@@ -318,7 +318,7 @@ So when we set the interpreter's environment to the new environment we created, 
 
 Two questions I've found to help me understand and use pointers better:
 
-- Do I want to point to X or share an underlying value with X? (The former means creating a pointer to X, while the latter implies changing X to be a pointer itself and using its pointer value.)
+- Do I want to point to X itself or share an underlying value with X? (The former means creating a pointer to X, while the latter implies changing X to be a pointer itself and using its pointer value.)
 - What do I expect to happen when the underlying value of the pointer changes?
 
 While working on the problem in this post, I also learned about the [memory layout of structs](https://research.swtch.com/godata) and [how structure padding affects the sizes of structs](https://go101.org/article/memory-layout.html), both of which are relevant to understanding how structs and pointers work in Go.
