@@ -31,7 +31,7 @@
     ` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }} {{ end -}}
     <!--  -->
 
-    {{ $scss := resources.Get "scss/main.scss" | resources.ToCSS | resources.Minify }}
+    {{ $scss := resources.Get "css/main.scss" | resources.ToCSS | resources.Minify }}
     <link href="{{ $scss.RelPermalink }}" rel="stylesheet" />
 
     <!--  -->
