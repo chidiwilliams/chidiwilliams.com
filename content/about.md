@@ -5,8 +5,6 @@ draft: false
 layout: static
 ---
 
-![Chidi](https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_200/v1621417333/Blog/FN6_Nerp_400x400.webp)
-
 Hi, my name is Chidi. I'm a software engineer, currently working at an investment bank in London. Before my current role, I built consumer and business fintech products at [a startup in Lagos](/2020/#changing-jobs). I've also written a few [open-source projects](https://github.com/chidiwilliams/), including some [Web-based simulations](/simulations/).
 
 I love playing the piano and guitar and reading about computing, science, and philosophy. You can find a list of books I'm currently reading or curious about on [my bookshelf](/bookshelf/).

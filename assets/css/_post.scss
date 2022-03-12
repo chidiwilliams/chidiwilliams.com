@@ -27,10 +27,16 @@ article .post-meta {
 article.post {
   margin-bottom: 3em;
 
+  h1 {
+    font-size: 2rem;
+  }
+
   a {
-    color: $primary-color;
-    font-weight: bold;
+    color: inherit;
     text-decoration: underline;
+    text-decoration-color: $primary-color;
+    text-underline-offset: 1px;
+    text-decoration-thickness: 2px;
   }
 
   .post-content {

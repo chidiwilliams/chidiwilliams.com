@@ -1,3 +1,4 @@
 <div class="post-meta">
-  <span>{{ .Page.PublishDate.Format "Jan 2, 2006" }}</span>
+  {{ if (gt .Page.PublishDate 0)}}<span>{{ .Page.PublishDate.Format "Jan 2, 2006" }}</span
+  >{{ end }}
 </div>

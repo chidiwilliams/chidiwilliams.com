@@ -19,19 +19,6 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: $secondary-font;
-}
-
-h1 {
-  font-size: 1.75rem;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
   margin: 20px 0 0;
 }
 
@@ -42,7 +29,6 @@ blockquote {
 body {
   line-height: 1.7;
   color: $body-color;
-  background-color: #fff;
   font-family: $body-font;
   -webkit-font-smoothing: antialiased;
 }
@@ -72,35 +58,17 @@ hr {
 }
 
 li {
-  margin-top: 0.4em;
-  margin-bottom: 0.4em;
-}
-
-a svg {
-  -webkit-transition: all 0.3s ease-in;
-  -moz-transition: all 0.3s ease-in;
-  -ms-transition: all 0.3s ease-in;
-  -o-transition: all 0.3s ease-in;
-  transition: all 0.3s ease-in;
-}
-
-a.primary svg {
-  fill: $primary-color;
-}
-
-a.secondary svg {
-  fill: $secondary-color;
-}
-
-.articles article a.github-link {
-  border-bottom: none;
-
-  svg {
-    width: 16px;
-    height: 16px;
-  }
+  margin: 0.4rem 0;
 }
 
 section.shelf a.perfect-book-link {
   font-weight: bold;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: $primary-color;
+  text-underline-offset: 0.5px;
+  text-decoration-thickness: 2px;
 }

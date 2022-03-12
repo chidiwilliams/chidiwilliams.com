@@ -1,24 +1,9 @@
 .bio {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 3rem;
-
-  a {
-    color: $primary-color;
-    font-weight: bold;
-    text-decoration: underline;
-  }
-
-  &__image {
-    margin-right: 20px;
-  }
 
   &__description {
-    margin-top: -1em;
+    margin: -1em 0 0;
     flex: 1 400px;
-
-    @media screen and (min-width: 615px) {
-      font-size: $small-font;
-    }
   }
 }
