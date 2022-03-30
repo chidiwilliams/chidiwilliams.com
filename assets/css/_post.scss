@@ -114,25 +114,21 @@ article.post {
   }
 
   table {
-    border: solid 2px #c6dcff;
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
-    font-size: $small-font;
+    font-size: $extra-small-font;
     margin-bottom: 1rem;
 
     thead th {
-      background-color: #e6ecf7;
-      border: solid 2px #c6dcff;
-      color: #3f5780;
-      padding: 10px;
+      border: solid 1px $secondary-color;
+      padding: 6px;
       text-align: left;
     }
 
     tbody td {
-      border: solid 2px #c6dcff;
-      color: #333;
-      padding: 10px;
+      border: solid 1px $secondary-color;
+      padding: 6px;
     }
   }
 
