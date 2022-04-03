@@ -461,11 +461,10 @@ interpret(expr, env) {
     return expr.value;
   }
   if (expr instanceof SymbolExpr) {
-    const value = env[expr.token.lexeme];
-    if (value === undefined) {
-      throw new RuntimeError(`Unknown identifier ${name}`);
+    if (env.has(expr.token.lexeme)) {
+      return env.get(expr.token.lexeme);
     }
-    return value;
+    throw new RuntimeError(`Unknown identifier: ${name}`);
   }
   // ...
 }
@@ -596,116 +595,97 @@ Then in the interpreter:
 ```js
 if (expr instanceof DefineExpr) {
   const value = this.interpret(expr.value);
-  env[expr.name.lexeme] = value;
+  env.set(expr.name.lexeme, value);
   return value;
 }
 if (expr instanceof SetExpr) {
   const value = this.interpret(expr.value);
-  if (env[expr.name.lexeme] === undefined) {
-    throw new RuntimeError(`Unknown identifier ${name}`);
+  if (env.has(expr.name.lexeme)) {
+    env.set(expr.name.lexeme, value);
+    return value;
   }
-  env[expr.name.lexeme] = value;
-  return value;
+  throw new RuntimeError(`Unknown identifier: ${name}`);
 }
 ```
 
 ## Local variables
 
-We may also wish to add locally-scoped variables to the interpreter. The Scheme procedure, `let`, can be used to create such variables, as follows:
+To implement locally-scoped variables in the interpreter, we'll add a new special form called `let`:
 
 ```scheme
-(define x 1)
-
-(let ((x 2) (y 4))
-  (display x)  ; 2
-  (display y)) ; 4
-
-(display x)    ; 1
-(display y)    ; Error: Unknown identifier: y
+jscheme> (define x 1)
+jscheme> (let ((x 2) (y 4)) (display x) (display y))
+'2'
+'4'
+jscheme> (display x) (display y)
+'1'
+Error: Unknown identifier: y
 ```
 
-In the program above, the `let` procedure defines two locally-scoped variables, `x` and `y`, and sets their values to `2` and `4` respectively. These variables are only visible within the body of the `let` expression, and override the variables set in the enclosing scope.
+To support local scopes, the environment needs to be able to access variables in the current scope as well as in "higher", or enclosing, scopes.[^slf] We'll change the environment object from a JavaScript `Map` to an instance of an `Environment` class.
 
-By way of local environments, we also see the difference between `define` and `set!`: `define` sets the value of a variable within the _current_ environment, while `set!` sets the value of the variable in whatever environment the variable was set in.
-
-```scheme
-(define x 1)
-(let ((y 2)) (define x 3) (display x)) ; 3
-(display x) ; 1
-(let ((y 2)) (set! x 3) (display x)) ; 3
-(display x) ; 3
-```
-
-In the example above, `define` creates a new variable `x` within the scope of the `let` expression, while `set!` changes the existing variable defined in the global scope.
-
-To implement this feature, we'll need a way for the environment to hold variables in the current scope as well as variables set in enclosing scopes. Our current implementation of the environment using a plain JavaScript object won't cut it. // TODO: Change the initial implementation to use a Map
-
-We'll create a class `Environment` with fields for the variables and the enclosing environment.
+[^slf]: In [Pointers in Go](https://chidiwilliams.com/post/pointers-in-go/#local-variables-in-lox), I wrote briefly about how this linked-list implementation of environments is used in the Lox intepreter from Bob Nystrom's _Crafting Interpreters_.
 
 ```js
 class Environment {
   constructor(params = [], args, enclosing) {
     this.values = new Map();
-    this.enclosing = enclosing;
-
     // sets the initial bindings in the environment
     params.forEach((param, i) => {
       this.values.set(param.lexeme, args[i]);
     });
+    this.enclosing = enclosing;
   }
-}
-```
 
-To define a variable in the environment, we'll set its value in the `values` map:
-
-```js
-define(name, value) {
-  this.values.set(name, value);
-}
-```
-
-To set a variable, we'll check if the variable is defined in the environment or in an enclosing environment, and set its value there. If we're at the global scope and we still can't find the variable defined there, we'll throw a `RuntimeError`.
-
-```js
-set(name, value) {
-  if (this.values.has(name, value)) {
+  define(name, value) {
     this.values.set(name, value);
-    return;
   }
-  if (this.enclosing) {
-    this.enclosing.set(name, value);
-    return;
+
+  // Sets the variable value in the
+  // environment in which it was defined
+  set(name, value) {
+    if (this.values.has(name, value)) {
+      this.values.set(name, value);
+      return;
+    }
+    if (this.enclosing) {
+      this.enclosing.set(name, value);
+      return;
+    }
+    throw new RuntimeError(`Unknown identifier: ${name}`);
   }
-  throw new RuntimeError(`Unknown identifier: ${name}`);
+
+  // Looks up the variable in the environment
+  // as well as its enclosing environments
+  get(name) {
+    if (this.values.has(name)) {
+      return this.values.get(name);
+    }
+    if (this.enclosing) {
+      return this.enclosing.get(name);
+    }
+    throw new RuntimeError(`Unknown identifier: ${name}`);
+  }
 }
 ```
 
-Similary, to get the value of a variable, we'll check the environment as well as its enclosing environments.
-
-```js
-get(name) {
-  if (this.values.has(name)) {
-    return this.values.get(name);
-  }
-  if (this.enclosing) {
-    return this.enclosing.get(name);
-  }
-  throw new RuntimeError(`Unknown identifier: ${name}`);
-}
-```
-
-// IMAGE of get define and set probably.
-
-The parser grammar for `let` is as follows:
+As before, we'll update the parser grammar for the `let` form:
 
 ```text
+expression  => if | call | define | set! | let | atom
 let         => "(" "let" "(" let-binding* ")" expression* ")"
 let-binding => "(" SYMBOL expression ")"
 ```
 
-In the parser:
+Then in the parser:
 
 ```js
+expression() {
+  // ...
+  if (token.lexeme === 'let') return this.let();
+  // ...
+}
+
 let() {
   this.advance(); // move past the "let" token
   this.consume(TokenType.LeftBracket);
@@ -717,7 +697,7 @@ let() {
 
   const body = [];
   while (!this.match(TokenType.RightBracket)) {
-    bindings.push(this.expression());
+    body.push(this.expression());
   }
 
   return new LetExpr(bindings, body);
@@ -732,15 +712,15 @@ letBinding() {
 }
 
 // class LetExpr {
-//   constructor(bindings, body) {/* ... */}
+//   constructor(bindings, body) { ... }
 // }
 
 // class LetBindingNode {
-//   constructor(name, value) {/* ... */}
+//   constructor(name, value) { ... }
 // }
 ```
 
-Finally, in the `Interpreter`, when we see a `LetExpr`, we'll get the variable names and values from the bindings. Then, we'll create a new `Environment` with the current environment as its enclosing environment, after which we'll evaluate all the expressions in the body **within the new environment** and return the result.
+To evaluate `LetExpr`-essions, we evaluate the values in the bindings, create a new environment with the current one as its enclosing environment, and evaluate the body of the expression **within the new environment**. In the interpreter:
 
 ```js
 if (expr instanceof LetExpr) {
@@ -753,81 +733,73 @@ if (expr instanceof LetExpr) {
   for (const exprInBody of expr.body) {
     result = this.interpret(exprInBody, letEnv);
   }
-
   return result;
 }
 ```
 
-> Image of environment with enclosing pointing to
-
-> TODO: Add link to this article in the article on pointers that talked about enclosing environments.
-
 ## Lambdas
 
-In this section, we'll add a final construct to our interpreter. We've come a long way by this point. The interpreter can evaluate simply expressions and use and modify both local and global state. But the interpreter is still pretty much a calculator. To improve it to a real programming language interpreter, we'll need a way to store a set of operations to be executed when needed. This construct, similar to a function in other languages, is called the `lambda` in Scheme.
+In this section, we'll add a final construct to our interpreter: the lambda expression.
 
-Lambdas in Scheme support zero or more arguments and a set of expressions in the body of the lambda. Like `let`, it evaluates all the expressions in the body and then returns the result of the final expression. Lambdas are also _first-class objects_: meaning they can be assigned to variables like other data types; a lambda can be passed as an argument into another lambda or procedure, etc.
+Lambdas in Scheme declare zero or more parameters followed by one or more expressions as its body. When a lambda is called, the interpreter sets the values of its parameters according to the passed arguments, evaluates the body of the lambda, and returns the result.
 
-```scheme
-(define square
-  (lambda (n)
-    (display "square was called")
-    (* n n)))
-(square 3) ; prints "square was called", returns 9
-
-(procedure? square) ; #t
-```
-
-Lambdas in Scheme also have closures. They "hang on" to the environment in which they were defined and can access and modify the environment when called later.
+Lambdas are also _first-class_ objects in Scheme: they can be assigned to variables like other data types, passed as arguments into other lambdas, and so on.
 
 ```scheme
-(define increment-generator
-  ;; returns a lambda which when called returns
-  ;; the next increment
-  (lambda ()
-    (let ((n 0))
-      (lambda ()
-        (set! n (+ n 1))
-        n))))
-
-(define next-increment (increment-generator))
-(next-increment) ; 1
-(next-increment) ; 2
-(next-increment) ; 3
+jscheme> (define square
+           (lambda (n)
+             (display "square was called")
+             (* n n)))
+jscheme> (square 3)
+'"square was called"'
+'9'
+jscheme> (procedure? square)
+'#t'
 ```
 
-The parser grammar rule for a lambda may be written as:
+Lambdas also "hang on" to the environment in which they are defined (the pair is often called a _closure_) and can access and modify that environment when called.
+
+```scheme
+jscheme> (define increment-generator
+           ;; returns a lambda that returns the next increment
+           (lambda ()
+             (let ((n 0))
+               (lambda () (set! n (+ n 1)) n))))
+jscheme> (define next (increment-generator))
+jscheme> (next)
+'1'
+jscheme> (next)
+'2'
+```
+
+We'll update the parser grammar for the lambda form:
 
 ```text
-...
-expression => if | call | define | lambda | atom
+expression => if | call | define | set! | let | lambda | atom
 lambda     => "(" "lambda" "(" SYMBOL* ")" expression* ")"
-...
 ```
 
-To translate that into code in the parser:
+Then in the parser:
 
 ```js
 expression() {
-  // ... if (token.lexeme === 'define') return this.define();
+  // ...
   if (token.lexeme === 'lambda') return this.lambda();
-	// ...
+  // ...
 }
 
 lambda() {
   this.advance(); // move past the "lambda" token
+  this.consume(TokenType.LeftBracket);
 
   const params = [];
-  this.consume(TokenType.LeftBracket);
   while (!this.match(TokenType.RightBracket)) {
-    const param = this.consume(TokenType.Symbol);
-    params.push(param);
+    params.push(this.consume(TokenType.Symbol));
   }
 
   const body = [];
   while (!this.match(TokenType.RightBracket)) {
-    const expression = this.expression();
-    body.push(expression);
+    body.push(this.expression());
   }
 
   return new LambdaExpr(params, body);
@@ -838,7 +810,7 @@ lambda() {
 // }
 ```
 
-In the interpreter, when we encounter a `LambdaExpr` node, we'll create and return a new `Procedure` object. The procedure holds the lambda's declaration as well as the current environment as its closure.
+To evaluate a lambda expression, we create and return a new `Procedure` object, holding the lambda's declaration and the current environment as its closure. In the interpreter:
 
 ```js
 interpret(expr, env) {
@@ -854,33 +826,28 @@ interpret(expr, env) {
 // }
 ```
 
-Next, we'll update what happens when a `CallExpr` is interpreted. Remember that a call expression looks like `(proc arg1)` , where `proc` is a primitive procedure or a lambda.
+Now, to evaluate a call expression (e.g. `(proc arg1)`), we check to see if the procedure to be called is a `Procedure` object, and then call a `call` method on the object:
 
 ```js
-interpret(expr, env) {
-  // ...
-  if (expr instanceof CallExpr) {
-    const callee = this.interpret(expr.callee, env);
-    const args = expr.args.map((arg) => this.interpret(arg, env));
+// ...
+if (expr instanceof CallExpr) {
+  const callee = this.interpret(expr.callee, env);
+  const args = expr.args.map((arg) => this.interpret(arg, env));
 
-    // Call user-defined procedures
-    if (callee instanceof Procedure) {
-      return callee.call(this, args);
-    }
-
-    // Call primitive procedures
-    if (callee instanceof Function) {
-      return callee(args);
-    }
-    throw new RuntimeError(`Cannot call ${callee}`);
+  if (callee instanceof Procedure) {
+    return callee.call(this, args);
   }
-  // ...
+
+  // Call primitive procedure
+  if (callee instanceof Function) {
+    return callee(args);
+  }
+  throw new RuntimeError(`Cannot call ${callee}`);
 }
+// ...
 ```
 
-When the procedure in the call expression is a `Procedure` object, we call a `call` method on the object, passing in `this` (the interpreter instance) and the evaluated arguments.
-
-In `call`, we'll create a new environment for the lambda call, setting the lambda's parameters to the values of the call arguments, and setting the lambda's closure as the enclosing environment. Then, we interpret the expressions in the body of the lambda and return the result of the final expression.
+In `call`, we create a new environment for the lambda call, with the arguments bound to the lambda's parameters and the closure set as the enclosing environment. Then we evaluate the body of the lambda and return the result.
 
 ```js
 class Procedure {
@@ -896,62 +863,50 @@ class Procedure {
 }
 ```
 
-## Eliminating tail calls
+## Tail-call elimination
 
-We have a fully-fledged Scheme interpreter now that supports declaring and calling lambda expressions. But a careful reader may have noticed that we did not implement a rather popular programming language feature in this interpreter: the loop.
+Before we can claim our interpreter is complete, there's an important optimization we need to make.
 
-Well, that's because we don't quite _need_ a loop procedure. Looping in Scheme is typically done through recursion—and our interpreter already supports that as it is! For example:
+You may have noticed that we did not implement a loop construct (like a "for" or "while" loop in other languages) in the earlier sections. That's because we don't quite need one: looping in Scheme is done by recursion—and the interpreter already supports that.
 
 ```scheme
-(define sum-to
-  (lambda (n)
-    (define sum-to-recur
-      (lambda (n, acc)
-        (if (= n 0)
-            acc
-            (sum-to-recur (- n 1) (+ n acc)))))
-    (sum-to-recur n 0)))
-
-(sum-to 1)   ; 1
-(sum-to 2)   ; 3
-(sum-to 3)   ; 6
-(sum-to 100) ; 5050
+jscheme> (define sum-to
+           (lambda (n acc)
+             (if (= n 0)
+                 acc
+                 (sum-to (- n 1) (+ n acc))))
+jscheme> (sum-to 1 0)
+'1'
+jscheme> (sum-to 2 0)
+'3'
+jscheme> (sum-to 3 0)
+'6'
+jscheme> (sum-to 100 0)
+'5050'
 ```
 
-This is, or at least should be, equivalent to the following JavaScript code:
+But because each procedure call calls `this.interpret(expr)`, recursing over a large number of items blows up the call stack of the interpreter.
 
-```text
-function sum-to(n):
-	sum = 0
-	loop with i from 1 to (n + 1):
-		sum = sum + i
-  return sum
-```
-
-But when we pass a very large number into the Scheme function, unlike in the pseudocode, we see the following error from the interpreter:
-
-```js
-> (sum-to 10000 0)
+```scheme
+jscheme> (sum-to 100000 0)
 RangeError: Maximum call stack size exceeded
 ```
 
-To make tail-recursive procedures equivalent to loop, we need to implement a go-to like behaviour in the interpreter.
+However, since the recursion in `sum-to` is in _tail position_ (that is, the recursive call is the final expression called by the lambda if `n != 0`), we can evaluate the call iteratively instead of recursively.
 
-Pseudocode for recursive function:
+Let's represent the pseudocode for `sum-to` as follows:
 
 ```text
-function sum-to-recur(n, acc):
-	if n = 0 then
-	return acc
-else
-	return sum-to-recur(n - 1, acc + n)
+function sum-to(n, acc):
+  if n = 0 then
+    return acc
+  else
+    return sum-to(n - 1, acc + n)
 ```
 
-When a recursive call is done in the tail position, i.e. the procedure ends by returning the value of the recursive call. Then keeping the caller's frame on the stack is a waste of memory because there's nothing left to do once the recursive call completes.
+Since the recursive call is in the tail position, we have nothing else to do once `sum-to(n - 1, acc + n)` completes; we immediately return its result.
 
-The third issue is that each recursive call adds a new frame to the [call stack](https://en.wikipedia.org/wiki/Call_stack), and each frame reserves additional memory for local variables and input arguments.
-
-And so the pseudocode for the `sum-to` function may be re-written as:
+For this reason, instead of recursing and allocating a new stack frame, we can "hand over" the body of the function to the new call: instead of recursively calling `sum-to`, we'll update the function's arguments and jump back to the top of the function's body.
 
 ```text
 function sum-to(n, acc):
@@ -964,13 +919,11 @@ start:
   	GOTO start
 ```
 
-Instead of a recursive function call, we may rewrite the program as a loop-like program, since the calling function does not do anything else but return the value of the recursive call.
+We'll add this optimization, called [tail-call elimination](https://en.wikipedia.org/wiki/Tail_call), to our Scheme interpreter. When evaluating a procedure call in the tail position, the interpret will update the current frame and make a [GOTO](https://chidiwilliams.com/post/goto/)-like jump to the top of the `interpret` method instead of recursing.[^dks]
 
-Essentially, what we want to do is implement our interpreter such that interpreting a tail-recursive call performs a [GOTO](https://chidiwilliams.com/post/goto/)-like jump instead of recursive procedure call.[^dks]
+[^dks]: There are a number of other ways to implement tail-call elimination, including writing a VM and using trampolines. But both methods are much more involved than using `continue` and hence far beyond the scope of this essay. See the Wikipedia entry on [tail-call implementation methods](https://en.wikipedia.org/wiki/Tail_call#Implementation_methods) or Eli Bendersky's essay on [recursion, continuations, and trampolines](https://eli.thegreenplace.net/2017/on-recursion-continuations-and-trampolines/).
 
-[^dks]: There are a few other ways to implement tail call elimination including implementing a VM and rewriting expressions in continuation-passing style and using trampolines. Can check out this article by [Eli Bendersky](https://eli.thegreenplace.net/2017/on-recursion-continuations-and-trampolines/) or [Wikipedia](<https://en.wikipedia.org/wiki/Trampoline_(computing)#High-level_programming>).
-
-Currently when interpreting call expressions:
+Let's review how we currently interpret call expressions:
 
 ```js
 interpret(expr, env) {
@@ -979,13 +932,13 @@ interpret(expr, env) {
     const args = expr.args.map((arg) => this.interpret(arg, env));
 
     if (callee instanceof Procedure) {
-      // Set up the environment of the call with the parameters of the procedure and the arguments of the call
       const callEnv = new Environment(callee.declaration.params, args, this.closure);
 
-      // Recursively interpret all the expressions in the function body
+      // Recursively interpret all the expressions
+      // in the function body within `callEnv`
       let result;
-      for (const expr of callee.declaration.body) {
-        result = interpreter.interpret(expr, callEnv);
+      for (const exprInBody of callee.declaration.body) {
+        result = this.interpret(exprInBody, callEnv);
       }
       return result;
     }
@@ -995,7 +948,7 @@ interpret(expr, env) {
 }
 ```
 
-What we want to do is change the final expression in the function body to a GOTO jump back to the start of the `interpret` method:
+Instead of recursively interpreting _all_ the expressions in the procedure's body, when we get to the last expression, we want to update the frame of the `interpret` method and "jump" back to the top.
 
 ```js
 interpret(expr, env) {
@@ -1004,26 +957,26 @@ interpret(expr, env) {
     // ...
     if (callee instanceof Procedure) {
       // ...
+      const callBody = callee.declaration.body;
 
-      // Recursively interpret all the expressions in the procedure's body *except the last one*
-      for (const expr of callee.declaration.body.slice(0, -1)) {
-        interpreter.interpret(expr, callEnv);
+      // Recursively interpret all expressions in the body, *except the last*
+      for (const exprInBody of callBody.slice(0, -1)) {
+        this.interpret(exprInBody, callEnv);
       }
 
-      // For the tail expression, instead of making a recursive call to interpret(), update the arguments and jump back to the top
-      expr = callee.declaration.body[callee.declaration.body.length - 1];
+      // For the last expression, update expr
+      // and env and jump back to the top ↑↑
+      expr = callBody[callBody.length - 1];
       env = callEnv;
       GOTO startInterpret;
     }
+    // ...
   }
+  // ...
 }
 ```
 
-Doing this interprets or evaluates the tail expression without growing the stack of the program.
-
-But if you are familiar with JavaScript, you may have caught that JavaScript does not support the GOTO statement. Thankfully, we can use a neat little trick to simulate the behaviour we want.
-
-We'll wrap the entire content of the `interpret` method with a while loop, and then when we want to GOTO the start of the method, we'll use a `continue` statement.
+JavaScript does not have a GOTO statement, so we'll use the next best thing: we'll place the entire body of the `interpret` method inside a while loop, and then `continue` the loop to jump back to the top.
 
 ```js
 interpret(expr, env) {
@@ -1032,61 +985,60 @@ interpret(expr, env) {
       // ...
       if (callee instanceof Procedure) {
         // ...
-        for (const expr of callee.declaration.body.slice(0, -1)) {
-          interpreter.interpret(expr, callEnv);
+        for (const expr of callBody.slice(0, -1)) {
+          this.interpret(expr, callEnv);
         }
-        expr = callee.declaration.body[callee.declaration.body.length - 1];
+        expr = callBody[callBody.length - 1];
         env = callEnv;
         continue;
       }
+      // ...
     }
+    // ...
   }
 }
 ```
 
-This effectively jumps back to the top of the `interpret` method with the updated arguments, effectively eliminating the "tail call".
+This effectively jumps back to the top of the method and evaluates the tail expression with its correct environment without recursing. So, we can now call tail-recursive functions with large inputs without getting overflowing the stack!
 
-We can also make the same optimization in the other places we evaluate tail expressions in the interpreter, like when evaluating let and if expressions.
+```js
+jscheme> (sum-to 10000 0)
+50005000
+```
+
+We may also add this same optimization in the other places where we evaluate tail expressions, like when interpreting let and if expressions.
 
 ```js
 interpret(expr, env) {
   while (true) {
     // ...
     if (expr instanceof IfExpr) {
-      const condition = this.interpret(expr.condition, env);
-      // Instead of calling this.interpret() on the then or else branch, we update the expr argument and continue the loop
-      expr = condition !== false ? expr.consequent : expr.alternative;
+      const test = this.interpret(expr.test, env);
+      // Instead of calling this.interpret() on the consequent or alternative, update the expr argument and continue the loop
+      expr = test !== false ? expr.consequent : expr.alternative;
       continue;
     }
+    
     if (expr instanceof LetExpr) {
-      // resolve the names and values of the bindings
       const letEnv = new Environment(names, values, env);
 
-      // Instead of recursively interpreting *all* the expressions in the body of the let expression,
-      // we recursively interpret all but the last one
-      for (const expr of callee.declaration.body.slice(0, -1)) {
-        interpreter.interpret(expr, callEnv);
+      // Recursively interpret all the expression in the body, *except the last one*
+      for (const exprInBody of expr.body.slice(0, -1)) {
+        this.interpret(exprInBody, letEnv);
       }
 
-      // then we update the expr and env arguments and continue the loop
-      expr = callee.declaration.body[callee.declaration.body.length - 1];
-      env = callEnv;
+      // for the tail expression, update expr
+      // and env and continue the loop
+      expr = expr.body[expr.body.length - 1];
+      env = letEnv;
       continue;
     }
+    
     // ...
   }
 }
 ```
 
-Now when we call a program with tail recursion, we no longer get a stakc overflow error since the program is evaluated iteratively!
-
-```js
-> (sum-to 10000 0)
-50005000
-```
-
-## Conclusion
-
-'We now have a language with procedures, variables, conditionals (`if`), and minimal error reporting. The entire interpreter comes in at less than 600 lines of JavaScript code (excluding comments). The interpreter is still far from complete. Various optimizations can still be added. Scheme has more than 100 more primitive procedures that were not implemented. Ports, vectors. Missing comments and dotted list notation, and comprehensive error handling and reporting. But hopefully, this gives a good insight into how Lisp interpreters work.
+Our interpreter is still far from a complete Scheme interpreter: it lacks comments, ports, vectors, call-with-current-continuation, dotted pair notation, quotes and quasiquotes, many primitive procedures, and comprehensive error detection and recovery. But it implements many of the core features of the language and, hopefully, gives a decent insight into some of the inner workings of interpreters.
 
 The complete source code is available [on GitHub](https://github.com/chidiwilliams/jscheme).
