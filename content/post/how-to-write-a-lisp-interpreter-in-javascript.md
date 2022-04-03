@@ -1,7 +1,7 @@
 ---
 title: How to Write a Lisp Interpreter in JavaScript
-date: 2022-03-27T12:00:00+00:00
-draft: true
+date: 2022-04-03T12:00:00+00:00
+draft: false
 categories: [languages]
 ---
 
@@ -1039,6 +1039,6 @@ interpret(expr, env) {
 }
 ```
 
-Our interpreter is still far from a complete Scheme interpreter: it lacks comments, ports, vectors, call-with-current-continuation, dotted pair notation, quotes and quasiquotes, many primitive procedures, and comprehensive error detection and recovery. But it implements many of the core features of the language and, hopefully, gives a decent insight into some of the inner workings of interpreters.
+Our Scheme interpreter is still far from complete: it lacks comments, ports, vectors, call-with-current-continuation, dotted pair notation, quotes and quasiquotes, many primitive procedures, comprehensive error detection and recovery, and more. But it implements many of the core features of the language and, hopefully, has given a decent insight into some of the inner workings of interpreters. We can take a victory lap here.
 
 The complete source code is available [on GitHub](https://github.com/chidiwilliams/jscheme).
