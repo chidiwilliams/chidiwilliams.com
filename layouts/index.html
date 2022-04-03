@@ -4,32 +4,34 @@
     <div class="bio__description">{{ partial "about.html" . }}</div>
   </div>
 
-  {{ $posts := where .Site.RegularPages "Section" "in" (slice "post") }}
+  <div>
+    {{ $posts := where .Site.RegularPages "Section" "in" (slice "post") }}
 
-  <!-- LATEST -->
-  {{ partial "post_list.html" (dict "posts" ($posts | first 5) "title" "Latest") }}<!--  -->
+    <!-- LATEST -->
+    {{ partial "post_list.html" (dict "posts" ($posts | first 5) "title" "Latest") }}<!--  -->
 
-  {{ $sortedTaxonomies := newScratch }}
+    {{ $sortedTaxonomies := newScratch }}
 
-  <!-- CATEGORIES -->
-  {{ range $taxonomy, $taxonomyPosts := .Site.Taxonomies.categories }}<!--  -->
-  {{ with $.Site.GetPage (printf "/%s" $taxonomy) }}<!--  -->
-  {{ $mapKey := (default $taxonomy (string .Params.order)) }}<!--  -->
-  {{ $sortedTaxonomies.SetInMap "posts" $mapKey $taxonomy }}<!--  -->
-  {{ end }} {{ end }}<!--  -->
-  {{ $postsByTaxonomy := $sortedTaxonomies.GetSortedMapValues "posts" }}
-  <!--  -->
+    <!-- CATEGORIES -->
+    {{ range $taxonomy, $taxonomyPosts := .Site.Taxonomies.categories }}<!--  -->
+    {{ with $.Site.GetPage (printf "/%s" $taxonomy) }}<!--  -->
+    {{ $mapKey := (default $taxonomy (string .Params.order)) }}<!--  -->
+    {{ $sortedTaxonomies.SetInMap "posts" $mapKey $taxonomy }}<!--  -->
+    {{ end }} {{ end }}<!--  -->
+    {{ $postsByTaxonomy := $sortedTaxonomies.GetSortedMapValues "posts" }}
+    <!--  -->
 
-  {{ range $taxonomy := $sortedTaxonomies.GetSortedMapValues "posts"}}<!--  -->
-  {{ $taxonomyPosts := index $.Site.Taxonomies.categories $taxonomy }}<!--  -->
-  {{ $title := $taxonomy }}<!--  -->
-  {{ with $.Site.GetPage (printf "/%s" $taxonomy) }}<!--  -->
-  {{ $title = .Params.Title }} {{ end }}<!--  -->
-  {{ partial "post_list.html" (dict "posts" $taxonomyPosts "title" $title) }}<!--  -->
-  {{ end }}
+    {{ range $taxonomy := $sortedTaxonomies.GetSortedMapValues "posts"}}<!--  -->
+    {{ $taxonomyPosts := index $.Site.Taxonomies.categories $taxonomy }}<!--  -->
+    {{ $title := $taxonomy }}<!--  -->
+    {{ with $.Site.GetPage (printf "/%s" $taxonomy) }}<!--  -->
+    {{ $title = .Params.Title }} {{ end }}<!--  -->
+    {{ partial "post_list.html" (dict "posts" $taxonomyPosts "title" $title) }}<!--  -->
+    {{ end }}
 
-  <!-- UNCATEGORIZED -->
-  {{ $uncategorized := where $posts "Params.categories" "==" nil }}<!--  -->
-  {{ partial "post_list.html" (dict "posts" $uncategorized "title" "More...") }}
+    <!-- UNCATEGORIZED -->
+    {{ $uncategorized := where $posts "Params.categories" "==" nil }}<!--  -->
+    {{ partial "post_list.html" (dict "posts" $uncategorized "title" "More...") }}
+  </div>
 </div>
 {{ end }}
