@@ -51,7 +51,7 @@ The _parser_ then transforms the list of tokens into an Abstract Syntax Tree (AS
 
 Each node in the AST describes some syntactic component in the program. A `LiteralExpr` node holds a literal value, like a number or a string; a `CallExpr` node represents a function call; a `LambdaExpr` node describes a lambda expression, and so on.
 
-![](/img/lisp-interpreter-ast.drawio.png)
+![Abstract Syntax Tree representation of a Scheme expression](https://res.cloudinary.com/cwilliams/image/upload/v1648988896/Blog/lisp-interpreter-ast.drawio.png)
 
 Finally, the _interpreter_ evaluates the AST. It walks from the top of the tree to the bottom, executes each node recursively, performs any needed side-effects (like defining or modifying variables), and returns the final result.
 
