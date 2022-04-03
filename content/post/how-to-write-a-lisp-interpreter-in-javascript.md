@@ -1,7 +1,7 @@
 ---
 title: How to Write a Lisp Interpreter in JavaScript
 date: 2022-04-03T12:00:00+00:00
-draft: false
+draft: true
 categories: [languages]
 ---
 
@@ -1018,7 +1018,7 @@ interpret(expr, env) {
       expr = test !== false ? expr.consequent : expr.alternative;
       continue;
     }
-    
+
     if (expr instanceof LetExpr) {
       const letEnv = new Environment(names, values, env);
 
@@ -1033,7 +1033,7 @@ interpret(expr, env) {
       env = letEnv;
       continue;
     }
-    
+
     // ...
   }
 }
