@@ -865,9 +865,7 @@ class Procedure {
 
 ## Tail-call elimination
 
-Before we can claim our interpreter is complete, there's an important optimization we need to make.
-
-You may have noticed that we did not implement a loop construct (like a "for" or "while" loop in other languages) in the earlier sections. That's because we don't quite need one: looping in Scheme is done by recursion—and the interpreter already supports that.
+There's an important optimization we need to make before we complete our interpreter. You may have noticed that we did not implement a loop construct (like a "for" or "while" loop in other languages) in the earlier sections. That's because we don't quite need one: looping in Scheme is done by recursion—and the interpreter already supports that.
 
 ```scheme
 jscheme> (define sum-to
@@ -919,7 +917,7 @@ start:
   	GOTO start
 ```
 
-We'll add this optimization, called [tail-call elimination](https://en.wikipedia.org/wiki/Tail_call), to our Scheme interpreter. When evaluating a procedure call in the tail position, the interpret will update the current frame and make a [GOTO](https://chidiwilliams.com/post/goto/)-like jump to the top of the `interpret` method instead of recursing.[^dks]
+We'll add this [tail-call optimization](https://en.wikipedia.org/wiki/Tail_call) to our Scheme interpreter. When evaluating a procedure call in the tail position, the interpret will update the current frame and make a [GOTO](https://chidiwilliams.com/post/goto/)-like jump to the top of the `interpret` method instead of recursing.[^dks]
 
 [^dks]: There are a number of other ways to implement tail-call elimination, including writing a VM and using trampolines. But both methods are much more involved than using `continue` and hence far beyond the scope of this essay. See the Wikipedia entry on [tail-call implementation methods](https://en.wikipedia.org/wiki/Tail_call#Implementation_methods) or Eli Bendersky's essay on [recursion, continuations, and trampolines](https://eli.thegreenplace.net/2017/on-recursion-continuations-and-trampolines/).
 
