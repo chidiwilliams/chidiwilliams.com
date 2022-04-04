@@ -9,9 +9,9 @@ In a previous [essay](https://chidiwilliams.com/post/evaluator/) [series](https:
 
 [^ldn]: This essay is largely inspired by Peter Norvig's [(How to Write a (Lisp) Interpreter (in Python))](https://norvig.com/lispy.html).
 
-We'll start with a brief discussion about Scheme's syntax and the general architecture of the interpreter. Then we'll implement number, boolean, string, and list data types; primitive procedures; conditional expressions; variables; and lambdas.
+We'll start with a brief discussion about Scheme's syntax and the basic architecture of the interpreter. Then we'll implement number, boolean, string, and list data types; primitive procedures; conditional expressions; variables; and lambdas.
 
-Hopefully, by the end of this essay, you'll have gained some understanding of some of the basic concepts behind languages and interpreters.
+Hopefully, you'll learn about some basic concepts behind languages and interpreters along the way
 
 ## A quick introduction to Scheme
 
@@ -30,9 +30,9 @@ All Scheme programs consist entirely of these expressions; unlike languages like
 (factorial 10) ; 3628800
 ```
 
-## General architecture of the interpreter
+## Basic architecture of the interpreter
 
-A Scheme interpreter accepts the a Scheme program's source code, evaluates the program's expressions, and returns the final result.
+A Scheme interpreter accepts a Scheme program's source code, evaluates the program's expressions, and returns the final result.
 
 We may split the interpreter into three main components: a scanner, a parser, and an interpreter.
 
@@ -77,12 +77,12 @@ We'll begin by implementing the interpreter as a simple "calculator". Like a reg
 
 The syntax for the first set of supported expressions is as follows:
 
-| Expression       | Syntax                             | Semantics and examples                                                                                                                                                                                                                                                                      |
-| ---------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| symbol           | _symbol_                           | A symbol is interpreted as a variable name; it evaluates to the value of the variable with its name. The interpreter doesn't yet support defining new variables, so the only known symbols are the primitive procedures. Examples: `+ => PrimitiveProcedure`, `cons => PrimitiveProcedure`. |
-| constant literal | _number_ \| _string_ \| _boolean_  | Numbers, strings, and booleans evaluate to themselves. Examples: `3 => 3`, `#t => #t`                                                                                                                                                                                                       |
-| conditional      | `(if test consequent alternative)` | Evaluate `test`; if "truthy" (i.e. any value other than `#f`), evaluate and return `consequent`; else, evaluate and return `alternative`. Example: `(if (< 2 3) 4 5) => 4`                                                                                                                  |
-| procedure call   | `(proc arg...)`                    | If `proc` is not a keyword, it is treated as a procedure. Evaluate `proc` and all the `args`, then call the procedure with the arguments. Example: `(remainder 5 2) => 1`                                                                                                                   |
+| Expression       | Syntax                             | Semantics and examples                                       |
+| ---------------- | ---------------------------------- | ------------------------------------------------------------ |
+| symbol           | _symbol_                           | A symbol is interpreted as a variable name; its value is the variable's value. The interpreter doesn't yet support defining new variables, so the only known symbols are the primitive procedures. Examples: `+ => PrimitiveProcedure`, `cons => PrimitiveProcedure`. |
+| constant literal | _number_ \| _string_ \| _boolean_  | Numbers, strings, and booleans evaluate to themselves. Examples: `3 => 3`, `#t => #t` |
+| conditional      | `(if test consequent alternative)` | Evaluate `test`; if "truthy" (i.e. any value other than `#f`), evaluate and return `consequent`; else, evaluate and return `alternative`. Example: `(if (< 2 3) 4 5) => 4` |
+| procedure call   | `(proc arg...)`                    | If `proc` is not a keyword, it is treated as a procedure. Evaluate `proc` and all the `args`, then call the procedure with the arguments. Example: `(remainder 5 2) => 1` |
 
 ## Scanner
 
