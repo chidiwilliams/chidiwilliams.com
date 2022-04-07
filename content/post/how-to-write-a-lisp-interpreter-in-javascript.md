@@ -1,6 +1,6 @@
 ---
 title: How to Write a Lisp Interpreter in JavaScript
-date: 2022-04-03T12:00:00+00:00
+date: 2022-04-07T12:00:00+00:00
 draft: false
 categories: [languages]
 ---
