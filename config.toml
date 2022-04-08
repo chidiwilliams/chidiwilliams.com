@@ -2,6 +2,8 @@ baseURL = "https://chidiwilliams.com/"
 languageCode = "en-us"
 title = "Chidi Williams"
 googleAnalytics = "UA-167812981-1"
+# Google Analytics 4
+googleAnalyticsID = "G-304375023"
 enableRobotsTXT = true
 rssLimit = 25
 pygmentsUseClasses = true
