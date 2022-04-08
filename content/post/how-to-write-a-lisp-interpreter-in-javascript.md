@@ -3,6 +3,7 @@ title: How to Write a Lisp Interpreter in JavaScript
 date: 2022-04-03T12:00:00+00:00
 draft: false
 categories: [languages]
+favorite: true
 ---
 
 In a previous [essay](https://chidiwilliams.com/post/evaluator/) [series](https://chidiwilliams.com/post/evaluator-2/), we saw how to write an expression evaluator that supports arithmetic and logical operators, variables, and functions like `IF`, `MIN`, and `MAX`. In this essay, we'll implement a similar but slightly more advanced program: an interpreter for a dialect of Lisp called [Scheme](<https://en.wikipedia.org/wiki/Scheme_(programming_language)>).[^ldn]
@@ -12,6 +13,8 @@ In a previous [essay](https://chidiwilliams.com/post/evaluator/) [series](https:
 We'll start with a brief discussion about Scheme's syntax and the basic architecture of the interpreter. Then we'll implement number, boolean, string, and list data types; primitive procedures; conditional expressions; variables; and lambdas.
 
 Hopefully, you'll have learned about some basic concepts behind languages and interpreters by the end of the essay.
+
+{{< toc >}}
 
 ## A quick introduction to Scheme
 
@@ -77,12 +80,12 @@ We'll begin by implementing the interpreter as a simple "calculator". Like a reg
 
 The syntax for the first set of supported expressions is as follows:
 
-| Expression       | Syntax                             | Semantics and examples                                       |
-| ---------------- | ---------------------------------- | ------------------------------------------------------------ |
+| Expression       | Syntax                             | Semantics and examples                                                                                                                                                                                                                                                |
+| ---------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | symbol           | _symbol_                           | A symbol is interpreted as a variable name; its value is the variable's value. The interpreter doesn't yet support defining new variables, so the only known symbols are the primitive procedures. Examples: `+ => PrimitiveProcedure`, `cons => PrimitiveProcedure`. |
-| constant literal | _number_ \| _string_ \| _boolean_  | Numbers, strings, and booleans evaluate to themselves. Examples: `3 => 3`, `#t => #t` |
-| conditional      | `(if test consequent alternative)` | Evaluate `test`; if "truthy" (i.e. any value other than `#f`), evaluate and return `consequent`; else, evaluate and return `alternative`. Example: `(if (< 2 3) 4 5) => 4` |
-| procedure call   | `(proc arg...)`                    | If `proc` is not a keyword, it is treated as a procedure. Evaluate `proc` and all the `args`, then call the procedure with the arguments. Example: `(remainder 5 2) => 1` |
+| constant literal | _number_ \| _string_ \| _boolean_  | Numbers, strings, and booleans evaluate to themselves. Examples: `3 => 3`, `#t => #t`                                                                                                                                                                                 |
+| conditional      | `(if test consequent alternative)` | Evaluate `test`; if "truthy" (i.e. any value other than `#f`), evaluate and return `consequent`; else, evaluate and return `alternative`. Example: `(if (< 2 3) 4 5) => 4`                                                                                            |
+| procedure call   | `(proc arg...)`                    | If `proc` is not a keyword, it is treated as a procedure. Evaluate `proc` and all the `args`, then call the procedure with the arguments. Example: `(remainder 5 2) => 1`                                                                                             |
 
 ## Scanner
 
@@ -272,7 +275,6 @@ The parser we're about to implement is a [recursive descent parser](https://en.w
 We'll define a few classes to represent the nodes of the AST:
 
 <!-- prettier-ignore -->
-
 ```js
 class Expr {}
 

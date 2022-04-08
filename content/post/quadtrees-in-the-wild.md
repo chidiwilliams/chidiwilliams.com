@@ -13,6 +13,7 @@ description: Quadtrees are tree structures used to efficiently store data in two
 footnotes: 'Thanks to Ayomide Oyekanmi and Opeyemi Onikute for reviewing drafts of this.'
 series: [Data Structures and Algorithms in the Wild]
 categories: [dsa]
+favorite: true
 ---
 
 Choosing good data structures and algorithms can have a significant impact on the performance of a program. Some data structures store information faster (but retrieve the information slower) than other data structures. And, for the same operation, one algorithm can perform faster on average (but slower in important edge cases) than another algorithm.
@@ -22,6 +23,8 @@ And so, learning about the performance benefits and [tradeoffs](/tradeoffs/) of 
 Starting with this post, I'll be writing a series called _[Data Structures and Algorithms in the Wild](/series/data-structures-and-algorithms-in-the-wild)_. Throughout the series, we'll review a few different data structures and algorithms to see how they work and what kinds of problems they solve.
 
 We'll start with a data structure called the **quadtree** and explore its applications in [spatial indexing](#points-within-a-boundary) and [image compression](#image-compression).
+
+{{< toc >}}
 
 ## Why we use quadtrees
 

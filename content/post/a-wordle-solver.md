@@ -9,6 +9,7 @@ images:
     'https://res.cloudinary.com/cwilliams/image/upload/v1641932928/Blog/wordle-banner.webp',
   ]
 categories: [games]
+favorite: true
 ---
 
 There's a new word game on the _Internets_. And the past week, there have been cryptic grids of black, orange, and green tiles all over my Twitter timeline.

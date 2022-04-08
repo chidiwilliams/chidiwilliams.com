@@ -127,4 +127,26 @@ article.post {
   video {
     width: 100%;
   }
+
+  aside.toc {
+    details {
+      background: #fafafa;
+      padding-bottom: 1px;
+
+      summary {
+        font-weight: bold;
+        padding: 0.5rem;
+        background: #eaeaea;
+      }
+
+      ul {
+        margin-top: 0;
+        list-style-type: auto;
+      }
+    }
+  }
+
+  li {
+    margin: 0.75rem 0;
+  }
 }

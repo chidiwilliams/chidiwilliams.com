@@ -9,6 +9,7 @@ images:
     'https://res.cloudinary.com/cwilliams/image/upload/v1636824748/Blog/pexels-photo-261763.webp',
   ]
 categories: [dsa]
+favorite: true
 ---
 
 In the [previous post](/post/quadtrees/) in the [Data Structures and Algorithms in the Wild](/series/data-structures-and-algorithms-in-the-wild/) series, we discussed the quadtree, a tree data structure used to index locations in two-dimensional space. In this post, we'll look into another data structure called the trie.
