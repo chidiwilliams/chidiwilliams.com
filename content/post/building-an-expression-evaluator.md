@@ -11,6 +11,7 @@ images:
     'https://res.cloudinary.com/cwilliams/image/upload/v1640476018/Blog/pexels-monstera-6238068.webp',
   ]
 categories: [languages]
+favorite: true
 ---
 
 In a spreadsheet application, like Microsoft Excel or Google Sheets, you can enter an expression like `=3 + 5 * 3 - 8` into a cell and calculate the result by pressing `ENTER`.
@@ -20,6 +21,8 @@ We call programs like that—programs that receive an arithmetic expression and 
 By the end of this post, we'll have written a JavaScript function, `evaluate`, which can perform simple arithmetic: addition, subtraction, multiplication, division, exponentiation.
 
 {{< video src="https://res.cloudinary.com/cwilliams/video/upload/c_crop,w_473,x_3,y_3/v1613991599/Blog/evaluator_demo.mp4" title="Demo of the online evaluator" >}}
+
+{{< toc >}}
 
 ## Just `eval()`?
 

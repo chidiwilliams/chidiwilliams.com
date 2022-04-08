@@ -5,11 +5,40 @@
 
   a {
     text-decoration: none;
-    font-weight: bold;
+    margin-right: 0.25rem;
   }
 
   &-item__date {
     color: $secondary-color;
     font-size: 0.875rem;
+    font-style: italic;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+
+    li {
+      margin-bottom: 0.75rem;
+      position: relative;
+
+      &.starred {
+        a::before {
+          content: '✱';
+          font-weight: bold;
+          color: $primary-color;
+          display: inline;
+          position: relative;
+          margin-right: 8px;
+
+          @media screen and (min-width: 700px) {
+            top: 0;
+            left: -1.25rem;
+            position: absolute;
+            margin-right: 0;
+          }
+        }
+      }
+    }
   }
 }

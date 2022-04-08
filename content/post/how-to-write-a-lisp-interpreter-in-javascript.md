@@ -3,15 +3,18 @@ title: How to Write a Lisp Interpreter in JavaScript
 date: 2022-04-07T12:00:00+00:00
 draft: false
 categories: [languages]
+favorite: true
 ---
 
 In a previous [essay](https://chidiwilliams.com/post/evaluator/) [series](https://chidiwilliams.com/post/evaluator-2/), we saw how to write an expression evaluator that supports arithmetic and logical operators, variables, and functions like `IF`, `MIN`, and `MAX`. In this essay, we'll implement a similar but slightly more advanced program: an interpreter for a dialect of Lisp called [Scheme](<https://en.wikipedia.org/wiki/Scheme_(programming_language)>).[^ldn]
 
 [^ldn]: This essay is largely inspired by Peter Norvig's [(How to Write a (Lisp) Interpreter (in Python))](https://norvig.com/lispy.html).
 
-We'll start with a brief discussion about Scheme's syntax and the general architecture of the interpreter. Then we'll implement number, boolean, string, and list data types; primitive procedures; conditional expressions; variables; and lambdas.
+We'll start with a brief discussion about Scheme's syntax and the basic architecture of the interpreter. Then we'll implement number, boolean, string, and list data types; primitive procedures; conditional expressions; variables; and lambdas.
 
-Hopefully, by the end of this essay, you'll have gained some understanding of some of the basic concepts behind languages and interpreters.
+Hopefully, you'll have learned about some basic concepts behind languages and interpreters by the end of the essay.
+
+{{< toc >}}
 
 ## A quick introduction to Scheme
 
@@ -19,7 +22,7 @@ Scheme is a minimalist dialect of Lisp, a family of languages based on a nested-
 
 An expression can either be an _atom_: a number (e.g. `8`), a string (e.g. `"welcome"`), a symbol (e.g. `count`); or a _list expression_: a "(", followed by zero or more expressions, followed by a ")". A list expression starting with a keyword (e.g. `(if ...)` or `(define ...)`) is a _special form_, while one starting with a non-keyword is a function call (e.g. `(fn ...)`).
 
-All Scheme programs consist entirely of these expressions; unlike languages like Java, C, and Python, Scheme makes no distinction between statements and expressions.
+All Scheme programs consist entirely of these expressions. Unlike languages like Java, C, and Python, Scheme makes no distinction between statements and expressions.
 
 ```scheme
 10 ; 10
@@ -30,15 +33,15 @@ All Scheme programs consist entirely of these expressions; unlike languages like
 (factorial 10) ; 3628800
 ```
 
-## General architecture of the interpreter
+## The basic architecture of the interpreter
 
-A Scheme interpreter accepts the a Scheme program's source code, evaluates the program's expressions, and returns the final result.
+A Scheme interpreter accepts a Scheme program's source code, evaluates the program's expressions, and returns the final result.
 
 We may split the interpreter into three main components: a scanner, a parser, and an interpreter.
 
 > **Scanner → Parser → Interpreter**
 
-The _scanner_ walks through source code and extracts the meaningful "units", or _tokens_, into a list. It discards unneeded whitespace characters and reports errors when it finds unknown characters.
+The _scanner_ walks through the source code and extracts the meaningful "units", or _tokens_, into a list. It discards unneeded whitespace characters and reports errors when it finds unknown characters.
 
 ```js
 scan(`(define odd?
@@ -49,11 +52,11 @@ scan(`(define odd?
 
 The _parser_ then transforms the list of tokens into an Abstract Syntax Tree (AST) that represents the syntactic structure of the program.
 
-Each node in the AST describes some syntactic component in the program. A `LiteralExpr` node holds a literal value, like a number or a string; a `CallExpr` node represents a function call; a `LambdaExpr` node describes a lambda expression, and so on.
+Each node in the AST describes some syntactic component in the program. A `LiteralExpr` node holds a literal value, like a number or a string; a `CallExpr` node represents a function call, and so on.
 
 ![Abstract Syntax Tree representation of a Scheme expression](https://res.cloudinary.com/cwilliams/image/upload/v1648988896/Blog/lisp-interpreter-ast.drawio.png)
 
-Finally, the _interpreter_ evaluates the AST. It walks from the top of the tree to the bottom, executes each node recursively, performs any needed side-effects (like defining or modifying variables), and returns the final result.
+Finally, the _interpreter_ evaluates the AST. It walks from the top of the tree to the bottom, evaluates each node, performs any needed side-effects (like defining or modifying variables), and returns the final result.
 
 We may define a `run` function to perform all three steps of the evaluation:
 
@@ -73,16 +76,16 @@ function run(source) {
 
 ## Lisp calculator
 
-We'll begin by implementing the interpreter as a simple "calculator". Like a regular calculator, it will be able to perform basic arithmetic operations on numbers; but it will also support boolean, string, and list operations. When this version is complete, we'll add variables and program-defined procedures.
+We'll begin by implementing the interpreter as a simple "calculator". Like a regular calculator, it will be able to perform basic arithmetic operations on numbers. But it will also support boolean, string, and list operations. When this version is complete, we'll add variables and program-defined procedures.
 
 The syntax for the first set of supported expressions is as follows:
 
-| Expression       | Syntax                             | Semantics and examples                                                                                                                                                                                                                                                                      |
-| ---------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| symbol           | _symbol_                           | A symbol is interpreted as a variable name; it evaluates to the value of the variable with its name. The interpreter doesn't yet support defining new variables, so the only known symbols are the primitive procedures. Examples: `+ => PrimitiveProcedure`, `cons => PrimitiveProcedure`. |
-| constant literal | _number_ \| _string_ \| _boolean_  | Numbers, strings, and booleans evaluate to themselves. Examples: `3 => 3`, `#t => #t`                                                                                                                                                                                                       |
-| conditional      | `(if test consequent alternative)` | Evaluate `test`; if "truthy" (i.e. any value other than `#f`), evaluate and return `consequent`; else, evaluate and return `alternative`. Example: `(if (< 2 3) 4 5) => 4`                                                                                                                  |
-| procedure call   | `(proc arg...)`                    | If `proc` is not a keyword, it is treated as a procedure. Evaluate `proc` and all the `args`, then call the procedure with the arguments. Example: `(remainder 5 2) => 1`                                                                                                                   |
+| Expression       | Syntax                             | Semantics and examples                                                                                                                                                                                                                                                |
+| ---------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| symbol           | _symbol_                           | A symbol is interpreted as a variable name; its value is the variable's value. The interpreter doesn't yet support defining new variables, so the only known symbols are the primitive procedures. Examples: `+ => PrimitiveProcedure`, `cons => PrimitiveProcedure`. |
+| constant literal | _number_ \| _string_ \| _boolean_  | Numbers, strings, and booleans evaluate to themselves. Examples: `3 => 3`, `#t => #t`                                                                                                                                                                                 |
+| conditional      | `(if test consequent alternative)` | Evaluate `test`; if "truthy" (i.e. any value other than `#f`), evaluate and return `consequent`; else, evaluate and return `alternative`. Example: `(if (< 2 3) 4 5) => 4`                                                                                            |
+| procedure call   | `(proc arg...)`                    | If `proc` is not a keyword, it is treated as a procedure. Evaluate `proc` and all the `args`, then call the procedure with the arguments. Example: `(remainder 5 2) => 1`                                                                                             |
 
 ## Scanner
 
@@ -161,7 +164,7 @@ class Scanner {
 }
 ```
 
-We advance through each character in the source string, looking for tokens. If the current character is a left or right bracket, we add the corresponding token to the list; if it's a whitespace character, we simply skip over it. After scanning the entire source, we push an `Eof` token and return the list. (We'll use the `Eof` token later in the parser to check for the end of the token list.)
+We advance through each character in the source string, looking for tokens. We add tokens for left and right brackets and skip over whitespace characters. After scanning the entire source, we push an `Eof` token and return the list. (We'll use the `Eof` token later in the parser to check for the end of the token list.)
 
 We also need to scan for boolean values: `#t` and `#f`, representing `true` and `false` respectively. Inside the switch block in `scan`:
 
@@ -247,7 +250,7 @@ default:
 
 Next, we'll write up the parser.
 
-As we discussed earlier, the parser transforms the list of tokens from the scanner into Abstract Syntax Trees (ASTs). To perform this transformation, it uses a specification called the _formal grammar_ of the language. We can express the formal grammar of our Lisp calculator as:
+As discussed earlier, the parser transforms the list of tokens from the scanner into Abstract Syntax Trees (ASTs). To perform this transformation, it uses a specification called the _formal grammar_ of the language. We can express the formal grammar of our Lisp calculator as:
 
 ```text
 program    => expression*
@@ -259,20 +262,19 @@ atom       => SYMBOL | NUMBER | BOOLEAN | STRING | ()
 
 In longhand:
 
-- A _program_ consists of zero or more _expression_-s
-- An _expression_ is an _if_ expression, a _call_ expression, or an _atom_
-- An _if_ expression is an opening bracket, followed by an "if", the test _expression_, the _consequent_ expression, an optional _alternative_ expression, and a closing bracket
-- A _call_ expression is an opening bracket, followed by the _expression_ to be called, zero or more argument _expression_-s, and a closing bracket
-- An _atom_ is a symbol, number, boolean, string, or the empty list
+- A _program_ consists of zero or more _expression_-s.
+- An _expression_ is an _if_ expression, a _call_ expression, or an _atom._
+- An _if_ expression is an opening bracket, followed by an "if", the test _expression_, the _consequent_ expression, an optional _alternative_ expression, and a closing bracket.
+- A _call_ expression is an opening bracket, followed by the _expression_ to be called, zero or more argument _expression_-s, and a closing bracket.
+- An _atom_ is a symbol, number, boolean, string, or an empty list.
 
 These five rules define how to translate a list of tokens into an AST. A program that does not satisfy the rules has a malformed syntax and is invalid.
 
-The parser we're about to implement is a [recursive descent parser](https://en.wikipedia.org/wiki/Recursive_descent_parser). "Descent" implies that we apply the grammar rules starting from the top (the "program") to the bottom (the "atoms"). "Recursive" indicates that the rules are applied recursively; for example, the consequent of an `if` expression is also an expression.
+The parser we're about to implement is a [recursive descent parser](https://en.wikipedia.org/wiki/Recursive_descent_parser). "Descent" implies that we apply the grammar rules starting from the top (the "program") to the bottom (the "atoms"). "Recursive" indicates that we apply the rules recursively; for example, the consequent of an `if` expression is also an expression.
 
 We'll define a few classes to represent the nodes of the AST:
 
 <!-- prettier-ignore -->
-
 ```js
 class Expr {}
 
@@ -346,7 +348,7 @@ match(tokenType) {
 check(tokenType) { return this.peek().tokenType === tokenType; }
 ```
 
-If the current token is _not_ an opening bracket, `expression` hands over parsing to the `atom` method. If it is, it checks the next token. If that token is a closing bracket, it returns a literal expression with a value of `null` (represented as an empty JavaScript array). But if it is an "if" token, it hands over parsing to the `if` method. Else, it calls the `call` method.
+If the current token is _not_ an opening bracket, `expression` hands over parsing to `atom`. If it is, it checks the next token. If that token is a closing bracket, it returns a literal expression with a value of `null` (represented as an empty JavaScript array). But if it is an "if" token, it hands over parsing to the `if` method. Else, it calls the `call` method.
 
 In `call`, we parse the call expression:
 
@@ -405,9 +407,7 @@ atom() {
 
 ## Interpreter
 
-We're now at the core of the interpreter itself. The scanner and parser have checked that the input program is valid, reporting any syntax errors, and transformed the program into a friendly tree structure. Now, the interpreter will evaluate (or interpret) the tree.
-
-We'll define an `Interpreter` class and its environment.
+We're now at the core of the interpreter itself, where we evaluate (or interpret) the AST. We'll define an `Interpreter` class and its environment:
 
 ```js
 class Interpreter {
@@ -440,9 +440,9 @@ class Interpreter {
 }
 ```
 
-The environment, `env`, maps a variable name to its value. For now, `env` only holds the primitive procedures and their implementations; but we'll extend it to support user-defined variables later on.
+The environment, `env`, maps a variable name to its value. For now, `env` only stores the primitive procedures. But we'll extend it to support user-defined variables later on.
 
-We'll add an `interpretAll` method to interpret the expressions returned by the parser. In `interpret`, we evaluate a given expression according to its type: literal expressions evaluate to their values; symbol expressions evaluate to the value of the variable of the same name.
+We'll add an `interpretAll` method to interpret the expressions returned by the parser. In `interpret`, we evaluate a given expression according to its type. Literal expressions evaluate to their values. Symbol expressions evaluate to the value of the variable of the same name.
 
 ```js
 interpretAll(expressions) {
@@ -467,7 +467,7 @@ interpret(expr, env) {
 }
 ```
 
-Conditional expressions evaluate to the consequent if the test expression is _truthy_ (that is, not `false`); else they evaluate to the alternative.
+Conditional expressions evaluate to the consequent if the test expression is _truthy_ (that is, not `#f`); else they evaluate to the alternative.
 
 ```js
 if (expr instanceof IfExpr) {
@@ -479,7 +479,7 @@ if (expr instanceof IfExpr) {
 }
 ```
 
-Finally, call expressions evaluate the procedure to be called, evaluate the arguments, and then call the procedure with the arguments.
+Finally, call expressions evaluate to the result of calling the procedure with its arguments.
 
 ```js
 const callee = this.interpret(expr.callee, env);
@@ -494,7 +494,7 @@ throw new RuntimeError(`Cannot call ${callee}`);
 
 The implementation for the Lisp calculator is now complete, but we'll need a way to run and test it.
 
-Among its many other legacies, Lisp helped popularize the [read-eval-print-loop (REPL)](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop), an interactive shell that takes single user inputs, executes them, and displays the result to the user. We'll add one to our interpreter using Node's [repl](https://nodejs.org/api/repl.html) module.
+Among its many other legacies, Lisp helped popularize the [read-eval-print-loop (REPL)](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop), an interactive shell that takes single user inputs, executes them, and then displays the result to the user. We'll add one to our interpreter using Node's [repl](https://nodejs.org/api/repl.html) module.
 
 ```js
 const repl = require('repl');
@@ -534,7 +534,7 @@ jscheme> (cons (car (list 7 8 9)) (cdr (list 1 (list 2 3) 4)))
 
 ## Global variables
 
-Our interpreter can now evaluate simple expressions, but we'll need a way to create, assign, and access variables. We'll add a `define` special form for creating global variables and a `set!` special form for changing the value of a variable.[^dlm]
+Our interpreter can now evaluate simple expressions. But we'll need a way to create, assign, and access variables. We'll add a `define` special form for creating global variables and a `set!` special form for changing the value of a variable.[^dlm]
 
 [^dlm]: Note why `define` and `set!` are both special forms. Non-special-form procedures evaluate all their arguments before using them. But `define` and `set!` cannot be evaluated that way since they _cannot_ evaluate their first argument, the identifier name.
 
@@ -639,7 +639,7 @@ class Environment {
   }
 
   // Sets the variable value in the
-  // environment in which it was defined
+  // environment where it was defined
   set(name, value) {
     if (this.values.has(name, value)) {
       this.values.set(name, value);
@@ -752,7 +752,7 @@ jscheme> (procedure? square)
 '#t'
 ```
 
-Lambdas also "hang on" to the environment in which they are defined (the pair is often called a _closure_) and can access and modify that environment when called.
+Lambdas also "hang on" to the environment where they are defined (the pair is often called a _closure_) and can access and modify that environment when called.
 
 ```scheme
 jscheme> (define increment-generator
@@ -805,7 +805,7 @@ lambda() {
 // }
 ```
 
-To evaluate a lambda expression, we return a new `Procedure` object, holding the lambda's declaration and the current environment as its closure. In the interpreter:
+To evaluate a lambda expression, we return a new `Procedure` object. The object holds the lambda's declaration and the current environment as its closure. In the interpreter:
 
 ```js
 interpret(expr, env) {
@@ -821,7 +821,7 @@ interpret(expr, env) {
 // }
 ```
 
-Now, to evaluate a call expression (e.g. `(proc arg1)`), we check to see if the procedure to be called is a `Procedure` object, and then call a `call` method on the object:
+Now, to evaluate a call expression (e.g. `(proc arg1)`), we check to see if the procedure to be called is a `Procedure` object. Then we run its `call` method:
 
 ```js
 // ...
@@ -860,7 +860,9 @@ class Procedure {
 
 ## Tail-call elimination
 
-There's an important optimization we need to make before we declare our interpreter complete. You may have noticed that we did not implement a loop construct (like a "for" or "while" loop in other languages) in the earlier sections. That's because we don't quite need one: looping in Scheme is done by recursion—and the interpreter already supports that.
+There's an important optimization we need to make before we declare our interpreter complete.
+
+You may have noticed that we did not implement a loop construct (like a "for" or "while" loop in other languages) in the earlier sections. That's because we don't quite need one: looping in Scheme is done by recursion—and the interpreter already supports that.
 
 ```scheme
 jscheme> (define sum-to
@@ -897,7 +899,7 @@ function sum-to(n, acc):
     return sum-to(n - 1, acc + n)
 ```
 
-Since the recursive call is in the tail position, we have nothing else to do once `sum-to(n - 1, acc + n)` completes; we immediately return its result.
+Since the recursive call is in the tail position, we have nothing else to do once `sum-to(n - 1, acc + n)` completes. We immediately return its result.
 
 For this reason, instead of recursing and allocating a new stack frame, we can "hand over" the function body to the new call. Instead of recursively calling `sum-to`, we'll update the function's arguments and jump back to the top of the function's body.
 
@@ -914,7 +916,7 @@ start:
 
 We'll add this [tail-call optimization](https://en.wikipedia.org/wiki/Tail_call) to our Scheme interpreter. When evaluating a procedure call in the tail position, the interpreter will update the current frame and make a [GOTO-like jump](https://chidiwilliams.com/post/goto/) to the top of the `interpret` method instead of recursing.[^dks]
 
-[^dks]: There are other ways to implement tail-call elimination, including writing a VM and using trampolines. But both methods are much more involved than using `continue` and far beyond the scope of this essay. See the Wikipedia entry on [tail-call implementation methods](https://en.wikipedia.org/wiki/Tail_call#Implementation_methods) or Eli Bendersky's essay on [recursion, continuations, and trampolines](https://eli.thegreenplace.net/2017/on-recursion-continuations-and-trampolines/).
+[^dks]: Other ways to implement tail-call elimination include writing a VM and using trampolines. But both methods are much more involved than using `continue` and far beyond the scope of this essay. See the Wikipedia entry on [tail-call implementation methods](https://en.wikipedia.org/wiki/Tail_call#Implementation_methods) or Eli Bendersky's essay on [recursion, continuations, and trampolines](https://eli.thegreenplace.net/2017/on-recursion-continuations-and-trampolines/).
 
 Let's review how we currently interpret call expressions:
 
@@ -969,7 +971,7 @@ interpret(expr, env) {
 }
 ```
 
-JavaScript doesn't have a GOTO statement, so we'll use the next best thing: we'll place the entire body of the `interpret` method inside a while loop, and then `continue` the loop to jump back to the top.
+JavaScript doesn't have a GOTO statement. So we'll use the next best thing: we'll place the entire body of the `interpret` method inside a while loop and then `continue` the loop to jump back to the top.
 
 ```js
 interpret(expr, env) {
@@ -992,7 +994,7 @@ interpret(expr, env) {
 }
 ```
 
-The `continue` statement effectively jumps back to the top of the method and evaluates the tail expression with its correct environment without recursing. So, we can now call tail-recursive functions with large inputs without overflowing the call stack!
+The `continue` statement effectively jumps back to the top of the method and evaluates the tail expression with its correct environment without recursing. Now, we can call tail-recursive functions with large inputs without overflowing the call stack!
 
 ```js
 jscheme> (sum-to 10000 0)
@@ -1032,6 +1034,6 @@ interpret(expr, env) {
 }
 ```
 
-Our Scheme interpreter is still far from complete: it lacks comments, ports, vectors, call-with-current-continuation, dotted pair notation, quotes and quasiquotes, many primitive procedures, comprehensive error detection and recovery, and more. But it implements many of the core features of Scheme and, hopefully, has given a decent insight into some of the inner workings of interpreters. We can take a victory lap here.
+Our Scheme interpreter is still far from complete. It lacks comments, ports, vectors, call-with-current-continuation, dotted pair notation, quotes and quasi-quotes, many primitive procedures, comprehensive error detection and recovery, and more. But it implements many of the core features of Scheme. And hopefully, it has given a decent insight into some of the inner workings of interpreters. We can take a victory lap here.
 
 The complete source code is available [on GitHub](https://github.com/chidiwilliams/jscheme).

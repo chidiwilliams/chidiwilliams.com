@@ -12,6 +12,7 @@ images:
     'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_750/v1621282181/Blog/hashcash-header.webp',
   ]
 categories: [explanations]
+favorite: true
 ---
 
 In the 1970s, a British comedy group ran a series called Monty Python's Flying Circus. [One sketch](https://www.dailymotion.com/video/x2hwqlw) opens with two customers descending into a greasy spoon cafe. The waitress reads out the breakfast menu. But almost all the dishes contain Spam (a brand of cooked and canned pork). As one of the customers complains about the dull menu, a group of Vikings start to chant, "Spam, Spam, Spam... Lovely Spam! Wonderful Spam!"

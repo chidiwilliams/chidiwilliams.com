@@ -7,6 +7,7 @@ thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_200/v164
 images:
   ['https://res.cloudinary.com/cwilliams/image/upload/v1640009010/Blog/dynamicland.webp']
 categories: [programming-essays]
+favorite: true
 ---
 
 {{<figure link="https://dynamicland.org/" src="https://res.cloudinary.com/cwilliams/image/upload/v1640009010/Blog/dynamicland.webp" caption="Dynamicland" width="1000" height="267" >}}

@@ -9,6 +9,7 @@ images:
     'https://res.cloudinary.com/cwilliams/image/upload/v1605754968/Blog/inside-a-go-slice-reslice.webp',
   ]
 categories: [go]
+favorite: true
 ---
 
 Two weeks ago, a friend of mine, who is learning to write Go, asked me to explain the output of this snippet.
