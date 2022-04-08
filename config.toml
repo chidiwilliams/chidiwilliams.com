@@ -12,7 +12,7 @@ images = [
   "https://res.cloudinary.com/cwilliams/image/upload/v1621417333/Blog/FN6_Nerp_400x400.webp"
 ]
 # Google Analytics 4
-GoogleAnalyticsID = "G-YTXBZ7Z07B"
+GoogleAnalyticsID = "G-NQZWXVEBWR"
 
 [markup.highlight]
 style = "xcode"
