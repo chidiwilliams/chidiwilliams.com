@@ -2,8 +2,6 @@ baseURL = "https://chidiwilliams.com/"
 languageCode = "en-us"
 title = "Chidi Williams"
 googleAnalytics = "UA-167812981-1"
-# Google Analytics 4
-googleAnalyticsID = "G-304375023"
 enableRobotsTXT = true
 rssLimit = 25
 pygmentsUseClasses = true
@@ -13,6 +11,8 @@ description = "Chidi's Blog"
 images = [
   "https://res.cloudinary.com/cwilliams/image/upload/v1621417333/Blog/FN6_Nerp_400x400.webp"
 ]
+# Google Analytics 4
+GoogleAnalyticsID = "G-304375023"
 
 [markup.highlight]
 style = "xcode"
