@@ -9,7 +9,7 @@ pygmentsUseClasses = true
 [params]
 description = "Chidi's Blog"
 images = [
-  "https://res.cloudinary.com/cwilliams/image/upload/v1621417333/Blog/FN6_Nerp_400x400.webp"
+  "https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_400/v1650188240/Blog/IMG_9874.jpg"
 ]
 # Google Analytics 4
 GoogleAnalyticsID = "G-NQZWXVEBWR"
