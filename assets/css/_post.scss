@@ -47,9 +47,14 @@ article.post {
   }
 
   a.heading-link {
-    float: left;
-    margin-left: -22px;
-    padding-right: 6px;
+    display: none;
+
+    @media screen and (min-width: 700px) {
+      display: inline-block;
+      float: left;
+      margin-left: -22px;
+      padding-right: 6px;
+    }
 
     svg {
       visibility: hidden;
