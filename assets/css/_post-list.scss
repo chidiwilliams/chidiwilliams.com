@@ -30,11 +30,12 @@
       &.starred {
         a::before {
           content: '✱';
-          font-weight: bold;
+          font-weight: 400;
           color: $primary-color;
           display: inline;
           position: relative;
           margin-right: 8px;
+          font-family: serif;
 
           @media screen and (min-width: 700px) {
             top: 0;
