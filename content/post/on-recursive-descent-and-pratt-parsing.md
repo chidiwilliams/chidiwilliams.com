@@ -4,40 +4,42 @@ date: 2022-05-29T11:15:47+01:00
 draft: true
 ---
 
-In this essay, we'll discuss two different techniques for parsing expressions: recursive descent parsing and Pratt parsing. We'll write two parsers highlighting each technique, and both will be able to parse an expression language called [Covey](https://github.com/chidiwilliams/covey/).
+In this post, we'll discuss two techniques for parsing expressions: recursive descent parsing and Pratt parsing.
 
-Covey supports simple expressions with arithmetic operations (plus, minus, multiplication, division), conditional operations with a ternary operator, identifiers (or what you might call a variable, in a full programming language), and a negation operation.
+We'll implement both parsers for a small expression language, **[Covey](https://github.com/chidiwilliams/covey)**, that supports addition, multiplication, subtraction, division, unary negation, and ternary expressions on numbers and identifiers.
 
-In this post, we'll only cover the implementation of the parser for the sake of comparison. For a full understanding of how scanners and interpreters might look like, see [Building an Expression Evaluator](https://chidiwilliams.com/post/evaluator/) and [How to Write a Lisp Interpreter in JavaScript](https://chidiwilliams.com/post/how-to-write-a-lisp-interpreter-in-javascript/).
+We'll only cover the implementations of the parsers here, for sake of comparing the recursive descent and Pratt parsing schemes. For the implementation of a full expression evaluator, see [Building an Expression Evaluator](https://chidiwilliams.com/post/evaluator/) and [How to Write a Lisp Interpreter in JavaScript](https://chidiwilliams.com/post/how-to-write-a-lisp-interpreter-in-javascript/).
 
 ## Parsers
 
-The goal of the Covey parser is to take a list of pre-scanned tokens representing the source expression and convert it into a parse tree. For example:
+An expression parser accepts a list of tokens representing an expression and converts it into a _parse tree_. (An evaluator may then traverse this tree recursively to produce the final result.)
 
 ```text
-expression = "1 + 3 * 9 - 43"
-tokens = [1, +, 3, *, 9]
-tree = (- (+ 1 (* 3 9)) 43)
+Expression: [1, +, 3, *, 9, -, 43]
+Parse tree:
+-
+├── +
+│   ├── 1
+│   └── *
+│       ├── 3
+│       └── 9
+└── 43
 ```
 
-[[TREE ANIMATION]]
+Notice that the structure of the parse tree matches the order in which the expression is to be evaluated: the sub-expressions to be evaluated first are lower down the tree than the ones to be evaluated last. Even though the sub-expression `1 + 3` appears first in the input expression, `3 * 9` has a higher precedence (remember [BODMAS](https://simple.wikipedia.org/wiki/Order_of_operations)?) and so is at the bottom of the parse tree.
 
-The resulting parse tree can then be interpreted by walking from the leaf nodes to the top of the tree to get the final result. But we won't be implementing an interpreter in this post.
-
-When implementing the parser, we need to keep the precedence of operations in mind. The resulting parse tree needs to match the evaluation order of the operations. Operations that should be carried out first are at the bottom of the tree, the leaf nodes, while the one to be carried out later are at the bottom of the tree. In the previous example, for example, even though "1 + 3" appeared first in the expression, the operation "3 + 9" is to be carried out first, and hence is at the bottom of the parse tree.
-
-It's also worth taking note of the concept of associativity. Operators like +, -, /, \*, are left-associative, while - (unary) and ternary operators are right-associative.
+Besides precedence, parsers also need to handle operator associativity. Operators like `+`, `-` (subtraction), `/`, and `*` are left-associative, while `-` (unary negation) and ternary operators are right-associative.
 
 ```text
-1 + 2 + 3         => ((+ 1 2) 3)
-8 * 3 * 9         => ((* 8 3) 9)
+1 + 2 + 3         => ((1 + 2) + 3)
+8 * 3 * 9         => ((8 * 3) * 9)
 - - - 3           => (- (- (- 3)))
-1 ? 2 : 3 ? 4 : 5 => (?: 1 2 (?: 3 4 5))
+1 ? 2 : 3 ? 4 : 5 => (1 ? 2 : (3 ? 4 : 5))
 ```
 
-Formal grammar is a way of representing the syntactic structure of a language. It shows [all the possible ways of producing valid statements in the language](https://chidiwilliams.com/post/ambiguous-grammars/).
+An expression parser also works according to the **formal grammar** of the language, a specification of all the possible ways of producing valid expressions in the language.
 
-We may specify the formal grammar for Covey as:
+For example, we may define the formal grammar for Covey as:
 
 ```text
 expression => ( "-" expression ) |
@@ -50,19 +52,28 @@ expression => ( "-" expression ) |
 primary    => NUMBER | IDENTIFIER
 ```
 
-According to this specification, an _expression_ can be any of a unary, binary, or ternary operation on _primary_ or a nested _expression_.
+According to this grammar, an _expression_ can be any of a unary, binary, or ternary operation on a _primary_ or a nested _expression_.
 
-However, this grammar falls into the trap we mentioned earlier. It specifies what operations are possible, but not what their precedence. A parser that tries to implement this grammar will not be able to distiguish.
+Hence all of the following are valid expressions:
 
-According to this grammar, the expression `1 + 2 * 3`, the parser is unable to tell whether to parse it in two ways:
+```text
+3          => expression -> primary -> NUMBER
+4 / 2      => expresssion "/" expression (each operand is
+              parsed as expression -> primary -> NUMBER)
+7 + 2 + 9  => expression "+" expression (first operand is
+              parsed as expression "+" expression; second
+              operand is parsed as NUMBER)
+...and so on...
+```
 
-If it parses "1" as a _primary_ and then on seeing "+", it parses an "expression + expression", making "1 + 2". Then it parses another _expression_ as a primary, making `(* (+ 1 2) 3)`.
+This grammar describes valid expressions, but it doesn't account for operator precedence. According to the grammar, the expression `1 + 2 * 3` can be parsed in _either_ of two ways:
 
-Alternatively, after parsing "1" as a primary, it may then parse "2 _ 3" as an "expression _ expression", making `(+ 1 (* 2 3))`. Which is the correct parse tree.
+1. As `expression "+" expression`, where the first expression is a `NUMBER`, `1`, and the other is an `expression "*" expression`, representing `2 * 3`.
+2. As `expression "*" expression`, where the first `expression` is an `expression "+" expression`, representing `1 + 2`, and the other is a `NUMBER`, 3.
 
-Parsers that are unable to make up their mind about the production of a given set of tokens are called ambiguous (link to ambiguous grammars post.)
+Both of those productions are possible according to the formal grammar, but only the former is correct.
 
-We may redefine the grammar to be less ambiguous by specifying the precedence within the grammar itself:
+To bake precedence into the formal grammar, we can rewrite the production rules as follows:
 
 ```text
 expression => ternary
@@ -73,17 +84,22 @@ unary      => ( "-" ) unary | primary
 primary    => NUMBER | IDENTIFIER
 ```
 
-An *expression* is a *ternary*. A *ternary* is a *term*, which may be followed by the rest of a ternary expression; because ternary expressions are right-associative, the then and else branches of the ternary may themselves be ternary expressions. A *term* is a *factor* followed by zero or more *factor*-s separated by a "-" or "+". A *factor* is a *unary* followed by one or more *unary*-s separated by "*" or "/". A *unary* is a "-" followed by a *unary* (hence its right-associativity); or a *primary*. Finally, as before, a *primary* is a number of an identifier.
+In this grammar:
 
-In this grammar, each rule defines how to parse an expression with at least the precedence of that rule. For example, the *ternary* rule parses an expression with a precedence equal to or higher than a *ternary* expression. The *unary* rule parses an expressions with a precedence equal to or higher than a *unary* expression, and so on.
+- An _expression_ is a _ternary_.
+- A _ternary_ is a _term_, which may be followed by the rest of a ternary expression. Becuase ternaries are right-associative, the "then" and "else" branches of the ternary are themselves _ternary_-s.
+- A _term_ is a _factor_ followed by zero or more *factor*s separated by a `"-"` or a `"+"`.
+- A _factor_ is a _unary_ followed by one or more _unary_-s separated by a `"*"` or a `"/"`.
+- A _unary_ is a _primary_ or a `"-"` followed by a _unary_.
+- A _primary_ is a `NUMBER` or an `IDENTIFIER`.
 
-Taking the previous example, "1 + 2 * 3": we walk through the grammar from top to bottom to parse the expression. After getting to the "1 +" in the tokens, we match a *term* expression: a *factor* followed by another *factor*. We match the "1" as a NUMBER, and then the "2 * 3" as a *unary* followed by a "*" and another *unary*. Hence, unlike the previous grammar, this grammar produces only one interpretation of the expression, the correct one: `(+ 1 (* 2 3))`.
+This version of the grammar removes the ambiguity we discussed earlier. The expression `1 + 2 * 3` now has only one interpretation: a `factor "+" factor`, where the first `factor` is a `NUMBER` and the second is a `NUMBER "*" NUMBER`.
 
 ## Recursive descent parsing
 
-The system we've just used to manually parse the expression *is* recursive descent parsing. In this technique, we walk down from the top of the language grammar to the bottom, and try to apply each production rule to match the tokens. We'll implement a set of recursive functions to implement, where each one implements one of the non-terminals of the grammar.
+The technique we used in the previous section to parse an expression by applying the grammar rules from top to bottom is called _recursive descent_. To implement a recursive descent parser, we define a set of recursive functions, each of which implements one of the non-terminals of the grammar.
 
-To parse a *ternary*, we'll parse a *term*, and then if a question mark follows, we'll parse the rest of the ternary expression and return a conditional expression:
+To parse a _ternary_, we parse a _term_. Then if a question mark follows, we parse the rest of the ternary expression and return a conditional expression:
 
 ```ts
 private ternary(): Expr {
@@ -100,7 +116,7 @@ private ternary(): Expr {
 }
 ```
 
-To parse a *term*, we'll parse a *factor*. And while there are subsequent "-" or "+" tokens, we'll parse the other operands to make binary expressions from left to right.
+To parse a _term_, we parse a _factor_. While there are subsequent `"-"` or `"+"` tokens, we'll parse another _factor_ to make binary expressions from left to right.
 
 ```ts
 private term(): Expr {
@@ -116,7 +132,7 @@ private term(): Expr {
 }
 ```
 
-To parse a *factor*, we'll parse a *unary*. And while there are subsequent "/" or "*" tokens, we'll parse the other operands to make binary expressions from left to right.
+To parse a _factor_, we parse a _unary_. While there are subsequent `"/"` or `"*"` tokens, we'll parse another _unary_ to make binary expressions from left to right.
 
 ```ts
 private factor(): Expr {
@@ -132,11 +148,11 @@ private factor(): Expr {
 }
 ```
 
-To parse a *unary*, we'll check if the next token a unary operator, like a "!" or "-". If it is, we'll parse a *unary* and return a unary expression. But if it isn't, we'll parse a *primary*.
+To parse a _unary_, we first check if the next token is a unary operator, `"-"`. If it is, we parse a _unary_ and return a unary expression. But if it isn't, we parse a _primary_.
 
 ```ts
 private unary(): Expr {
-  if (this.match(TokenType.BANG, TokenType.MINUS)) {
+  if (this.match(TokenType.MINUS)) {
     const operator = this.previous();
     const expression = this.unary();
     return new UnaryExpr(operator, expression);
@@ -145,7 +161,7 @@ private unary(): Expr {
 }
 ```
 
-Finally, to parse a *primary*, we'll check if the current token is a number or an identifier, and return a literal expression or a variable expression respectively.
+Finally, to parse a _primary_, we check if the current token is a number or an identifier and return a literal or variable expression respectively.
 
 ```ts
 private primary(): Expr {
@@ -160,7 +176,7 @@ private primary(): Expr {
 }
 ```
 
-To parse a given expression, we'll start with the lowest precedence rule, *ternary*:
+To parse any given expression, we start with the lowest precedence rule, _ternary_:
 
 ```ts
 parse(): Expr {
@@ -170,34 +186,35 @@ parse(): Expr {
 
 ## Pratt parsing
 
-That's one way to parse expression, but Pratt describes a different algorithm for parsing expressions.
+Pratt parsing describes an alternative way of parsing expressions. Here's how it works:
 
-In Pratt parsing, we describe every expression as consisting of an *prefix*, followed by zero or more *infix*-es of the same or higher precedence. A *prefix* can be a number, a variable, or a *unary*, where a *unary* is a unary token (e.g. "-"), followed by an expression with a precedence of at least UNARY. An *infix* can be a binary (e.g. "+", "-", "/", "*") or a ternary expression ("?:"). The right operand of a binary expression has a precedence greater than that of the expression's operator. Also, the then and else branches of a ternary expression both have precedences of at least TERNARY.
+To parse an expression, we parse a _prefix_ followed by zero or more _infixes_ at the same or higher precedence. A _prefix_ is a number, an identifier, or a _unary_ (where a _unary_ is a unary token, such as `"-"`, followed by an expression with a precedence equal to or higher than `UNARY`).
 
-This is how we would parse the expression `- age + 23 / 5 - 10` using Pratt parsing:
+And an _infix_ is a binary or a ternary expression. If the _infix_ is a binary expression, the left operand is the result of the _prefix_ parsing. And to get the right operand, we parse an expression at a precedence at least one higher than that of the binary operator. If the _infix_ is a ternary expression, the ternary condition is the result of the _prefix_ parsing. And to get the then- and else-branches, we parse the next sub-expression at a precedence of at least `TERNARY`.
 
-- At first, we start parsing with the lowest precedence, TERNARY
-- Parse the *prefix* of the expression. The next token is a "-", so we parse a *unary*. The *unary* matches the "-" token and then recursively parses using a precedence of UNARY.
-  - The *prefix* of this expression is "age", a variable expression; and there are no *infixes* with a precedence of at least UNARY.
-- The next token, "+", has a higher precedence than TERNARY, so we parse an *infix*. "+" matches a binary expression, where the left operand is the unary expression we've just parsed, `(- age)`. To get the right operand, we continue parsing with a precedence of TERM+1, i.e. one higher than the precedence of the operator, "+".
-  - This parsing produces an *prefix*, `23`. And, since the precedence of "/", FACTOR, is at least the precedence of TERM+1, we parse an *infix*. "/" matches a binary expression, where the left operand is the prefix, `23`, and the right operand is the result of parsing with a precedence of FACTOR+1.
-    - This parsing in turn has a *prefix* of *5* and no *infix*es, as the next operator "-" has a precedence less than FACTOR+1.
-- The next token, "-", also has a higher precedence than TERNARY, so we parse another *infix*. Again, "-" matches a binary expression, where the left operand is the result of the previous *infix*, `(+ (- age) (/ 23 5))`, and the right operand is the result of parsing with a precedence of TERM+1.
-  - Parsing the right operand results in a *prefix*, `10`, followed by no infixes, as there are no tokens left to parse.
-- The result parse tree becomes `(- (+ (- age) (/ 23 5)) 10)`
+To parse the expression `- age + 23 / 5 - 10`, for example:[^slc]
 
-A previous reader of this blog might note that this algorithm is somewhat similar to the Dijkstra shunting yard algorithm implemented in [Building an Expression Evaluator](https://chidiwilliams.com/post/evaluator/#converting-from-infix-to-rpn).
+[^slc]: This algorithm is somewhat similar to the stack-based shunting yard algorithm implemented in [Building an Expression Evaluator](https://chidiwilliams.com/post/evaluator/#converting-from-infix-to-rpn).
 
-We'll define a type, `ParseRule`, that defines the precedence of a token type as well as the functions to be used to parse it as a *prefix* or *infix*.
+- Start parsing with the lowest precedence, `TERNARY`
+- Parse the _prefix_. The next token is `"-"` which matches a _unary_. To get the unary operand, we (recursively) parse with a precedence of `UNARY`.
+  - Parse the _prefix_. The next token is `age` which results in a variable expression.
+  - The next token, `"+"`, has a lower precedence than `UNARY`, so we have no *infix*es to parse.
+- The next token, `"+"`, has a higher precedence than `TERNARY`, so we parse an _infix_. `"+"` matches a binary expression; the left operand is the result of the _prefix_ parsing: `(- age)`. To get the right operand, we (recursively) parse with a precedence of `TERM + 1`.
+  - Parse the _prefix_. The next token is `23`, resulting in literal expression.
+  - The next token, `"/"`, has a precedence, `FACTOR`, equal to `TERM + 1`. So we parse an _infix_. `"/"` matches a binary expression. The left operand is `23`. And to get the right operand, we (recursively) parse with a precedence of `FACTOR + 1`, getting `5`.
+- The next token, `"-"`, also has a higher precedence than `TERNARY`. So we parse another _infix_. `"-"` matches a binary expression. The left operand is the result of the previous _infix_ parsing: `(+ (- age) (/ 23 5))`. To get the right operand, we (recursively) parse with a precedence of `TERM + 1`, getting `10`.
+- The final parse tree becomes `(- (+ (- age) (/ 23 5)) 10)`
+
+To implement the parser, we'll first define a type, `ParseRule`, that specifies the precedence of a token type as well as the functions to be used to parse it as a _prefix_ or an _infix_.
 
 ```ts
-// Operator precedence from lowest (top) to highest (bottom)
 enum Precedence {
-  NONE,
+  NONE, // lowest
   TERNARY,
   TERM,
   FACTOR,
-  UNARY,
+  UNARY, // highest
 }
 
 type PrefixParseFn = () => Expr;
@@ -205,9 +222,9 @@ type PrefixParseFn = () => Expr;
 type InfixParseFn = (left: Expr) => Expr;
 
 interface ParseRule {
+  precedence: Precedence;
   prefix?: PrefixParseFn;
   infix?: InfixParseFn;
-  precedence: Precedence;
 }
 ```
 
@@ -233,9 +250,9 @@ private parsePrecedence(precedence: Precedence): Expr {
 }
 ```
 
-`parsePrecedence` parses the *prefix* expression according to the parse rule of the next token. Then, while the next tokens have a precedence greater than or equal to the given precedence, we parse *infix* expressions to make up the final result.
+`parsePrecedence` parses the next _prefix_ expression according to the parse rule of the next token. Then, while the next tokens have a precedence greater than or equal to the given precedence, it parses subsequent _infix_ expressions to make up the final result.
 
-Next, we'll define the rules for each token type:
+Next, we'll write the method that returns the parse rule for a token type:
 
 ```ts
 private parseRules: ParseRule[] = [
@@ -256,7 +273,7 @@ private getRule(tokenType: TokenType): ParseRule {
 }
 ```
 
-For the prefix parsing functions, `number` parses a literal expression containing a number:
+`number` parses a literal expression containing a number:
 
 ```ts
 private number: PrefixParseFn = () => {
@@ -272,7 +289,7 @@ private variable: PrefixParseFn = () => {
 };
 ```
 
-And `unary` parses a unary expression:
+`unary` parses a unary expression:
 
 ```ts
 private unary: PrefixParseFn = () => {
@@ -282,7 +299,7 @@ private unary: PrefixParseFn = () => {
 };
 ```
 
-Then for the infix parsing functions, `binary` parses a binary expression:
+`binary` parses a binary expression:
 
 ```ts
 private binary: InfixParseFn = (left: Expr) => {
@@ -312,50 +329,33 @@ parse(): Expr {
 }
 ```
 
-## Comparison
+## Comparison and benchmarks
 
+While both parsers can parse any valid expression in the language, they differ in terms of implementation, extensibility, and performance. The structure of the recursive descent parser closely mirrors the formal grammar of the language, and so might be easier to implement than the Pratt parser which requires knowledge of a special algorithm.
 
+On the other hand, since the Pratt parser defines all the operations and rules in a single table, it is easier to extend than the recursive descent parser. Adding a new operator or changing the precedence of an operator only requires modifying the parsing rules. The same operation in the recursive descent parser would require adding new methods and changing exisiting methods.[^sdk]
 
-- Pratt parsing is basically a type of shunting yard, which is something I've used in a previous post
-  - Here's a big advantage of this hybrid parser: adding new expressions and/or changing precedence levels is much simpler and requires far less code. In the pure RD parser, the operators and their precedences are determined by the structure of recursive calls between methods. Adding a new operator requires a new method, as well as modifying some of the other methods [[2\]](https://eli.thegreenplace.net/2009/03/20/a-recursive-descent-parser-with-an-infix-expression-evaluator#id5). Changing the precedence of some operator is also troublesome and requires moving around lots of code.
-- https://eli.thegreenplace.net/2009/03/20/a-recursive-descent-parser-with-an-infix-expression-evaluator
-- https://www.engr.mun.ca/~theo/Misc/exp_parsing.htm
+[^sdk]: It's possible to combine both parsing methods. In a parser for a programming language with statements and expressions, we can use a hybrid scheme: recursive descent parsing for the statements and Pratt parsing for the expressions.
 
-Benchmarks: with the TS implementation, Pratt is much slower by a large margin, but I tried reimplementing with Go, and I changed the map of token types to parse rules to an array and Pratt is only about 1.3
+I ran [some benchmarks](https://github.com/chidiwilliams/covey/blob/main/src/benchmarks.ts) to compare the Recursive Descent and Pratt parsers and found that for a short expression (2 binary operations) the recursive descent parser was about 3.4x faster than the Pratt parser. For a longer expression (2 unary, 21 binary, and 2 ternary operations), the recursive descent parser was about 0.1x faster.
 
-According to the Wikipedia page on Operator precedence parsing, recursive descent can become inefficient when parsing. Parsing a number requires five function calls, one for each non-terminal in the grammary until reaching primary.
-
-
-
-With object:
+After some profiling, I noticed that a decent amount of overhead in the Pratt parsing happened during the initialization of the `PrattParser` object. And so, at the cost of a little less readability, I [moved the parse functions outside the `PrattParser` class definition](https://github.com/chidiwilliams/covey/blob/main/src/optimized-pratt-parser.ts). After this optimization, the Pratt parser was about 0.7x faster than the recursive descent parser for both the short and long expressions.
 
 ```text
 Input: 1 + 3 - 5
-Recursive Descent x 4,220,448 ops/sec ±1.04% (94 runs sampled)
-Pratt x 837,369 ops/sec ±4.85% (67 runs sampled)
+Recursive Descent x 4,825,141 ops/sec ±0.26% (94 runs sampled)
+Pratt x 1,106,515 ops/sec ±4.38% (64 runs sampled)
+Optimized Pratt x 8,263,421 ops/sec ±0.35% (94 runs sampled)
 
 Input: - 1 + 23 * 4 + age + 4 ? 5 : 9 * height / 5 + 2
-Recursive Descent x 1,042,365 ops/sec ±0.23% (94 runs sampled)
-Pratt x 489,539 ops/sec ±3.06% (80 runs sampled)
+Recursive Descent x 1,121,539 ops/sec ±0.22% (97 runs sampled)
+Pratt x 812,288 ops/sec ±5.69% (71 runs sampled)
+Optimized Pratt x 2,172,998 ops/sec ±0.24% (96 runs sampled)
 
 Input: 2 / 89 + 37 ? 9 : 17 * 90 - 3 + 7 / 1 - - 4 + 89 * 3 + 1 + 9 - 47 - - 9 + 2 ? 4 : 37 * 9 + 0 / 21 + 8 - 9 - 2 / 4
-Recursive Descent x 395,567 ops/sec ±5.03% (89 runs sampled)
-Pratt x 264,563 ops/sec ±2.77% (88 runs sampled)
+Recursive Descent x 450,890 ops/sec ±0.26% (90 runs sampled)
+Pratt x 490,240 ops/sec ±5.28% (80 runs sampled)
+Optimized Pratt x 778,055 ops/sec ±0.27% (93 runs sampled)
 ```
 
-With array:
-
-```text
-Input: 1 + 3 - 5
-Recursive Descent x 4,718,156 ops/sec ±0.34% (94 runs sampled)
-Pratt x 1,005,622 ops/sec ±9.43% (57 runs sampled)
-
-Input: - 1 + 23 * 4 + age + 4 ? 5 : 9 * height / 5 + 2
-Recursive Descent x 1,098,175 ops/sec ±0.96% (91 runs sampled)
-Pratt x 789,713 ops/sec ±5.21% (67 runs sampled)
-
-Input: 2 / 89 + 37 ? 9 : 17 * 90 - 3 + 7 / 1 - - 4 + 89 * 3 + 1 + 9 - 47 - - 9 + 2 ? 4 : 37 * 9 + 0 / 21 + 8 - 9 - 2 / 4
-Recursive Descent x 450,167 ops/sec ±0.26% (95 runs sampled)
-Pratt x 490,550 ops/sec ±3.64% (83 runs sampled)
-```
-
+The complete implementation of the parsers is available [on GitHub](https://github.com/chidiwilliams/covey/blob/main/src/parser.ts).
