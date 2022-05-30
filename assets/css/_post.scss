@@ -29,6 +29,7 @@ article.post {
 
   h1 {
     font-size: 2rem;
+    line-height: 1.5;
   }
 
   .post-content {
@@ -98,6 +99,7 @@ article.post {
     border: 1px solid $border-color;
     border-radius: 3px;
     tab-size: 4;
+    overflow: auto;
   }
 
   figure {
