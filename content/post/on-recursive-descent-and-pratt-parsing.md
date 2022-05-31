@@ -52,7 +52,7 @@ expression => ( "-" expression ) |
 primary    => NUMBER | IDENTIFIER
 ```
 
-According to this grammar, an _expression_ can be a _primary_ or a unary, binary, or ternary operation on a _primary_ or a nested _expression_. And a _primary_ is a `NUMBER` or an `IDENTIFIER`.
+According to this grammar, an _expression_ is a _primary_ or a unary, binary, or ternary operation on a _primary_ or a nested _expression_. And a _primary_ is a `NUMBER` or an `IDENTIFIER`.
 
 Hence all of the following are valid expressions:
 
