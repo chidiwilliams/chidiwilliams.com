@@ -1,7 +1,7 @@
 ---
 title: 'On Recursive Descent and Pratt Parsing'
 date: 2022-05-31T00:15:47+01:00
-draft: true
+draft: false
 ---
 
 In this essay, we'll discuss two techniques for parsing expressions: recursive descent parsing and Pratt parsing.
@@ -26,9 +26,9 @@ Parse tree:
 └── 43
 ```
 
-Notice that the structure of the parse tree matches the order of evaluation of the expression. The sub-expressions to be evaluated first are lower down the tree than the ones to be evaluated last. Even though the sub-expression `1 + 3` appears first in the input expression, `3 * 9` has a higher precedence (remember [BODMAS](https://simple.wikipedia.org/wiki/Order_of_operations)?) and so is at the bottom of the parse tree.
+Notice that the structure of the parse tree matches the order of evaluation of the expression. The sub-expressions to be evaluated first are lower down the tree than the ones to be evaluated last. Even though `1 + 3` appears first in the input expression, `3 * 9` has a higher precedence (remember [BODMAS](https://simple.wikipedia.org/wiki/Order_of_operations)?) and so is at the bottom of the tree.
 
-Besides precedence, parsers also need to handle operator associativity. Operators like `+`, `-` (subtraction), `/`, and `*` are left-associative, while `-` (unary negation) and ternary operators are right-associative.
+Besides precedence, parsers also need to handle operator associativity correctly. Operators like `+`, `-` (subtraction), `/`, and `*` are left-associative, while `-` (unary negation) and ternary operators are right-associative.
 
 ```text
 1 + 2 + 3         => ((1 + 2) + 3)
@@ -37,9 +37,9 @@ Besides precedence, parsers also need to handle operator associativity. Operator
 1 ? 2 : 3 ? 4 : 5 => (1 ? 2 : (3 ? 4 : 5))
 ```
 
-An expression parser also works according to the **formal grammar** of the language, which specifies all the possible ways of producing valid expressions in the language.
+Expression parsers also follow the **formal grammar** of the language, which specifies all the possible ways of producing valid expressions in the language.
 
-For example, we may define the formal grammar for Covey as:
+For example, we may define the formal grammar of Covey as:
 
 ```text
 expression => ( "-" expression ) |
@@ -52,7 +52,7 @@ expression => ( "-" expression ) |
 primary    => NUMBER | IDENTIFIER
 ```
 
-According to this grammar, an _expression_ can be a unary, binary, or ternary operation on a _primary_ or a nested _expression_.
+According to this grammar, an _expression_ is a _primary_ or a unary, binary, or ternary operation on a _primary_ or a nested _expression_. And a _primary_ is a `NUMBER` or an `IDENTIFIER`.
 
 Hence all of the following are valid expressions:
 
@@ -87,13 +87,13 @@ primary    => NUMBER | IDENTIFIER
 In this grammar:
 
 - An _expression_ is a _ternary_.
-- A _ternary_ is a _term_, which may be followed by the rest of a ternary expression. Because ternaries are right-associative, the "then" and "else" branches of the ternary are _ternary_-s.
+- A _ternary_ is a _term_, which may be followed by the rest of a ternary expression. Because ternaries are right-associative, the "then" and "else" branches of the ternary are also _ternary_-s.
 - A _term_ is a _factor_ followed by zero or more *factor*s separated by a `"-"` or a `"+"`.
-- A _factor_ is a _unary_ followed by one or more _unary_-s separated by a `"*"` or a `"/"`.
+- A _factor_ is a _unary_ followed by zero or more _unary_-s separated by a `"*"` or a `"/"`.
 - A _unary_ is a _primary_ or a `"-"` followed by a _unary_.
 - A _primary_ is a `NUMBER` or an `IDENTIFIER`.
 
-This version of the grammar removes the ambiguity we discussed earlier. The expression `1 + 2 * 3` now has only one interpretation: a `factor "+" factor`, where the first `factor` is a `NUMBER` and the second is a `NUMBER "*" NUMBER`.
+This grammar removes the ambiguity we discussed earlier. The expression `1 + 2 * 3` now has only one interpretation: a `factor "+" factor`, where the first `factor` is a `NUMBER` and the second is a `NUMBER "*" NUMBER`.
 
 ## Recursive descent parsing
 
@@ -188,9 +188,9 @@ parse(): Expr {
 
 Pratt parsing describes an alternative way of parsing expressions. Here's how it works:
 
-To parse an expression: we parse a _prefix_ followed by zero or more _infixes_ at the same or higher precedence. A _prefix_ is a number, an identifier, or a _unary_. (A _unary_ is a unary token, such as `"-"`, followed by an expression with a precedence of at least `UNARY`.)
+To parse an expression: we parse a _prefix_ followed by zero or more _infixes_ of the same or higher precedence. A _prefix_ is a number, an identifier, or a _unary_. (A _unary_ is a unary token, such as `"-"`, followed by an expression with a precedence of at least `UNARY`.)
 
-And an _infix_ is a binary or a ternary expression. If the _infix_ is a binary expression, the result of the previous _prefix_ parsing is the left operand. To get the right operand, we parse the next sub-expression at a precedence at least one higher than the the binary operator. If the _infix_ is a ternary expression, the result of the _prefix_ parsing is the ternary condition. To get the then- and else-branches, we parse the next sub-expression at a precedence of at least `TERNARY`.
+An _infix_ is a binary or a ternary expression. If the _infix_ is a binary expression, the result of the previous _prefix_ parsing is the left operand. To get the right operand, we parse the next sub-expression with a precedence at least one higher than the the binary operator. If the _infix_ is a ternary expression, the result of the _prefix_ parsing is the ternary condition. To get the then- and else-branches, we parse the next sub-expression at a precedence of at least `TERNARY`.
 
 Let's take an example. To parse the expression `- age + 23 / 5 - 10`:[^slc]
 
@@ -198,7 +198,7 @@ Let's take an example. To parse the expression `- age + 23 / 5 - 10`:[^slc]
 
 - Start parsing with the lowest precedence, `TERNARY`
 - Parse the _prefix_. The next token is `"-"` which matches a _unary_. To get the unary operand, we (recursively) parse with a precedence of `UNARY`.
-  - Parse the _prefix_. The next token is `age` which results in a variable expression.
+  - Parse the _prefix_. The next token is `age` which forms a variable expression.
   - The next token, `"+"`, has a lower precedence than `UNARY`, so we have no *infix*es to parse.
   - Result: `(- age)`
 - The next token, `"+"`, has a higher precedence than `TERNARY`, so we parse an _infix_. `"+"` matches a binary expression; the left operand is the result of the previous _prefix_ parsing: `(- age)`. To get the right operand, we (recursively) parse with a precedence of `TERM + 1`.
@@ -230,7 +230,7 @@ interface ParseRule {
 }
 ```
 
-Next, we'll implement the method that parses an expression at a given precedence:
+Next, we'll implement the method that parses the next sub-expression with a given precedence:
 
 ```ts
 private parsePrecedence(precedence: Precedence): Expr {
@@ -333,7 +333,7 @@ parse(): Expr {
 
 ## Comparison and benchmarks
 
-While both parsers can parse any valid expression in the language, they differ in terms of implementation, extensibility, and performance. The structure of the recursive descent parser closely mirrors the formal grammar of the language. And so it may be easier to implement than the Pratt parser which requires knowledge of a special algorithm.
+While both parsers can parse any valid expression in the language, they differ in terms of implementation, extensibility, and performance. The structure of the recursive descent parser closely mirrors the formal grammar of the language. And so it may be easier to implement than the Pratt parser, which requires knowledge of a special algorithm.
 
 On the other hand, since the Pratt parser defines all the operations and rules in a single table, it is easier to extend than the recursive descent parser. To add a new operator or change the precedence of an operator, one only has to update the parsing rules. But the same task in the recursive descent parser will require adding new methods and changing existing methods.[^sdk]
 
