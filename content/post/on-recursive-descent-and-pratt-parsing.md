@@ -190,7 +190,7 @@ Pratt parsing describes an alternative way of parsing expressions. Here's how it
 
 To parse an expression: we parse a _prefix_ followed by zero or more _infixes_ at the same or higher precedence. A _prefix_ is a number, an identifier, or a _unary_. (A _unary_ is a unary token, such as `"-"`, followed by an expression with a precedence of at least `UNARY`.)
 
-And an _infix_ is a binary or a ternary expression. If the _infix_ is a binary expression, the result of the previous *prefix* parsing is the left operand. To get the right operand, we parse the next sub-expression at a precedence at least one higher than the the binary operator. If the _infix_ is a ternary expression, the result of the *prefix* parsing is the ternary condition. To get the then- and else-branches, we parse the next sub-expression at a precedence of at least `TERNARY`.
+And an _infix_ is a binary or a ternary expression. If the _infix_ is a binary expression, the result of the previous _prefix_ parsing is the left operand. To get the right operand, we parse the next sub-expression at a precedence at least one higher than the the binary operator. If the _infix_ is a ternary expression, the result of the _prefix_ parsing is the ternary condition. To get the then- and else-branches, we parse the next sub-expression at a precedence of at least `TERNARY`.
 
 Let's take an example. To parse the expression `- age + 23 / 5 - 10`:[^slc]
 
@@ -203,7 +203,7 @@ Let's take an example. To parse the expression `- age + 23 / 5 - 10`:[^slc]
   - Result: `(- age)`
 - The next token, `"+"`, has a higher precedence than `TERNARY`, so we parse an _infix_. `"+"` matches a binary expression; the left operand is the result of the previous _prefix_ parsing: `(- age)`. To get the right operand, we (recursively) parse with a precedence of `TERM + 1`.
   - Parse the _prefix_. The next token is `23`, resulting in literal expression.
-  - The next token, `"/"`, has a precedence, `FACTOR`, equal to `TERM + 1`. So we parse an _infix_. `"/"` matches a binary expression. The left operand is `23`, the result of the previous *prefix* parsing. And to get the right operand, we (recursively) parse with a precedence of `FACTOR + 1`, getting `5`.
+  - The next token, `"/"`, has a precedence, `FACTOR`, equal to `TERM + 1`. So we parse an _infix_. `"/"` matches a binary expression. The left operand is `23`, the result of the previous _prefix_ parsing. And to get the right operand, we (recursively) parse with a precedence of `FACTOR + 1`, getting `5`.
   - Result: `(+ (- age) (/ 23 5))`
 - The next token, `"-"`, also has a higher precedence than `TERNARY`. So we parse another _infix_. `"-"` matches a binary expression. The left operand is the result of the previous _infix_ parsing: `(+ (- age) (/ 23 5))`. To get the right operand, we (recursively) parse with a precedence of `TERM + 1`, getting `10`.
 - The final parse tree becomes `(- (+ (- age) (/ 23 5)) 10)`
