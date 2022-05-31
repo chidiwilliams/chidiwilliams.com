@@ -1,7 +1,7 @@
 ---
 title: 'On Recursive Descent and Pratt Parsing'
 date: 2022-05-31T00:15:47+01:00
-draft: true
+draft: false
 ---
 
 In this essay, we'll discuss two techniques for parsing expressions: recursive descent parsing and Pratt parsing.
