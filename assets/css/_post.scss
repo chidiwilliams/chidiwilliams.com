@@ -92,6 +92,17 @@ article.post {
     }
   }
 
+  p,
+  li {
+    code {
+      padding: 2px 4px;
+      background: #eeeeee;
+      font-size: 0.875rem;
+      border-radius: 3px;
+      white-space: pre;
+    }
+  }
+
   pre {
     white-space: pre-wrap;
     padding: 20px;
