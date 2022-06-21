@@ -1,7 +1,7 @@
 ---
 title: 'Crafting Interpreters: A Review'
 date: 2022-06-21T13:08:51+01:00
-draft: true
+draft: false
 categories: languages
 images:
   [
