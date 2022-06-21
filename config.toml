@@ -20,3 +20,6 @@ style = "xcode"
 [taxonomies]
 series = "series"
 category = "categories"
+
+[markup.goldmark.renderer]
+unsafe = true
