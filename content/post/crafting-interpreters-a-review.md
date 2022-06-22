@@ -13,7 +13,7 @@ images:
   <img src="https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_800/v1655822011/Blog/crafting-interpreters.webp" alt="Picture of Crafting Interpreters" width="800" height="533">
 	<figcaption>
     <p>
-      Source: <a href="https://journal.stuffwithstuff.com/2021/07/29/640-pages-in-15-months/">Bob Nystrom</a>
+      Source: <a href="https://journal.stuffwithstuff.com/2021/07/29/640-pages-in-15-months/" target="_blank" rel="noreferer noopener">Bob Nystrom</a>
     </p>
   </figcaption>
 </figure>
