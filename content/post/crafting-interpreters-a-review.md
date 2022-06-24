@@ -7,6 +7,7 @@ images:
   [
     'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_800/v1655822011/Blog/crafting-interpreters.webp',
   ]
+favorite: true
 ---
 
 <figure>
