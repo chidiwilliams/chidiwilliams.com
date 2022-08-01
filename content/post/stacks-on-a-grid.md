@@ -65,4 +65,4 @@ Also, is it possible to make a numerical representation of instructions such tha
 
 While I won't be using StackGrid to build real applications anytime soon, I think it made for a weird, fun language to create.
 
-_The source code for the StackGrid interpreter is available [on GitHub](https://github.com/langjam/jam0003/tree/main/stackgrid), and the playground is [here](https://chidiwilliams.github.io/stackgrid)._
+_Check out the [source code](https://github.com/langjam/jam0003/tree/main/stackgrid) for the StackGrid interpreter and the [web playground](https://chidiwilliams.github.io/stackgrid)._
