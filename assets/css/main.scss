@@ -22,13 +22,10 @@ h6 {
   margin: 20px 0 0;
 }
 
-blockquote {
-  font-style: italic;
-}
-
 body {
   line-height: 1.5;
   word-spacing: 1px;
+  background: $body-background;
   color: $body-color;
   font-family: $body-font;
   -webkit-font-smoothing: antialiased;
@@ -39,7 +36,7 @@ button {
 }
 
 hr {
-  border: 1px solid $border-color;
+  border: 1px solid $primary-color-3;
 }
 
 .sr-only {
@@ -63,7 +60,7 @@ section.shelf a.perfect-book-link {
 
 a {
   color: $primary-color;
-  text-decoration: none;
+  // text-decoration: none;
 }
 
 a:hover {

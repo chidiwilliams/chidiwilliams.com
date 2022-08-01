@@ -15,7 +15,7 @@
 }
 
 .post-meta {
-  color: $secondary-color;
+  color: $primary-color-2;
   font-size: $small-font;
   font-family: $secondary-font;
 }
@@ -99,7 +99,7 @@ article.post {
   li {
     code {
       padding: 2px 4px;
-      background: #eeeeee;
+      background: $primary-color-4;
       font-size: 0.875rem;
       border-radius: 3px;
       white-space: pre;
@@ -110,7 +110,7 @@ article.post {
     white-space: pre-wrap;
     padding: 20px;
     font-size: 0.85rem;
-    border: 1px solid $border-color;
+    border: 1px solid $primary-color-3;
     border-radius: 3px;
     tab-size: 4;
     overflow: auto;
@@ -125,7 +125,7 @@ article.post {
       text-align: center;
       font-size: $small-font;
       font-style: italic;
-      color: $secondary-color;
+      color: $primary-color-2;
     }
 
     figcaption p {
@@ -158,13 +158,13 @@ article.post {
     margin-bottom: 1rem;
 
     thead th {
-      border: solid 1px $secondary-color;
+      border: solid 1px $primary-color-2;
       padding: 6px;
       text-align: left;
     }
 
     tbody td {
-      border: solid 1px $secondary-color;
+      border: solid 1px $primary-color-2;
       padding: 6px;
     }
   }
@@ -197,5 +197,12 @@ article.post {
 
   sup {
     vertical-align: text-top;
+  }
+
+  blockquote {
+    font-style: italic;
+    border-left: solid 0.25rem;
+    padding-left: 1rem;
+    margin: 0;
   }
 }
