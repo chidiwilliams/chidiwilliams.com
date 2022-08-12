@@ -2,6 +2,7 @@
 title: 'Generic Zero Values in Go'
 date: 2022-08-12T07:55:39+01:00
 draft: false
+categories: [languages]
 ---
 
 When a variable or value is declared without explicit initialization, the Go compiler assigns it a default value. From the [Go spec](https://go.dev/ref/spec#The_zero_value):
