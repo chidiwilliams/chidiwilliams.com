@@ -22,4 +22,4 @@ jobs:
         env:
           BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
           RSS_URL: "https://chidiwilliams.com/post/index.xml"
-          MAX_RECENT_POST_AGE: "604800"
+          MAX_RECENT_POST_AGE: "86400"
