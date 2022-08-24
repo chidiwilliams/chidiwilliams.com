@@ -109,11 +109,15 @@ article.post {
   pre {
     white-space: pre-wrap;
     padding: 20px;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     border: 1px solid $primary-color-3;
     border-radius: 3px;
     tab-size: 4;
     overflow: auto;
+
+    code {
+      color: #000000;
+    }
   }
 
   figure {
