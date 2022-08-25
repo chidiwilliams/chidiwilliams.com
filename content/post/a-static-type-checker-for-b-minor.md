@@ -424,6 +424,84 @@ case *WhileStmt:
 
 ## Maps and arrays
 
+B-Minor also supports maps and arrays which can be declared with map and array literals and accessed and set:
+
+```text
+m: map string integer = { "hello": 5, "goodbye": 10 };
+m["farewell"] = 20;
+print m["farewell"], m["hello"];
+
+// map declared without initializer is empty by default
+n: map string string; // {}
+
+a: array [5] integer = {1, 2, 3, 4, 5};
+a[2] = 39;
+print a[4];
+
+// array declared without initializer is filled with zero
+// values of its element type
+b: array [3] string;  // {"", "", ""}
+c: array [2] boolean; // {false, false}
+```
+
+First, we need to create a representation of the map type. The map type is a "meta-type" containing two other types: the key type and the value type. And two map types are equal if their key types and value types are also equal.
+
+```go
+type mapType struct {
+	keyType   Type
+	valueType Type
+}
+
+func (m *mapType) Equals(other Type) bool {
+	otherMapType, ok := other.(*mapType)
+	if !ok {
+		return false
+	}
+
+	return m.keyType.Equals(otherMapType.keyType) &&
+		m.valueType.Equals(otherMapType.valueType)
+}
+
+func (m *mapType) ZeroValue() Value {
+	return MapValue{}
+}
+
+func (m *mapType) String() string {
+	return fmt.Sprintf("map %s %s", m.keyType, m.valueType)
+}
+```
+
+Similarly, we create an array type containing a length value and an element type. Two array types are equal if their lengths and element types are also equal.
+
+```go
+type arrayType struct {
+	length      int
+	elementType Type
+}
+
+func (a *arrayType) Equals(other Type) bool {
+	otherArrayType, ok := other.(*arrayType)
+	if !ok {
+		return false
+	}
+
+	return a.length == otherArrayType.length &&
+  	a.elementType.Equals(otherArrayType.elementType)
+}
+
+func (a *arrayType) ZeroValue() Value {
+	arr := ArrayValue(make([]Value, a.length))
+	for i := 0; i < a.length; i++ {
+		arr[i] = a.elementType.ZeroValue()
+	}
+	return arr
+}
+
+func (a *arrayType) String() string {
+	return fmt.Sprintf("array [%s] %s", a.elementType)
+}
+```
+
 
 
 ---
