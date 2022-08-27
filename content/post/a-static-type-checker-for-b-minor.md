@@ -5,11 +5,11 @@ draft: true
 categories: [languages]
 ---
 
-In my last few posts, we’ve discussed different topics related to programming languages and interpreters and compilers. In this post, we’ll talk about how to implement a simple static type-checker for the [B-Minor language](https://www3.nd.edu/~dthain/courses/cse40243/fall2020/bminor.html).
+In this post, we'll discuss the implementation of a static type checker for a simple, C-like language called [B-Minor](https://www3.nd.edu/~dthain/courses/cse40243/fall2020/bminor.html).
 
-B-Minor is a simple C-like language for use in an undergraduate compilers class. It includes expressions, basic control flow, recursive functions, and static type checking.
+B-Minor is a small language designed for use in an [undergraduate compilers course](https://www3.nd.edu/~dthain/courses/cse40243/fall2020/) and it supports expressions, basic control flow, functions, and static type checking.
 
-An example B-Minor program looks like this:
+Here's an example B-Minor program:
 
 ```text
 // Prints the sum of all multiples of 3 and 5 less than n
@@ -26,21 +26,17 @@ sumMultiples: function integer (n: integer) = {
 print sumMultiples(1000);
 ```
 
-In this post, we’ll focus on the type checker for the language. We’ll assume a scanner, parser, and interpreter have been implemented.
-
-The type checker accepts a list of statements, `[]Stmt`, like `PrintStmt`, `VarStmt`, `ForStmt`, `ExprStmt`, `BlockStmt`, `IfStmt`, and more. And each of these statements may themselves contain other statements and expressions.
-
-// TODO: Add picture of [Scanner] -> [Parser] -> [Type checker] -> [Interpreter]
-
-To learn more about how some of the other modules work, see Recursive Descent and Pratt Parsing, How to write a Lisp Interpreter in JavaScript, Building an Expression Evaluator, etc.
-
 ## The type checker
 
-The goal of a type checker is pretty simple. It accepts a list of AST statements representing the parsed program and reports type errors.
+A compiler (or interpreter) typically performs semantic analysis, checking for errors like type mismatches and misuse of reserved identifiers, after scanning and parsing source tokens into an Abstract Syntax Tree (AST).
 
-As may have been visible from the example program, B-Minor is strictly typed. You may only assign a value to a variable or function parameter is the type of value and the type of the variable or function parameter match exactly. So, B-Minor has two main classes of type errors: when it is unable to determine the type of an expression, and when the type of a value does not match its assigned variable or function parameter.
+[[TODO: Add image of stages of the compiler]]
 
-We’ll add a type checker struct and a method to check a list of statements and another method to get the type of an expression:
+Our type checker accepts the parser's output (a list of AST statements), walks through the AST, and reports type errors it finds.
+
+B-Minor is strictly-typed, meaning a program can only assign a value to a variable (or function parameter) if the types of the value and variable match exactly. So, there are two main classes of type errors: when the type checker cannot determine the type of an expression, and when the type of an expression does not match its assigned variable or function parameter.
+
+We'll represent the type checker and the methods for type-checking statements and resolving the types of expressions as follows:
 
 ```go
 type typeChecker struct {}
@@ -51,16 +47,29 @@ func (c *typeChecker) check(statements []Stmt) {
   }
 }
 
-func (c *typeChecker) resolveExpr(expr Expr) Type {
+func (c *typeChecker) checkStmt(stmt Stmt) {
+	switch stmt := stmt.(type) {
+	// ...
+	default:
+    [[TODO: Remove all panics from code samples]]
+		c.error(stmt, "unexpected statement type: %v", stmt))
+	}
+}
 
+func (c *typeChecker) resolveExpr(expr Expr) Type {
+	switch expr := expr.(type) {
+    default:
+    	c.error(expr, "unexpected expression type: %s", expr)
+  }
 }
 ```
 
-We'll start off with type checking simple expressions and statements, before proceeding to more complex constructs. B-Minor has four atomic types: integers, booleans, characters, and strings. And so, we'll create a values to represent these types: And also a function to say if an atomic type is equal to another type. We'll use the later on for type checking.
+We'll start off with simple expressions and statements before proceeding to more complex constructs.
+
+B-Minor has four atomic types: integers, booleans, characters and strings. We'll create a type to represent these atomic types, with an `Equals` method that checks if two B-Minor types are equal:
 
 ```go
 type Type interface {
-  fmt.Stringer
   Equals(other Type) bool
 }
 
@@ -72,24 +81,25 @@ type atomicType struct {
   name string
 }
 
-func (t *atomicType) String() string {
-  return t.name
-}
-
 func (t *atomicType) Equals(other Type) bool {
   return t == other
 }
 ```
 
-Then, we'll create values for the four atomic types:
+Then, the four atomic types will be:
 
 ```go
 var (
 	typeInteger = newAtomicType("integer")
 	typeBoolean = newAtomicType("boolean")
-	typeChar    = newAtomicType("char")
-	typeString  = newAtomicType("string")
+	typeChar = newAtomicType("char")
+	typeString = newAtomicType("string")
 )
+```
+
+To type-check an expression statement like `3 * 9;` or `"hello" + "world";`, we try to resolve the contained expression:
+
+```go
 ```
 
 Next, we'll work on checking simple expression statements:
@@ -424,7 +434,7 @@ case *WhileStmt:
 
 ## Maps and arrays
 
-B-Minor also supports maps and arrays which can be declared with map and array literals and accessed and set:
+B-Minor also supports maps and arrays which can be declared with map and array literals and accessed and set: {{add type errors to examples}}
 
 ```text
 m: map string integer = { "hello": 5, "goodbye": 10 };
@@ -502,42 +512,188 @@ func (a *arrayType) String() string {
 }
 ```
 
+We resolve the type of an array literal by resolving the element type and creating a new array type based on the element type and array length:
 
+```go
+func (c *TypeChecker) resolveExpr(expr Expr) Type {
+  // ...
+	case *ArrayExpr:
+		firstElementType := c.resolveExpr(expr.Elements[0])
+		for _, element := range expr.Elements[1:] {
+			elementType := c.resolveExpr(element)
+			c.expectExpr(element, elementType, firstElementType)
+		}
+		return newArrayType(firstElementType, len(expr.Elements), false)
+```
 
----
+Similarly, we resolve map literals by resolving the key and value types:
 
-- What is B-Minor?
-- What is static type checking?
-- Goals of a type-checker
-  - Reporting type errors at compile time
-  - Unable to infer the type of an expression
-  - Inferred type is not equal to declared type
-- Parsing types
-- Setting up the type checker
-  - Environment
-- Expression statements
-  - Literal expressions
-    - Atomic types: integer, boolean, char, string
-  - Binary expressions
-    - Arithmetic, boolean
-  - Prefix and postfix expressions
-  - Logical expressions
-- Variables and scope
-  - Environments
-  - Block statements
-  - Variable definitions
-    - Default zero values
-  - Assignment expressions
-  - Variable lookups
-- Print statement
-- If statement
-- For statement
-- Maps and array
-  - Literals
-  - Lookups
-- Functions
-  - Function statements
-  - Call expressions
-  - No function expressions because B-Minor doesn't really have function expressions.
-  - No function nesting.
-  - Function prototype...should just work out of the box in the typechecker module
+```go
+	case *MapExpr:
+		if len(expr.Pairs) == 0 {
+			return newMapType(typeAny, typeAny)
+		}
+
+		firstPair := expr.Pairs[0]
+		firstKeyType := c.resolveExpr(firstPair.Key)
+		firstValueType := c.resolveExpr(firstPair.Value)
+
+		for _, pair := range expr.Pairs[1:] {
+			keyType := c.resolveExpr(pair.Key)
+			c.expectExpr(pair.Key, keyType, firstKeyType)
+			valueType := c.resolveExpr(pair.Value)
+			c.expectExpr(pair.Value, valueType, firstValueType)
+		}
+
+		return newMapType(firstKeyType, firstValueType)
+```
+
+We resolve get expressions (like `arr[index]`, `m[key]`) and set expressions (like `arr[index] = 3`, `m[key] = 4`) as follows:
+
+```go
+	case *GetExpr:
+		return c.resolveLookup(expr.Object, expr.Name)
+	case *SetExpr:
+		expectedValueType := c.resolveLookup(expr.Object, expr.Name)
+		valueType := c.resolveExpr(expr.Value)
+		c.expectExpr(expr.Value, valueType, expectedValueType)
+		return expectedValueType
+```
+
+`resolveLookup` returns the type of a value in a map or element in an array, while checking that the lookup key has the correct type.
+
+```go
+func (c *TypeChecker) resolveLookup(object, name Expr) Type {
+	objectType := c.resolveExpr(object)
+	switch objectType := objectType.(type) {
+	case *arrayType:
+		indexType := c.resolveExpr(name)
+		c.expectExpr(name, indexType, typeInteger)
+		return objectType.elementType
+	case *mapType:
+		indexType := c.resolveExpr(name)
+		c.expectExpr(name, indexType, objectType.keyType)
+		return objectType.valueType
+	default:
+		panic(c.error(object, "can only index maps and arrays"))
+	}
+}
+```
+
+## Functions
+
+Finally, we'll discuss type-checking functions. B-Minor functions are declared and called as follows:
+
+```text
+fibonacci: function integer (x: integer) = {
+    if (x < 2) {
+        return x;
+    } else {
+        return fibonacci(x - 1) + fibonacci(x - 2);
+    }
+}
+
+print fibonacci(20);
+```
+
+As we did with maps and arrays, we first defined a representation for the function type. A function's type is defined by the type of its parameters and its return type; so a function has the same type as another function if their return types are equal and their parameters all have the same type. {{maybe remove string representation from other type structs as well}}
+
+```go
+type functionType struct {
+	paramTypes []paramType
+	returnType Type
+}
+
+type paramType struct {
+	Name Token
+	Type Type
+}
+
+func (f *functionType) Equals(other Type) bool {
+	otherFunctionType, ok := other.(*functionType)
+	if !ok {
+		return false
+	}
+	if f.returnType != otherFunctionType.returnType {
+		return false
+	}
+	if len(f.paramTypes) != len(otherFunctionType.paramTypes) {
+		return false
+	}
+	for i, paramType := range f.paramTypes {
+		if !paramType.Type.Equals(otherFunctionType.paramTypes[i].Type) {
+			return false
+		}
+	}
+	return true
+}
+```
+
+To type-check a function declaration:
+
+```go
+func (c *TypeChecker) checkStmt(stmt Stmt) {
+	// ...
+  case *FunctionStmt:
+  	// save the function's type in the environment before type-checking the function body
+    // because the function body may contain a recursive call to itself
+		fnType := c.getType(stmt.TypeExpr)
+		c.env.Define(stmt.Name.Lexeme, fnType)
+
+  // begin a new scope for the function body
+		previous := c.env
+		c.env = NewEnvironment(previous)
+  
+		c.hasCurrentFunctionReturned = false
+
+  // define the param types within the function scope
+		for _, param := range stmt.TypeExpr.Params {
+			c.env.Define(param.Name.Lexeme, c.getType(param.Type))
+		}
+
+		c.currentFunctionReturnType = fnType.(*functionType).returnType
+
+  // check the function body
+		c.checkStmt(stmt.Body)
+
+		if c.currentFunctionReturnType != typeVoid && !c.hasCurrentFunctionReturned {
+			panic(c.error(stmt, "expected function to return value of type '%s'", c.currentFunctionReturnType))
+		}
+
+  // end the function body scope and restore the outer scope
+		c.env = previous
+```
+
+For a return statement within a function:
+
+```go
+	case *ReturnStmt:
+		if stmt.Value != nil && c.currentFunctionReturnType == typeVoid {
+			panic(c.error(stmt.Value, "not expecting any return value"))
+		}
+		valueType := c.resolveExpr(stmt.Value)
+		c.expectExpr(stmt.Value, valueType, c.currentFunctionReturnType)
+		c.hasCurrentFunctionReturned = true
+```
+
+Note the checks we ensure that the function returns a value with the correct type.
+
+Next, we resolve function calls by checking the called value is a function and that the argument types match the types of the function parameters.
+
+```go
+func (c *TypeChecker) resolveExpr(expr Expr) Type {
+	// ...
+  	case *CallExpr:
+		calleeType, ok := c.resolveExpr(expr.Callee).(*functionType)
+		if !ok {
+			panic(c.error(expr.Callee, "%s is not a function", expr.Callee))
+		}
+
+		for i, arg := range expr.Arguments {
+			argType := c.resolveExpr(arg)
+			expectedType := calleeType.paramTypes[i].Type
+			c.expectExpr(arg, argType, expectedType)
+		}
+
+		return calleeType.returnType
+```
