@@ -9,10 +9,7 @@ images:
   ]
 ---
 
-{{< external-image
-  title="\"A solarpunk robot dreaming about lambda symbols and sets and functional programming\" via Stable Diffusion"
-  alt="\"A solarpunk robot dreaming about lambda symbols and sets and functional programming\" via Stable Diffusion"
-  src="https://res.cloudinary.com/cwilliams/image/upload/v1661685391/Blog/static-type-checkers.webp" >}}
+{{< figure src="https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_650/v1661685391/Blog/static-type-checkers.webp" alt="\"A solarpunk robot dreaming about lambda symbols and sets and functional programming\" via Stable Diffusion" width="600" height="300" >}}
 
 In this post, we'll discuss the implementation of a static type checker for a simple, C-like language called [B-Minor](https://www3.nd.edu/~dthain/courses/cse40243/fall2020/bminor.html).
 B-Minor is a small language designed for use in an [undergraduate compilers course](https://www3.nd.edu/~dthain/courses/cse40243/fall2020/), and it supports expressions, basic control flow, functions, and static type checking.
@@ -651,4 +648,4 @@ case *CallExpr:
 	return calleeType.returnType
 ```
 
-The complete implementation of the B-Minor interpreter is available [on GitHub](https://github.com/chidiwilliams/bminor/tree/3984d1dd78f1733ab8841c95bea9413b94fce8cd/interpreter). See the [language specification](https://www3.nd.edu/~dthain/courses/cse40243/fall2020/bminor.html) or the online textbook, [*Introduction to Compilers and Language Design*](https://www3.nd.edu/~dthain/compilerbook/), to learn more about B-Minor and compilers.
+The complete implementation of the B-Minor interpreter is available [on GitHub](https://github.com/chidiwilliams/bminor/tree/3984d1dd78f1733ab8841c95bea9413b94fce8cd/interpreter). See the [language specification](https://www3.nd.edu/~dthain/courses/cse40243/fall2020/bminor.html) or the online textbook, [_Introduction to Compilers and Language Design_](https://www3.nd.edu/~dthain/compilerbook/), to learn more about B-Minor and compilers.
