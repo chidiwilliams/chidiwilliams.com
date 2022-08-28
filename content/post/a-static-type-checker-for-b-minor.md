@@ -3,7 +3,16 @@ title: 'A Static Type Checker for B-Minor'
 date: 2022-08-28T08:16:10+01:00
 draft: true
 categories: [languages]
+images:
+  [
+    'https://res.cloudinary.com/cwilliams/image/upload/v1661685391/Blog/static-type-checkers.webp',
+  ]
 ---
+
+{{< external-image
+  title="\"A solarpunk robot dreaming about lambda symbols and sets and functional programming\" via Stable Diffusion"
+  alt="\"A solarpunk robot dreaming about lambda symbols and sets and functional programming\" via Stable Diffusion"
+  src="https://res.cloudinary.com/cwilliams/image/upload/v1661685391/Blog/static-type-checkers.webp" >}}
 
 In this post, we'll discuss the implementation of a static type checker for a simple, C-like language called [B-Minor](https://www3.nd.edu/~dthain/courses/cse40243/fall2020/bminor.html).
 B-Minor is a small language designed for use in an [undergraduate compilers course](https://www3.nd.edu/~dthain/courses/cse40243/fall2020/), and it supports expressions, basic control flow, functions, and static type checking.
