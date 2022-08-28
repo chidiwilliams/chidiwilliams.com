@@ -1,7 +1,7 @@
 ---
 title: 'A Static Type Checker for B-Minor'
 date: 2022-08-28T08:16:10+01:00
-draft: true
+draft: false
 categories: [languages]
 images:
   [
