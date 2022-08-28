@@ -110,7 +110,7 @@ article.post {
     white-space: pre-wrap;
     padding: 20px;
     font-size: 0.8rem;
-    border: 1px solid $primary-color-3;
+    border: 2px solid $primary-color-3;
     border-radius: 3px;
     tab-size: 4;
     overflow: auto;
@@ -124,12 +124,16 @@ article.post {
     display: flex;
     flex-direction: column;
     margin: 1em 0;
+    border: 2px solid $primary-color-3;
+    border-radius: 3px;
 
     figcaption {
       text-align: center;
       font-size: $small-font;
       font-style: italic;
       color: $primary-color-2;
+      padding: 0 0.5rem;
+      background: $primary-color-4;
     }
 
     figcaption p {
