@@ -44,14 +44,16 @@
     />
 
     {{ if .Params.math }}{{ partial "math.html" . }}{{ end }}
-    <!--  -->
+
     <!-- TODO: Show only on production. Cloudflare isn't passing env variables to Hugo to be used as (getenv "ENV") -->
     {{- if (and (not .Site.IsServer)) -}}
-    <link rel="preconnect" href="https://www.google-analytics.com/" />
-    <!-- {{ template "_internal/google_analytics.html" . }} -->
-    <!--  -->
-    {{ partial "analytics-gtag.html" . }}
-    <!--  -->
+
+    <script
+      defer
+      data-domain="chidiwilliams.com"
+      src="https://plausible.io/js/script.js"
+    ></script>
+
     {{- end -}}
   </head>
   <body>
