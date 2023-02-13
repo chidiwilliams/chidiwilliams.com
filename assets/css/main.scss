@@ -1,6 +1,5 @@
 @import 'header';
 @import 'variables';
-@import 'fonts';
 @import 'buttondown';
 @import 'post-list';
 @import 'bio';
@@ -23,9 +22,20 @@ h6 {
   margin: 20px 0 0;
 }
 
-body {
+h1 {
+  line-height: 1.3;
+}
+
+h2 {
+  line-height: 1.4;
+}
+
+h3 {
   line-height: 1.5;
-  word-spacing: 1px;
+}
+
+body {
+  line-height: 1.7;
   background: $body-background;
   color: $body-color;
   font-family: $body-font;
@@ -37,7 +47,7 @@ button {
 }
 
 hr {
-  border: 1px solid $primary-color-3;
+  border: 1px solid $body-background-3;
 }
 
 .sr-only {

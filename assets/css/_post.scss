@@ -17,7 +17,7 @@
 .post-meta {
   color: $primary-color-2;
   font-size: $small-font;
-  font-family: $secondary-font;
+  font-family: $body-font;
 }
 
 article .post-meta {
@@ -29,7 +29,6 @@ article.post {
 
   h1 {
     font-size: 2rem;
-    line-height: 1.5;
   }
 
   .post-content {
@@ -99,7 +98,7 @@ article.post {
   li {
     code {
       padding: 2px 4px;
-      background: $primary-color-4;
+      background: $body-background-2;
       font-size: 0.875rem;
       border-radius: 3px;
       white-space: pre;
@@ -107,24 +106,23 @@ article.post {
   }
 
   pre {
-    white-space: pre-wrap;
     padding: 20px;
     font-size: 0.8rem;
-    border: 2px solid $primary-color-3;
+    border: solid 1px $body-background-2;
     border-radius: 3px;
     tab-size: 4;
-    overflow: auto;
+    overflow-x: auto;
+  }
 
-    code {
-      color: #000000;
-    }
+  img {
+    border-radius: 3px;
   }
 
   figure {
     display: flex;
     flex-direction: column;
     margin: 1em 0;
-    border: 2px solid $primary-color-3;
+    border: 2px solid $body-background-3;
     border-radius: 3px;
 
     figcaption {
@@ -133,7 +131,7 @@ article.post {
       font-style: italic;
       color: $primary-color-2;
       padding: 0 0.5rem;
-      background: $primary-color-4;
+      background: $body-background-2;
     }
 
     figcaption p {
