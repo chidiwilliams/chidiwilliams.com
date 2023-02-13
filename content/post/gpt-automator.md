@@ -1,7 +1,13 @@
 ---
 title: 'GPT Automator: A voice-controlled personal assistant for your Mac'
 date: 2023-02-13T14:49:06Z
+thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/v1676303596/Blog/retrofuturism-style-robot-wearing-headphones-voice-controlled-line-drawing-style-comic-book-styl-.png'
+images:
+  [
+    'https://res.cloudinary.com/cwilliams/image/upload/v1676303596/Blog/retrofuturism-style-robot-wearing-headphones-voice-controlled-line-drawing-style-comic-book-styl-.png',
+  ]
 draft: false
+categories: [explanations]
 ---
 
 ![Retro robot](https://res.cloudinary.com/cwilliams/image/upload/v1676303596/Blog/retrofuturism-style-robot-wearing-headphones-voice-controlled-line-drawing-style-comic-book-styl-.png)
