@@ -20,7 +20,7 @@ This past weekend, I attended a hackathon organised by the [Effective Altruism L
 
 GPT Automator transcribes audio commands in natural language into text using Whisper, converts the text into AppleScript and JavaScript scripts, and then executes the scripts to control the user’s computer. We imagine it as an LLM-charged version of Mac’s [Automator](<https://en.wikipedia.org/wiki/Automator_(macOS)>), where instead of requiring the user to create workflows manually, the program directly understands the user’s instructions.
 
-Implementation-wise, the program consists of three major components. The first is the graphical interface (GUI), built using [PyQt6](https://pypi.org/project/PyQt6/). We used a simple application window with an button to start and stop recordings and a label to view transcribed prompts and help messages.
+Implementation-wise, the program consists of three major components. The first is the graphical interface (GUI), built using [PyQt6](https://pypi.org/project/PyQt6/). We used a simple application window with a button to start and stop recordings and a label to view transcribed prompts and help messages.
 
 ```python
 class MainWindow(QMainWindow):
@@ -66,8 +66,6 @@ class MainWindow(QMainWindow):
             self.record_button.setIcon(self.stop_icon)
             self.is_recording = True
 ```
-
-![GPT Automator](https://res.cloudinary.com/cwilliams/image/upload/v1676303619/Blog/app.png)
 
 The second component of the application performs audio-to-text processing. When a user provides an audio prompt, the application records the input into a temporary file and then converts the audio file into text using Whisper:
 
@@ -209,7 +207,7 @@ def execute(command):
 
 LangChain uses the functions annotated with `@langchain.agents.tool` as [tools](https://langchain.readthedocs.io/en/latest/modules/agents/tools.html?highlight=tools#tools), interpreting their docstrings as prompts to be fed to GPT-3. When run, the LangChain agent executes each tool, which effectively creates an AppleScript program representing the user’s request, runs the program, and then audibly responds to the user.
 
-The demo gods smiled upon us at the hackathon, and at the end of the event, we showed how a user could instruct GPT Automator to calculate a math expression or find nearby restaurants.
+The demo gods smiled upon us at the hackathon, and at the end of the event, [we showed](https://www.loom.com/share/7bfa82c604f3412fbbb04191ce2ae12f) how a user could instruct GPT Automator to calculate a math expression or find nearby restaurants.
 
 We’ve open-sourced GPT Automator [on GitHub](https://github.com/chidiwilliams/GPT-Automator), with the caveat that this work was made as a proof-of-concept and is not intended for production use. Concretely, the program executes code generated from natural language prompts and may be susceptible to prompt injection attacks. It may also produce unexpected behaviour from presumably safe but malformed prompts.
 
