@@ -1,0 +1,42 @@
+[
+  {
+    "name": "GPT Automator",
+    "github_url": "https://github.com/chidiwilliams/GPT-Automator",
+    "blog_url": "https://chidiwilliams.com/post/gpt-automator/",
+    "description": "A voice-controlled Mac assistant using Whisper and GPT-3."
+  },
+  {
+    "name": "Buzz",
+    "github_url": "https://github.com/chidiwilliams/Buzz",
+    "description": "A desktop app that transcribes and translates audio offline on your personal computer. Powered by OpenAI's Whisper."
+  },
+  {
+    "name": "Lox Playground",
+    "github_url": "https://github.com/chidiwilliams/lox-playground",
+    "description": "A web-based REPL and web editor for running Lox programs. The playground runs Loxjs, a JavaScript implementation of the tree-walking interpreter from Bob Nystrom's Crafting Interpreters.",
+    "playground_url": "https://chidiwilliams.github.io/lox-playground/"
+  },
+  {
+    "name": "Glox",
+    "github_url": "https://github.com/chidiwilliams/glox",
+    "description": "A Go implementation of the Lox interpreter."
+  },
+  {
+    "name": "Wordle AI",
+    "github_url": "https://github.com/chidiwilliams/wordle",
+    "description": "A Wordle solver.",
+    "blog_url": "https://chidiwilliams.com/post/a-wordle-solver/"
+  },
+  {
+    "name": "Expression Evaluator",
+    "github_url": "https://github.com/chidiwilliams/expression-evaluator",
+    "description": "A math expression evaluator built with JavaScript.",
+    "playground_url": "https://chidiwilliams.github.io/expression-evaluator/",
+    "blog_url": "https://chidiwilliams.com/post/evaluator/"
+  },
+  {
+    "name": "GitHub Stories",
+    "github_url": "https://github.com/chidiwilliams/github-stories",
+    "description": "A playful Chrome extension for viewing stories on your GitHub dashboard."
+  }
+]

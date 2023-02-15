@@ -71,9 +71,8 @@ section.shelf a.perfect-book-link {
 
 a {
   color: $primary-color;
-  // text-decoration: none;
 }
 
-a:hover {
-  text-decoration: underline;
+li {
+  margin: 0.75rem 0;
 }
