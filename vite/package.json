@@ -1,0 +1,26 @@
+{
+  "name": "chidiwilliams.com",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.4",
+    "@types/markdown-it": "^12.2.3",
+    "@types/node": "^18.7.13",
+    "@vitejs/plugin-vue-jsx": "^3.0.2",
+    "markdown-it-footnote": "^3.0.3",
+    "tailwindcss": "^3.3.5",
+    "typescript": "^5.2.2",
+    "vite": "^4.5.0",
+    "vitepress": "1.0.0-rc.24",
+    "vue": "^3.3.7"
+  }
+}
