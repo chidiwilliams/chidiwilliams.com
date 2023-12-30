@@ -146,7 +146,7 @@ It felt *good*. I can’t scream at strangers like that on London expressways. P
 ## Miscellany
 
 - I wrote only [one other blog post](/posts/gpt-automator) this year. I wanted to spend more things making things than writing, but I’ll try to do more of both next year.
-- With Ayo and Bayo and the [SysDsgn team](https://bento.me/sysdsgn), I helped organize [SysConf](https://hopin.com/events/sysconf/registration), a virtual technical conference on systems design topics, in September, and more than 600 people attended. In December, we hosted 50 people to a mini-conference in Lagos. I gave [talks](/talks) at both events.
+- With Ayo and Bayo and the [SysDsgn team](https://bento.me/sysdsgn), I helped organize [SysConf](https://hopin.com/events/sysconf/registration), a virtual technical conference on systems design topics, in September, and more than 600 people attended. In December, we hosted 50 people to a mini-conference in Lagos. I gave talks at both events.
 - I re-applied for the Tech Nation visa in November and got approved.
 - I worked on a few more projects that didn’t pan out as well.
 - I tried a lot of things this year, and enjoyed most of them. I’ll try that again next year.
