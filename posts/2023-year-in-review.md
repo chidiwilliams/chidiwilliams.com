@@ -131,7 +131,7 @@ We got help from the roadside officials, who enthusiastically helped us with wat
 
 We’re calling and texting now. The groom and his company had arrived at the wedding in time. They were going to send their *family driver*  to pick us up and take care of the car. He said he’d be here soon, but it’s been more than twenty minutes. Maybe there’s traffic on the way.
 
-I’m fiddling with my phone, alternating between standing outside and sitting inside the car, trying to decide whether I preferred to be where it was airy or whether there was shade. I hear someone cry out mockingly towards us in the opposite direction:
+I’m fiddling with my phone, alternating between standing outside and sitting inside the car, trying to decide whether I preferred to be where it was airy or where there was shade. I hear someone cry out mockingly towards us in the opposite direction:
 
 *”Una no dey go wedding again?”*
 
