@@ -17,7 +17,7 @@ export default defineConfig({
     ['meta', { name: 'twitter:site', content: '@ChidiWilliams__' }],
     ['meta', { name: 'twitter:card', content: 'summary' }],
     ['meta', { name: 'twitter:creator', content: '@ChidiWilliams__' }],
-    ['meta', { name: 'twitter:image', content: 'https://chidiwilliams.com/favicon.ico' }],
+    ['meta', { name: 'og:image', content: 'https://chidiwilliams.com/favicon.ico' }],
     ['meta', { name: 'twitter:image:alt', content: "Chidi Williams' Blog" }],
     ['meta', { name: 'twitter:title', content: 'Chidi Williams' }],
     ['meta', { name: 'twitter:description', content: "Chidi Williams' Blog" }],
