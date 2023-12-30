@@ -1,7 +1,0 @@
-{{ define "main" }}
-<section class="articles">
-  <h2>Series: {{ with .Params.Title }} {{ . }} {{ else }} {{ .Title }} {{ end }}</h2>
-  <!--  -->
-  {{ partial "post_list.html" (dict "posts" .Data.Pages.ByDate.Reverse) }}
-</section>
-{{ end }}
