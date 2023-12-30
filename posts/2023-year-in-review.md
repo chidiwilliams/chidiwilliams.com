@@ -99,7 +99,7 @@ In the queue to get the food, I make eye contact with a stranger as we try to re
 
 Going home is a revival (*re vivere*, a living-again) of duties: son, friend, elder brother.
 
-“How was *WAEC*?“
+“How was *WAEC*?”
 
 “How much do we need?”
 
