@@ -1,9 +1,0 @@
-{{ define "main" }}
-<article class="post">
-  <h1>{{ .Title }}</h1>
-  {{ partial "post-meta.html" (dict "Page" .) }}
-  <div class="post-content">{{ .Content }}</div>
-  <div class="post-footer">{{ .Params.Footnotes }}</div>
-</article>
-
-{{ partial "subscribe-form.html" }} {{ end }}

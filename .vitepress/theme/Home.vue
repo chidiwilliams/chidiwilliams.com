@@ -10,7 +10,7 @@ const { frontmatter } = useData();
   <div class="divide-y divide-gray-200">
     <div class="pt-6 pb-8 space-y-2 md:space-y-5">
       <h1
-        class="text-3xl leading-9 font-extrabold text-gray-900 tracking-tight sm:text-4xl sm:leading-10 md:text-6xl md:leading-14"
+        class="text-3xl leading-9 font-extrabold text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14"
       >
         {{ frontmatter.title }}
       </h1>
@@ -24,7 +24,7 @@ const { frontmatter } = useData();
           <Date :date="date" />
           <div class="space-y-5 xl:col-span-3">
             <div class="space-y-6">
-              <h2 class="text-2xl leading-8 font-bold tracking-tight">
+              <h2 class="text-2xl leading-8 font-bold">
                 <a class="text-gray-900" :href="url">{{ title }}</a>
               </h2>
               <div

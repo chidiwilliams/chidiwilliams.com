@@ -20,47 +20,23 @@ const prevPost = computed(() => posts[findCurrentIndex() + 1]);
 
 <template>
   <article class="">
-    <header class="pt-6 xl:pb-10 space-y-1 text-center">
-      <Date :date="date" />
+    <header class="pt-6 xl:pb-10 space-y-1">
       <h1
-        class="text-3xl leading-9 font-extrabold text-neutral-900 tracking-tight sm:text-4xl sm:leading-10 md:text-5xl md:leading-14"
+        class="text-2xl leading-9 font-extrabold sm:text-4xl sm:leading-10 md:text-5xl md:leading-14"
       >
         {{ data.title }}
       </h1>
+      <Date :date="date" />
     </header>
 
     <div
-      class="divide-y xl:divide-y-0 divide-neutral-200 xl:grid xl:grid-cols-4 xl:gap-x-10 pb-16 xl:pb-20"
-      style="grid-template-rows: auto 1fr"
+      class="divide-y xl:divide-y-0 divide-neutral-200"
     >
-      <Author />
       <div class="divide-y divide-neutral-200 xl:pb-0 xl:col-span-3 xl:row-span-2">
         <Content
-          class="prose prose-code:before:content-none prose-code:after:content-none max-w-none pt-10 pb-8"
+          class="prose prose-code:before:content-none prose-code:after:content-none max-w-prose pb-8 prose-p:text-[18px] prose-p:leading-[28px] prose-h2:text-lg prose-p:text-orange-950 prose-a:text-orange-950 prose-h1:text-orange-950 prose-h2:text-orange-950 prose-li:text-orange-950 prose-strong:text-orange-950"
         />
       </div>
-
-      <footer
-        class="text-sm font-medium leading-5 divide-y divide-neutral-200 xl:col-start-1 xl:row-start-2"
-      >
-        <div v-if="nextPost" class="py-8">
-          <h2 class="text-xs tracking-wide uppercase text-neutral-500">Next Article</h2>
-          <div class="link">
-            <a :href="nextPost.url">{{ nextPost.title }}</a>
-          </div>
-        </div>
-        <div v-if="prevPost" class="py-8">
-          <h2 class="text-xs tracking-wide uppercase text-neutral-500">
-            Previous Article
-          </h2>
-          <div class="link">
-            <a :href="prevPost.url">{{ prevPost.title }}</a>
-          </div>
-        </div>
-        <div class="pt-8">
-          <a class="link" href="/">← Back to the blog</a>
-        </div>
-      </footer>
     </div>
   </article>
 </template>
