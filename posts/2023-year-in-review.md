@@ -33,7 +33,7 @@ I received feedback a short month later: “Tech Nation has advised that you do 
 
 I remember an old essay I read once decrying the growth of automation in society. The author argued that people should handle public services rather than machines because a human can understand and empathise whereas a machine cannot. “Please wait! Wait for me!”, someone running late can cry, and the train driver holds the doors open a minute longer. A machine-run train will be much less forgiving. With people, people can negotiate.  *I* can negotiate.
 
-I sent an appeal soon after chronicling where I thought I was misjudged, how I thought my application was misread, listing out things I thought the reviewer missed or left after. But the response was resolute still: my work wasn’t that compelling; I haven’t been recognised at the national or international level; I haven’t shown that the impact of my work contributions can be attributed to me alone. *Oh well.*
+I sent an appeal soon after chronicling where I thought I was misjudged, how I thought my application was misread, listing out things I thought the reviewer missed or left out. But the response was resolute still: my work wasn’t that compelling; I haven’t been recognised at the national or international level; I haven’t shown that the impact of my work contributions can be attributed to me alone. *Oh well.*
 
 Could this be my pivotal moment? My canon event? I should hang the scathing words of my reviews above my desk, meditate on them from waking day to quiet night, and dedicate my work and life to proving them wrong, as the negative motivation to do so inevitably corrupts my soul in the end. Or I could just re-apply later.
 
