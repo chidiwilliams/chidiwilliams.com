@@ -21,7 +21,7 @@ const recentProjects = projects.slice(0, 5);
         software and stories.
       </div>
       <nav>
-        <ul class="text-sm flex flex-col gap-1.5 font-sans">
+        <ul class="text-sm flex flex-col gap-2 font-sans">
           <li v-for="{ name, link } of site.themeConfig.socialLinks">
             <a :href="link" class="transition transition-all opacity-80 hover:opacity-100">{{ name }}</a>
           </li>
