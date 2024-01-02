@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  background-color: theme("colors.orange.50");
+  color: theme("colors.orange.950");
+}
+
 :root {
 }
 

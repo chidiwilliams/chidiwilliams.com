@@ -8,10 +8,6 @@ export default {
       theme: {
         extend: {
           fontFamily: {
-            sans: [
-              "Inter",
-              'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-            ],
             serif: ['"Source Serif 4"'],
           },
           typography: ({ theme }) => ({
@@ -26,7 +22,7 @@ export default {
                 "--tw-prose-code": theme("colors.orange.950"),
                 "--tw-prose-quotes": theme("colors.yellow.950"),
                 pre: {
-                  "background-color": "#fcfcfa",
+                  "background-color": "#ffffffbb",
                   "font-size": "13px",
                   "line-height": "21px",
                 },

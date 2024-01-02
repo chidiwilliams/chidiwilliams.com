@@ -1,4 +1,4 @@
-import { createContentLoader } from 'vitepress';
+import { createContentLoader } from "vitepress";
 
 interface Post {
   title: string;
@@ -13,30 +13,31 @@ interface Post {
 declare const data: Post[];
 export { data };
 
-export default createContentLoader('posts/*.md', {
-  excerpt: false,
+export default createContentLoader("posts/*.md", {
   transform(raw): Post[] {
     return raw
       .filter(({ frontmatter }) => !frontmatter.draft)
-      .map(({ url, frontmatter }) => ({
-        title: frontmatter.title,
-        url,
-        excerpt: '',
-        date: formatDate(frontmatter.date),
-      }))
+      .map(({ url, frontmatter, excerpt }) => {
+        return {
+          title: frontmatter.title,
+          url,
+          excerpt: excerpt,
+          date: formatDate(frontmatter.date),
+        };
+      })
       .sort((a, b) => b.date.time - a.date.time);
   },
 });
 
-function formatDate(raw: string): Post['date'] {
+function formatDate(raw: string): Post["date"] {
   const date = new Date(raw);
   date.setUTCHours(12);
   return {
     time: +date,
-    string: date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
+    string: date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     }),
   };
 }

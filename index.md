@@ -1,4 +1,6 @@
 ---
 title: Chidi Williams
-index: true
+layout: page
 ---
+
+<Home />

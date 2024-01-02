@@ -1,25 +1,50 @@
 <script setup lang="ts">
-import { useData } from 'vitepress';
-import Home from './Home.vue';
-import Article from './Article.vue';
-import NotFound from './NotFound.vue';
+import { useData } from "vitepress";
+import Article from "./Article.vue";
+import NotFound from "./NotFound.vue";
 
-const { page, frontmatter, title, site } = useData();
+const { page, frontmatter, site } = useData();
 </script>
 
 <template>
-  <div class="bg-orange-50 text-orange-950 font-serif">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 xl:max-w-5xl xl:px-0">
-      <nav class="flex justify-between items-center py-10 font-bold">
-        <a class="text-xl" href="/" aria-label="Chidi Williams">
-          <span v-if="!frontmatter.index" class="inline">{{ site.title }}</span>
-        </a>
-      </nav>
+  <div class="font-serif">
+    <div v-if="frontmatter.layout === 'page'">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 xl:max-w-5xl xl:px-0 pb-12">
+        <div class="py-10 space-y-16">
+          <header class="space-y-4">
+            <h1
+              class="lg:pt-32 text-2xl leading-9 font-extrabold sm:text-3xl sm:leading-10 md:text-5xl md:leading-14 italic lowercase"
+            >
+              {{ frontmatter.title }}
+            </h1>
+
+            <nav>
+              <ul class="flex gap-6 text-sm opacity-80 font-sans">
+                <li v-if="page.relativePath !== 'index.md'">
+                  <a
+                    href="/"
+                    class="transition transition-all opacity-80 hover:opacity-100"
+                    >← Home</a
+                  >
+                </li>
+                <template v-for="{ text, link } of site.themeConfig.nav">
+                  <li v-if="text !== frontmatter.title">
+                    <a
+                      :href="link"
+                      class="transition transition-all opacity-80 hover:opacity-100"
+                      >{{ text }}</a
+                    >
+                  </li>
+                </template>
+              </ul>
+            </nav>
+          </header>
+
+          <Content />
+        </div>
+      </div>
     </div>
-    <main class="max-w-3xl mx-auto px-4 sm:px-6 xl:max-w-5xl xl:px-0 pb-12">
-      <Home v-if="frontmatter.index" />
-      <NotFound v-else-if="page.isNotFound" />
-      <Article v-else />
-    </main>
+    <NotFound v-else-if="page.isNotFound" />
+    <Article v-else />
   </div>
 </template>
