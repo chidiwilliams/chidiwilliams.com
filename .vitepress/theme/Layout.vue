@@ -19,7 +19,7 @@ const { page, frontmatter, site } = useData();
             </h1>
 
             <nav>
-              <ul class="flex gap-6 text-sm opacity-80 font-sans">
+              <ul class="flex gap-6 text-sm font-sans">
                 <li v-if="page.relativePath !== 'index.md'">
                   <a
                     href="/"

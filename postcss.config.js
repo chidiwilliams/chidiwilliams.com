@@ -22,7 +22,7 @@ export default {
                 "--tw-prose-code": theme("colors.orange.950"),
                 "--tw-prose-quotes": theme("colors.yellow.950"),
                 pre: {
-                  "background-color": "#ffffffbb",
+                  "background-color": "#fcfcfa",
                   "font-size": "13px",
                   "line-height": "21px",
                 },

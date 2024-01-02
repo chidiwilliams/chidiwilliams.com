@@ -17,7 +17,9 @@ const date = computed(
   <div class="max-w-3xl mx-auto px-4 sm:px-6 xl:max-w-5xl xl:px-0 pb-12">
     <header class="py-10">
       <h1 class="">
-        <a href="/" class="mt-1 text-sm gap-6 opacity-80 font-semibold"
+        <a
+          href="/"
+          class="mt-1 text-sm gap-6 font-sans transition transition-all opacity-80 hover:opacity-100"
           >← Home</a
         >
       </h1>

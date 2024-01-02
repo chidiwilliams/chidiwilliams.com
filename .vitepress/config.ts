@@ -11,6 +11,7 @@ export default defineConfigWithTheme({
     config: (md) => {
       md.use(footnote);
     },
+    toc: {},
   },
   head: [
     ["meta", { name: "twitter:site", content: "@ChidiWilliams__" }],
