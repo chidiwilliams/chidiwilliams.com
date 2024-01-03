@@ -98,6 +98,18 @@ export default defineConfigWithTheme({
     ],
     projects: [
       {
+        name: "SysDsgn",
+        link: "https://bento.me/sysdsgn",
+        description:
+          "Community hosting conversations on software systems design. Organizers of SysDsgn Twitter Spaces and SysConf.",
+        links: [
+          {
+            name: "Twitter",
+            link: "https://twitter.com/sysdsgn",
+          },
+        ],
+      },
+      {
         name: "GPT Automator",
         link: "https://github.com/chidiwilliams/GPT-Automator",
         description:
@@ -119,18 +131,6 @@ export default defineConfigWithTheme({
         name: "Buzz",
         link: "https://github.com/chidiwilliams/buzz",
         description: "Open-source, cross-platform version of Buzz Captions.",
-      },
-      {
-        name: "SysDsgn",
-        link: "https://bento.me/sysdsgn",
-        description:
-          "Community hosting conversations on software systems design. Organizers of SysDsgn Twitter Spaces and SysConf.",
-        links: [
-          {
-            name: "Twitter",
-            link: "https://twitter.com/sysdsgn",
-          },
-        ],
       },
       {
         name: "Lox Playground",
