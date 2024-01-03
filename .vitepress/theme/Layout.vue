@@ -11,7 +11,7 @@ const { page, frontmatter, site } = useData();
     <div v-if="frontmatter.layout === 'page'">
       <div class="max-w-3xl mx-auto px-4 sm:px-6 xl:max-w-5xl xl:px-0 pb-12">
         <div class="py-10 space-y-16">
-          <header class="space-y-4">
+          <header class="space-y-2 sm:space-y-4">
             <h1
               class="lg:pt-32 text-2xl leading-9 font-extrabold sm:text-3xl sm:leading-10 md:text-5xl md:leading-14 italic lowercase"
             >
