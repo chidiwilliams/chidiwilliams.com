@@ -1,10 +1,8 @@
 import cn from "classnames";
 import type { Metadata } from "next";
-import { Inter, Source_Serif_4 } from "next/font/google";
+import { Source_Serif_4 } from "next/font/google";
 
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
 
 const sourceSerif4 = Source_Serif_4({ subsets: ["latin"] });
 
@@ -24,7 +22,9 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/favicon/favicon.ico" />
         <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       </head>
-      <body className={cn(sourceSerif4.className, "")}>
+      <body
+        className={cn(sourceSerif4.className, "text-foreground bg-background")}
+      >
         <div className="min-h-screen">{children}</div>
       </body>
     </html>

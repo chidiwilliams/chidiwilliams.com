@@ -1,6 +1,6 @@
 import { getAllPosts, getPostBySlug } from "@/lib/api";
-import { formatDate } from "@/lib/utils";
 import markdownToHtml from "@/lib/markdownToHtml";
+import { formatDate } from "@/lib/utils";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -20,7 +20,7 @@ export default async function Post(props: Params) {
         <h1>
           <a
             href="/"
-            className="mt-1 text-sm gap-6 font-sans transition-all opacity-80 hover:opacity-100"
+            className="mt-1 text-sm gap-6 transition-all opacity-80 hover:opacity-100"
           >
             ← Home
           </a>

@@ -2,12 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  background-color: theme("colors.orange.50");
-  color: theme("colors.orange.950");
-}
-
 button.copy,
 span.lang {
   display: none;
+}
+
+:root {
+  --color-foreground: 13 81% 15%; /* orange.950 */
+  --color-background: 33 100% 96%; /* orange.50 */
+
+  --color-secondary-foreground: 16 18% 48%;
 }

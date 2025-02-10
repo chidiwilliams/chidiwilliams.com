@@ -65,6 +65,13 @@ export default {
           },
         },
       }),
+      colors: {
+        foreground: "hsl(var(--color-foreground))",
+        background: "hsl(var(--color-background))",
+        secondary: {
+          foreground: "hsl(var(--color-secondary-foreground))",
+        },
+      },
     },
   },
   plugins: [tailwindTypography],

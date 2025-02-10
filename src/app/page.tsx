@@ -11,18 +11,18 @@ export default function Index() {
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 xl:max-w-5xl xl:px-0 pb-12">
       <div className="py-10 space-y-16">
-        <header className="space-y-2 sm:space-y-4">
+        <header className="space-y-1 sm:space-y-2">
           <h1 className="lg:pt-32 text-2xl leading-9 font-semibold sm:text-3xl sm:leading-10 md:text-4xl md:leading-14">
             Chidi Williams
           </h1>
 
           <nav>
-            <ul className="text-sm flex gap-4 font-sans">
+            <ul className="text-sm flex gap-4">
               {siteConfig.socialLinks.map(({ name, link }) => (
                 <li key={name}>
                   <a
                     href={link}
-                    className="transition-all opacity-80 hover:opacity-100"
+                    className="transition-all text-secondary-foreground hover:text-foreground"
                   >
                     {name}
                   </a>
@@ -42,9 +42,14 @@ export default function Index() {
                   <li key={post.slug}>
                     <article>
                       <h3 className="text-lg font-medium">
-                        <a href={`/posts/${post.slug}`}>{post.title}</a>
+                        <a
+                          href={`/posts/${post.slug}`}
+                          className="hover:underline"
+                        >
+                          {post.title}
+                        </a>
                       </h3>
-                      <time className="text-sm opacity-60">
+                      <time className="text-sm text-secondary-foreground">
                         {formatDate(new Date(post.date))}
                       </time>
                     </article>
@@ -64,9 +69,14 @@ export default function Index() {
                   <li key={post.slug}>
                     <article>
                       <h3 className="text-lg font-medium">
-                        <a href={`/posts/${post.slug}`}>{post.title}</a>
+                        <a
+                          href={`/posts/${post.slug}`}
+                          className="hover:underline"
+                        >
+                          {post.title}
+                        </a>
                       </h3>
-                      <time className="text-sm opacity-60">
+                      <time className="text-sm text-secondary-foreground">
                         {formatDate(new Date(post.date))}
                       </time>
                     </article>
@@ -83,9 +93,11 @@ export default function Index() {
                   <li key={project.name}>
                     <article>
                       <h3 className="text-lg font-medium">
-                        <a href={project.link}>{project.name}</a>
+                        <a href={project.link} className="hover:underline">
+                          {project.name}
+                        </a>
                       </h3>
-                      <p className="text-sm opacity-80">
+                      <p className="text-sm text-secondary-foreground">
                         {project.description}
                       </p>
                     </article>
@@ -101,7 +113,9 @@ export default function Index() {
                   <li key={title}>
                     <article>
                       <h3 className="text-lg font-medium">
-                        <a href={url}>{title}</a>
+                        <a href={url} className="hover:underline">
+                          {title}
+                        </a>
                       </h3>
                       <time className="text-sm opacity-60">
                         {formatDate(new Date(date))}
