@@ -1,28 +1,37 @@
 {
-  "name": "chidiwilliams.com",
-  "version": "1.0.0",
-  "type": "module",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vitepress dev",
-    "build": "vitepress build && cp _redirects .vitepress/dist/_redirects",
-    "preview": "vitepress preview"
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.16",
+    "classnames": "^2.5.1",
+    "date-fns": "^3.6.0",
+    "gray-matter": "^4.0.3",
+    "next": "15.0.2",
+    "react": "19.0.0-rc-02c0e824-20241028",
+    "react-dom": "19.0.0-rc-02c0e824-20241028",
+    "rehype-highlight": "^7.0.2",
+    "rehype-raw": "^7.0.0",
+    "rehype-stringify": "^10.0.1",
+    "remark": "^15.0.1",
+    "remark-frontmatter": "^5.0.0",
+    "remark-html": "^16.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-parse-frontmatter": "^1.0.3",
+    "remark-rehype": "^11.1.1",
+    "unified": "^11.0.5"
+  },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.4",
-    "@types/markdown-it": "^12.2.3",
-    "@types/node": "^18.7.13",
-    "@vitejs/plugin-vue-jsx": "^3.0.2",
-    "frontmatter": "^0.0.3",
-    "markdown-it-footnote": "^3.0.3",
-    "tailwindcss": "^3.3.5",
-    "typescript": "^5.2.2",
-    "vite": "^4.5.0",
-    "vitepress": "1.0.0-rc.24",
-    "vue": "^3.3.7"
+    "@types/node": "^20.14.8",
+    "@types/react": "npm:types-react@19.0.0-rc.1",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.4",
+    "typescript": "^5.5.2"
   },
   "packageManager": "pnpm@9.15.0+sha512.76e2379760a4328ec4415815bcd6628dee727af3779aaa4c914e3944156c4299921a89f976381ee107d41f12cfa4b66681ca9c718f0668fa0831ed4c6d8ba56c"
 }

@@ -6,6 +6,9 @@ images: ["/img/cyber-for-builders.jpg"]
 ---
 
 <img src="/img/cyber-for-builders.jpg" alt="Cyber for Builders" width="540" height="810">
+<!-- <Image alt={My computer desk} src={/static/images/desk.jpg} width={1000} height={735} priority /> -->
+
+
 
 Since starting [Rulebase](https://rulebase.co), where we're building fraud and security tools for call centers, I’ve immersed myself in learning everything I can find about the cybersecurity/fraud prevention startup ecosystem. I came across [Ross Haleliuk](https://www.linkedin.com/in/rosshaleliuk/), author of the [_Venture in Security_](https://ventureinsecurity.net/) blog, a few weeks ago. His articles, like ["Let’s have an honest conversation about the state of cybersecurity"](https://ventureinsecurity.net/p/lets-have-an-honest-conversation) and ["On a hunt for successful cybersecurity startups and unicorn founders"](https://ventureinsecurity.net/p/on-a-hunt-for-successful-cybersecurity) immediately stood out to me as knowledgeable, well-researched, and sharply insightful. I subsequently discovered and spent the last few weeks reading his book, [_Cyber for Builders: The Essential Guide to Building a Cybersecurity Startup_](https://ventureinsecurity.net/p/cyber-for-builders).
 

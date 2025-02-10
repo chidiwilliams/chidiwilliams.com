@@ -7,9 +7,6 @@ html {
   color: theme("colors.orange.950");
 }
 
-:root {
-}
-
 button.copy,
 span.lang {
   display: none;

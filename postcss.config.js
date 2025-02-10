@@ -4,7 +4,7 @@ import tailwind from "tailwindcss";
 export default {
   plugins: [
     tailwind({
-      content: ["./.vitepress/theme/**/*.vue", "./components/**/*.vue"],
+      content: ["./src/app/**/*.{js,ts,jsx,tsx}"],
       theme: {
         extend: {
           fontFamily: {
