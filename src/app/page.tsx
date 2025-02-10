@@ -1,6 +1,7 @@
 import { getAllPosts } from "@/lib/api";
 import { getSiteConfig } from "@/lib/config";
 import { formatDate } from "@/lib/utils";
+import Link from "next/link";
 
 export default function Index() {
   const allPosts = getAllPosts();
@@ -23,6 +24,7 @@ export default function Index() {
                   <a
                     href={link}
                     className="transition-all text-secondary-foreground hover:text-foreground"
+                    target="_blank"
                   >
                     {name}
                   </a>
@@ -42,12 +44,12 @@ export default function Index() {
                   <li key={post.slug}>
                     <article>
                       <h3 className="text-lg font-medium">
-                        <a
+                        <Link
                           href={`/posts/${post.slug}`}
                           className="hover:underline"
                         >
                           {post.title}
-                        </a>
+                        </Link>
                       </h3>
                       <time className="text-sm text-secondary-foreground">
                         {formatDate(new Date(post.date))}
@@ -69,12 +71,12 @@ export default function Index() {
                   <li key={post.slug}>
                     <article>
                       <h3 className="text-lg font-medium">
-                        <a
+                        <Link
                           href={`/posts/${post.slug}`}
                           className="hover:underline"
                         >
                           {post.title}
-                        </a>
+                        </Link>
                       </h3>
                       <time className="text-sm text-secondary-foreground">
                         {formatDate(new Date(post.date))}
@@ -93,7 +95,11 @@ export default function Index() {
                   <li key={project.name}>
                     <article>
                       <h3 className="text-lg font-medium">
-                        <a href={project.link} className="hover:underline">
+                        <a
+                          href={project.link}
+                          className="hover:underline"
+                          target="_blank"
+                        >
                           {project.name}
                         </a>
                       </h3>
@@ -113,7 +119,11 @@ export default function Index() {
                   <li key={title}>
                     <article>
                       <h3 className="text-lg font-medium">
-                        <a href={url} className="hover:underline">
+                        <a
+                          href={url}
+                          className="hover:underline"
+                          target="_blank"
+                        >
                           {title}
                         </a>
                       </h3>
