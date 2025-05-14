@@ -1,16 +1,16 @@
 ---
-title: 'Quadtrees in the Wild'
+title: "Quadtrees in the Wild"
 date: 2021-09-21T08:49:21+01:00
 draft: false
 slug: quadtrees
 aliases: [/quadtrees]
-thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1632075791/Blog/pexels-sunil-patel-599708.webp'
+thumbnail: "https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1632075791/Blog/pexels-sunil-patel-599708.webp"
 images:
   [
     https://res.cloudinary.com/cwilliams/image/upload/v1632075791/Blog/pexels-sunil-patel-599708.webp,
   ]
 description: Quadtrees are tree structures used to efficiently store data in two-dimensional space. They are useful in spatial indexing and image compression.
-footnotes: 'Thanks to Ayomide Oyekanmi and Opeyemi Onikute for reviewing drafts of this.'
+footnotes: "Thanks to Ayomide Oyekanmi and Opeyemi Onikute for reviewing drafts of this."
 series: [Data Structures and Algorithms in the Wild]
 categories: [dsa]
 favorite: true
@@ -30,7 +30,10 @@ Quadtrees are tree structures used to efficiently store data in two-dimensional 
 
 Say we have an app that shows a user the locations of grocery stores close to them. A store signs up by submitting its location. And when a user opens the app, they see all the stores within a certain distance from their current location. Given the locations of all the stores, can we write a program that returns all the points within a boundary?
 
-<IframeFigure src="https://chidiwilliams.github.io/dsaw/quadtrees/demos/1.html" caption="Click anywhere to find points within a boundary" height="315px" />
+<figure>
+  <iframe src="https://chidiwilliams.github.io/dsaw/quadtrees/demos/1.html" height="305px" width="100%"></iframe>
+  <figcaption>Click anywhere to find points within a boundary</figcaption>
+</figure>
 
 One quick solution could be to keep all the store locations in a list of (x, y) points. To find the points within a boundary, we loop over the list and return all the points that fall within the boundary.
 
@@ -65,11 +68,17 @@ This `search` function has a runtime complexity of _O(n)_. Because we loop throu
 
 But what if we split up the space into sections? This way, we only need to search the sections that intersect with the search boundary, and we can ignore the other sections.
 
-<IframeFigure src="https://chidiwilliams.github.io/dsaw/quadtrees/demos/2.html" caption="Click anywhere to find points within a boundary. Only the points in sections that intersect with the search boundary (marked orange) are checked" height="315px" />
+<figure>
+  <iframe src="https://chidiwilliams.github.io/dsaw/quadtrees/demos/2.html" height="305px" width="100%"></iframe>
+  <figcaption>Click anywhere to find points within a boundary. Only the points in sections that intersect with the search boundary (marked orange) are checked</figcaption>
+</figure>
 
 This is essentially how quadtrees work. We start by adding points to the root node of the quadtree, which defines the entire possible space. When the number of points in the node reaches a predefined maximum capacity, it splits into four child nodes (four quadrants). And when any of those nodes reaches the maximum capacity of points, it splits again into four child nodes, and so on.
 
-<IframeFigure src="https://chidiwilliams.github.io/dsaw/quadtrees/demos/3.html" caption="Click to add a new point. Each quadrant contains at most four points, after which it splits into four child quadrants. Quadrants with darker shades are deeper in the quadtree." height="345px" />
+<figure>
+  <iframe src="https://chidiwilliams.github.io/dsaw/quadtrees/demos/3.html" height="340px" width="100%"></iframe>
+  <figcaption>Click to add a new point. Each quadrant contains at most four points, after which it splits into four child quadrants. Quadrants with darker shades are deeper in the quadtree.</figcaption>
+</figure>
 
 ## Points within a boundary
 
@@ -192,7 +201,10 @@ search(quadtree, { x1: 3, y1: 3, x2: 7, y2: 7 });
 
 At each node, we first check to see if the node's boundary intersects with the search boundary. If it doesn't, we can skip the node and all its child nodes. This saves us from wasting time looping through points we already know do not fall inside the search boundary.
 
-<Figure src="https://res.cloudinary.com/cwilliams/image/upload/v1631579887/Blog/Finding_points_within_a_boundary.webp" caption="The time it takes to find points within a boundary grows slower with a quadtree than with a list" />
+<figure>
+  <img src="https://res.cloudinary.com/cwilliams/image/upload/v1631579887/Blog/Finding_points_within_a_boundary.webp" alt="The time it takes to find points within a boundary grows slower with a quadtree than with a list" />
+  <figcaption>The time it takes to find points within a boundary grows slower with a quadtree than with a list</figcaption>
+</figure>
 
 Consequently, quadtrees perform best when the data points are fairly evenly scattered. If most of the points are positioned close to one another, the quadtree becomes _unbalanced_. Only a few nodes would hold most of the points, and the runtime performance of searching the quadtree will tend closer towards that of the list.[^ger]
 
@@ -224,7 +236,10 @@ function distance(p1, p2) {
 
 Alternatively, with a quadtree, we can check the smallest quadrant which surrounds the search location first. This node would likely have points that are very close to the search location. Then, when we check through the rest of the tree, we can exclude quadrants that are too far away without even checking their child quadrants and points.[^snk]
 
-<IframeFigure src="https://chidiwilliams.github.io/dsaw/quadtrees/demos/4.html" height="315px" caption="Click anywhere to find the nearest neighbour (shown in red). Green quadrants are visited, with saturation indicating depth in the quadtree. Only the orange points are checked."/>
+<figure>
+  <iframe src="https://chidiwilliams.github.io/dsaw/quadtrees/demos/4.html" height="305px" width="100%"></iframe>
+  <figcaption>Click anywhere to find the nearest neighbour (shown in red). Green quadrants are visited, with saturation indicating depth in the quadtree. Only the orange points are checked.</figcaption>
+</figure>
 
 We follow a few steps:
 
@@ -284,7 +299,10 @@ function nearest(node, location, nearestPoint) {
 }
 ```
 
-<Figure src="https://res.cloudinary.com/cwilliams/image/upload/v1631630410/Blog/Finding_the_nearest_neighbour.webp" caption="The time it takes to find the nearest point grows much slower with a quadtree than with a list"/>
+<figure>
+  <img src="https://res.cloudinary.com/cwilliams/image/upload/v1631630410/Blog/Finding_the_nearest_neighbour.webp" alt="The time it takes to find the nearest point grows much slower with a quadtree than with a list" />
+  <figcaption>The time it takes to find the nearest point grows much slower with a quadtree than with a list</figcaption>
+</figure>
 
 ## Image compression
 
@@ -351,7 +369,7 @@ To display the compressed image, we draw the colours in each leaf node of the tr
 function drawTree(tree, width, height) {
   canvas.width = width;
   canvas.height = height;
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext("2d");
   drawNode(tree, ctx);
 }
 
@@ -374,7 +392,10 @@ drawTree(quadtree, w, h);
 
 By varying the maximum amount of error in each quadrant, we can change the amount of compression done to the image:
 
-<IframeFigure src="https://chidiwilliams.github.io/dsaw/quadtrees/demos/5.html" height="370px" caption="Move the slider to change the maximum compression error. Click on the image to randomize."/>
+<figure>
+  <iframe src="https://chidiwilliams.github.io/dsaw/quadtrees/demos/5.html" height="360px" width="100%"></iframe>
+  <figcaption>Move the slider to change the maximum compression error. Click on the image to randomize.</figcaption>
+</figure>
 
 ---
 

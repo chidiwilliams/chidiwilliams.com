@@ -2,6 +2,7 @@ import rehypeHighlight from "rehype-highlight";
 import rehypeRaw from "rehype-raw";
 import rehypeStringify from "rehype-stringify";
 import remarkFrontmatter from "remark-frontmatter";
+import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import remarkParseFrontmatter from "remark-parse-frontmatter";
 import remarkRehype from "remark-rehype";
@@ -11,6 +12,7 @@ export default async function markdownToHtml(markdown: string) {
   const result = unified()
     // Take Markdown as input and turn it into MD syntax tree
     .use(remarkParse)
+    .use(remarkGfm)
     // Add support for frontmatter in Markdown
     .use(remarkFrontmatter, ["yaml"])
     // Prase and validate Markdown frontmatter (YAML)

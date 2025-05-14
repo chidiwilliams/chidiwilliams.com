@@ -21,6 +21,10 @@ export default function RootLayout({
       <head>
         <link rel="shortcut icon" href="/favicon/favicon.ico" />
         <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.0/styles/github.min.css"
+        />
       </head>
       <body
         className={cn(sourceSerif4.className, "text-foreground bg-background")}
