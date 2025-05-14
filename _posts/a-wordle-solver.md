@@ -1,12 +1,12 @@
 ---
-title: 'A Wordle Solver'
+title: "A Wordle Solver"
 date: 2022-01-12T09:00:00Z
 draft: false
-description: 'How to make an AI player for the game of Wordle'
-thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_200/v1641932928/Blog/wordle-banner.webp'
+description: "How to make an AI player for the game of Wordle"
+thumbnail: "https://res.cloudinary.com/cwilliams/image/upload/c_scale,h_200/v1641932928/Blog/wordle-banner.webp"
 images:
   [
-    'https://res.cloudinary.com/cwilliams/image/upload/v1641932928/Blog/wordle-banner.webp',
+    "https://res.cloudinary.com/cwilliams/image/upload/v1641932928/Blog/wordle-banner.webp",
   ]
 categories: [games]
 favorite: true
@@ -18,7 +18,10 @@ There's a new word game on the _Internets_. And the past week, there have been c
 
 After each guess, the game tells you how close your guess was to the correct word.
 
-<Figure src="https://res.cloudinary.com/cwilliams/image/upload/v1641914076/Blog/EAA379A8-406F-4A08-B6AF-8584F25CB770.webp" alt="Wordle" width="503" height="483"/>
+<figure>
+  <img src="https://res.cloudinary.com/cwilliams/image/upload/v1641914076/Blog/EAA379A8-406F-4A08-B6AF-8584F25CB770.webp" alt="Wordle" width="503" height="483"/>
+  <figcaption>Wordle</figcaption>
+</figure>
 
 I played the game a few times. (It's really fun.) And it got me thinking about how a program that can solve the puzzle might look. So, here goes. Here's how to build a Wordle solver.
 
@@ -28,7 +31,10 @@ As you might expect, the aim of the solver is the same as with a human player: t
 
 Say we have a game where the correct word is "STARS". If we try guessing "RADAR", we'll see this result:
 
-<Figure src="https://res.cloudinary.com/cwilliams/image/upload/v1641914224/Blog/A9224322-6F62-4FB9-B2CF-37688509BBF4.webp" alt="Wordle 'RADAR' guess" width="339" height="72" />
+<figure>
+  <img src="https://res.cloudinary.com/cwilliams/image/upload/v1641914224/Blog/A9224322-6F62-4FB9-B2CF-37688509BBF4.webp" alt="Wordle 'RADAR' guess" width="339" height="72" />
+  <figcaption>Wordle 'RADAR' guess</figcaption>
+</figure>
 
 _What does this tell us about the correct word?_
 
@@ -38,7 +44,10 @@ We can make a similar conclusion for "A": there's only one "A" in the correct wo
 
 Alternatively, if we guess "FRERE" instead, we'll see this result:
 
-<Figure src="https://res.cloudinary.com/cwilliams/image/upload/v1641914232/Blog/AB7C7329-A617-4ECB-9456-E113CFC56351.webp" alt="Wordle 'FRERE' guess" width="336" height="70" />
+<figure>
+  <img src="https://res.cloudinary.com/cwilliams/image/upload/v1641914232/Blog/AB7C7329-A617-4ECB-9456-E113CFC56351.webp" alt="Wordle 'FRERE' guess" width="336" height="70" />
+  <figcaption>Wordle 'FRERE' guess</figcaption>
+</figure>
 
 As before, we can conclude that the correct word has no "F" or "E". We also learn that it has a single "R" in the fourth position.
 
@@ -222,7 +231,10 @@ To get the scores for the letters, we'll first compute the frequency distributio
 const frequencies = new Map();
 for (const word of words) {
   for (const letter of word) {
-    frequencies.set(letter, frequencies.has(letter) ? frequencies.get(letter) + 1 : 1);
+    frequencies.set(
+      letter,
+      frequencies.has(letter) ? frequencies.get(letter) + 1 : 1
+    );
   }
 }
 ```
@@ -239,7 +251,10 @@ sortBy(alphabet, frequencies.get).forEach((letter, i) => {
 });
 ```
 
-<Figure src="https://res.cloudinary.com/cwilliams/image/upload/v1641914245/Blog/3D422A06-03F3-43D1-85FE-1C65EBF71F3B.webp" alt="Frequency distribution of letters" width="771" height="493" caption="The number of times each letter occurs in a set of 12,483 words."/>
+<figure>
+  <img src="https://res.cloudinary.com/cwilliams/image/upload/v1641914245/Blog/3D422A06-03F3-43D1-85FE-1C65EBF71F3B.webp" alt="Frequency distribution of letters" width="771" height="493" />
+  <figcaption>The number of times each letter occurs in a set of 12,483 words.</figcaption>
+</figure>
 
 To find `getScore()`, the score of each word, we first sum up the scores of all its letters:
 
@@ -280,7 +295,10 @@ while (!isGameOver(result)) {
 
 Here's how many guesses the solver needs to figure out [these 12,483 words](https://github.com/chidiwilliams/wordle/blob/main/src/data/words.json).[^dfg]
 
-<Figure src="https://res.cloudinary.com/cwilliams/image/upload/v1641914250/Blog/437A082B-2D4F-430A-A153-1B7094D57360.webp" alt="Number of guesses needed vs number of words" width="771" height="465" caption='The solver can complete more than eighty-five per cent of the words in six guesses or fewer. The easiest word to guess is "aeros" (one try), and the most difficult is "lills" (sixteen tries).' />
+<figure>
+  <img src="https://res.cloudinary.com/cwilliams/image/upload/v1641914250/Blog/437A082B-2D4F-430A-A153-1B7094D57360.webp" alt="Number of guesses needed vs number of words" width="771" height="465" />
+  <figcaption>The solver can complete more than eighty-five per cent of the words in six guesses or fewer. The easiest word to guess is "aeros" (one try), and the most difficult is "lills" (sixteen tries).</figcaption>
+</figure>
 
 Words at the tail end of the chart, like "lills", take many tries to guess because many other words have similar letters. The solver tries guessing words like "bills", "fills", "tills", "hills", "wills", and "pills" before getting to "lills".
 
@@ -288,7 +306,10 @@ And…that's all. A few if statements and a for loop here and there. That's what
 
 _If you enjoyed reading this, you might also like [Building Ayòayò: An Unbeatable Player](/posts/building-ayoayo-an-unbeatable-player)._
 
-<Iframefigure src="https://chidiwilliams.github.io/wordle" caption="Play against the AI. Try to guess the word and then click ‘Show AI Board’ to see what the AI played." height="720px" title="Wordle Game" />
+<figure>
+  <iframe src="https://chidiwilliams.github.io/wordle" height="720px" width="100%"></iframe>
+  <figcaption>Play against the AI. Try to guess the word and then click ‘Show AI Board’ to see what the AI played.</figcaption>
+</figure>
 
 [^cje]: At first, I thought the name was a play on Scrabble. But it turns out [it's a play on the creator's last name: Wardle.](https://www.nytimes.com/2022/01/03/technology/wordle-word-game-creator.html)
 [^dfg]: It might be a fun exercise to try different values of `UNIQUENESS_SCORE_WEIGHT` (or even an entirely different scoring scale) to see how the solver improves or worsens.

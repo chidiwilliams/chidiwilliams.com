@@ -1,12 +1,12 @@
 ---
-title: 'Text Search with Tries'
+title: "Text Search with Tries"
 date: 2021-11-13T00:06:52Z
 draft: false
 series: [Data Structures and Algorithms in the Wild]
-thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1636824748/Blog/pexels-photo-261763.webp'
+thumbnail: "https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1636824748/Blog/pexels-photo-261763.webp"
 images:
   [
-    'https://res.cloudinary.com/cwilliams/image/upload/v1636824748/Blog/pexels-photo-261763.webp',
+    "https://res.cloudinary.com/cwilliams/image/upload/v1636824748/Blog/pexels-photo-261763.webp",
   ]
 categories: [dsa]
 favorite: true
@@ -51,9 +51,9 @@ function startsWith(dictionary, prefix) {
   return matches;
 }
 
-const dictionary = ['ant', 'antelope', 'bear', 'cat', 'dog'];
-exists(dictionary, 'ant'); // ['ant', 'antelope']
-exists(dictionary, 'lion'); // []
+const dictionary = ["ant", "antelope", "bear", "cat", "dog"];
+exists(dictionary, "ant"); // ['ant', 'antelope']
+exists(dictionary, "lion"); // []
 ```
 
 To find the matches in this program, we check every word in the dictionary. And, for each word, we check whether it matches the prefix.
@@ -95,7 +95,10 @@ insert(dictionary, 'antelope'); //   [['ant', 'antelope'], ...]
 insert(dictionary, 'chicken'); //    [['ant', 'antelope'], ..., ['chicken'], ...]
 ```
 
-<IframeFigure src="https://chidiwilliams.github.io/dsaw/tries/demos/group-1.html" height="500px" caption="Type into the textbox to add words to the dictionary" />
+<figure>
+  <iframe src="https://chidiwilliams.github.io/dsaw/tries/demos/group-1.html" height="500px" width="100%"></iframe>
+  <figcaption>Type into the textbox to add words to the dictionary</figcaption>
+</figure>
 
 To find words that begin with a prefix, we only need to check the correct child dictionary.
 
@@ -158,17 +161,18 @@ function insert(dictionary, word) {
 }
 
 const dictionary = new Array(26);
-insert(dictionary, 'apple'); // [[..., ['apple'], ...], ...]
-insert(dictionary, 'bear'); //  [[..., ['apple'], ...], [..., ['bear'], ...], ...]
-insert(dictionary, 'bee'); //   [[..., ['apple'], ...], [..., ['bear', 'bee'], ...], ...]
-insert(dictionary, 'bull'); //  [[..., ['apple'], ...], [..., ['bear', 'bee'], ..., ['bull'], ...], ...]
+insert(dictionary, "apple"); // [[..., ['apple'], ...], ...]
+insert(dictionary, "bear"); //  [[..., ['apple'], ...], [..., ['bear'], ...], ...]
+insert(dictionary, "bee"); //   [[..., ['apple'], ...], [..., ['bear', 'bee'], ...], ...]
+insert(dictionary, "bull"); //  [[..., ['apple'], ...], [..., ['bear', 'bee'], ..., ['bull'], ...], ...]
 ```
 
 As before, to find the words beginning with a prefix, we search through the correct grand-child dictionary:
 
 ```javascript
 function startsWith(dictionary, prefix) {
-  const grandChild = dictionary[alphabet.indexOf(prefix[0])][alphabet.indexOf(prefix[1])];
+  const grandChild =
+    dictionary[alphabet.indexOf(prefix[0])][alphabet.indexOf(prefix[1])];
   return getMatches(grandChild, prefix);
 }
 ```
@@ -191,7 +195,10 @@ function insert(dictionary, word) {
   const firstLetterIndex = alphabet.indexOf(word[0]);
   if (!current.children[firstLetterIndex]) {
     // The `isEndOfWord` flag says whether this child dictionary is the end of a word
-    current.children[firstLetterIndex] = { isEndOfWord: false, children: new Array(26) };
+    current.children[firstLetterIndex] = {
+      isEndOfWord: false,
+      children: new Array(26),
+    };
   }
   // Update current to point to the child dictionary
   current = current.children[firstLetterIndex];
@@ -205,7 +212,10 @@ function insert(dictionary, word) {
   // Create a child dictionary for words starting with the second character
   const secondLetterIndex = alphabet.indexOf(word[1]);
   if (!current.children[secondLetterIndex]) {
-    current.children[secondLetterIndex] = { isEndOfWord: false, children: new Array(26) };
+    current.children[secondLetterIndex] = {
+      isEndOfWord: false,
+      children: new Array(26),
+    };
   }
   current = current.children[secondLetterIndex];
 
@@ -220,7 +230,10 @@ function insert(dictionary, word) {
 }
 ```
 
-<IframeFigure src="https://chidiwilliams.github.io/dsaw/tries/demos/group-2.html" height="500px" caption="Type into the textbox to add words to the dictionary. Child dictionaries that are the end of words are coloured brown." />
+<figure>
+  <iframe src="https://chidiwilliams.github.io/dsaw/tries/demos/group-2.html" height="500px" width="100%"></iframe>
+  <figcaption>Type into the textbox to add words to the dictionary. Child dictionaries that are the end of words are coloured brown.</figcaption>
+</figure>
 
 ### Grouping by all the characters
 
@@ -249,7 +262,10 @@ function insert(dictionary, word) {
 }
 ```
 
-<IframeFigure src="https://chidiwilliams.github.io/dsaw/tries/demos/trie.html" height="500px" caption="Type into the textbox to add words to the dictionary. Child dictionaries that are the end of words are coloured purple." />
+<figure>
+  <iframe src="https://chidiwilliams.github.io/dsaw/tries/demos/trie.html" height="500px" width="100%"></iframe>
+  <figcaption>Type into the textbox to add words to the dictionary. Child dictionaries that are the end of words are coloured purple.</figcaption>
+</figure>
 
 To get the words that begin with a prefix, we first find the child dictionary corresponding to the prefix. Then we collect all the words in its children.
 
@@ -370,7 +386,10 @@ function hasPrefix(trie, prefix) {
 
 The time complexity of checking whether the prefix exists in the trie is _O(q)_, where _q_ is the length of the substring. Effectively, by _indexing_ the text into a "suffix trie" beforehand, we improve the performance of finding a substring from _O(p\*q)_ to _O(q)_.
 
-<IframeFigure src="https://chidiwilliams.github.io/dsaw/tries/demos/substring.html" height="400px" caption="Search for a substring within the text. Only the nodes coloured green or red are checked. Correct matches will have all green nodes. Wrong matches will end in a red node." />
+<figure>
+  <iframe src="https://chidiwilliams.github.io/dsaw/tries/demos/substring.html" height="400px" width="100%"></iframe>
+  <figcaption>Search for a substring within the text. Only the nodes coloured green or red are checked. Correct matches will have all green nodes. Wrong matches will end in a red node.</figcaption>
+</figure>
 
 Suffix tries are typically much larger than the text they represent. Usually, a compressed version of the suffix trie, known as the [_suffix tree_](https://en.wikipedia.org/wiki/Suffix_tree), is used instead. These suffix trees are useful in many text-based operations, like free-text search and for finding patterns in long DNA and protein sequences.
 

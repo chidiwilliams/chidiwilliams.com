@@ -30,6 +30,7 @@ export default {
               background: "#fcfcfa",
               "border-radius": "0.375rem",
               border: "1px solid #e0e0e0",
+              overflow: "hidden",
               figcaption: {
                 padding: "0.625rem",
                 margin: "0",

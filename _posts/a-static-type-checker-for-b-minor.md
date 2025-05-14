@@ -1,15 +1,18 @@
 ---
-title: 'A Static Type Checker for B-Minor'
+title: "A Static Type Checker for B-Minor"
 date: 2022-08-28T08:16:10+01:00
 draft: false
 categories: [languages]
 images:
   [
-    'https://res.cloudinary.com/cwilliams/image/upload/v1661685391/Blog/static-type-checkers.webp',
+    "https://res.cloudinary.com/cwilliams/image/upload/v1661685391/Blog/static-type-checkers.webp",
   ]
 ---
 
-<Figure src="https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_650/v1661685391/Blog/static-type-checkers.webp" alt='"A solarpunk robot dreaming about lambda symbols and sets and functional programming" via Stable Diffusion' width="600" height="300" />
+<figure>
+  <img src="https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_650/v1661685391/Blog/static-type-checkers.webp" alt='"A solarpunk robot dreaming about lambda symbols and sets and functional programming" via Stable Diffusion' width="600" height="300" />
+  <figcaption>A solarpunk robot dreaming about lambda symbols and sets and functional programming via Stable Diffusion</figcaption>
+</figure>
 
 In this post, we'll discuss the implementation of a static type checker for a simple, C-like language called [B-Minor](https://www3.nd.edu/~dthain/courses/cse40243/fall2020/bminor.html).
 B-Minor is a small language designed for use in an [undergraduate compilers course](https://www3.nd.edu/~dthain/courses/cse40243/fall2020/), and it supports expressions, basic control flow, functions, and static type checking.
@@ -35,7 +38,10 @@ print sumMultiples(1000);
 
 A compiler (or interpreter) typically performs semantic analysis, checking for errors like type mismatches and misuse of reserved identifiers, after scanning and parsing source tokens into an Abstract Syntax Tree (AST).
 
-<Figure src="https://res.cloudinary.com/cwilliams/image/upload/v1661677031/Blog/stages-of-a-unix-compiler.webp" alt="Stages of a Unix compiler" width="600" height="117" caption='Source: "Introduction to Compilers and Language Design", Douglas Thain' />
+<figure>
+  <img src="https://res.cloudinary.com/cwilliams/image/upload/v1661677031/Blog/stages-of-a-unix-compiler.webp" alt="Stages of a Unix compiler" width="600" height="117" />
+  <figcaption>Source: "Introduction to Compilers and Language Design", Douglas Thain</figcaption>
+</figure>
 
 Our type checker accepts the parser's output (a list of AST statements), walks through the AST, and reports type errors it finds.
 

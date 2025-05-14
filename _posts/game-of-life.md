@@ -5,11 +5,11 @@ draft: false
 slug: game-of-life
 aliases: [/game-of-life]
 description: On the history and implementation of John Conway's Game of Life
-footnotes: 'Thanks to Ayomide Oyekanmi and Opeyemi Onikute for reviewing drafts of this.'
-thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1634464272/Blog/pexels-photo-2102850.webp'
+footnotes: "Thanks to Ayomide Oyekanmi and Opeyemi Onikute for reviewing drafts of this."
+thumbnail: "https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1634464272/Blog/pexels-photo-2102850.webp"
 images:
   [
-    'https://res.cloudinary.com/cwilliams/image/upload/v1634464272/Blog/pexels-photo-2102850.webp',
+    "https://res.cloudinary.com/cwilliams/image/upload/v1634464272/Blog/pexels-photo-2102850.webp",
   ]
 categories: [games]
 favorite: true
@@ -31,7 +31,11 @@ With this model, von Neumann showed that [a certain pattern of cells](https://en
 
 [^djd]: The process of constructing from a description or blueprint and the process of copying the description mirrors the processes of [DNA translation](https://en.wikipedia.org/wiki/Translation_%28biology%29) and [DNA replication](https://en.wikipedia.org/wiki/DNA_replication). Interestingly, von Neumann proposed his ideas for self-replicating automata even before the discovery of the structure of DNA molecules and the processes of translation and replication in biological cells.
 
-<Figure src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Nobili_Pesavento_2reps.png" caption="The first implementation of von Neumann's constructor, showing three generations of the machine (the second generation has nearly finished constructing the third). The lines of cells running to the right are the machine blueprints." attr="Wikipedia" attrlink="https://upload.wikimedia.org/wikipedia/commons/c/c4/Nobili_Pesavento_2reps.png" width="450" />
+<figure>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Nobili_Pesavento_2reps.png" alt="The first implementation of von Neumann's constructor, showing three generations of the machine (the second generation has nearly finished constructing the third). The lines of cells running to the right are the machine blueprints." width="450" />
+
+  <figcaption>The first implementation of von Neumann's constructor, showing three generations of the machine (the second generation has nearly finished constructing the third). The lines of cells running to the right are the machine blueprints.</figcaption>
+</figure>
 
 ## Life
 
@@ -48,7 +52,10 @@ Like von Neumann's automaton, the Game of Life runs on an infinite, two-dimensio
 
 Conway's Game of Life is a "no-player" game, just like von Neumann's automaton. The initial pattern acts as the seed of the system. And each successive generation is gotten by applying the game rules to the previous generation without any new input.
 
-<Figure src="https://res.cloudinary.com/cwilliams/image/upload/v1634496238/Blog/Game%20of%20Life.webp" caption="Four generations of the Game of Life shown, with live cells shown in black and dead cells in white. At each generation, we check for the number of neighbours each cell has. Then, we apply the game rules to find the next generation."/>
+<figure>
+  <img src="https://res.cloudinary.com/cwilliams/image/upload/v1634496238/Blog/Game%20of%20Life.webp" alt="Four generations of the Game of Life shown, with live cells shown in black and dead cells in white. At each generation, we check for the number of neighbours each cell has. Then, we apply the game rules to find the next generation." />
+  <figcaption>Four generations of the Game of Life shown, with live cells shown in black and dead cells in white. At each generation, we check for the number of neighbours each cell has. Then, we apply the game rules to find the next generation.</figcaption>
+</figure>
 
 We can implement these rules in code as:
 
@@ -74,8 +81,8 @@ function next(grid) {
             // Check that we're not looking at the cell itself...
             !(dx === 0 && dy === 0) &&
             // And that the neighbour is not outside the grid
-            typeof grid[x + dx] !== 'undefined' &&
-            typeof grid[x + dx][y + dy] !== 'undefined' &&
+            typeof grid[x + dx] !== "undefined" &&
+            typeof grid[x + dx][y + dy] !== "undefined" &&
             // If the neighbour is live, increment c
             grid[x + dx][y + dy]
           ) {
@@ -106,7 +113,10 @@ next([
 //    [false, true, false]]
 ```
 
-<IframeFigure src="https://chidiwilliams.github.io/conway-game-of-life/?size=lg&speed=1" caption="Click on a few cells to set the initial state, then click Play." height="750px" />
+<figure>
+  <iframe src="https://chidiwilliams.github.io/conway-game-of-life/?size=lg&speed=1" height="750px" width="100%"></iframe>
+  <figcaption>Click on a few cells to set the initial state, then click Play.</figcaption>
+</figure>
 
 ## Life forms
 
@@ -114,23 +124,38 @@ Many different patterns occur in the Game of Life, and we typically classify the
 
 _Still lifes_ are patterns that don't change from one generation to the next (as long as they are not disturbed by other patterns).
 
-<IframeFigure src="https://chidiwilliams.github.io/conway-game-of-life/?init=18d-,18d-,7d-2l-4d-2l-3d-,2d-2l-2d-1l-2d-1l-2d-1l-2d-1l-2d-,2d-2l-3d-2l-4d-1l-1d-1l-2d-,14d-1l-3d-,18d-,4d-2l-4d-1l-7d-,4d-1l-1d-1l-2d-1l-1d-1l-6d-,5d-1l-4d-1l-7d-,18d-,18d-,&speed=2&random=false&clear=false&reset=true" caption="Top, L-R: A block, a bee-hive, and a loaf. Bottom, L-R: A boat and a tub." height="750px"/>
+<figure>
+  <iframe src="https://chidiwilliams.github.io/conway-game-of-life/?init=18d-,18d-,7d-2l-4d-2l-3d-,2d-2l-2d-1l-2d-1l-2d-1l-2d-1l-2d-,2d-2l-3d-2l-4d-1l-1d-1l-2d-,14d-1l-3d-,18d-,4d-2l-4d-1l-7d-,4d-1l-1d-1l-2d-1l-1d-1l-6d-,5d-1l-4d-1l-7d-,18d-,18d-,&speed=2&random=false&clear=false&reset=true" height="750px" width="100%"></iframe>
+  <figcaption>Top, L-R: A block, a bee-hive, and a loaf. Bottom, L-R: A boat and a tub.</figcaption>
+</figure>
 
 _Oscillators_ are patterns that return to their initial state after a finite number of generations. The number of generations it takes to return to the initial state is called the pattern's _period_.
 
-<IframeFigure src="https://chidiwilliams.github.io/conway-game-of-life/?init=19d-,19d-,9d-1l-3d-2l-4d-,2d-3l-2d-1l-2d-1l-2d-1l-5d-,7d-1l-2d-1l-5d-1l-2d-,8d-1l-6d-2l-2d-,19d-,19d-,19d-,5d-3l-3d-3l-5d-,19d-,3d-1l-4d-1l-1d-1l-4d-1l-3d-,3d-1l-4d-1l-1d-1l-4d-1l-3d-,3d-1l-4d-1l-1d-1l-4d-1l-3d-,5d-3l-3d-3l-5d-,19d-,5d-3l-3d-3l-5d-,3d-1l-4d-1l-1d-1l-4d-1l-3d-,3d-1l-4d-1l-1d-1l-4d-1l-3d-,3d-1l-4d-1l-1d-1l-4d-1l-3d-,19d-,5d-3l-3d-3l-5d-,19d-,19d-,19d-,19d-,19d-,19d-,19d-,19d-,19d-,19d-,&speed=2&random=false&clear=false&reset=true" caption="Top, L-R: A blinker (period 2), a toad (period 2), and a beacon (period 2). Bottom: A pulsar (period 3)." height="750px" />
+<figure>
+  <iframe src="https://chidiwilliams.github.io/conway-game-of-life/?init=19d-,19d-,9d-1l-3d-2l-4d-,2d-3l-2d-1l-2d-1l-2d-1l-5d-,7d-1l-2d-1l-5d-1l-2d-,8d-1l-6d-2l-2d-,19d-,19d-,19d-,5d-3l-3d-3l-5d-,19d-,3d-1l-4d-1l-1d-1l-4d-1l-3d-,3d-1l-4d-1l-1d-1l-4d-1l-3d-,3d-1l-4d-1l-1d-1l-4d-1l-3d-,5d-3l-3d-3l-5d-,19d-,5d-3l-3d-3l-5d-,3d-1l-4d-1l-1d-1l-4d-1l-3d-,3d-1l-4d-1l-1d-1l-4d-1l-3d-,3d-1l-4d-1l-1d-1l-4d-1l-3d-,19d-,5d-3l-3d-3l-5d-,19d-,19d-,19d-,19d-,19d-,19d-,19d-,19d-,19d-,19d-,&speed=2&random=false&clear=false&reset=true" height="750px" width="100%"></iframe>
+  <figcaption>Top, L-R: A blinker (period 2), a toad (period 2), and a beacon (period 2). Bottom: A pulsar (period 3).</figcaption>
+</figure>
 
 _Spaceships_ can move across the board.
 
-<IframeFigure src="https://chidiwilliams.github.io/conway-game-of-life/?init=35d-,35d-,3d-4l-28d-,2d-1l-3d-1l-28d-,6d-1l-28d-,2d-1l-2d-1l-29d-,35d-,35d-,35d-,4d-1l-24d-1l-5d-,5d-1l-22d-1l-6d-,3d-3l-22d-3l-4d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,&speed=2&random=false&clear=false&reset=true" caption="Top: A light-weight spaceship. Bottom: Two gliders collide." height="750px" />
+<figure>
+  <iframe src="https://chidiwilliams.github.io/conway-game-of-life/?init=35d-,35d-,3d-4l-28d-,2d-1l-3d-1l-28d-,6d-1l-28d-,2d-1l-2d-1l-29d-,35d-,35d-,35d-,4d-1l-24d-1l-5d-,5d-1l-22d-1l-6d-,3d-3l-22d-3l-4d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,35d-,&speed=2&random=false&clear=false&reset=true" height="750px" width="100%"></iframe>
+  <figcaption>Top: A light-weight spaceship. Bottom: Two gliders collide.</figcaption>
+</figure>
 
 _Methuselahs_, like the R-pentomino, evolve for many generations before stabilizing.
 
-<IframeFigure src="https://chidiwilliams.github.io/conway-game-of-life/?init=116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,55d-2l-59d-,54d-2l-60d-,55d-1l-60d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,&speed=50&random=false&clear=false&reset=true" caption="The R-pentomino takes 1103 generations to stabilize" height="750px" />
+<figure>
+  <iframe src="https://chidiwilliams.github.io/conway-game-of-life/?init=116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,55d-2l-59d-,54d-2l-60d-,55d-1l-60d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,116d-,&speed=50&random=false&clear=false&reset=true" height="750px" width="100%"></iframe>
+  <figcaption>The R-pentomino takes 1103 generations to stabilize</figcaption>
+</figure>
 
 There are more complex patterns, like stationary guns that produce gliders and other spaceships.
 
-<IframeFigure src="https://chidiwilliams.github.io/conway-game-of-life/?init=90d-,26d-1l-63d-,24d-1l-1d-1l-63d-,14d-2l-6d-2l-12d-2l-52d-,13d-1l-3d-1l-4d-2l-12d-2l-52d-,2d-2l-8d-1l-5d-1l-3d-2l-66d-,2d-2l-8d-1l-3d-1l-1d-2l-4d-1l-1d-1l-63d-,12d-1l-5d-1l-7d-1l-63d-,13d-1l-3d-1l-72d-,14d-2l-74d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,&speed=50&random=false&clear=false&reset=true" caption="A Gosper glider gun emitting gliders" height="750px" />
+<figure>
+  <iframe src="https://chidiwilliams.github.io/conway-game-of-life/?init=90d-,26d-1l-63d-,24d-1l-1d-1l-63d-,14d-2l-6d-2l-12d-2l-52d-,13d-1l-3d-1l-4d-2l-12d-2l-52d-,2d-2l-8d-1l-5d-1l-3d-2l-66d-,2d-2l-8d-1l-3d-1l-1d-2l-4d-1l-1d-1l-63d-,12d-1l-5d-1l-7d-1l-63d-,13d-1l-3d-1l-72d-,14d-2l-74d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,90d-,&speed=50&random=false&clear=false&reset=true" height="750px" width="100%"></iframe>
+  <figcaption>A Gosper glider gun emitting gliders</figcaption>
+</figure>
 
 And it gets even more interesting. We can use glider guns as digital signal generators, construct [logic gates](https://youtu.be/vGWGeund3eA) (like AND, OR, and NOT gates) and memory blocks based on the interactions of gliders, and combine these logic gates and memory blocks to create patterns that can perform computations. In fact, the Game of Life is Turing-complete. In theory, it can simulate any computation that a typical computer can perform—including [simulating itself](https://youtu.be/xP5-iIeKXE8)!
 

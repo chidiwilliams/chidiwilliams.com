@@ -1,12 +1,15 @@
 ---
-title: 'Gifts and Games'
+title: "Gifts and Games"
 date: 2021-05-03T20:30:00+01:00
 draft: false
 slug: gifts-and-games
 aliases: [/gifts-and-games]
 tags: [personal, vr]
-thumbnail: 'https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1620074571/Blog/IMG_1102.webp'
-images: [https://res.cloudinary.com/cwilliams/image/upload/v1620074571/Blog/IMG_1102.webp]
+thumbnail: "https://res.cloudinary.com/cwilliams/image/upload/c_scale,w_300/v1620074571/Blog/IMG_1102.webp"
+images:
+  [
+    https://res.cloudinary.com/cwilliams/image/upload/v1620074571/Blog/IMG_1102.webp,
+  ]
 categories: [games]
 ---
 
@@ -34,4 +37,7 @@ It doesn’t often happen that I use technology in a way I would describe as bri
 
 My time in the Metaverse reminded me of childlike playfulness and a time before Solving Problems and Creating Value™ when I just wanted to have fun with technology. It showed me a different way to be present. An other-worldly kind of presence. A presence untangled from physical space and time. And it gave me a glimpse into new ways of interacting with technology and ourselves, prompting me to rethink what part I wanted to play in building this future.
 
-<Figure src="https://res.cloudinary.com/cwilliams/image/upload/v1620074571/Blog/IMG_1102.webp" alt="The Oculus Quest 2" caption="The Oculus Quest 2" />
+<figure>
+  <img src="https://res.cloudinary.com/cwilliams/image/upload/v1620074571/Blog/IMG_1102.webp" alt="The Oculus Quest 2" />
+  <figcaption>The Oculus Quest 2</figcaption>
+</figure>
